@@ -146,6 +146,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "LoginPage";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LoginPage_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

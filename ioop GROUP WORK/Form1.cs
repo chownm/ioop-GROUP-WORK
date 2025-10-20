@@ -36,5 +36,10 @@ namespace ioop_GROUP_WORK
         {
 
         }
+
+        private void LoginPage_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
