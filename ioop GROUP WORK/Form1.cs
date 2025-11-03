@@ -34,7 +34,15 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string stat;
+            User obj1 = new User(txtUsername.Text, txtPassword.Text);
+            stat = obj1.login(txtUsername.Text);
+            if(stat != null)
+            {
+                MessageBox.Show(stat);
+            }
+            txtUsername.Text = String.Empty;
+            txtUsername.Text = String.Empty ;   
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

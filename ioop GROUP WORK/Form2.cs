@@ -41,5 +41,10 @@ namespace ioop_GROUP_WORK
         {
 
         }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
