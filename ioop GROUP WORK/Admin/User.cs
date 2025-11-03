@@ -1,11 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Configuration;
+using System.Diagnostics.Eventing.Reader;
+using System.Runtime.InteropServices;
 
 
 namespace ioop_GROUP_WORK
@@ -14,6 +16,14 @@ namespace ioop_GROUP_WORK
     {
         private string username = " ";
         private string password = " ";
+
+
+        public User(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
+
         public string login(string un)
         {
             string status = null;
@@ -37,6 +47,16 @@ namespace ioop_GROUP_WORK
             {
                 StudentHome s = new StudentHome(un);
                 s.ShowDialog();
+            }
+            else if (userRole == "HR")
+            {
+               // HRHome h = new HRHome(un);
+               // h.ShowDialog();
+            }
+            else if (userRole == "Unisupervisor")
+            {
+              //  Unisuperviorhome US = new Unisupervisorhome(un);
+              //  US.ShowDialog();
             }
             else
             {
