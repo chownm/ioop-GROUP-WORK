@@ -24,7 +24,7 @@ namespace ioop_GROUP_WORK
             this.password = password;
         }
 
-        public string login(string un)
+        public string login(string un, string pw)
         {
             string status = null;
 
@@ -32,38 +32,43 @@ namespace ioop_GROUP_WORK
 
             con.Open();
 
-            SqlCommand cmd2 = new SqlCommand("select count(*) from users where username =@a and password =@b", con);
-            cmd2.Parameters.AddWithValue("@a", username);
-            cmd2.Parameters.AddWithValue("@b", password);
+            SqlCommand cmd2 = new SqlCommand("select role from users where username =@a and password =@b", con);
+            cmd2.Parameters.AddWithValue("@a", un);
+            cmd2.Parameters.AddWithValue("@b", pw);
 
-            string userRole = cmd2.ExecuteScalar().ToString();
+            object result = cmd2.ExecuteScalar();
+            if (result != null)
+            {
+                string userRole = result.ToString();
 
-            if (userRole == "admin")
-            {
-                AdminHome a = new AdminHome(un);
-                a.ShowDialog();
-            }
-            else if (userRole == "student")
-            {
-                StudentHome s = new StudentHome(un);
-                s.ShowDialog();
-            }
-            else if (userRole == "HR")
-            {
-               // HRHome h = new HRHome(un);
-               // h.ShowDialog();
-            }
-            else if (userRole == "Unisupervisor")
-            {
-              //  Unisuperviorhome US = new Unisupervisorhome(un);
-              //  US.ShowDialog();
-            }
-            else
-            {
-                status = "Incorrect username/password";
 
+                if (userRole == "admin")
+                {
+                    AdminHome a = new AdminHome(un);
+                    a.ShowDialog();
+                }
+                else if (userRole == "student")
+                {
+                    StudentHome s = new StudentHome(un);
+                    s.ShowDialog();
+                }
+                else if (userRole == "HR")
+                {
+                    // HRHome h = new HRHome(un);
+                    // h.ShowDialog();
+                }
+                else if (userRole == "Unisupervisor")
+                {
+                    //  Unisuperviorhome US = new Unisupervisorhome(un);
+                    //  US.ShowDialog();
+                }
+                else
+                {
+                    status = "Incorrect username/password";
+
+                }
             }
-            con.Close();
+                con.Close();
 
             return status;
             //status = null if login success

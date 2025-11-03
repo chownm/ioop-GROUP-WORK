@@ -36,7 +36,7 @@ namespace ioop_GROUP_WORK
         {
             string stat;
             User obj1 = new User(txtUsername.Text, txtPassword.Text);
-            stat = obj1.login(txtUsername.Text);
+            stat = obj1.login(txtUsername.Text, txtPassword.Text);
             if(stat != null)
             {
                 MessageBox.Show(stat);

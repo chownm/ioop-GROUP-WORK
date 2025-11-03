@@ -41,7 +41,7 @@ namespace ioop_GROUP_WORK
 
             SqlCommand cmd2 = new SqlCommand("insert into users (username,password,role) values(@name,'123','student')", con);
             cmd.Parameters.AddWithValue("@name", studName);
-            cmd.Parameters.AddWithValue("@name", studName);
+            cmd2.Parameters.AddWithValue("@name", studName);
             cmd.Parameters.AddWithValue("@em", email);
             cmd.Parameters.AddWithValue("@num", phoneNum);
 
