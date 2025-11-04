@@ -15,6 +15,7 @@ namespace ioop_GROUP_WORK
         private string studName;
         private string email;
         private string phoneNum;
+        private string password;
 
         static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 

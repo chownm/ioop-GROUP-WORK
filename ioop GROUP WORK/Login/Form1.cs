@@ -34,7 +34,7 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string stat;
+            string stat ;
             User obj1 = new User(txtUsername.Text, txtPassword.Text);
             stat = obj1.login(txtUsername.Text, txtPassword.Text);
             if(stat != null)

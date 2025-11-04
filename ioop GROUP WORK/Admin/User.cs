@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices;
+using System.Net.NetworkInformation;
 
 
 namespace ioop_GROUP_WORK
@@ -40,12 +41,12 @@ namespace ioop_GROUP_WORK
             if (result != null)
             {
                 string userRole = result.ToString();
-
-
+           
                 if (userRole == "admin")
                 {
                     AdminHome a = new AdminHome(un);
                     a.ShowDialog();
+
                 }
                 else if (userRole == "student")
                 {
@@ -62,13 +63,14 @@ namespace ioop_GROUP_WORK
                     //  Unisuperviorhome US = new Unisupervisorhome(un);
                     //  US.ShowDialog();
                 }
-                else
-                {
-                    status = "Incorrect username/password";
-
-                }
+                
             }
-                con.Close();
+            else
+            {
+                status = "Incorrect username/password";
+
+            }
+            con.Close();
 
             return status;
             //status = null if login success
