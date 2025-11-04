@@ -22,5 +22,10 @@ namespace ioop_GROUP_WORK
             Student obj1 = new Student(txtName.Text, txtEmail.Text, txtPhone.Text);
             MessageBox.Show(obj1.addStudent());
         }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
