@@ -16,5 +16,10 @@ namespace ioop_GROUP_WORK
         {
             InitializeComponent();
         }
+
+        private void HRHome_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
