@@ -138,11 +138,11 @@
       <DependentUpon>StudentHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\Student.cs" />
-    <Compile Include="Student\AddStudent.cs">
+    <Compile Include="Student\RegisterStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\AddStudent.Designer.cs">
-      <DependentUpon>AddStudent.cs</DependentUpon>
+    <Compile Include="Student\RegisterStudent.Designer.cs">
+      <DependentUpon>RegisterStudent.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\Student_Profile.cs" />
     <Compile Include="UniSupervisor\Student_Profile_Review.cs">
@@ -192,8 +192,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Student\AddStudent.resx">
-      <DependentUpon>AddStudent.cs</DependentUpon>
+    <EmbeddedResource Include="Student\RegisterStudent.resx">
+      <DependentUpon>RegisterStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\ViewStudent.resx">
       <DependentUpon>ViewStudent.cs</DependentUpon>

@@ -12,52 +12,54 @@ namespace ioop_GROUP_WORK
 {
     internal class Student
     {
-        private string studName;
+        //=============================
+        //Atributes
+        //=============================
+        private string name;
+        private string id;
         private string email;
-        private string phoneNum;
+        private string phoneno;
+        private string course;
         private string password;
 
+        //Shared SQL Connection string
         static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
-        public Student(string studName, string email, string phoneNum)
+
+        //=============================
+        //Constructor
+        //=============================
+        public Student(string stuName, string stuId, string stuEmail, string stuPhoneno, string stuCourse, string stuPassword)
         {
-            this.studName = studName;
-            this.Email = email;
-            this.PhoneNum = phoneNum;
+            this.name = stuName;
+            this.id = stuId;
+            this.email = stuEmail;
+            this.phoneno = stuPhoneno;
+            this.course = stuCourse;
+            this.password = stuPassword;
 
         }
-        public Student(string Studname)
-        {
-            this.studName = Studname;
-        }
 
-        public string PhoneNum { get => phoneNum; set => phoneNum = value; }
-        public string Email { get => email; set => email = value; }
 
-        public string addStudent()
+        //=============================
+        //Methods
+        //=============================
+        public string AddStudent()
         {
             string status;
-            con.Open();
-            SqlCommand cmd = new SqlCommand("Insert into students(studentName, email, phoneNumber) values(@name, @em, @num)", con);
 
-            SqlCommand cmd2 = new SqlCommand("insert into users (username,password,role) values(@name,'123','student')", con);
-            cmd.Parameters.AddWithValue("@name", studName);
-            cmd2.Parameters.AddWithValue("@name", studName);
-            cmd.Parameters.AddWithValue("@em", email);
-            cmd.Parameters.AddWithValue("@num", phoneNum);
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            {
+                con.Open();
 
-            cmd2.ExecuteNonQuery();
-            int i = cmd.ExecuteNonQuery();
-            if (i != 0)
-                status = "Registration Successful.";
-            else
-                status = "Unable to register.";
-            con.Close();
-            return status;
+                //Insert Into student table
+                SqlCommand cmd = new SqlCommand("INSERT INTO students(studentName, studentID, email, phoneNumber, course, password) values(@name, @id, @em, @num, @course, @courseid)", con);
+            }
+
 
         }
 
-        public static ArrayList viewAll()
+        public static ArrayList ViewAll()
         {
             ArrayList nm = new ArrayList();
             con.Open();
@@ -71,7 +73,7 @@ namespace ioop_GROUP_WORK
             return nm;
         }
         
-        public static void viewProfile(Student o1)
+        public static void ViewProfile(Student o1)
         {
             con.Open();
             SqlCommand cmd = new SqlCommand("select * from students where studentName = @a", con);
@@ -87,7 +89,7 @@ namespace ioop_GROUP_WORK
                 
         }
 
-        public string updateProfile(string em, string num)
+        public string UpdateProfile(string em, string num)
         {
             string status;
             con.Open();
