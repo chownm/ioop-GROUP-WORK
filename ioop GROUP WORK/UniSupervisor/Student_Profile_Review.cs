@@ -21,5 +21,10 @@ namespace ioop_GROUP_WORK.UniSupervisor
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ioop_GROUP_WORK
+namespace ioop_GROUP_WORK.HR
 {
-    public partial class RegisterStudent : Form
+    public partial class CompanyProfile : Form
     {
-        public RegisterStudent()
+        public CompanyProfile()
         {
             InitializeComponent();
         }
