@@ -104,6 +104,7 @@
     <Compile Include="HR\CompanyProfile.Designer.cs">
       <DependentUpon>CompanyProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="HR\VP.cs" />
     <Compile Include="HR\ManageOffer.cs">
       <SubType>Form</SubType>
     </Compile>

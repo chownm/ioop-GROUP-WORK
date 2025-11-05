@@ -45,7 +45,7 @@
             this.label1.Location = new System.Drawing.Point(651, 127);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(425, 81);
+            this.label1.Size = new System.Drawing.Size(284, 55);
             this.label1.TabIndex = 0;
             this.label1.Text = "Add Student";
             // 
@@ -55,7 +55,7 @@
             this.label2.Location = new System.Drawing.Point(449, 337);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 36);
+            this.label2.Size = new System.Drawing.Size(76, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Name :";
             // 
@@ -65,7 +65,7 @@
             this.label3.Location = new System.Drawing.Point(457, 456);
             this.label3.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 36);
+            this.label3.Size = new System.Drawing.Size(75, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "Email :";
             // 
@@ -75,7 +75,7 @@
             this.label4.Location = new System.Drawing.Point(457, 564);
             this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(220, 36);
+            this.label4.Size = new System.Drawing.Size(154, 25);
             this.label4.TabIndex = 3;
             this.label4.Text = "Phone Number :";
             // 
@@ -84,7 +84,7 @@
             this.txtName.Location = new System.Drawing.Point(885, 328);
             this.txtName.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(340, 44);
+            this.txtName.Size = new System.Drawing.Size(340, 32);
             this.txtName.TabIndex = 4;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -93,7 +93,7 @@
             this.txtEmail.Location = new System.Drawing.Point(885, 436);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(340, 44);
+            this.txtEmail.Size = new System.Drawing.Size(340, 32);
             this.txtEmail.TabIndex = 5;
             // 
             // txtPhone
@@ -101,7 +101,7 @@
             this.txtPhone.Location = new System.Drawing.Point(885, 544);
             this.txtPhone.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(340, 44);
+            this.txtPhone.Size = new System.Drawing.Size(340, 32);
             this.txtPhone.TabIndex = 6;
             // 
             // btnRegister
@@ -117,7 +117,7 @@
             // 
             // AddStudent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 36F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.btnRegister);
@@ -132,6 +132,7 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.Name = "AddStudent";
             this.Text = "Add Student";
+            this.Load += new System.EventHandler(this.AddStudent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ioop_GROUP_WORK.HR;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,13 @@ namespace ioop_GROUP_WORK
         private void HRHome_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnViewApplications_Click(object sender, EventArgs e)
+        {
+            ViewApplication vp = new ViewApplication();
+               vp.Show();
+               this.Hide();
         }
     }
 }

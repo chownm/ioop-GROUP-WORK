@@ -55,8 +55,8 @@ namespace ioop_GROUP_WORK
                 }
                 else if (userRole == "HR")
                 {
-                    // HRHome h = new HRHome(un);
-                    // h.ShowDialog();
+                     HRHome h = new HRHome();
+                     h.ShowDialog();
                 }
                 else if (userRole == "Unisupervisor")
                 {
