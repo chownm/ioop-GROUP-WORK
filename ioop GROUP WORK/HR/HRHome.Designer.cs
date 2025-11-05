@@ -28,57 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btnViewApplications = new System.Windows.Forms.Button();
+            this.btnManageOffers = new System.Windows.Forms.Button();
+            this.btnCompanyProfile = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(129, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 64);
+            this.label2.Location = new System.Drawing.Point(292, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.Size = new System.Drawing.Size(91, 16);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "Welcome HR!";
             // 
-            // label3
+            // btnViewApplications
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(117, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
+            this.btnViewApplications.Location = new System.Drawing.Point(62, 273);
+            this.btnViewApplications.Name = "btnViewApplications";
+            this.btnViewApplications.Size = new System.Drawing.Size(137, 45);
+            this.btnViewApplications.TabIndex = 2;
+            this.btnViewApplications.Text = "View Applications";
+            this.btnViewApplications.UseVisualStyleBackColor = true;
+            // 
+            // btnManageOffers
+            // 
+            this.btnManageOffers.Location = new System.Drawing.Point(233, 273);
+            this.btnManageOffers.Name = "btnManageOffers";
+            this.btnManageOffers.Size = new System.Drawing.Size(137, 45);
+            this.btnManageOffers.TabIndex = 3;
+            this.btnManageOffers.Text = "Manage Offers";
+            this.btnManageOffers.UseVisualStyleBackColor = true;
+            // 
+            // btnCompanyProfile
+            // 
+            this.btnCompanyProfile.Location = new System.Drawing.Point(407, 273);
+            this.btnCompanyProfile.Name = "btnCompanyProfile";
+            this.btnCompanyProfile.Size = new System.Drawing.Size(137, 45);
+            this.btnCompanyProfile.TabIndex = 4;
+            this.btnCompanyProfile.Text = "Company Profile";
+            this.btnCompanyProfile.UseVisualStyleBackColor = true;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(580, 273);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(137, 45);
+            this.btnLogout.TabIndex = 5;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
             // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnLogout);
+            this.Controls.Add(this.btnCompanyProfile);
+            this.Controls.Add(this.btnManageOffers);
+            this.Controls.Add(this.btnViewApplications);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "HRHome";
             this.Text = "HRHome";
+            this.Load += new System.EventHandler(this.HRHome_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnViewApplications;
+        private System.Windows.Forms.Button btnManageOffers;
+        private System.Windows.Forms.Button btnCompanyProfile;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
