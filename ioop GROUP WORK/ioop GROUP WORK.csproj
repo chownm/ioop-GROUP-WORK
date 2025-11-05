@@ -125,6 +125,7 @@
     <Compile Include="Student\AddStudent.Designer.cs">
       <DependentUpon>AddStudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UniSupervisor\Student_Profile.cs" />
     <Compile Include="UniSupervisor\Student_Profile_Review.cs">
       <SubType>Form</SubType>
     </Compile>
