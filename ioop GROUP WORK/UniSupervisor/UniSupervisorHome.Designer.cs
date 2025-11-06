@@ -98,6 +98,7 @@
             this.Controls.Add(this.label1);
             this.Name = "UniSupervisorHome";
             this.Text = "UniSupervisorHome";
+            this.Load += new System.EventHandler(this.UniSupervisorHome_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

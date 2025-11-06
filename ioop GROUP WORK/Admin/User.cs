@@ -60,8 +60,8 @@ namespace ioop_GROUP_WORK
                 }
                 else if (userRole == "Unisupervisor")
                 {
-                    //  Unisuperviorhome US = new Unisupervisorhome(un);
-                    //  US.ShowDialog();
+                    UniSupervisorHome US = new UniSupervisorHome();
+                    US.ShowDialog();
                 }
                 
             }

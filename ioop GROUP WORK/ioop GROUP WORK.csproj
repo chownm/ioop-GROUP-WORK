@@ -150,7 +150,7 @@
     <Compile Include="Student\StudentProfileForm.Designer.cs">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UniSupervisor\Student_Profile.cs" />
+    <Compile Include="UniSupervisor\UniSupervisor.cs" />
     <Compile Include="UniSupervisor\Student_Profile_Review.cs">
       <SubType>Form</SubType>
     </Compile>
