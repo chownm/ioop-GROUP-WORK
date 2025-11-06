@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.Student
 {
-    partial class StudentDashboardForm
+    partial class StudentHomeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -55,7 +55,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(598, 141);
+            this.label1.Location = new System.Drawing.Point(527, 136);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(842, 109);
             this.label1.TabIndex = 8;
@@ -65,14 +65,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Silver;
             this.groupBox1.Controls.Add(this.btnLogout);
             this.groupBox1.Controls.Add(this.btnUpReport);
             this.groupBox1.Controls.Add(this.btnInternList);
             this.groupBox1.Controls.Add(this.btnProfile);
             this.groupBox1.Controls.Add(this.lblWelcome);
-            this.groupBox1.Location = new System.Drawing.Point(576, 234);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(576, 248);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(741, 541);
+            this.groupBox1.Size = new System.Drawing.Size(741, 527);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
@@ -127,6 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);

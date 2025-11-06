@@ -58,8 +58,8 @@
             // 
             this.lblDisUsername.AutoSize = true;
             this.lblDisUsername.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDisUsername.ForeColor = System.Drawing.Color.Teal;
-            this.lblDisUsername.Location = new System.Drawing.Point(298, 58);
+            this.lblDisUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblDisUsername.Location = new System.Drawing.Point(287, 59);
             this.lblDisUsername.Name = "lblDisUsername";
             this.lblDisUsername.Size = new System.Drawing.Size(376, 55);
             this.lblDisUsername.TabIndex = 10;
@@ -69,8 +69,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Teal;
-            this.label2.Location = new System.Drawing.Point(85, 58);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label2.Location = new System.Drawing.Point(32, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(260, 55);
             this.label2.TabIndex = 9;
@@ -110,9 +110,9 @@
             // 
             this.txtNewPass2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtNewPass2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPass2.Location = new System.Drawing.Point(333, 358);
+            this.txtNewPass2.Location = new System.Drawing.Point(371, 358);
             this.txtNewPass2.Name = "txtNewPass2";
-            this.txtNewPass2.Size = new System.Drawing.Size(367, 53);
+            this.txtNewPass2.Size = new System.Drawing.Size(354, 53);
             this.txtNewPass2.TabIndex = 11;
             // 
             // label6
@@ -120,7 +120,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(29, 360);
+            this.label6.Location = new System.Drawing.Point(6, 366);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(364, 45);
             this.label6.TabIndex = 10;
@@ -130,18 +130,18 @@
             // 
             this.txtNewPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtNewPass.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPass.Location = new System.Drawing.Point(333, 275);
+            this.txtNewPass.Location = new System.Drawing.Point(371, 275);
             this.txtNewPass.Name = "txtNewPass";
-            this.txtNewPass.Size = new System.Drawing.Size(367, 53);
+            this.txtNewPass.Size = new System.Drawing.Size(354, 53);
             this.txtNewPass.TabIndex = 9;
             // 
             // txtNewUser
             // 
             this.txtNewUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtNewUser.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewUser.Location = new System.Drawing.Point(333, 189);
+            this.txtNewUser.Location = new System.Drawing.Point(371, 189);
             this.txtNewUser.Name = "txtNewUser";
-            this.txtNewUser.Size = new System.Drawing.Size(367, 53);
+            this.txtNewUser.Size = new System.Drawing.Size(354, 53);
             this.txtNewUser.TabIndex = 8;
             // 
             // label4
@@ -149,7 +149,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(29, 189);
+            this.label4.Location = new System.Drawing.Point(6, 197);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(303, 45);
             this.label4.TabIndex = 4;
@@ -160,7 +160,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Navy;
-            this.label5.Location = new System.Drawing.Point(29, 277);
+            this.label5.Location = new System.Drawing.Point(6, 283);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(294, 45);
             this.label5.TabIndex = 5;
@@ -170,6 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);

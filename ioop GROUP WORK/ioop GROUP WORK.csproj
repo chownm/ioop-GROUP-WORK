@@ -131,17 +131,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student\InternshipListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\InternshipListForm.Designer.cs">
+      <DependentUpon>InternshipListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Student\StudentRegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Student\StudentRegisterForm.Designer.cs">
       <DependentUpon>StudentRegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\StudentDashboardForm.cs">
+    <Compile Include="Student\StudentHomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\StudentDashboardForm.Designer.cs">
-      <DependentUpon>StudentDashboardForm.cs</DependentUpon>
+    <Compile Include="Student\StudentHomeForm.Designer.cs">
+      <DependentUpon>StudentHomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\Student.cs" />
     <Compile Include="Student\StudentProfileForm.cs">
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="Student\StudentProfileForm.Designer.cs">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\UploadResumeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\UploadResumeForm.Designer.cs">
+      <DependentUpon>UploadResumeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\Student_Profile.cs" />
     <Compile Include="UniSupervisor\Student_Profile_Review.cs">
@@ -201,14 +213,20 @@
     <EmbeddedResource Include="Admin\ViewStudent.resx">
       <DependentUpon>ViewStudent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Student\InternshipListForm.resx">
+      <DependentUpon>InternshipListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student\StudentRegisterForm.resx">
       <DependentUpon>StudentRegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\StudentDashboardForm.resx">
-      <DependentUpon>StudentDashboardForm.cs</DependentUpon>
+    <EmbeddedResource Include="Student\StudentHomeForm.resx">
+      <DependentUpon>StudentHomeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\StudentProfileForm.resx">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student\UploadResumeForm.resx">
+      <DependentUpon>UploadResumeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\Student_Profile_Review.resx">
       <DependentUpon>Student_Profile_Review.cs</DependentUpon>

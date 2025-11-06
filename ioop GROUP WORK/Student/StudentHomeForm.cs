@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.Student
 {
-    public partial class StudentDashboardForm : Form
+    public partial class StudentHomeForm : Form
     {
-        public StudentDashboardForm()
+        public StudentHomeForm()
         {
             InitializeComponent();
         }
