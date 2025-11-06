@@ -61,7 +61,7 @@
             this.lblDisUsername.ForeColor = System.Drawing.Color.Teal;
             this.lblDisUsername.Location = new System.Drawing.Point(298, 58);
             this.lblDisUsername.Name = "lblDisUsername";
-            this.lblDisUsername.Size = new System.Drawing.Size(319, 45);
+            this.lblDisUsername.Size = new System.Drawing.Size(376, 55);
             this.lblDisUsername.TabIndex = 10;
             this.lblDisUsername.Text = "Nameeeeeeeeeeee";
             // 
@@ -72,7 +72,7 @@
             this.label2.ForeColor = System.Drawing.Color.Teal;
             this.label2.Location = new System.Drawing.Point(85, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(217, 45);
+            this.label2.Size = new System.Drawing.Size(260, 55);
             this.label2.TabIndex = 9;
             this.label2.Text = "Username :";
             // 
@@ -81,9 +81,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(675, 141);
+            this.label1.Location = new System.Drawing.Point(618, 138);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(554, 90);
+            this.label1.Size = new System.Drawing.Size(668, 109);
             this.label1.TabIndex = 8;
             this.label1.Text = "Student Profile";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,7 +112,7 @@
             this.txtNewPass2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewPass2.Location = new System.Drawing.Point(333, 358);
             this.txtNewPass2.Name = "txtNewPass2";
-            this.txtNewPass2.Size = new System.Drawing.Size(367, 45);
+            this.txtNewPass2.Size = new System.Drawing.Size(367, 53);
             this.txtNewPass2.TabIndex = 11;
             // 
             // label6
@@ -122,7 +122,7 @@
             this.label6.ForeColor = System.Drawing.Color.Navy;
             this.label6.Location = new System.Drawing.Point(29, 360);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(310, 38);
+            this.label6.Size = new System.Drawing.Size(364, 45);
             this.label6.TabIndex = 10;
             this.label6.Text = "Confirm Password :";
             // 
@@ -132,7 +132,7 @@
             this.txtNewPass.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewPass.Location = new System.Drawing.Point(333, 275);
             this.txtNewPass.Name = "txtNewPass";
-            this.txtNewPass.Size = new System.Drawing.Size(367, 45);
+            this.txtNewPass.Size = new System.Drawing.Size(367, 53);
             this.txtNewPass.TabIndex = 9;
             // 
             // txtNewUser
@@ -141,7 +141,7 @@
             this.txtNewUser.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewUser.Location = new System.Drawing.Point(333, 189);
             this.txtNewUser.Name = "txtNewUser";
-            this.txtNewUser.Size = new System.Drawing.Size(367, 45);
+            this.txtNewUser.Size = new System.Drawing.Size(367, 53);
             this.txtNewUser.TabIndex = 8;
             // 
             // label4
@@ -151,7 +151,7 @@
             this.label4.ForeColor = System.Drawing.Color.Navy;
             this.label4.Location = new System.Drawing.Point(29, 189);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(258, 38);
+            this.label4.Size = new System.Drawing.Size(303, 45);
             this.label4.TabIndex = 4;
             this.label4.Text = "New Username: ";
             // 
@@ -162,15 +162,15 @@
             this.label5.ForeColor = System.Drawing.Color.Navy;
             this.label5.Location = new System.Drawing.Point(29, 277);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(249, 38);
+            this.label5.Size = new System.Drawing.Size(294, 45);
             this.label5.TabIndex = 5;
             this.label5.Text = "New Password :";
             // 
             // StudentProfileForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 46F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
