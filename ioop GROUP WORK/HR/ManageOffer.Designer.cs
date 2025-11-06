@@ -29,34 +29,26 @@
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(796, 64);
+            this.lblTitle.Location = new System.Drawing.Point(597, 52);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(504, 53);
+            this.lblTitle.Size = new System.Drawing.Size(410, 43);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Manage Internship Offers";
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel1.Location = new System.Drawing.Point(99, 192);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(999, 904);
-            this.panel1.TabIndex = 9;
-            // 
             // ManageOffer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2382, 1303);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.lblTitle);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ManageOffer";
             this.Text = "ManageOffer";
             this.Load += new System.EventHandler(this.ManageOffer_Load);
@@ -67,6 +59,5 @@
 
         #endregion
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel panel1;
     }
 }

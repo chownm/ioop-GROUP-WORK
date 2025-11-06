@@ -64,7 +64,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(128, 77);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(92, 21);
             this.comboBox1.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             this.lstApplicationDetails.FormattingEnabled = true;
             this.lstApplicationDetails.Location = new System.Drawing.Point(38, 122);
-            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(2);
             this.lstApplicationDetails.Name = "lstApplicationDetails";
             this.lstApplicationDetails.Size = new System.Drawing.Size(235, 147);
             this.lstApplicationDetails.TabIndex = 3;
@@ -83,7 +83,7 @@
             // btnViewProfile
             // 
             this.btnViewProfile.Location = new System.Drawing.Point(38, 301);
-            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewProfile.Name = "btnViewProfile";
             this.btnViewProfile.Size = new System.Drawing.Size(82, 24);
             this.btnViewProfile.TabIndex = 4;
@@ -94,7 +94,7 @@
             // btnAccept
             // 
             this.btnAccept.Location = new System.Drawing.Point(161, 301);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(2);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(82, 24);
             this.btnAccept.TabIndex = 5;
@@ -105,7 +105,7 @@
             // btnReject
             // 
             this.btnReject.Location = new System.Drawing.Point(280, 301);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(2);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(82, 24);
             this.btnReject.TabIndex = 6;
@@ -116,7 +116,7 @@
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(394, 301);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(82, 24);
             this.btnBack.TabIndex = 7;
@@ -137,7 +137,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblSelectStudent);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ViewApplication";
             this.Text = "ViewApplication";
             this.Load += new System.EventHandler(this.ViewApplication_Load);
