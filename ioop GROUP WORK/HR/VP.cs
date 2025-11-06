@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Windows.Forms;
 
 
 namespace ioop_GROUP_WORK.HR
@@ -67,6 +68,38 @@ namespace ioop_GROUP_WORK.HR
             con.Close();
 
             return names;
+
+        }
+
+        public string Accept()
+        {
+            string newstatus = "Accepted";
+            string message;
+
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
+
+            cmd.Parameters.AddWithValue("@status", newstatus);
+            cmd.Parameters.AddWithValue("@SName", this.StudentName);
+
+            int i = cmd.ExecuteNonQuery();
+
+            if (i > 0)
+            {
+                message = ($"{this.StudentName} Student : Application accepted successfully.");
+
+            }
+            else if (i == 0)
+            {
+                message = $"{this.StudentName} : Student already accepted."; 
+            }
+            else
+            {
+                message = ("No record found to update");
+            }
+
+            con.Close();
+            return message;
         }
     }
 }
