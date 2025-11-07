@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.Student
 {
-    partial class UploadReportForm
+    partial class UploadResumeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // UploadReportForm
+            // UploadResumeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 46F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
-            this.Name = "UploadReportForm";
+            this.Name = "UploadResumeForm";
             this.Text = "Upload Report";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.UploadReportForm_Load);

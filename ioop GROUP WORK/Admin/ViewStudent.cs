@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ioop_GROUP_WORK;
 
 namespace ioop_GROUP_WORK
 {
@@ -20,10 +21,9 @@ namespace ioop_GROUP_WORK
 
         private void ViewStudent_Load(object sender, EventArgs e)
         {
-            ArrayList name = new ArrayList();
+            ArrayList names = StudentV2.ViewAll();
 
-            name = Student.viewAll();
-            foreach (var item in name)
+            foreach (var item in names)
             {
                 lstStudent.Items.Add(item);
             }

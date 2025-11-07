@@ -27,7 +27,7 @@ namespace ioop_GROUP_WORK.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database1.mdf" +
-            ";Integrated Security=True")]
+            ";Integrated Security=True;Encrypt=True")]
         public string cn {
             get {
                 return ((string)(this["cn"]));
