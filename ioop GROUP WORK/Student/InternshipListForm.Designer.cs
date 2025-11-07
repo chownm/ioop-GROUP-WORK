@@ -48,6 +48,7 @@
             this.btnResume.TabIndex = 12;
             this.btnResume.Text = "Upload Resume";
             this.btnResume.UseVisualStyleBackColor = false;
+            this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
             // 
             // label1
             // 
@@ -56,7 +57,7 @@
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(617, 99);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(662, 109);
+            this.label1.Size = new System.Drawing.Size(550, 90);
             this.label1.TabIndex = 8;
             this.label1.Text = "Internship List";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -91,13 +92,13 @@
             this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblStatus.Location = new System.Drawing.Point(281, -3);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(195, 45);
+            this.lblStatus.Size = new System.Drawing.Size(165, 38);
             this.lblStatus.TabIndex = 10;
             this.lblStatus.Text = "Successful";
             // 
             // InternshipListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 46F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);

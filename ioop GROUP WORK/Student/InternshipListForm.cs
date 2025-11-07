@@ -16,5 +16,10 @@ namespace ioop_GROUP_WORK.Student
         {
             InitializeComponent();
         }
+
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

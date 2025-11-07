@@ -16,5 +16,12 @@ namespace ioop_GROUP_WORK.Student
         {
             InitializeComponent();
         }
+
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
