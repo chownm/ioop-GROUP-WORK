@@ -16,5 +16,10 @@ namespace ioop_GROUP_WORK
         {
             InitializeComponent();
         }
+
+        private void UniSupervisorHome_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
