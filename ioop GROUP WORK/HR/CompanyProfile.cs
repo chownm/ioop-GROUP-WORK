@@ -32,15 +32,5 @@ namespace ioop_GROUP_WORK.HR
         {
 
         }
-
-        private void CompanyProfile_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
