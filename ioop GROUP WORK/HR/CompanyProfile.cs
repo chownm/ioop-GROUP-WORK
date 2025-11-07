@@ -23,8 +23,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            StudentV2 obj1 = new StudentV2(txtCompanyName.Text, txtAddress.Text, txtContactPerson.Text, txtEmail.Text, txtPhone.Text);
-            MessageBox.Show(obj1.AddStudent());
+            
         }
 
 
