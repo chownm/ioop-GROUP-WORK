@@ -23,22 +23,23 @@ namespace ioop_GROUP_WORK.Student
         {
             string name = txtStuName.Text;
             string id = txtStuID.Text;
-            string password = txtStuPass.Text;
             string email = txtStuEmail.Text;
             string contact = txtStuCont.Text;
             string course = txtStuCourse.Text;
+            string password = txtStuPass.Text;
 
             try
             {
                 con.Open();
 
                 // Insert into Students table
-                SqlCommand cmd = new SqlCommand("INSERT INTO Students(studentID, studentName, email, phoneNumber, course) VALUES(@id,@name,@em,@ph,@cr)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Students(studentID, studentName, email, phoneNumber, course, password) VALUES(@id,@name,@em,@ph,@cr,@pw)", con);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@em", email);
                 cmd.Parameters.AddWithValue("@ph", contact);
                 cmd.Parameters.AddWithValue("@cr", course);
+                cmd.Parameters.AddWithValue("@pw", password);
                 cmd.ExecuteNonQuery();
 
                 // Insert into Users table

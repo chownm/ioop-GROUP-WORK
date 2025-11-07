@@ -52,7 +52,7 @@ namespace ioop_GROUP_WORK
                     cmd.Parameters.AddWithValue("@em", this.email);
                     cmd.Parameters.AddWithValue("@num", this.phoneno);
                     cmd.Parameters.AddWithValue("@course", this.course);
-                    cmd.Parameters.AddWithValue("@pass", this.password);
+                    cmd.Parameters.AddWithValue ("@pass", this.password);
 
                     int result = cmd.ExecuteNonQuery();
                     status = (result > 0) ? "Student Added Successfully." : "Failed to Add Student.";
@@ -109,7 +109,6 @@ namespace ioop_GROUP_WORK
                         student.email = rd["email"].ToString();
                         student.phoneno = rd["phoneNumber"].ToString();
                         student.course = rd["course"].ToString();
-                        student.password = rd["password"].ToString();
                     }
                 }
             }
