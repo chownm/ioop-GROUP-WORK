@@ -23,7 +23,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Student obj1 = new Student(txtName.Text, txtEmail.Text, txtPhone.Text);
+            Student obj1 = new Student(txtCompanyName.Text, txtEmail.Text, txtPhone.Text);
             MessageBox.Show(obj1.addStudent());
         }
 
@@ -39,6 +39,11 @@ namespace ioop_GROUP_WORK.HR
         }
 
         private void btnBack_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCompanyName_TextChanged(object sender, EventArgs e)
         {
 
         }
