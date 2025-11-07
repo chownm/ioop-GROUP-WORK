@@ -162,7 +162,6 @@
     <Compile Include="Student\UploadResumeForm.Designer.cs">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UniSupervisor\Student_Profile.cs" />
     <Compile Include="UniSupervisor\Student_Profile_Review.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +181,7 @@
     <Compile Include="Admin\ViewStudent.Designer.cs">
       <DependentUpon>ViewStudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UniSupervisor\View_&amp;_Display_Student_Profile.cs" />
     <EmbeddedResource Include="Admin\AdminHome.resx">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </EmbeddedResource>
