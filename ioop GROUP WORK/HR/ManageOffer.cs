@@ -21,5 +21,15 @@ namespace ioop_GROUP_WORK.HR
         {
 
         }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStudent_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
