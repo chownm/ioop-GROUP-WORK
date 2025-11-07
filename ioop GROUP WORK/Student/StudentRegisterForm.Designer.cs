@@ -49,9 +49,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(590, 128);
+            this.label1.Location = new System.Drawing.Point(518, 130);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(747, 90);
+            this.label1.Size = new System.Drawing.Size(897, 109);
             this.label1.TabIndex = 0;
             this.label1.Text = "Student Registration";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -62,7 +62,7 @@
             this.txtStuName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtStuName.Location = new System.Drawing.Point(276, 85);
             this.txtStuName.Name = "txtStuName";
-            this.txtStuName.Size = new System.Drawing.Size(408, 53);
+            this.txtStuName.Size = new System.Drawing.Size(408, 63);
             this.txtStuName.TabIndex = 1;
             // 
             // label2
@@ -71,7 +71,7 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(633, 321);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 45);
+            this.label2.Size = new System.Drawing.Size(173, 55);
             this.label2.TabIndex = 2;
             this.label2.Text = "Name :";
             // 
@@ -81,7 +81,7 @@
             this.label3.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(633, 406);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(146, 45);
+            this.label3.Size = new System.Drawing.Size(175, 55);
             this.label3.TabIndex = 3;
             this.label3.Text = "Email :";
             // 
@@ -91,7 +91,7 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(46, 255);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(198, 45);
+            this.label4.Size = new System.Drawing.Size(237, 55);
             this.label4.TabIndex = 4;
             this.label4.Text = "Password:";
             // 
@@ -101,7 +101,7 @@
             this.label5.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(46, 338);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(176, 45);
+            this.label5.Size = new System.Drawing.Size(214, 55);
             this.label5.TabIndex = 5;
             this.label5.Text = "Contact :";
             // 
@@ -127,7 +127,7 @@
             this.txtStuCourse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtStuCourse.Location = new System.Drawing.Point(276, 416);
             this.txtStuCourse.Name = "txtStuCourse";
-            this.txtStuCourse.Size = new System.Drawing.Size(408, 53);
+            this.txtStuCourse.Size = new System.Drawing.Size(408, 63);
             this.txtStuCourse.TabIndex = 11;
             // 
             // label6
@@ -136,7 +136,7 @@
             this.label6.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(46, 422);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 45);
+            this.label6.Size = new System.Drawing.Size(198, 55);
             this.label6.TabIndex = 10;
             this.label6.Text = "Course :";
             // 
@@ -145,7 +145,7 @@
             this.txtStuCont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtStuCont.Location = new System.Drawing.Point(276, 333);
             this.txtStuCont.Name = "txtStuCont";
-            this.txtStuCont.Size = new System.Drawing.Size(408, 53);
+            this.txtStuCont.Size = new System.Drawing.Size(408, 63);
             this.txtStuCont.TabIndex = 9;
             // 
             // txtStuPass
@@ -153,7 +153,7 @@
             this.txtStuPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtStuPass.Location = new System.Drawing.Point(276, 250);
             this.txtStuPass.Name = "txtStuPass";
-            this.txtStuPass.Size = new System.Drawing.Size(408, 53);
+            this.txtStuPass.Size = new System.Drawing.Size(408, 63);
             this.txtStuPass.TabIndex = 8;
             // 
             // txtStuEmail
@@ -161,7 +161,7 @@
             this.txtStuEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtStuEmail.Location = new System.Drawing.Point(276, 170);
             this.txtStuEmail.Name = "txtStuEmail";
-            this.txtStuEmail.Size = new System.Drawing.Size(408, 53);
+            this.txtStuEmail.Size = new System.Drawing.Size(408, 63);
             this.txtStuEmail.TabIndex = 7;
             // 
             // btnRegister
@@ -176,11 +176,12 @@
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = false;
             // 
-            // RegisterStudentForm
+            // StudentRegisterForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 46F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.BackColor = System.Drawing.Color.Silver;
+            this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -188,7 +189,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
-            this.Name = "RegisterStudentForm";
+            this.Name = "StudentRegisterForm";
             this.Text = "Student Registration";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

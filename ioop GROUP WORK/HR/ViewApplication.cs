@@ -30,8 +30,21 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
+            
+            if (comboBox1.SelectedItem != null)
+            {
+                string selectedStudent = comboBox1.SelectedItem.ToString();
+                VP ac = new VP(selectedStudent);
+                MessageBox.Show(ac.Accept());
 
+             }
+            else
+            {
+                MessageBox.Show("Please select a student from the list.");
+
+            }
         }
+            
 
         private void btnViewProfile_Click(object sender, EventArgs e)
         {

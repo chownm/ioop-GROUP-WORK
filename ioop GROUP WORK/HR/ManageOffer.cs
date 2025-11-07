@@ -16,5 +16,10 @@ namespace ioop_GROUP_WORK.HR
         {
             InitializeComponent();
         }
+
+        private void ManageOffer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
