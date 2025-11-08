@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices;
 using System.Net.NetworkInformation;
+using ioop_GROUP_WORK.Student;
 
 
 namespace ioop_GROUP_WORK
@@ -50,7 +51,7 @@ namespace ioop_GROUP_WORK
                 }
                 else if (userRole == "student")
                 {
-                    StudentHome s = new StudentHome(un);
+                    StudentHomeForm s = new StudentHomeForm(un);
                     s.ShowDialog();
                 }
                 else if (userRole == "HR")

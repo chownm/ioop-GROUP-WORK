@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.Student
 {
-    public partial class UploadReportForm : Form
+    public partial class UploadResumeForm : Form
     {
-        public UploadReportForm()
+        public UploadResumeForm()
         {
             InitializeComponent();
         }

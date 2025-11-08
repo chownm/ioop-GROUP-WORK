@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace ioop_GROUP_WORK
 {
-    internal class Student
+    internal class StudentV2
     {
         //=============================
-        //Atributes
+        // Attributes
         //=============================
         private string name;
         private string id;
@@ -22,14 +17,10 @@ namespace ioop_GROUP_WORK
         private string course;
         private string password;
 
-        //Shared SQL Connection string
-        static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
-
-
         //=============================
-        //Constructor
+        // Constructor
         //=============================
-        public Student(string stuName, string stuId, string stuEmail, string stuPhoneno, string stuCourse, string stuPassword)
+        public StudentV2(string stuName, string stuId, string stuEmail, string stuPhoneno, string stuCourse, string stuPassword)
         {
             this.name = stuName;
             this.id = stuId;
@@ -37,75 +28,121 @@ namespace ioop_GROUP_WORK
             this.phoneno = stuPhoneno;
             this.course = stuCourse;
             this.password = stuPassword;
-
         }
 
+        //=============================
+        // Methods
+        //=============================
 
-        //=============================
-        //Methods
-        //=============================
+        // Add a new student to the database
         public string AddStudent()
         {
             string status;
-
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            try
             {
-                con.Open();
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "INSERT INTO students(studentName, studentID, email, phoneNumber, course, password) " +
+                        "VALUES(@name, @id, @em, @num, @course, @pass)", con);
 
-                //Insert Into student table
-                SqlCommand cmd = new SqlCommand("INSERT INTO students(studentName, studentID, email, phoneNumber, course, password) values(@name, @id, @em, @num, @course, @courseid)", con);
+                    cmd.Parameters.AddWithValue("@name", this.name);
+                    cmd.Parameters.AddWithValue("@id", this.id);
+                    cmd.Parameters.AddWithValue("@em", this.email);
+                    cmd.Parameters.AddWithValue("@num", this.phoneno);
+                    cmd.Parameters.AddWithValue("@course", this.course);
+                    cmd.Parameters.AddWithValue ("@pass", this.password);
+
+                    int result = cmd.ExecuteNonQuery();
+                    status = (result > 0) ? "Student Added Successfully." : "Failed to Add Student.";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = "Error: " + ex.Message;
             }
 
-
+            return status;
         }
 
+        // View all student names
         public static ArrayList ViewAll()
         {
-            ArrayList nm = new ArrayList();
-            con.Open();
-            SqlCommand cmd = new SqlCommand("select studentName from students", con);
-            SqlDataReader rd = cmd.ExecuteReader();
-            while (rd.Read())
+            ArrayList studentNames = new ArrayList();
+            try
             {
-                nm.Add(rd.GetString(0));
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT studentName FROM students", con);
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    while (rd.Read())
+                    {
+                        studentNames.Add(rd.GetString(0));
+                    }
+                }
             }
-            con.Close();
-            return nm;
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return studentNames;
         }
-        
-        public static void ViewProfile(Student o1)
+
+        // View full profile of a student
+        public static void ViewProfile(StudentV2 student)
         {
-            con.Open();
-            SqlCommand cmd = new SqlCommand("select * from students where studentName = @a", con);
-            cmd.Parameters.AddWithValue("@a", o1.studName);
-
-            SqlDataReader rd = cmd.ExecuteReader();
-            while (rd.Read()) 
+            try
             {
-                o1.email = rd.GetString(2);
-                o1.phoneNum =  rd.GetString(3);
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM students WHERE studentName = @name", con);
+                    cmd.Parameters.AddWithValue("@name", student.name);
+
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    if (rd.Read())
+                    {
+                        student.id = rd["studentID"].ToString();
+                        student.email = rd["email"].ToString();
+                        student.phoneno = rd["phoneNumber"].ToString();
+                        student.course = rd["course"].ToString();
+                    }
+                }
             }
-            con.Close();
-                
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
 
-        public string UpdateProfile(string em, string num)
+        // Update email and phone number
+        public string UpdateProfile(string newEmail, string newPhone)
         {
             string status;
-            con.Open();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(
+                        "UPDATE students SET email = @em, phoneNumber = @ph WHERE studentName = @name", con);
 
-            SqlCommand cmd = new SqlCommand("update students set email = @e, phoneNumber=@p where studentName =@nm", con);
-            cmd.Parameters.AddWithValue("@e",em);
-            cmd.Parameters.AddWithValue("@p", num);
-            cmd.Parameters.AddWithValue("@nm", studName);
+                    cmd.Parameters.AddWithValue("@em", newEmail);
+                    cmd.Parameters.AddWithValue("@ph", newPhone);
+                    cmd.Parameters.AddWithValue("@name", this.name);
 
-            int i = cmd.ExecuteNonQuery();
-            if (i != 0)
-                status = "Update Succefully.";
-            else
-                status = "Unable to update";
-            con.Close();
-            
+                    int i = cmd.ExecuteNonQuery();
+                    status = (i > 0) ? "Profile Updated Successfully." : "Unable to Update Profile.";
+                }
+            }
+            catch (Exception ex)
+            {
+                status = "Error: " + ex.Message;
+            }
+
             return status;
         }
     }

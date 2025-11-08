@@ -23,12 +23,21 @@ namespace ioop_GROUP_WORK.HR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Student obj1 = new Student(txtName.Text, txtEmail.Text, txtPhone.Text);
-            MessageBox.Show(obj1.addStudent());
+            
         }
 
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CompanyProfile_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
         {
 
         }

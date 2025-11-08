@@ -154,6 +154,7 @@
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(100, 20);
             this.txtCompanyName.TabIndex = 10;
+            
             // 
             // txtAddress
             // 

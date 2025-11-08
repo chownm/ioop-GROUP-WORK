@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ioop_GROUP_WORK.Student;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +28,7 @@ namespace ioop_GROUP_WORK
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            RegisterStudent ad = new RegisterStudent();
+            StudentRegisterForm ad = new StudentRegisterForm();
             ad.ShowDialog();
         }
 

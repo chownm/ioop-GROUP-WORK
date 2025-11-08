@@ -49,6 +49,7 @@
             this.btnProfile.TabIndex = 12;
             this.btnProfile.Text = "Profile";
             this.btnProfile.UseVisualStyleBackColor = false;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // label1
             // 
@@ -57,7 +58,7 @@
             this.label1.ForeColor = System.Drawing.Color.Navy;
             this.label1.Location = new System.Drawing.Point(527, 136);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(842, 109);
+            this.label1.Size = new System.Drawing.Size(701, 90);
             this.label1.TabIndex = 8;
             this.label1.Text = "Student Dashboard";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,13 +123,13 @@
             this.lblWelcome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.lblWelcome.Location = new System.Drawing.Point(12, 49);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(362, 41);
+            this.lblWelcome.Size = new System.Drawing.Size(297, 35);
             this.lblWelcome.TabIndex = 10;
             this.lblWelcome.Text = "Welcome Back! Name!";
             // 
-            // StudentDashboardForm
+            // StudentHomeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 55F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 46F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
@@ -136,8 +137,9 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
-            this.Name = "StudentDashboardForm";
-            this.Text = "Student Dashboard";
+            this.Name = "StudentHomeForm";
+            this.Text = "Student Home";
+            this.Load += new System.EventHandler(this.StudentHomeForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
