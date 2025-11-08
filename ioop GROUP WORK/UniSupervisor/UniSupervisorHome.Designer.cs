@@ -55,6 +55,7 @@
             this.lst_Student_List.Name = "lst_Student_List";
             this.lst_Student_List.Size = new System.Drawing.Size(699, 500);
             this.lst_Student_List.TabIndex = 1;
+            this.lst_Student_List.SelectedIndexChanged += new System.EventHandler(this.lst_Student_List_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -75,6 +76,7 @@
             this.btn_Select.TabIndex = 2;
             this.btn_Select.Text = "Select";
             this.btn_Select.UseVisualStyleBackColor = true;
+            this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
             // 
             // btn_Exit
             // 
@@ -85,6 +87,7 @@
             this.btn_Exit.TabIndex = 2;
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // UniSupervisorHome
             // 
