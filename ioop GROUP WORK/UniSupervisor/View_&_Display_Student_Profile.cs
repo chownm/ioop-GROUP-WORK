@@ -45,20 +45,20 @@ namespace ioop_GROUP_WORK.UniSupervisor
         }
 
         // Get student basic info
-        public static ArrayList Get_Student_Details(string student_id, string student_name, string email, string phone_number)
+        public static ArrayList Get_Student_Details(string student_id, string student_name, string email, string phone_number, string course_name)
         {
             ArrayList student_details = new ArrayList();
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString)) ;
             { 
                 con.Open();
-                string query_cmd = "SELECT Id, studentName, Email, PhoneNumber FROM students";
+                string query_cmd = "SELECT studentID, studentName, email, phoneNumber, course FROM Students";
                 SqlCommand cmd = new SqlCommand(query_cmd, con);
           
                 SqlDataReader rd = cmd.ExecuteReader();
 
                 while (rd.Read())
                 {
-                    string student_parameters = $"Student Id: {rd["Id"]} | Student Name: {rd["studentName"]} | Email: {rd["Email"]} | Contact Number: {rd["Phone_Number"]}";
+                    string student_parameters = $"Student Id: {rd["studentID"]} | Student Name: {rd["studentName"]} | Email: {rd["email"]} | Contact Number: {rd["phoneNumber"]} | Course: {rd[course_name]}";
                     student_details.Add(student_parameters);
                 }
 

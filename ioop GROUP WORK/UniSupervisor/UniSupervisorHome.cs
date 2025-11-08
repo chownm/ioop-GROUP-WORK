@@ -48,14 +48,16 @@ namespace ioop_GROUP_WORK
 
         private void Show_Student_Details()
         {
+            lst_Student_List.Items.Clear();         // Clear existing items before adding new ones
             string student_id = ""; 
             string student_name ="";
             string email = "";
             string phone_number = "";
-            ArrayList student_details = View_Student_Profile.Get_Student_Details(student_id, student_name, email, phone_number);
+            string course_name = "";
+            ArrayList student_details = View_Student_Profile.Get_Student_Details(student_id, student_name, email, phone_number, course_name);
             foreach (string details in student_details)
             {
-                lst_Student_List.Items.Add(details);
+                lst_Student_List.Items.Add(details);        // Add each student detail to the ListBox
             }
         }
     }
