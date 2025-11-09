@@ -12,123 +12,162 @@ namespace ioop_GROUP_WORK.UniSupervisor
 {
     internal class View_Student_Profile
     {
-        // Attributes
-        public string student_name;
-        public string student_id;
-        public string email;
-        public string phone_number;
-        public string course_id;
-        public string course_name;
-        public string chapter_id;
-        public string chapter_order;
-        public string chapter_description;
-        public double progress_percentage;
+        // Attributes (Student Details)
+        public string StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string CourseID { get; set; }
+        public string CourseName { get; set; }
 
-        // SQL Connection
-        static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
+        // Attributes (Course Progress)
+        public string ChapterID { get; set; }
+        public string ChapterOrder { get; set; }
+        public string ChapterDescription { get; set; }
+        public double ProgressPercentage { get; set; }
 
-        // Constructor
-        public View_Student_Profile(string student_name, string student_id, string email, string phone_number,
-                                    string course_id, string course_name, string chapter_id,
-                                    string chapter_order, string chapter_description, double progress_percentage)
+        // Constructors
+        public View_Student_Profile(string studentID, string studentName , string email, string phoneNumber,
+                                    string courseID, string courseName, string chapterID,
+                                    string chapterOrder, string chapterDescription , double progressPercentage)
         {
-            this.student_name = student_name;
-            this.student_id = student_id;
-            this.email = email;
-            this.phone_number = phone_number;
-            this.course_id = course_id;
-            this.course_name = course_name;
-            this.chapter_id = chapter_id;
-            this.chapter_order = chapter_order;
-            this.chapter_description = chapter_description;
-            this.progress_percentage = progress_percentage;
+            StudentID = studentID;
+            StudentName = studentName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            CourseID = courseID;
+            CourseName = courseName;
+            ChapterID = chapterID;
+            ChapterOrder = chapterOrder;
+            ChapterDescription = chapterDescription;
+            ProgressPercentage = progressPercentage;
         }
 
-        // Get student basic info
-        public static ArrayList Get_Student_Details(string student_id, string student_name, string email, string phone_number, string course_name)
+        public View_Student_Profile(string studentID, string courseID, string courseName, string chapterID, string chapterOrder, string chapterDescription, double progressPercentage)
         {
-            ArrayList student_details = new ArrayList();
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString)) ;
-            { 
-                con.Open();
-                string query_cmd = "SELECT studentID, studentName, email, phoneNumber, course FROM Students";
-                SqlCommand cmd = new SqlCommand(query_cmd, con);
-          
-                SqlDataReader rd = cmd.ExecuteReader();
-
-                while (rd.Read())
-                {
-                    string student_parameters = $"Student Id: {rd["studentID"]} | Student Name: {rd["studentName"]} | Email: {rd["email"]} | Contact Number: {rd["phoneNumber"]} | Course: {rd[course_name]}";
-                    student_details.Add(student_parameters);
-                }
-
-                rd.Close();
-                con.Close();
-
-                return student_details;
-            }
-           
+            StudentID = studentID;
+            CourseID = courseID;
+            CourseName = courseName;
+            ChapterID = chapterID;
+            ChapterOrder = chapterOrder;
+            ChapterDescription = chapterDescription;
+            ProgressPercentage = progressPercentage;
         }
 
-        // Get student's course progress
-        public static ArrayList Get_Student_Course_Progress(int student_id)
+
+
+        // Methods
+        public static List<View_Student_Profile> GetAllStudents()
         {
-            ArrayList course_progress = new ArrayList();
+            List<View_Student_Profile> students = new List<View_Student_Profile>();
 
-            string query_cmd = @"SELECT 
-                                    c.Course_Id, 
-                                    c.Subject_Name, 
-                                    ch.Chapter_Id, 
-                                    ch.Chapter_Order, 
-                                    ch.Description, 
-                                    sp.Progress_Percentage
-                                 FROM Student_Progress sp
-                                 JOIN Chapters ch ON sp.Chapter_Id = ch.Chapter_Id
-                                 JOIN Courses c ON ch.Course_Id = c.Course_Id
-                                 WHERE sp.Student_Id = @Student_Id";
-
-            SqlCommand cmd = new SqlCommand(query_cmd, con);
-            cmd.Parameters.AddWithValue("@Student_Id", student_id);
-
-            con.Open();
-            SqlDataReader rd = cmd.ExecuteReader();
-
-            while (rd.Read())
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
             {
-                course_progress.Add(new View_Student_Profile(
-                    "", student_id, "", "",
-                    rd["Course_Id"].ToString(),
-                    rd["Subject_Name"].ToString(),
-                    rd["Chapter_Id"].ToString(),
-                    rd["Chapter_Order"].ToString(),
-                    rd["Description"].ToString(),
-                    Convert.ToDouble(rd["Progress_Percentage"])
-                ));
+                con.Open();
+                string query = "SELECT studentID, studentName, email, phoneNumber, course FROM Students";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        students.Add(new View_Student_Profile(
+                            studentID: rd["studentID"].ToString(),
+                            studentName: rd["studentName"].ToString(),
+                            email: rd["email"].ToString(),
+                            phoneNumber: rd["phoneNumber"].ToString(),
+                            courseID: null,
+                            courseName: rd["course"].ToString(),
+                            chapterID: null,
+                            chapterOrder: null,
+                            chapterDescription: null,
+                            progressPercentage: 0.0
+                        ));
+                    }
+                }
             }
 
-            rd.Close();
-            con.Close();
-
-            return course_progress;
+            return students;
         }
 
-        // Display functions
-        public string Display_Student_Details()
+        // Get student details by ID
+        public static View_Student_Profile GetStudentByID(string studentID)
         {
-            return $"Student Name: {student_name}\n" +
-                   $"Student ID: {student_id}\n" +
-                   $"Email: {email}\n" +
-                   $"Phone Number: {phone_number}\n";
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            {
+                con.Open();
+                string query = "SELECT studentID, studentName, email, phoneNumber, course FROM Students WHERE studentID = @id";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@id", studentID);
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read())
+                        {
+                            return new View_Student_Profile(
+                                studentID: rd["studentID"].ToString(),
+                                studentName: rd["studentName"].ToString(),
+                                email: rd["email"].ToString(),
+                                phoneNumber: rd["phoneNumber"].ToString(),
+                                courseID: null,
+                                courseName: rd["course"].ToString(),
+                                chapterID: null,
+                                chapterOrder: null,
+                                chapterDescription: null,
+                                progressPercentage: 0.0
+                            );
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
-        public string Display_Course_Progress()
+        // Get student course progress by student ID
+        public static List<View_Student_Profile> GetStudentCourseProgress(string studentID)
         {
-            return $"Course ID: {course_id}\n" +
-                   $"Course Name: {course_name}\n" +
-                   $"Chapter ID: {chapter_id}\n" +
-                   $"Chapter Order: {chapter_order}\n" +
-                   $"Chapter Description: {chapter_description}\n" +
-                   $"Progress Percentage: {progress_percentage}%\n";
+            List<View_Student_Profile> progressList = new List<View_Student_Profile>();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            {
+                con.Open();
+                string query = @"
+                    SELECT 
+                        c.Course_Id, 
+                        c.Subject_Name, 
+                        ch.Chapter_Id, 
+                        ch.Chapter_Order, 
+                        ch.Description, 
+                        sp.Progress_Percentage
+                    FROM Student_Progress sp
+                    JOIN Chapters ch ON sp.Chapter_Id = ch.Chapter_Id
+                    JOIN Courses c ON ch.Course_Id = c.Course_Id
+                    WHERE sp.Student_Id = @Student_Id
+                ";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Student_Id", studentID);
+
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                        {
+                            progressList.Add(new View_Student_Profile(
+                                studentID: studentID,
+                                courseID: rd["Course_Id"].ToString(),
+                                courseName: rd["Subject_Name"].ToString(),
+                                chapterID: rd["Chapter_Id"].ToString(),
+                                chapterOrder: rd["Chapter_Order"].ToString(),
+                                chapterDescription: rd["Description"].ToString(),
+                                progressPercentage: Convert.ToDouble(rd["Progress_Percentage"])
+                            ));
+                        }
+                    }
+                }
+            }
+
+            return progressList;
         }
     }
 }

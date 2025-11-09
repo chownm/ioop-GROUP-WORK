@@ -162,17 +162,23 @@
     <Compile Include="Student\UploadResumeForm.Designer.cs">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UniSupervisor\Student_Profile_Review.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UniSupervisor\Student_Profile_Review.Designer.cs">
-      <DependentUpon>Student_Profile_Review.cs</DependentUpon>
-    </Compile>
     <Compile Include="UniSupervisor\UniSupervisorHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UniSupervisor\UniSupervisorHome.Designer.cs">
       <DependentUpon>UniSupervisorHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniSupervisor\Student_Table.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UniSupervisor\Student_Table.Designer.cs">
+      <DependentUpon>Student_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniSupervisor\Student_Profile_Review.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UniSupervisor\Student_Profile_Review.Designer.cs">
+      <DependentUpon>Student_Profile_Review.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\User.cs" />
     <Compile Include="Admin\ViewStudent.cs">
@@ -230,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\Student_Profile_Review.resx">
       <DependentUpon>Student_Profile_Review.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UniSupervisor\Student_Table.resx">
+      <DependentUpon>Student_Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\UniSupervisorHome.resx">
       <DependentUpon>UniSupervisorHome.cs</DependentUpon>

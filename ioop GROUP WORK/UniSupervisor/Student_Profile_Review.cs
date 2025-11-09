@@ -10,9 +10,10 @@ using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.UniSupervisor
 {
-    public partial class Student_Profile_Review : Form
+    public partial class frm_Student_Profile_Review : Form
     {
-        public Student_Profile_Review()
+
+        public frm_Student_Profile_Review()
         {
             InitializeComponent();
         }
@@ -22,7 +23,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void frm_Student_Profile_Review_Load(object sender, EventArgs e)
         {
 
         }

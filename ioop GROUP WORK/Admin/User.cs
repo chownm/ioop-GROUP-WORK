@@ -1,15 +1,16 @@
 ﻿
+using ioop_GROUP_WORK.Student;
+using ioop_GROUP_WORK.UniSupervisor;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.InteropServices;
-using System.Net.NetworkInformation;
-using ioop_GROUP_WORK.Student;
 
 
 namespace ioop_GROUP_WORK
@@ -61,8 +62,8 @@ namespace ioop_GROUP_WORK
                 }
                 else if (userRole == "Unisupervisor")
                 {
-                    UniSupervisorHome US = new UniSupervisorHome();
-                    US.ShowDialog();
+                    frm_UniSupervisorHome() us = new frm_UniSupervisorHome();
+                    us.ShowDialog();
                 }
                 
             }
