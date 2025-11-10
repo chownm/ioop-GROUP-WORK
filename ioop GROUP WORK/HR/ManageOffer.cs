@@ -65,9 +65,10 @@ namespace ioop_GROUP_WORK.HR
 
             cbJobTitle.Items.AddRange(positions.ToArray());
 
-            if (cbJobTitle.Items.Count > 0) 
-                cbJobTitle.SelectedIndex = 0;
-
+            if (cbJobTitle.Items.Count > 0)
+            {
+              cbJobTitle.SelectedIndex = 0;
+            }
         }
     }
 }
