@@ -62,7 +62,7 @@ namespace ioop_GROUP_WORK
                 }
                 else if (userRole == "Unisupervisor")
                 {
-                    frm_UniSupervisorHome() us = new frm_UniSupervisorHome();
+                   frm_UniSupervisorHome us = new frm_UniSupervisorHome();
                     us.ShowDialog();
                 }
                 

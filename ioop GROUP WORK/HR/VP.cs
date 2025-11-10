@@ -111,13 +111,13 @@ namespace ioop_GROUP_WORK.HR
             SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
 
             cmd.Parameters.AddWithValue("@status", newstatus);
-            cmd.Parameters.AddWithValue("@SName", this.StudentNAme);
+            cmd.Parameters.AddWithValue("@SName", this.StudentName);
 
             int i = cmd.ExecuteNonQuery();
 
             if (i > 0)
             {
-                message = $"{this.StudentName} Student:Application Rejected Successful."
+                message = $"{this.StudentName} Student:Application Rejected Successful.";
             }
             else if (i == 0)
             {
