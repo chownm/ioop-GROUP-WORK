@@ -98,12 +98,14 @@
     <Compile Include="Admin\AdminHome.Designer.cs">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="HR\CP.cs" />
     <Compile Include="HR\CompanyProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HR\CompanyProfile.Designer.cs">
       <DependentUpon>CompanyProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="HR\MO.cs" />
     <Compile Include="HR\VP.cs" />
     <Compile Include="HR\ManageOffer.cs">
       <SubType>Form</SubType>

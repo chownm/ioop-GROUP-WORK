@@ -86,12 +86,12 @@ namespace ioop_GROUP_WORK.HR
 
             if (i > 0)
             {
-                message = ($"{this.StudentName} Student : Application accepted successfully.");
+                message = ($"{this.StudentName} Student:Application accepted successfully.");
 
             }
             else if (i == 0)
             {
-                message = $"{this.StudentName} : Student already accepted."; 
+                message = $"{this.StudentName}Student:already accepted."; 
             }
             else
             {
@@ -101,5 +101,37 @@ namespace ioop_GROUP_WORK.HR
             con.Close();
             return message;
         }
+
+        public string Reject()
+        {
+            string newstatus = "Rejected";
+            string message;
+
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
+
+            cmd.Parameters.AddWithValue("@status", newstatus);
+            cmd.Parameters.AddWithValue("@SName", this.StudentName);
+
+            int i = cmd.ExecuteNonQuery();
+
+            if (i > 0)
+            {
+                message = $"{this.StudentName} Student:Application Rejected Successful.";
+            }
+            else if (i == 0)
+            {
+                message = $"{this.StudentName} Student:already rejected.";
+            }
+            else
+            {
+                message = "No record found to update";
+            }
+            con.Close();
+            return message;
+        }
+
+        
+        
     }
 }

@@ -25,7 +25,17 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnReject_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem != null)
+            {
+                string selectedStudent = comboBox1.SelectedItem.ToString();
+                VP ac = new VP(selectedStudent);
+                MessageBox.Show(ac.Reject());
+            }
+            else
+            {
+                MessageBox.Show("Please select a student from the list.");
 
+            }
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
@@ -69,7 +79,8 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
+            HRHome back = new HRHome();
+            back.ShowDialog();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
