@@ -63,12 +63,68 @@ namespace ioop_GROUP_WORK.HR
             string selectedDept = cbJobTitle.SelectedItem.ToString();
             List<string> positions = MO.AddJobPosition(selectedDept);
 
-            cbJobTitle.Items.AddRange(positions.ToArray());
+            foreach (string position in positions)
+            {
+                cbJobTitle.Items.Add(position);
+            }
 
             if (cbJobTitle.Items.Count > 0)
             {
               cbJobTitle.SelectedIndex = 0;
             }
         }
+
+        private void btnSendOffer_Click(object sender, EventArgs e)
+        {
+            MO mo = new MO();
+
+
+            try
+            {
+                if (cmbStudent.SelectedItem == null || cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select something before sending.");
+                    return;
+                }
+
+                mo(
+                    cmbStudent.SelectedItem.ToString(),
+                    cmbJobTitle.SelectedItem.ToString(),
+                    cmbPosition.SelectedItem.ToString(), 
+                    dtpStartDate.Value, 
+                    dtpEndDate.Value, 
+                    txtSalary.Text, 
+                    rtbDescription.Text
+                  );
+
+                MessageBox.Show($"{mo.SendApplication()}");
+                clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                clear();
+            }
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            HRHome back = new HRHome();
+            back.ShowDialog();
+        }
+
+        private void clear()
+        {
+            dtpStartDate.Value = DateTime.Now;
+            dtpEndDate.Value = DateTime.Now;
+            txtSalary.Clear();
+            rtbDescription.Clear();
+            cmbStudent.SelectedIndex = -1;
+            cmbJobTitle.SelectedIndex = -1;
+            cmbPosition.SelectedIndex = -1;
+
+        }
+
     }
 }
