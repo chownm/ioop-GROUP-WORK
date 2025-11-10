@@ -162,6 +162,20 @@
     <Compile Include="Student\UploadResumeForm.Designer.cs">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UniSupervisor\Check_Internship_Progress.cs" />
+    <Compile Include="UniSupervisor\Evaluation_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UniSupervisor\Evaluation_Form.Designer.cs">
+      <DependentUpon>Evaluation_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniSupervisor\Internship_Evaluation.cs" />
+    <Compile Include="UniSupervisor\Student_Internship_Review.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UniSupervisor\Student_Internship_Review.Designer.cs">
+      <DependentUpon>Student_Internship_Review.cs</DependentUpon>
+    </Compile>
     <Compile Include="UniSupervisor\UniSupervisorHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +247,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Student\UploadResumeForm.resx">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UniSupervisor\Evaluation_Form.resx">
+      <DependentUpon>Evaluation_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UniSupervisor\Student_Internship_Review.resx">
+      <DependentUpon>Student_Internship_Review.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\Student_Profile_Review.resx">
       <DependentUpon>Student_Profile_Review.cs</DependentUpon>
