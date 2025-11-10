@@ -172,11 +172,11 @@
       <DependentUpon>Evaluation_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\Internship_Evaluation.cs" />
-    <Compile Include="UniSupervisor\Student_Internship_Review.cs">
+    <Compile Include="UniSupervisor\Student_Internship_Table.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UniSupervisor\Student_Internship_Review.Designer.cs">
-      <DependentUpon>Student_Internship_Review.cs</DependentUpon>
+    <Compile Include="UniSupervisor\Student_Internship_Table.Designer.cs">
+      <DependentUpon>Student_Internship_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\UniSupervisorHome.cs">
       <SubType>Form</SubType>
@@ -253,8 +253,8 @@
     <EmbeddedResource Include="UniSupervisor\Evaluation_Form.resx">
       <DependentUpon>Evaluation_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UniSupervisor\Student_Internship_Review.resx">
-      <DependentUpon>Student_Internship_Review.cs</DependentUpon>
+    <EmbeddedResource Include="UniSupervisor\Student_Internship_Table.resx">
+      <DependentUpon>Student_Internship_Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\Student_Profile_Review.resx">
       <DependentUpon>Student_Profile_Review.cs</DependentUpon>
