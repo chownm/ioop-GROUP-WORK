@@ -70,5 +70,10 @@ namespace ioop_GROUP_WORK.HR
               cbJobTitle.SelectedIndex = 0;
             }
         }
+
+        private void btnSendOffer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
