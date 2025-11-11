@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.Runtime.CompilerServices;
 
 
 namespace ioop_GROUP_WORK.HR
@@ -47,54 +46,6 @@ namespace ioop_GROUP_WORK.HR
             
   
         }
-
-        public string SendApplication()
-        {
-            string message = "";
-            DateTime timenow = DateTime.Now;
-
-
-            con.Open();
-
-            SqlCommand Checkcmd = new SqlCommand("SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
-            Checkcmd.Parameters.AddWithValue("@student", Studentname);
-
-            int count = (int)checkCmd.ExecuteScalar();
-
-            if (count > 0)
-            {
-                message = "This student has already been offered";
-            }
-            else
-            {
-
-                SqlCommand cmd = new SqlCommand(
-                    "INSERT INTO InternshipOffer (StudentName, JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
-                    "VALUES (@student, @title, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
-
-                cmd.Parameters.AddWithValue("@student", Studentname);
-                cmd.Parameters.AddWithValue("@title", jobTitle);
-                cmd.Parameters.AddWithValue("@position", Position);
-                cmd.Parameters.AddWithValue("@startDate", Start);
-                cmd.Parameters.AddWithValue("@endDate", End);
-                cmd.Parameters.AddWithValue("@salary", Salary);
-                cmd.Parameters.AddWithValue("@description", JobDescription);
-                cmd.Parameters.AddWithValue("@dateO", timenow);
-
-                int result = cmd.ExecuteNonQuery();
-
-                if (result > 0)
-                    message = "Application sent successfully!";
-                else
-                    message = "Failed to send application.";
-            }
-
-            con.Close();
-
-            return message;
-        }
-
-
 
         public static List<string> GetAllStudentNames()
         {
@@ -207,7 +158,5 @@ namespace ioop_GROUP_WORK.HR
 
 
         }
-
-        
     }
 }
