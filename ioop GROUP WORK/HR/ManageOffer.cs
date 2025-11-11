@@ -59,21 +59,64 @@ namespace ioop_GROUP_WORK.HR
 
         private void cbJobTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbJobTitle.Items.Clear();
-            string selectedDept = cbJobTitle.SelectedItem.ToString();
+            cmbJobTitle.Items.Clear();
+            string selectedDept = cmbJobTitle.SelectedItem.ToString();
             List<string> positions = MO.AddJobPosition(selectedDept);
 
-            cbJobTitle.Items.AddRange(positions.ToArray());
+            cmbJobTitle.Items.AddRange(positions.ToArray());
 
-            if (cbJobTitle.Items.Count > 0)
+            if (cmbJobTitle.Items.Count > 0)
             {
-              cbJobTitle.SelectedIndex = 0;
+              cmbJobTitle.SelectedIndex = 0;
             }
         }
 
         private void btnSendOffer_Click(object sender, EventArgs e)
         {
+            double salary = double.Parse(txtSalary.Text);
+            try
+            {
+                if (cmbStudent.SelectedItem == null || cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select all fields before sending.");
+                    return;
+                }
 
+                MO mo = new MO(cmbStudent.SelectedItem.ToString(),
+                    cmbJobTitle.SelectedItem.ToString(),
+                    cmbPosition.SelectedItem.ToString(),
+                    dtpStartDate.Value,
+                    dtpEndDate.Value,
+                    salary,
+                    rtbDescription.Text);
+                                
+                string result = mo.SendApplication();
+                    
+
+                MessageBox.Show(result);
+                clear(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            HRHome back = new HRHome();
+            back.ShowDialog();
+        }
+
+        private void clear()
+        {
+            dtpStartDate.Value = DateTime.Now;
+            dtpEndDate.Value = DateTime.Now;
+            txtSalary.Clear();
+            rtbDescription.Clear();
+            cmbStudent.SelectedIndex = -1;
+            cmbJobTitle.SelectedIndex = -1;
+            cmbPosition.SelectedIndex = -1;
         }
     }
 }

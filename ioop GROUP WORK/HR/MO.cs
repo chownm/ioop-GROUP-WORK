@@ -47,6 +47,61 @@ namespace ioop_GROUP_WORK.HR
   
         }
 
+        public string SendApplication()
+        {
+            string message = "";
+            DateTime timenow = DateTime.Now;
+
+            try
+            {
+                con.Open();
+                
+                SqlCommand checkCmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
+                checkCmd.Parameters.AddWithValue("@student", Studentname);
+
+                int count = (int)checkCmd.ExecuteScalar();
+
+                if (count > 0)
+                {
+                    message = "This student has already been offered.";
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand(
+                        "INSERT INTO InternshipOffer " +
+                        "(StudentName, JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
+                        "VALUES (@student, @title, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
+
+                    cmd.Parameters.AddWithValue("@student", Studentname);
+                    cmd.Parameters.AddWithValue("@title", jobTitle);
+                    cmd.Parameters.AddWithValue("@position", Position);
+                    cmd.Parameters.AddWithValue("@startDate", Start);
+                    cmd.Parameters.AddWithValue("@endDate", End);
+                    cmd.Parameters.AddWithValue("@salary", Salary);
+                    cmd.Parameters.AddWithValue("@description", JobDescription);
+                    cmd.Parameters.AddWithValue("@dateO", timenow);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result > 0)
+                        message = "Application sent successfully!";
+                    else
+                        message = "Failed to send application.";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = "Error: " + ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return message;
+        }
+
         public static List<string> GetAllStudentNames()
         {
             List<string> names = new List<string>();
