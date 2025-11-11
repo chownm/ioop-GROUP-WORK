@@ -101,13 +101,7 @@ namespace ioop_GROUP_WORK.HR
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            HRHome back = new HRHome();
-            back.ShowDialog();
-        }
-
+                
         private void clear()
         {
             dtpStartDate.Value = DateTime.Now;
@@ -117,6 +111,13 @@ namespace ioop_GROUP_WORK.HR
             cmbStudent.SelectedIndex = -1;
             cmbJobTitle.SelectedIndex = -1;
             cmbPosition.SelectedIndex = -1;
+        }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+            HRHome back = new HRHome();
+            this.Close();
+            back.ShowDialog();
         }
     }
 }

@@ -76,7 +76,7 @@
             this.cmbStudent.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStudent.FormattingEnabled = true;
             this.cmbStudent.Location = new System.Drawing.Point(636, 146);
-            this.cmbStudent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbStudent.Margin = new System.Windows.Forms.Padding(2);
             this.cmbStudent.Name = "cmbStudent";
             this.cmbStudent.Size = new System.Drawing.Size(193, 28);
             this.cmbStudent.TabIndex = 10;
@@ -108,7 +108,7 @@
             // 
             this.dtpStartDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpStartDate.Location = new System.Drawing.Point(636, 332);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(287, 29);
             this.dtpStartDate.TabIndex = 14;
@@ -128,7 +128,7 @@
             // 
             this.dtpEndDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEndDate.Location = new System.Drawing.Point(636, 393);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(287, 29);
             this.dtpEndDate.TabIndex = 16;
@@ -148,7 +148,7 @@
             // 
             this.txtSalary.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSalary.Location = new System.Drawing.Point(636, 462);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(2);
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(204, 29);
             this.txtSalary.TabIndex = 18;
@@ -168,7 +168,7 @@
             // 
             this.rtbDescription.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbDescription.Location = new System.Drawing.Point(636, 526);
-            this.rtbDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rtbDescription.Margin = new System.Windows.Forms.Padding(2);
             this.rtbDescription.Name = "rtbDescription";
             this.rtbDescription.Size = new System.Drawing.Size(657, 162);
             this.rtbDescription.TabIndex = 20;
@@ -178,7 +178,7 @@
             // 
             this.btnSendOffer.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSendOffer.Location = new System.Drawing.Point(425, 762);
-            this.btnSendOffer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSendOffer.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendOffer.Name = "btnSendOffer";
             this.btnSendOffer.Size = new System.Drawing.Size(214, 53);
             this.btnSendOffer.TabIndex = 21;
@@ -190,19 +190,20 @@
             // 
             this.btnBack.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Location = new System.Drawing.Point(716, 762);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(214, 53);
             this.btnBack.TabIndex = 22;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // cmbPosition
             // 
             this.cmbPosition.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPosition.FormattingEnabled = true;
             this.cmbPosition.Location = new System.Drawing.Point(636, 261);
-            this.cmbPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbPosition.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPosition.Name = "cmbPosition";
             this.cmbPosition.Size = new System.Drawing.Size(193, 28);
             this.cmbPosition.TabIndex = 23;
@@ -232,7 +233,7 @@
             "Production / Operations",
             "Maintenance & Support"});
             this.cmbJobTitle.Location = new System.Drawing.Point(636, 203);
-            this.cmbJobTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbJobTitle.Margin = new System.Windows.Forms.Padding(2);
             this.cmbJobTitle.Name = "cmbJobTitle";
             this.cmbJobTitle.Size = new System.Drawing.Size(193, 28);
             this.cmbJobTitle.TabIndex = 25;
@@ -261,7 +262,7 @@
             this.Controls.Add(this.cmbStudent);
             this.Controls.Add(this.lblStudent);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ManageOffer";
             this.Text = "ManageOffer";
             this.Load += new System.EventHandler(this.ManageOffer_Load);

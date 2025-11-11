@@ -189,6 +189,12 @@
     <EmbeddedResource Include="Admin\ViewStudent.resx">
       <DependentUpon>ViewStudent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HR\CompanyProfile.resx">
+      <DependentUpon>CompanyProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\HRHome.resx">
+      <DependentUpon>HRHome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HR\ManageOffer.resx">
       <DependentUpon>ManageOffer.cs</DependentUpon>
     </EmbeddedResource>

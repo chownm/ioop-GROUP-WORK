@@ -41,5 +41,10 @@ namespace ioop_GROUP_WORK.HR
         {
 
         }
+
+        private void txtContactPerson_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

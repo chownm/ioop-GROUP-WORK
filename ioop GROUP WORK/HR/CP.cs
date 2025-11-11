@@ -8,5 +8,7 @@ namespace ioop_GROUP_WORK.HR
 {
     internal class CP
     {
+
+
     }
 }
