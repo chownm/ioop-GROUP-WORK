@@ -31,16 +31,20 @@
             this.btnProfile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnFeedback = new System.Windows.Forms.Button();
+            this.btnApplications = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.btnUpReport = new System.Windows.Forms.Button();
-            this.btnInternList = new System.Windows.Forms.Button();
+            this.btnUploadResume = new System.Windows.Forms.Button();
+            this.btnInternship = new System.Windows.Forms.Button();
             this.lblWelcome = new System.Windows.Forms.Label();
+            this.btnChangePass = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnProfile
             // 
             this.btnProfile.BackColor = System.Drawing.Color.Navy;
+            this.btnProfile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProfile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfile.ForeColor = System.Drawing.Color.White;
             this.btnProfile.Location = new System.Drawing.Point(138, 98);
@@ -56,7 +60,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(527, 136);
+            this.label1.Location = new System.Drawing.Point(607, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(701, 90);
             this.label1.TabIndex = 8;
@@ -67,65 +71,118 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Silver;
+            this.groupBox1.Controls.Add(this.btnFeedback);
+            this.groupBox1.Controls.Add(this.btnApplications);
             this.groupBox1.Controls.Add(this.btnLogout);
-            this.groupBox1.Controls.Add(this.btnUpReport);
-            this.groupBox1.Controls.Add(this.btnInternList);
+            this.groupBox1.Controls.Add(this.btnUploadResume);
+            this.groupBox1.Controls.Add(this.btnInternship);
             this.groupBox1.Controls.Add(this.btnProfile);
             this.groupBox1.Controls.Add(this.lblWelcome);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(576, 248);
+            this.groupBox1.Location = new System.Drawing.Point(576, 135);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(741, 527);
+            this.groupBox1.Size = new System.Drawing.Size(741, 765);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            // 
+            // btnFeedback
+            // 
+            this.btnFeedback.BackColor = System.Drawing.Color.Navy;
+            this.btnFeedback.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFeedback.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFeedback.ForeColor = System.Drawing.Color.White;
+            this.btnFeedback.Location = new System.Drawing.Point(138, 427);
+            this.btnFeedback.Name = "btnFeedback";
+            this.btnFeedback.Size = new System.Drawing.Size(484, 86);
+            this.btnFeedback.TabIndex = 17;
+            this.btnFeedback.Text = "View Feedback";
+            this.btnFeedback.UseVisualStyleBackColor = false;
+            this.btnFeedback.Click += new System.EventHandler(this.btnFeedback_Click);
+            // 
+            // btnApplications
+            // 
+            this.btnApplications.BackColor = System.Drawing.Color.Navy;
+            this.btnApplications.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnApplications.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplications.ForeColor = System.Drawing.Color.White;
+            this.btnApplications.Location = new System.Drawing.Point(138, 319);
+            this.btnApplications.Name = "btnApplications";
+            this.btnApplications.Size = new System.Drawing.Size(484, 86);
+            this.btnApplications.TabIndex = 16;
+            this.btnApplications.Text = "View Application Status";
+            this.btnApplications.UseVisualStyleBackColor = false;
+            this.btnApplications.Click += new System.EventHandler(this.btnApplications_Click);
             // 
             // btnLogout
             // 
             this.btnLogout.BackColor = System.Drawing.Color.Navy;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogout.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(138, 428);
+            this.btnLogout.Location = new System.Drawing.Point(138, 647);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(484, 86);
             this.btnLogout.TabIndex = 15;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // btnUpReport
+            // btnUploadResume
             // 
-            this.btnUpReport.BackColor = System.Drawing.Color.Navy;
-            this.btnUpReport.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpReport.ForeColor = System.Drawing.Color.White;
-            this.btnUpReport.Location = new System.Drawing.Point(138, 321);
-            this.btnUpReport.Name = "btnUpReport";
-            this.btnUpReport.Size = new System.Drawing.Size(484, 86);
-            this.btnUpReport.TabIndex = 14;
-            this.btnUpReport.Text = "Upload Report";
-            this.btnUpReport.UseVisualStyleBackColor = false;
+            this.btnUploadResume.BackColor = System.Drawing.Color.Navy;
+            this.btnUploadResume.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUploadResume.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUploadResume.ForeColor = System.Drawing.Color.White;
+            this.btnUploadResume.Location = new System.Drawing.Point(138, 538);
+            this.btnUploadResume.Name = "btnUploadResume";
+            this.btnUploadResume.Size = new System.Drawing.Size(484, 86);
+            this.btnUploadResume.TabIndex = 14;
+            this.btnUploadResume.Text = " Upload Resume";
+            this.btnUploadResume.UseVisualStyleBackColor = false;
+            this.btnUploadResume.Click += new System.EventHandler(this.btnUploadResume_Click);
             // 
-            // btnInternList
+            // btnInternship
             // 
-            this.btnInternList.BackColor = System.Drawing.Color.Navy;
-            this.btnInternList.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInternList.ForeColor = System.Drawing.Color.White;
-            this.btnInternList.Location = new System.Drawing.Point(138, 210);
-            this.btnInternList.Name = "btnInternList";
-            this.btnInternList.Size = new System.Drawing.Size(484, 86);
-            this.btnInternList.TabIndex = 13;
-            this.btnInternList.Text = "Internship List";
-            this.btnInternList.UseVisualStyleBackColor = false;
+            this.btnInternship.BackColor = System.Drawing.Color.Navy;
+            this.btnInternship.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInternship.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInternship.ForeColor = System.Drawing.Color.White;
+            this.btnInternship.Location = new System.Drawing.Point(138, 210);
+            this.btnInternship.Name = "btnInternship";
+            this.btnInternship.Size = new System.Drawing.Size(484, 86);
+            this.btnInternship.TabIndex = 13;
+            this.btnInternship.Text = "Internship List";
+            this.btnInternship.UseVisualStyleBackColor = false;
+            this.btnInternship.Click += new System.EventHandler(this.btnInternship_Click);
             // 
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lblWelcome.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblWelcome.Location = new System.Drawing.Point(12, 49);
+            this.lblWelcome.Location = new System.Drawing.Point(40, 49);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(297, 35);
+            this.lblWelcome.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblWelcome.Size = new System.Drawing.Size(335, 35);
             this.lblWelcome.TabIndex = 10;
-            this.lblWelcome.Text = "Welcome Back! Name!";
+            this.lblWelcome.Text = "Welcome, [StudentName]";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnChangePass
+            // 
+            this.btnChangePass.BackColor = System.Drawing.Color.Silver;
+            this.btnChangePass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChangePass.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePass.ForeColor = System.Drawing.Color.White;
+            this.btnChangePass.Location = new System.Drawing.Point(751, 906);
+            this.btnChangePass.Name = "btnChangePass";
+            this.btnChangePass.Size = new System.Drawing.Size(412, 51);
+            this.btnChangePass.TabIndex = 18;
+            this.btnChangePass.Text = "Change Password";
+            this.btnChangePass.UseVisualStyleBackColor = false;
+            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
             // 
             // StudentHomeForm
             // 
@@ -133,6 +190,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
+            this.Controls.Add(this.btnChangePass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -154,7 +212,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Button btnUpReport;
-        private System.Windows.Forms.Button btnInternList;
+        private System.Windows.Forms.Button btnUploadResume;
+        private System.Windows.Forms.Button btnInternship;
+        private System.Windows.Forms.Button btnFeedback;
+        private System.Windows.Forms.Button btnApplications;
+        private System.Windows.Forms.Button btnChangePass;
     }
 }
