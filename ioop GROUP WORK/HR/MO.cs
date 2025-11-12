@@ -26,13 +26,13 @@ namespace ioop_GROUP_WORK.HR
 
         static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
-        public string Studentname { get => studentname; set => studentname = value; }
-        public string JobTitle { get => jobTitle; set => jobTitle = value; }
-        public string Position { get => position; set => position = value; }
-        public DateTime Start { get => start; set => start = value; }
-        public DateTime End { get => end; set => end = value; }
-        public double Salary { get => salary; set => salary = value; }
-        public string JobDescription { get => jobDescription; set => jobDescription = value; }
+        public string Studentname { get => studentname; private set => studentname = value; }
+        public string JobTitle { get => jobTitle; private set => jobTitle = value; }
+        public string Position { get => position; private set => position = value; }
+        public DateTime Start { get => start; private set => start = value; }
+        public DateTime End { get => end; private set => end = value; }
+        public double Salary { get => salary; private set => salary = value; }
+        public string JobDescription { get => jobDescription; private set => jobDescription = value; }
 
         public MO(string studentname,string jobTitle, string position, DateTime start, DateTime end, double salary, string jobDescription)
         {
@@ -56,8 +56,7 @@ namespace ioop_GROUP_WORK.HR
             {
                 con.Open();
                 
-                SqlCommand checkCmd = new SqlCommand(
-                    "SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
+                SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
                 checkCmd.Parameters.AddWithValue("@student", Studentname);
 
                 int count = (int)checkCmd.ExecuteScalar();

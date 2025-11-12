@@ -142,6 +142,7 @@
             // pbLogo
             // 
             this.pbLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.pbLogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbLogo.Location = new System.Drawing.Point(1238, 594);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(534, 309);
@@ -184,6 +185,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(343, 44);
             this.txtEmail.TabIndex = 13;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // txtPhone
             // 
@@ -203,6 +205,7 @@
             this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Save Changes";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnBack
             // 
@@ -213,6 +216,7 @@
             this.btnBack.TabIndex = 16;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // btnUploadLogo
             // 
@@ -223,6 +227,7 @@
             this.btnUploadLogo.TabIndex = 17;
             this.btnUploadLogo.Text = "Upload Logo";
             this.btnUploadLogo.UseVisualStyleBackColor = true;
+            this.btnUploadLogo.Click += new System.EventHandler(this.btnUploadLogo_Click);
             // 
             // richTextBox1
             // 
@@ -260,6 +265,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CompanyProfile";
             this.Text = "CompanyProfile";
+            this.Load += new System.EventHandler(this.CompanyProfile_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
