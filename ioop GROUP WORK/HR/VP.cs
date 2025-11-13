@@ -12,10 +12,10 @@ namespace ioop_GROUP_WORK.HR
 {
     internal class VP
     {
-        public string StudentName { get; set; }
-        public string Position { get; set; }
-        public DateTime DateApplied { get; set; }
-        public string Status { get; set; }
+        public string StudentName { get; private set; }
+        public string Position { get; private set; }
+        public DateTime DateApplied { get; private set; }
+        public string Status { get; private set; }
 
         static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 

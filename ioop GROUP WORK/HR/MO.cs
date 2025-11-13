@@ -26,13 +26,13 @@ namespace ioop_GROUP_WORK.HR
 
         static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
-        public string Studentname { get => studentname; set => studentname = value; }
-        public string JobTitle { get => jobTitle; set => jobTitle = value; }
-        public string Position { get => position; set => position = value; }
-        public DateTime Start { get => start; set => start = value; }
-        public DateTime End { get => end; set => end = value; }
-        public double Salary { get => salary; set => salary = value; }
-        public string JobDescription { get => jobDescription; set => jobDescription = value; }
+        public string Studentname { get => studentname; private set => studentname = value; }
+        public string JobTitle { get => jobTitle; private set => jobTitle = value; }
+        public string Position { get => position; private set => position = value; }
+        public DateTime Start { get => start; private set => start = value; }
+        public DateTime End { get => end; private set => end = value; }
+        public double Salary { get => salary; private set => salary = value; }
+        public string JobDescription { get => jobDescription; private set => jobDescription = value; }
 
         public MO(string studentname,string jobTitle, string position, DateTime start, DateTime end, double salary, string jobDescription)
         {
@@ -45,6 +45,60 @@ namespace ioop_GROUP_WORK.HR
             JobDescription = jobDescription;
             
   
+        }
+
+        public string SendApplication()
+        {
+            string message = "";
+            DateTime timenow = DateTime.Now;
+
+            try
+            {
+                con.Open();
+                
+                SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
+                checkCmd.Parameters.AddWithValue("@student", Studentname);
+
+                int count = (int)checkCmd.ExecuteScalar();
+
+                if (count > 0)
+                {
+                    message = "This student has already been offered.";
+                }
+                else
+                {
+                    SqlCommand cmd = new SqlCommand(
+                        "INSERT INTO InternshipOffer " +
+                        "(StudentName, JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
+                        "VALUES (@student, @title, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
+
+                    cmd.Parameters.AddWithValue("@student", Studentname);
+                    cmd.Parameters.AddWithValue("@title", jobTitle);
+                    cmd.Parameters.AddWithValue("@position", Position);
+                    cmd.Parameters.AddWithValue("@startDate", Start);
+                    cmd.Parameters.AddWithValue("@endDate", End);
+                    cmd.Parameters.AddWithValue("@salary", Salary);
+                    cmd.Parameters.AddWithValue("@description", JobDescription);
+                    cmd.Parameters.AddWithValue("@dateO", timenow);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result > 0)
+                        message = "Application sent successfully!";
+                    else
+                        message = "Failed to send application.";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = "Error: " + ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return message;
         }
 
         public static List<string> GetAllStudentNames()

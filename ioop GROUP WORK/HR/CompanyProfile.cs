@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,6 +42,83 @@ namespace ioop_GROUP_WORK.HR
         private void btnBack_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtContactPerson_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUploadLogo_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog openFileDialog  = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {      
+                pbLogo.Image = Image.FromFile(openFileDialog.FileName);
+                pbLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        private byte[] getPhoto()
+        {
+            if (pbLogo.Image == null)
+                return null;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pbLogo.Image.Save(ms, pbLogo.Image.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            byte[] logoBytes = getPhoto();
+
+            CP company = new CP(txtCompanyName.Text, txtContactPerson.Text, txtEmail.Text, txtPhone.Text, richTextBox1.Text, rtbDescription.Text, logoBytes);
+
+
+           MessageBox.Show(company.SaveInfo());
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CompanyProfile_Load_1(object sender, EventArgs e)
+        {
+            CP company = new CP(1);
+            txtCompanyName.Text = company.Companyname;
+            txtContactPerson.Text = company.Contactperson;
+            txtEmail.Text = company.Email;
+            txtPhone.Text = company.Contactnumber;
+            richTextBox1.Text = company.Address;
+            rtbDescription.Text = company.Companydescription;
+
+            if (company.CompanyLogo != null)
+            {
+                using (MemoryStream ms = new MemoryStream(company.CompanyLogo))
+                {
+                    pbLogo.Image = Image.FromStream(ms);
+                    pbLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+            else
+            {
+                pbLogo.Image = null;
+            }
+        }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+            HRHome back = new HRHome();
+            this.Close();
+            back.ShowDialog();
+            
         }
     }
 }

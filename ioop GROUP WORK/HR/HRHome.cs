@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Metadata.Edm;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,26 @@ namespace ioop_GROUP_WORK
         private void btnViewApplications_Click(object sender, EventArgs e)
         {
             ViewApplication vp = new ViewApplication();
-               vp.Show();
-               this.Hide();
+            this.Close();
+            vp.ShowDialog();
+               
+        }
+
+        private void btnCompanyProfile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnManageOffers_Click(object sender, EventArgs e)
+        {
+            ManageOffer mo = new ManageOffer();
+            this.Close();
+            mo.ShowDialog();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
