@@ -38,13 +38,13 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btn_Submit = new System.Windows.Forms.Button();
             this.btn_Exit = new System.Windows.Forms.Button();
-            this.txt_studentID = new System.Windows.Forms.TextBox();
             this.txt_performance_mark = new System.Windows.Forms.TextBox();
             this.txt_communication_mark = new System.Windows.Forms.TextBox();
             this.txt_punctuality_mark = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.rtxt_descriptions = new System.Windows.Forms.RichTextBox();
-            this.cmb_position = new System.Windows.Forms.ComboBox();
+            this.cmb_student_name = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +62,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(200, 244);
+            this.label3.Location = new System.Drawing.Point(435, 244);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 37);
             this.label3.TabIndex = 1;
@@ -74,9 +74,10 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(192, 136);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(219, 37);
+            this.label4.Size = new System.Drawing.Size(382, 37);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Student Name :";
+            this.label4.Text = "Student ID | Student Name :";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -148,14 +149,6 @@
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
             // 
-            // txt_studentID
-            // 
-            this.txt_studentID.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_studentID.Location = new System.Drawing.Point(491, 132);
-            this.txt_studentID.Name = "txt_studentID";
-            this.txt_studentID.Size = new System.Drawing.Size(341, 45);
-            this.txt_studentID.TabIndex = 3;
-            // 
             // txt_performance_mark
             // 
             this.txt_performance_mark.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -198,26 +191,35 @@
             this.rtxt_descriptions.TabIndex = 4;
             this.rtxt_descriptions.Text = "";
             // 
-            // cmb_position
+            // cmb_student_name
             // 
-            this.cmb_position.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmb_position.FormattingEnabled = true;
-            this.cmb_position.Location = new System.Drawing.Point(491, 244);
-            this.cmb_position.Name = "cmb_position";
-            this.cmb_position.Size = new System.Drawing.Size(413, 45);
-            this.cmb_position.TabIndex = 5;
+            this.cmb_student_name.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_student_name.FormattingEnabled = true;
+            this.cmb_student_name.Location = new System.Drawing.Point(612, 132);
+            this.cmb_student_name.Name = "cmb_student_name";
+            this.cmb_student_name.Size = new System.Drawing.Size(413, 45);
+            this.cmb_student_name.TabIndex = 5;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(612, 240);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(413, 45);
+            this.comboBox1.TabIndex = 5;
             // 
             // frm_Evaluation_From
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.cmb_position);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmb_student_name);
             this.Controls.Add(this.rtxt_descriptions);
             this.Controls.Add(this.txt_punctuality_mark);
             this.Controls.Add(this.txt_communication_mark);
             this.Controls.Add(this.txt_performance_mark);
-            this.Controls.Add(this.txt_studentID);
             this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.btn_Submit);
             this.Controls.Add(this.label5);
@@ -248,12 +250,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_Submit;
         private System.Windows.Forms.Button btn_Exit;
-        private System.Windows.Forms.TextBox txt_studentID;
         private System.Windows.Forms.TextBox txt_performance_mark;
         private System.Windows.Forms.TextBox txt_communication_mark;
         private System.Windows.Forms.TextBox txt_punctuality_mark;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox rtxt_descriptions;
-        private System.Windows.Forms.ComboBox cmb_position;
+        private System.Windows.Forms.ComboBox cmb_student_name;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
