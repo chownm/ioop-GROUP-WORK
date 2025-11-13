@@ -43,7 +43,7 @@
             this.txt_punctuality_mark = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.rtxt_descriptions = new System.Windows.Forms.RichTextBox();
-            this.cmb_student_name = new System.Windows.Forms.ComboBox();
+            this.cmb_studentName_studentID = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -191,14 +191,14 @@
             this.rtxt_descriptions.TabIndex = 4;
             this.rtxt_descriptions.Text = "";
             // 
-            // cmb_student_name
+            // cmb_studentName_studentID
             // 
-            this.cmb_student_name.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmb_student_name.FormattingEnabled = true;
-            this.cmb_student_name.Location = new System.Drawing.Point(612, 132);
-            this.cmb_student_name.Name = "cmb_student_name";
-            this.cmb_student_name.Size = new System.Drawing.Size(413, 45);
-            this.cmb_student_name.TabIndex = 5;
+            this.cmb_studentName_studentID.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_studentName_studentID.FormattingEnabled = true;
+            this.cmb_studentName_studentID.Location = new System.Drawing.Point(612, 132);
+            this.cmb_studentName_studentID.Name = "cmb_studentName_studentID";
+            this.cmb_studentName_studentID.Size = new System.Drawing.Size(413, 45);
+            this.cmb_studentName_studentID.TabIndex = 5;
             // 
             // comboBox1
             // 
@@ -215,7 +215,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.cmb_student_name);
+            this.Controls.Add(this.cmb_studentName_studentID);
             this.Controls.Add(this.rtxt_descriptions);
             this.Controls.Add(this.txt_punctuality_mark);
             this.Controls.Add(this.txt_communication_mark);
@@ -233,6 +233,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frm_Evaluation_From";
             this.Text = "Evaluation_From";
+            this.Load += new System.EventHandler(this.frm_Evaluation_From_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,7 +256,7 @@
         private System.Windows.Forms.TextBox txt_punctuality_mark;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox rtxt_descriptions;
-        private System.Windows.Forms.ComboBox cmb_student_name;
+        private System.Windows.Forms.ComboBox cmb_studentName_studentID;
         private System.Windows.Forms.ComboBox comboBox1;
     }
 }

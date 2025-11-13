@@ -21,5 +21,10 @@ namespace ioop_GROUP_WORK.UniSupervisor
         {
 
         }
+
+        private void frm_Evaluation_From_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
