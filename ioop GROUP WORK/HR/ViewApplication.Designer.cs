@@ -36,15 +36,19 @@
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnReject = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 18);
+            this.lblTitle.Location = new System.Drawing.Point(9, 15);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(630, 90);
+            this.lblTitle.Size = new System.Drawing.Size(503, 73);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "View Applications";
             this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
@@ -54,9 +58,10 @@
             this.lblSelectStudent.AutoSize = true;
             this.lblSelectStudent.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelectStudent.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblSelectStudent.Location = new System.Drawing.Point(42, 203);
+            this.lblSelectStudent.Location = new System.Drawing.Point(32, 165);
+            this.lblSelectStudent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSelectStudent.Name = "lblSelectStudent";
-            this.lblSelectStudent.Size = new System.Drawing.Size(283, 45);
+            this.lblSelectStudent.Size = new System.Drawing.Size(230, 36);
             this.lblSelectStudent.TabIndex = 1;
             this.lblSelectStudent.Text = "Select Student :";
             this.lblSelectStudent.Click += new System.EventHandler(this.lblSelectStudent_Click);
@@ -65,10 +70,10 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(345, 203);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBox1.Location = new System.Drawing.Point(259, 165);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(328, 53);
+            this.comboBox1.Size = new System.Drawing.Size(247, 44);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -77,11 +82,11 @@
             this.lstApplicationDetails.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstApplicationDetails.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lstApplicationDetails.FormattingEnabled = true;
-            this.lstApplicationDetails.ItemHeight = 45;
-            this.lstApplicationDetails.Location = new System.Drawing.Point(50, 299);
-            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstApplicationDetails.ItemHeight = 36;
+            this.lstApplicationDetails.Location = new System.Drawing.Point(38, 243);
+            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstApplicationDetails.Name = "lstApplicationDetails";
-            this.lstApplicationDetails.Size = new System.Drawing.Size(1334, 499);
+            this.lstApplicationDetails.Size = new System.Drawing.Size(603, 400);
             this.lstApplicationDetails.TabIndex = 3;
             this.lstApplicationDetails.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -89,10 +94,10 @@
             // 
             this.btnViewProfile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewProfile.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnViewProfile.Location = new System.Drawing.Point(59, 850);
-            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewProfile.Location = new System.Drawing.Point(44, 691);
+            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnViewProfile.Name = "btnViewProfile";
-            this.btnViewProfile.Size = new System.Drawing.Size(217, 54);
+            this.btnViewProfile.Size = new System.Drawing.Size(163, 44);
             this.btnViewProfile.TabIndex = 4;
             this.btnViewProfile.Text = "View Profile";
             this.btnViewProfile.UseVisualStyleBackColor = true;
@@ -102,10 +107,10 @@
             // 
             this.btnAccept.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAccept.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnAccept.Location = new System.Drawing.Point(345, 850);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAccept.Location = new System.Drawing.Point(259, 691);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(217, 54);
+            this.btnAccept.Size = new System.Drawing.Size(163, 44);
             this.btnAccept.TabIndex = 5;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
@@ -115,10 +120,10 @@
             // 
             this.btnReject.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReject.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnReject.Location = new System.Drawing.Point(628, 850);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReject.Location = new System.Drawing.Point(471, 691);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReject.Name = "btnReject";
-            this.btnReject.Size = new System.Drawing.Size(217, 54);
+            this.btnReject.Size = new System.Drawing.Size(163, 44);
             this.btnReject.TabIndex = 6;
             this.btnReject.Text = "Reject";
             this.btnReject.UseVisualStyleBackColor = true;
@@ -128,21 +133,41 @@
             // 
             this.btnBack.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnBack.Location = new System.Drawing.Point(919, 850);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBack.Location = new System.Drawing.Point(689, 691);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(217, 54);
+            this.btnBack.Size = new System.Drawing.Size(163, 44);
             this.btnBack.TabIndex = 7;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(760, 46);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(591, 597);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Resume";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(24, 48);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(552, 533);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // ViewApplication
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.ClientSize = new System.Drawing.Size(1426, 839);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnReject);
             this.Controls.Add(this.btnAccept);
@@ -151,10 +176,11 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblSelectStudent);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ViewApplication";
             this.Text = "ViewApplication";
             this.Load += new System.EventHandler(this.ViewApplication_Load);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,5 +196,7 @@
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnReject;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

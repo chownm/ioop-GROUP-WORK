@@ -92,6 +92,13 @@
     <Compile Include="HR\ManageOffer.Designer.cs">
       <DependentUpon>ManageOffer.cs</DependentUpon>
     </Compile>
+    <Compile Include="HR\PersonalProfile.cs" />
+    <Compile Include="HR\PersonalProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HR\PersonalProfileForm.Designer.cs">
+      <DependentUpon>PersonalProfileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HR\ViewApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +234,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HR\ManageOffer.resx">
       <DependentUpon>ManageOffer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\PersonalProfileForm.resx">
+      <DependentUpon>PersonalProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HR\ViewApplication.resx">
+      <DependentUpon>ViewApplication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
