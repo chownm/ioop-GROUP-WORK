@@ -45,7 +45,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 Internship_Evaluation selectedStudent = cmb_studentName_studentID.SelectedItem as Internship_Evaluation;
                 string studentID = selectedStudent.Student_id;
                 string studentName = selectedStudent.Student_name;
-                string position = cmb_position.SelectedValue?.ToString();
+                string position = cmb_position.SelectedItem.ToString();
                 DateTime evaldate = dtp_datetime.Value;
                 double performance = double.Parse(txt_performance_mark.Text);
                 double communication = double.Parse(txt_communication_mark.Text);
