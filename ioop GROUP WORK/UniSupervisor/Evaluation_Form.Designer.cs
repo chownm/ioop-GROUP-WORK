@@ -44,7 +44,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.rtxt_descriptions = new System.Windows.Forms.RichTextBox();
             this.cmb_studentName_studentID = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_position = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btn_Refresh = new System.Windows.Forms.Button();
+            this.dtp_datetime = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +65,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(435, 244);
+            this.label3.Location = new System.Drawing.Point(405, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 37);
             this.label3.TabIndex = 1;
@@ -72,7 +75,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(192, 136);
+            this.label4.Location = new System.Drawing.Point(162, 132);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(382, 37);
             this.label4.TabIndex = 1;
@@ -138,16 +141,18 @@
             this.btn_Submit.TabIndex = 2;
             this.btn_Submit.Text = "Submit";
             this.btn_Submit.UseVisualStyleBackColor = true;
+            this.btn_Submit.Click += new System.EventHandler(this.btn_Submit_Click);
             // 
             // btn_Exit
             // 
             this.btn_Exit.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Exit.Location = new System.Drawing.Point(975, 934);
+            this.btn_Exit.Location = new System.Drawing.Point(1040, 934);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(224, 52);
             this.btn_Exit.TabIndex = 2;
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // txt_performance_mark
             // 
@@ -195,32 +200,63 @@
             // 
             this.cmb_studentName_studentID.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_studentName_studentID.FormattingEnabled = true;
-            this.cmb_studentName_studentID.Location = new System.Drawing.Point(612, 132);
+            this.cmb_studentName_studentID.Location = new System.Drawing.Point(602, 128);
             this.cmb_studentName_studentID.Name = "cmb_studentName_studentID";
             this.cmb_studentName_studentID.Size = new System.Drawing.Size(413, 45);
             this.cmb_studentName_studentID.TabIndex = 5;
             // 
-            // comboBox1
+            // cmb_position
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(612, 240);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(413, 45);
-            this.comboBox1.TabIndex = 5;
+            this.cmb_position.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_position.FormattingEnabled = true;
+            this.cmb_position.Location = new System.Drawing.Point(602, 192);
+            this.cmb_position.Name = "cmb_position";
+            this.cmb_position.Size = new System.Drawing.Size(413, 45);
+            this.cmb_position.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(380, 260);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "DateTime :";
+            // 
+            // btn_Refresh
+            // 
+            this.btn_Refresh.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Refresh.Location = new System.Drawing.Point(663, 934);
+            this.btn_Refresh.Name = "btn_Refresh";
+            this.btn_Refresh.Size = new System.Drawing.Size(224, 52);
+            this.btn_Refresh.TabIndex = 2;
+            this.btn_Refresh.Text = "Refresh";
+            this.btn_Refresh.UseVisualStyleBackColor = true;
+            this.btn_Refresh.Click += new System.EventHandler(this.btn_Submit_Click);
+            // 
+            // dtp_datetime
+            // 
+            this.dtp_datetime.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_datetime.Location = new System.Drawing.Point(602, 260);
+            this.dtp_datetime.Name = "dtp_datetime";
+            this.dtp_datetime.Size = new System.Drawing.Size(503, 45);
+            this.dtp_datetime.TabIndex = 6;
             // 
             // frm_Evaluation_From
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.dtp_datetime);
+            this.Controls.Add(this.cmb_position);
             this.Controls.Add(this.cmb_studentName_studentID);
             this.Controls.Add(this.rtxt_descriptions);
             this.Controls.Add(this.txt_punctuality_mark);
             this.Controls.Add(this.txt_communication_mark);
             this.Controls.Add(this.txt_performance_mark);
             this.Controls.Add(this.btn_Exit);
+            this.Controls.Add(this.btn_Refresh);
             this.Controls.Add(this.btn_Submit);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label10);
@@ -229,6 +265,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "frm_Evaluation_From";
@@ -257,6 +294,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox rtxt_descriptions;
         private System.Windows.Forms.ComboBox cmb_studentName_studentID;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb_position;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_Refresh;
+        private System.Windows.Forms.DateTimePicker dtp_datetime;
     }
 }

@@ -88,11 +88,11 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 {
                     con.Open();
                     string query_cmd = @"INSERT INTO Student_Evaluation_Report 
-                                            (studentID, studentName, Position, EvaluationDate, Performance, CommunicationSkills， Punctuality, Description)
+                                            (studentID, studentName, Position, EvaluationDate, Performance, CommunicationSkills, Punctuality, Description)
                                          VALUES
                                            (@id, @name, @position, @date, @performance, @communication, @punctuality, @description)";   // Key in the sql command to insert evaluation record
                             
-                    using (SqlCommand cmd = new SqlCommand(query_cmd, con));
+                    using (SqlCommand cmd = new SqlCommand(query_cmd, con))
                     {
                         cmd.Parameters.AddWithValue("@id", this.student_id);
                         cmd.Parameters.AddWithValue("@name", this.student_name);
