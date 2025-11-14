@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ioop_GROUP_WORK;
 
@@ -30,37 +23,37 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            StudentProfileForm changeform = new StudentProfileForm();
-            changeform.ShowDialog();
+            StudentProfileForm profile = new StudentProfileForm(username);
+            profile.ShowDialog();
         }
 
 
 
         private void btnInternship_Click(object sender, EventArgs e)
         {
-            InternshipListForm changeform = new InternshipListForm();
-            changeform.ShowDialog();
+            InternshipListForm internship = new InternshipListForm();
+            internship.ShowDialog();
         }
 
 
         private void btnApplications_Click(object sender, EventArgs e)
         {
-            ViewApplicationStatusForm changeform = new ViewApplicationStatusForm();
-            changeform.ShowDialog();
+            ViewApplicationStatusForm application = new ViewApplicationStatusForm();
+            application.ShowDialog();
         }
 
 
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            ViewFeedbackForm changeform = new ViewFeedbackForm();
-            changeform.ShowDialog();
+            ViewFeedbackForm feedback = new ViewFeedbackForm();
+            feedback.ShowDialog();
         }
 
 
         private void btnUploadResume_Click(object sender, EventArgs e)
         {
-            UploadResumeForm changeform = new UploadResumeForm();
-            changeform.ShowDialog();
+            UploadResumeForm resume = new UploadResumeForm();
+            resume.ShowDialog();
         }
 
 
@@ -73,8 +66,8 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnChangePass_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm changeform = new ChangePasswordForm(username);
-            changeform.ShowDialog();
+            ChangePasswordForm changepass = new ChangePasswordForm(username);
+            changepass.ShowDialog();
         }
 
 
