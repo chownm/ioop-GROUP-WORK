@@ -30,8 +30,14 @@ namespace ioop_GROUP_WORK.UniSupervisor
             this.communication_skills_rating = communication_skills_rating;
             this.punctuality_rating = punctuality_rating;
             this.description = description;
-
         }
+
+        public Internship_Evaluation(string student_name, string student_id)            // This connstructor is used for GetStudentName()
+        {
+            this.student_name = student_name;
+            this.student_id = student_id;
+        }
+
 
         public string Student_name { get => student_name; set => student_name = value; }
         public string Student_id { get => student_id; set => student_id = value; }
@@ -43,30 +49,46 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         // Methods
 
-        public static List<student_details> GetStudentName()
-        { 
+        public static List<Internship_Evaluation> GetStudentName()
+        {
+            List<Internship_Evaluation> students = new List<Internship_Evaluation>();
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-            { 
-                List<student_details> students = new List<student_details>();
+            {
+
                 con.Open();
                 string query_cmd = @"SELECT studentID, studentName FROM InternshipOffer";
                 SqlCommand cmd = new SqlCommand(query_cmd, con);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
-                { 
-                    students.Add(new student_details(
-                        studentID: reader["studentID"].ToString(),
-                        studentName: reader["studentName"].ToString()
+                {
+                    students.Add(new Internship_Evaluation(
+                        student_id: reader["studentID"].ToString(),
+                        student_name: reader["studentName"].ToString()
                     ));
                 }
 
             }
-            con.Close();
-            return student_details;
+            return students;
         }
 
         public string Display_Student_Name()
         {
-            return $"{studentID} | {studentName}";
+            return $"{student_id} | {student_name}";
+        }
+
+        public static List<Internship_Evaluation> InsertEvaluationsRecord(string student_id)
+        {
+            List<Internship_Evaluation> evaluations = new List<Internship_Evaluation>();
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            {
+                con.Open();
+                string query_cmd = @"";
+            }
+            
+
+        }
+        
+
         }
     }
+}
