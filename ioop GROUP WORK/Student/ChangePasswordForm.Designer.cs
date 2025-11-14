@@ -167,9 +167,9 @@
             this.label4.ForeColor = System.Drawing.Color.Navy;
             this.label4.Location = new System.Drawing.Point(6, 197);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(239, 37);
+            this.label4.Size = new System.Drawing.Size(301, 37);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Old Password : ";
+            this.label4.Text = "Current Password : ";
             // 
             // label5
             // 
