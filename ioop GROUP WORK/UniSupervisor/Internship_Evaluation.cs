@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Windows;
 
 namespace ioop_GROUP_WORK.UniSupervisor
 {
@@ -15,17 +16,19 @@ namespace ioop_GROUP_WORK.UniSupervisor
         private string student_name;
         private string student_id;
         private string position;
+        private DateTime evaluation_date;
         private double performance_rating;
         private double communication_skills_rating;
         private double punctuality_rating;
         private string description;
 
         // Constructor
-        public Internship_Evaluation(string student_name, string student_id, string position, double performance_rating, double communication_skills_rating, double punctuality_rating, string description)
+        public Internship_Evaluation(string student_name, string student_id, string position, DateTime evaluation_date,double performance_rating, double communication_skills_rating, double punctuality_rating, string description)
         {
             this.student_name = student_name;
             this.student_id = student_id;
             this.position = position;
+            this.evaluation_date = evaluation_date;
             this.performance_rating = performance_rating;
             this.communication_skills_rating = communication_skills_rating;
             this.punctuality_rating = punctuality_rating;
@@ -46,6 +49,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
         public double Communication_skills_rating { get => communication_skills_rating; set => communication_skills_rating = value; }
         public double Punctuality_rating { get => punctuality_rating; set => punctuality_rating = value; }
         public string Description { get => description; set => description = value; }
+        public DateTime Evaluation_date { get => evaluation_date; set => evaluation_date = value; }
 
         // Methods
 
@@ -76,17 +80,38 @@ namespace ioop_GROUP_WORK.UniSupervisor
             return $"{student_id} | {student_name}";
         }
 
-        public static List<Internship_Evaluation> InsertEvaluationsRecord(string student_id)
+        public void InsertEvaluationsRecord()
         {
-            List<Internship_Evaluation> evaluations = new List<Internship_Evaluation>();
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            try
             {
-                con.Open();
-                string query_cmd = @"";
-            }
-            
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query_cmd = @"INSERT INTO Student_Evaluation_Report 
+                                            (studentID, studentName, Position, EvaluationDate, Performance, CommunicationSkills， Punctuality, Description)
+                                         VALUES
+                                           (@id, @name, @position, @date, @performance, @communication, @punctuality, @description)";   // Key in the sql command to insert evaluation record
+                            
+                    using (SqlCommand cmd = new SqlCommand(query_cmd, con));
+                    {
+                        cmd.Parameters.AddWithValue("@id", this.student_id);
+                        cmd.Parameters.AddWithValue("@name", this.student_name);
+                        cmd.Parameters.AddWithValue("@position", this.position);
+                        cmd.Parameters.AddWithValue("@date", this.evaluation_date == default(DateTime) ? DateTime.Now : this.evaluation_date);
+                        cmd.Parameters.AddWithValue("@performance", this.performance_rating);
+                        cmd.Parameters.AddWithValue("@communication", this.communication_skills_rating);
+                        cmd.Parameters.AddWithValue("@punctuality", this.punctuality_rating);
+                        cmd.Parameters.AddWithValue("@description", this.description);
+                        
+                        cmd.ExecuteNonQuery();
+                    }
 
-        }
+                }
+            } 
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Error inserting evaluation record: " + ex.Message);
+            }
         
 
         }
