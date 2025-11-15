@@ -80,6 +80,11 @@ namespace ioop_GROUP_WORK.UniSupervisor
             return $"{student_id} | {student_name}";
         }
 
+        public string ShowStudentName()
+        {
+            return $"{student_name}";
+        }
+
         public void InsertEvaluationsRecord()
         {
             try
