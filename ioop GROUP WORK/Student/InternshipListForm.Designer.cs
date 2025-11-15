@@ -33,6 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvIntern = new System.Windows.Forms.DataGridView();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIntern)).BeginInit();
             this.SuspendLayout();
@@ -40,13 +41,13 @@
             // btnResume
             // 
             this.btnResume.BackColor = System.Drawing.Color.Navy;
-            this.btnResume.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResume.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnResume.ForeColor = System.Drawing.Color.White;
-            this.btnResume.Location = new System.Drawing.Point(576, 758);
+            this.btnResume.Location = new System.Drawing.Point(919, 758);
             this.btnResume.Name = "btnResume";
-            this.btnResume.Size = new System.Drawing.Size(741, 110);
+            this.btnResume.Size = new System.Drawing.Size(398, 110);
             this.btnResume.TabIndex = 12;
-            this.btnResume.Text = "Upload Resume";
+            this.btnResume.Text = "Apply";
             this.btnResume.UseVisualStyleBackColor = false;
             this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
             // 
@@ -90,11 +91,24 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblStatus.Location = new System.Drawing.Point(281, -3);
+            this.lblStatus.Location = new System.Drawing.Point(207, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(165, 38);
+            this.lblStatus.Size = new System.Drawing.Size(324, 38);
             this.lblStatus.TabIndex = 10;
-            this.lblStatus.Text = "Successful";
+            this.lblStatus.Text = "Available Internships";
+            this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.Navy;
+            this.btnBack.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(576, 758);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(337, 110);
+            this.btnBack.TabIndex = 13;
+            this.btnBack.Text = "Cancel";
+            this.btnBack.UseVisualStyleBackColor = false;
             // 
             // InternshipListForm
             // 
@@ -102,6 +116,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnResume);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
@@ -124,5 +139,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvIntern;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnBack;
     }
 }

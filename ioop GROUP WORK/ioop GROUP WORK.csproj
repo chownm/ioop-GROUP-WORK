@@ -128,12 +128,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Student\ApplyInternshipForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Student\ApplyInternshipForm.Designer.cs">
-      <DependentUpon>ApplyInternshipForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Student\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +140,12 @@
     </Compile>
     <Compile Include="Student\StudentProfileForm.Designer.cs">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StudentReportUploadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\StudentReportUploadForm.Designer.cs">
+      <DependentUpon>StudentReportUploadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\UploadResumeForm.cs">
       <SubType>Form</SubType>
@@ -183,6 +183,12 @@
     </Compile>
     <Compile Include="Student\ViewFeedbackForm.Designer.cs">
       <DependentUpon>ViewFeedbackForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\ViewProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\ViewProgressForm.Designer.cs">
+      <DependentUpon>ViewProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\Check_Internship_Progress.cs" />
     <Compile Include="UniSupervisor\Evaluation_Form.cs">
@@ -245,14 +251,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\ApplyInternshipForm.resx">
-      <DependentUpon>ApplyInternshipForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Student\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\StudentProfileForm.resx">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student\StudentReportUploadForm.resx">
+      <DependentUpon>StudentReportUploadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\UploadResumeForm.resx">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Student\ViewFeedbackForm.resx">
       <DependentUpon>ViewFeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student\ViewProgressForm.resx">
+      <DependentUpon>ViewProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UniSupervisor\Evaluation_Form.resx">
       <DependentUpon>Evaluation_Form.cs</DependentUpon>
