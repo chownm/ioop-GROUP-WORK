@@ -124,6 +124,7 @@
             this.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.Name = "InternshipListForm";
             this.Text = "Internship List";
+            this.Load += new System.EventHandler(this.InternshipListForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIntern)).EndInit();

@@ -76,6 +76,9 @@ namespace ioop_GROUP_WORK.Student
 
         }
 
-        
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

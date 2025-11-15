@@ -17,6 +17,23 @@ namespace ioop_GROUP_WORK.Student
             InitializeComponent();
         }
 
+
+
+        private void InternshipListForm_Load(object sender, EventArgs e)
+        {
+            LoadIntershipOffers();
+        }
+
+
+
+        private void LoadIntershipOffers()
+        {
+            // Code to load internship offers from the database and display them in the DataGridView
+            string
+        }
+
+
+
         private void btnResume_Click(object sender, EventArgs e)
         {
 
@@ -26,5 +43,7 @@ namespace ioop_GROUP_WORK.Student
         {
 
         }
+
+        
     }
 }
