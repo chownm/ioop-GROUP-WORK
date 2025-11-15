@@ -18,6 +18,13 @@ namespace ioop_GROUP_WORK.UniSupervisor
             InitializeComponent();
         }
 
+        // Constructor accepting studentId parameter
+        public frm_Student_Profile_Review(string studentId)
+        {
+            InitializeComponent();
+            // Load student profile based on studentId
+        }
+
         private void Student_Profile_Review_Load(object sender, EventArgs e)
         {
 
