@@ -121,7 +121,7 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(942, 91);
+            this.lblDescription.Location = new System.Drawing.Point(737, 88);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(279, 31);
@@ -133,7 +133,7 @@
             // 
             this.lblLogo.AutoSize = true;
             this.lblLogo.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogo.Location = new System.Drawing.Point(1255, 434);
+            this.lblLogo.Location = new System.Drawing.Point(814, 426);
             this.lblLogo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Size = new System.Drawing.Size(202, 31);
@@ -144,7 +144,7 @@
             // 
             this.pbLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.pbLogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbLogo.Location = new System.Drawing.Point(1536, 390);
+            this.pbLogo.Location = new System.Drawing.Point(1021, 402);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(356, 268);
             this.pbLogo.TabIndex = 8;
@@ -153,9 +153,9 @@
             // rtbDescription
             // 
             this.rtbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.rtbDescription.Location = new System.Drawing.Point(1226, 73);
+            this.rtbDescription.Location = new System.Drawing.Point(1021, 88);
             this.rtbDescription.Name = "rtbDescription";
-            this.rtbDescription.Size = new System.Drawing.Size(666, 277);
+            this.rtbDescription.Size = new System.Drawing.Size(460, 294);
             this.rtbDescription.TabIndex = 9;
             this.rtbDescription.Text = "";
             // 
@@ -222,7 +222,7 @@
             // btnUploadLogo
             // 
             this.btnUploadLogo.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUploadLogo.Location = new System.Drawing.Point(1632, 691);
+            this.btnUploadLogo.Location = new System.Drawing.Point(1021, 697);
             this.btnUploadLogo.Name = "btnUploadLogo";
             this.btnUploadLogo.Size = new System.Drawing.Size(209, 48);
             this.btnUploadLogo.TabIndex = 17;
@@ -264,7 +264,7 @@
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CompanyProfile";
             this.Text = "CompanyProfile";
             this.Load += new System.EventHandler(this.CompanyProfile_Load_1);
