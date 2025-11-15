@@ -85,7 +85,9 @@ namespace ioop_GROUP_WORK.UniSupervisor
             }
 
             int actualDays = GetMonthlyCheckInCount(studentID, date);
-            double percentage = ((double)actualDays / requiredDays) * 100;
+            double percentage = ((double)actualDays / requiredDays) * 100.00;
+
+            return $"{percentage, 2F}";
         }
     }
 }

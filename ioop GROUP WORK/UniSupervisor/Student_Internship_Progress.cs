@@ -39,7 +39,14 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
+            this.Close();
+            frm_Student_Internship_Table frm = new frm_Student_Internship_Table();
+            frm.ShowDialog();
+        }
 
+        private void LoadStudentInternshipProgress()
+        {
+            lbl_student_id.Text = $"{student_id}"; // Set student ID
         }
     }
 }
