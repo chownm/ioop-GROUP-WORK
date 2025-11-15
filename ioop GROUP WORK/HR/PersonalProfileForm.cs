@@ -42,6 +42,8 @@ namespace ioop_GROUP_WORK.HR
             PersonalProfile pp = new PersonalProfile();
             MessageBox.Show(pp.UpdatePersonalProfile(txtUsername.Text, txtPassword.Text, txtEmail.Text));
             Clear();
+            this.Close();
+            
 
         }
 
