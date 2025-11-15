@@ -14,7 +14,6 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class CompanyProfile : Form
     {
-        private PersonalProfile PP;
         public CompanyProfile()
         {
             InitializeComponent();
@@ -77,6 +76,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            PersonalProfile PP = new PersonalProfile();
             string name = PP.getname();
             string password = PP.getpassword();
 
@@ -95,6 +95,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void CompanyProfile_Load_1(object sender, EventArgs e)
         {
+            PersonalProfile PP = new PersonalProfile();
             string name = PP.getname();
             string password = PP.getpassword();
 

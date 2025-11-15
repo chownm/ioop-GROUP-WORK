@@ -13,7 +13,6 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class ManageOffer : Form
     {
-        private PersonalProfile PP;
         public ManageOffer()
         {
             InitializeComponent();
@@ -62,6 +61,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSendOffer_Click(object sender, EventArgs e)
         {
+            PersonalProfile PP = new PersonalProfile();
             string name = PP.getname();
             string password = PP.getpassword();
 

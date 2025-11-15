@@ -35,15 +35,17 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string stat ;
-            User obj1 = new User(txtUsername.Text, txtPassword.Text);
-            stat = obj1.login(txtUsername.Text, txtPassword.Text);
-            if(stat != null)
+            string role ;
+            User obj1 = new User(txtIdentify.Text, txtPassword.Text);
+            role = obj1.login();
+            if (role != null)
             {
-                MessageBox.Show(stat);
+                this.Close();
+                MessageBox.Show(obj1.identify(role));   
             }
-            txtUsername.Text = String.Empty;
-            txtUsername.Text = String.Empty ;   
+            
+            txtIdentify.Text = String.Empty;
+            txtPassword.Text = String.Empty ;   
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

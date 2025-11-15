@@ -58,7 +58,7 @@ namespace ioop_GROUP_WORK.HR
         public string getprofilename()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM \\\\ WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
+            SqlCommand cmd = new SqlCommand("SELECT Email FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
 
             cmd.Parameters.AddWithValue("@identity", this.Useridentify);
             cmd.Parameters.AddWithValue("@password", this.password);
@@ -82,7 +82,7 @@ namespace ioop_GROUP_WORK.HR
         {
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM \\\\ WHERE (Email = @identity OR \\\\ Username = @identity) AND Password = @password", con);
+            SqlCommand cmd = new SqlCommand("SELECT Email FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
 
             cmd.Parameters.AddWithValue("@identity", this.Useridentify);
             cmd.Parameters.AddWithValue("@password", this.password);
@@ -111,7 +111,7 @@ namespace ioop_GROUP_WORK.HR
         {
             string message = "";
             con.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE \\\\ SET \\\\Username = @newusername, Password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND Password = @oldpassword ", con);
+            SqlCommand cmd = new SqlCommand("UPDATE users SET Username = @newusername, Password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND Password = @oldpassword ", con);
 
             SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Password = @newpassword, Email = @newemail WHERE (ContactPerson = @oldusername OR Email = @oldemail) AND Password = @oldpassword ", con);
 

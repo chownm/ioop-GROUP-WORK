@@ -71,7 +71,7 @@
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(259, 165);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(247, 44);
             this.comboBox1.TabIndex = 2;
@@ -84,7 +84,7 @@
             this.lstApplicationDetails.FormattingEnabled = true;
             this.lstApplicationDetails.ItemHeight = 36;
             this.lstApplicationDetails.Location = new System.Drawing.Point(38, 243);
-            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstApplicationDetails.Margin = new System.Windows.Forms.Padding(2);
             this.lstApplicationDetails.Name = "lstApplicationDetails";
             this.lstApplicationDetails.Size = new System.Drawing.Size(603, 400);
             this.lstApplicationDetails.TabIndex = 3;
@@ -95,7 +95,7 @@
             this.btnViewProfile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewProfile.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnViewProfile.Location = new System.Drawing.Point(44, 691);
-            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewProfile.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewProfile.Name = "btnViewProfile";
             this.btnViewProfile.Size = new System.Drawing.Size(163, 44);
             this.btnViewProfile.TabIndex = 4;
@@ -105,28 +105,30 @@
             // 
             // btnAccept
             // 
+            this.btnAccept.BackColor = System.Drawing.Color.LimeGreen;
             this.btnAccept.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccept.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnAccept.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnAccept.Location = new System.Drawing.Point(259, 691);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(2);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(163, 44);
             this.btnAccept.TabIndex = 5;
             this.btnAccept.Text = "Accept";
-            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.UseVisualStyleBackColor = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnReject
             // 
+            this.btnReject.BackColor = System.Drawing.Color.Red;
             this.btnReject.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReject.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnReject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnReject.Location = new System.Drawing.Point(471, 691);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(2);
             this.btnReject.Name = "btnReject";
             this.btnReject.Size = new System.Drawing.Size(163, 44);
             this.btnReject.TabIndex = 6;
             this.btnReject.Text = "Reject";
-            this.btnReject.UseVisualStyleBackColor = true;
+            this.btnReject.UseVisualStyleBackColor = false;
             this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
             // 
             // btnBack
@@ -134,7 +136,7 @@
             this.btnBack.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnBack.Location = new System.Drawing.Point(689, 691);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(163, 44);
             this.btnBack.TabIndex = 7;
@@ -176,7 +178,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblSelectStudent);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ViewApplication";
             this.Text = "ViewApplication";
             this.Load += new System.EventHandler(this.ViewApplication_Load);
