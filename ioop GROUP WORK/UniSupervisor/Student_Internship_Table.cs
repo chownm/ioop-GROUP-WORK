@@ -32,7 +32,14 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void btn_select_Click(object sender, EventArgs e)       // Select Button
         {
+            if (cmb_student_id.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a student ID.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
 
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)      // Refresh Button
