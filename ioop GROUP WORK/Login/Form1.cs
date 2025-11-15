@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ioop_GROUP_WORK.Login;
+using ioop_GROUP_WORK.Admin;
+using ioop_GROUP_WORK.Student;
+using ioop_GROUP_WORK.UniSupervisor;
+using ioop_GROUP_WORK.HR;
 
 namespace ioop_GROUP_WORK
 {
@@ -40,7 +44,32 @@ namespace ioop_GROUP_WORK
             stat = obj1.login(txtUsername.Text, txtPassword.Text);
             if(stat != null)
             {
-                MessageBox.Show(stat);
+                switch(stat)
+                {
+                    case "admin":
+                        AdminHome adminHome = new AdminHome();
+                        adminHome.Show();
+                        this.Hide();
+                        break;
+                    case "student":
+                        StudentHomeForm studentHome = new StudentHomeForm();
+                        studentHome.Show();
+                        this.Hide();
+                        break;
+                    case "HR":
+                        HRHome companyHome = new HRHome();
+                        companyHome.Show();
+                        this.Hide();
+                        break;
+                    case "supervisor":
+                        frm_UniSupervisorHome uniSupervisorHome = new frm_UniSupervisorHome();
+                        uniSupervisorHome.Show();
+                        this.Hide();
+                        break;
+                    default:
+                        MessageBox.Show("Invalid user role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
             txtUsername.Text = String.Empty;
             txtUsername.Text = String.Empty ;   

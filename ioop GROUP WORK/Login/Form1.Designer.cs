@@ -92,7 +92,7 @@ namespace ioop_GROUP_WORK
             this.txtUsername.Location = new System.Drawing.Point(263, 81);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(132, 37);
+            this.txtUsername.Size = new System.Drawing.Size(180, 37);
             this.txtUsername.TabIndex = 3;
             // 
             // txtPassword
@@ -100,7 +100,7 @@ namespace ioop_GROUP_WORK
             this.txtPassword.Location = new System.Drawing.Point(263, 151);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(132, 37);
+            this.txtPassword.Size = new System.Drawing.Size(180, 37);
             this.txtPassword.TabIndex = 4;
             // 
             // label4
