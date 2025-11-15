@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ioop_GROUP_WORK.UniSupervisor;
+
 
 namespace ioop_GROUP_WORK.UniSupervisor
 {
@@ -33,7 +35,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
             string selectedText = lst_Student_Details.SelectedItem.ToString();
             string selectedStudentID = selectedText.Split('-')[0].Trim();
 
-            frm_Student_Profile_Review profilePage = new Student_Profile_Review(selectedStudentID);
+            frm_Student_Profile_Review profilePage = new frm_Student_Profile_Review(selectedStudentID);
             profilePage.ShowDialog();
         }
 
