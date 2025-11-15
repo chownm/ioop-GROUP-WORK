@@ -64,7 +64,7 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void BtnRefresh_Click(object sender, EventArgs e)
         {
             LoadStatistics();
             MessageBox.Show("Statistics refreshed!");
