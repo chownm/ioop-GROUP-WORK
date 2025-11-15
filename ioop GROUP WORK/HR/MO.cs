@@ -13,7 +13,6 @@ namespace ioop_GROUP_WORK.HR
 {
     internal class MO
     {
-        private string studentname;
         private string jobTitle;
         private string position;
         private DateTime start;
@@ -24,9 +23,8 @@ namespace ioop_GROUP_WORK.HR
 
         
 
-        static SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
-        public string Studentname { get => studentname; private set => studentname = value; }
         public string JobTitle { get => jobTitle; private set => jobTitle = value; }
         public string Position { get => position; private set => position = value; }
         public DateTime Start { get => start; private set => start = value; }
@@ -34,9 +32,8 @@ namespace ioop_GROUP_WORK.HR
         public double Salary { get => salary; private set => salary = value; }
         public string JobDescription { get => jobDescription; private set => jobDescription = value; }
 
-        public MO(string studentname,string jobTitle, string position, DateTime start, DateTime end, double salary, string jobDescription)
+        public MO(string jobTitle, string position, DateTime start, DateTime end, double salary, string jobDescription)
         {
-            Studentname = studentname;
             JobTitle = jobTitle;
             Position = position;
             Start = start;
@@ -47,7 +44,7 @@ namespace ioop_GROUP_WORK.HR
   
         }
 
-        public string SendApplication()
+        public string SendApplication(string companyname)
         {
             string message = "";
             DateTime timenow = DateTime.Now;
@@ -55,24 +52,12 @@ namespace ioop_GROUP_WORK.HR
             try
             {
                 con.Open();
-                
-                SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM InternshipOffer WHERE StudentName = @student", con);
-                checkCmd.Parameters.AddWithValue("@student", Studentname);
-
-                int count = (int)checkCmd.ExecuteScalar();
-
-                if (count > 0)
-                {
-                    message = "This student has already been offered.";
-                }
-                else
-                {
+                               
                     SqlCommand cmd = new SqlCommand(
                         "INSERT INTO InternshipOffer " +
-                        "(StudentName, JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
-                        "VALUES (@student, @title, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
-
-                    cmd.Parameters.AddWithValue("@student", Studentname);
+                        "(JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered, Company) " +
+                        "VALUES (@title, @position, @startDate, @endDate, @salary, @description, @dateO, @companyname)", con);
+                                        
                     cmd.Parameters.AddWithValue("@title", jobTitle);
                     cmd.Parameters.AddWithValue("@position", Position);
                     cmd.Parameters.AddWithValue("@startDate", Start);
@@ -80,6 +65,7 @@ namespace ioop_GROUP_WORK.HR
                     cmd.Parameters.AddWithValue("@salary", Salary);
                     cmd.Parameters.AddWithValue("@description", JobDescription);
                     cmd.Parameters.AddWithValue("@dateO", timenow);
+                    cmd.Parameters.AddWithValue("@companyname", companyname);
 
                     int result = cmd.ExecuteNonQuery();
 
@@ -87,7 +73,7 @@ namespace ioop_GROUP_WORK.HR
                         message = "Application sent successfully!";
                     else
                         message = "Failed to send application.";
-                }
+                
             }
             catch (Exception ex)
             {
@@ -100,32 +86,7 @@ namespace ioop_GROUP_WORK.HR
 
             return message;
         }
-
-        public static List<string> GetAllStudentNames()
-        {
-            List<string> names = new List<string>();
-            string newstatus = "Rejected";
-
-
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT StudentName FROM StudentApplication WHERE Status = @status", con);
-            cmd.Parameters.AddWithValue("@status", newstatus);
-
-
-            SqlDataReader rd = cmd.ExecuteReader();
-
-            while (rd.Read())
-            {
-                names.Add(rd["StudentName"].ToString());
-            }
-
-            rd.Close();
-            con.Close();
-
-            return names;
-
-        }
-
+                
         public static List<string> AddJobPosition(string department)
         {
 

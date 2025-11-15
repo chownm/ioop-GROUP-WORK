@@ -13,6 +13,7 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class ManageOffer : Form
     {
+        private PersonalProfile PP;
         public ManageOffer()
         {
             InitializeComponent();
@@ -20,19 +21,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void ManageOffer_Load(object sender, EventArgs e)
         {
-            List<string> studentNames = MO.GetAllStudentNames();
-            cmbStudent.Items.Clear();
-
-            foreach (string name in studentNames)
-            {
-                cmbStudent.Items.Add(name);
-            }
-
-
-            if (cmbStudent.Items.Count > 0)
-            {
-                cmbStudent.SelectedIndex = 0;
-            }
+            
         }
 
         private void lblTitle_Click(object sender, EventArgs e)
@@ -73,16 +62,22 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSendOffer_Click(object sender, EventArgs e)
         {
+            string name = PP.getname();
+            string password = PP.getpassword();
+
+            CP company = new CP(name, password);
+            string Cname = company.Companyname;
+
             double salary = double.Parse(txtSalary.Text);
             try
             {
-                if (cmbStudent.SelectedItem == null || cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)
+                if (cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)
                 {
                     MessageBox.Show("Please select all fields before sending.");
                     return;
                 }
 
-                MO mo = new MO(cmbStudent.SelectedItem.ToString(),
+                MO mo = new MO(
                     cmbJobTitle.SelectedItem.ToString(),
                     cmbPosition.SelectedItem.ToString(),
                     dtpStartDate.Value,
@@ -90,7 +85,7 @@ namespace ioop_GROUP_WORK.HR
                     salary,
                     rtbDescription.Text);
                                 
-                string result = mo.SendApplication();
+                string result = mo.SendApplication(Cname);
                     
 
                 MessageBox.Show(result);
@@ -108,7 +103,6 @@ namespace ioop_GROUP_WORK.HR
             dtpEndDate.Value = DateTime.Now;
             txtSalary.Clear();
             rtbDescription.Clear();
-            cmbStudent.SelectedIndex = -1;
             cmbJobTitle.SelectedIndex = -1;
             cmbPosition.SelectedIndex = -1;
         }
