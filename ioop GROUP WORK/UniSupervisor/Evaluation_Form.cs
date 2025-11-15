@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.UniSupervisor
 {
-    public partial class frm_Evaluation_From : Form
+    public partial class frm_Evaluation_Form : Form
     {
-        public frm_Evaluation_From()
+        public frm_Evaluation_Form()
         {
             InitializeComponent();
         }

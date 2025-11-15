@@ -17,6 +17,7 @@ using ioop_GROUP_WORK.Login;
 using ioop_GROUP_WORK.Student;
 using ioop_GROUP_WORK.HR;
 using ioop_GROUP_WORK.UniSupervisor;
+using System.Windows.Navigation;
 
 namespace ioop_GROUP_WORK
 {
@@ -35,6 +36,73 @@ namespace ioop_GROUP_WORK
             this.adminUser = admin;
         }
 
+        private int lblTotalUsersint;
+        private int lblTotalStudentsint;
+        private int lblTotalCompaniesint;
+        private int lblTotalRecruitersint;
+        private int lblPendingApplicationsint;
+
+        // Properties
+        public int TotalUsers
+        {
+            get
+            {
+                return lblTotalUsersint;
+            }
+            private set
+            {
+                lblTotalUsersint = value;
+            }
+        }
+
+        public int TotalStudents
+        {
+            get
+            {
+                return lblTotalStudentsint;
+            }
+            private set
+            {
+                lblTotalStudentsint = value;
+            }
+        }
+
+        public int TotalCompanies
+        {
+            get
+            {
+                return lblTotalCompaniesint;
+            }
+            private set
+            {
+                lblTotalCompaniesint = value;
+            }
+        }
+
+        public int TotalRecruiters
+        {
+            get
+            {
+                return lblTotalRecruitersint;
+            }
+            private set
+            {
+                lblTotalRecruitersint = value;
+            }
+        }
+
+        public int PendingApplications
+        {
+            get
+            {
+                return lblPendingApplicationsint;
+            }
+            private set
+            {
+                lblPendingApplicationsint = value;
+            }
+        }
+
         private void AdminHome_Load(object sender, EventArgs e)
         {
             try
@@ -50,6 +118,13 @@ namespace ioop_GROUP_WORK
                         lblTotalCompanies.Text = "Total Companies: " + stats.Rows[0]["TotalCompanies"].ToString();
                         lblTotalRecruiters.Text = "Total Recruiters: " + stats.Rows[0]["TotalRecruiters"].ToString();
                         lblPendingApplications.Text = "Pending: " + stats.Rows[0]["PendingApplications"].ToString();
+
+                        // Set property values (this calls the private setters)
+                        TotalUsers = Convert.ToInt32(stats.Rows[0]["TotalUsers"]);
+                        TotalStudents = Convert.ToInt32(stats.Rows[0]["TotalStudents"]);
+                        TotalCompanies = Convert.ToInt32(stats.Rows[0]["TotalCompanies"]);
+                        TotalRecruiters = Convert.ToInt32(stats.Rows[0]["TotalRecruiters"]);
+                        PendingApplications = Convert.ToInt32(stats.Rows[0]["PendingApplications"]);
                     }
                 }
             }

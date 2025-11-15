@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.UniSupervisor
 {
-    partial class frm_Evaluation_From
+    partial class frm_Evaluation_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -243,7 +243,7 @@
             this.dtp_datetime.Size = new System.Drawing.Size(503, 45);
             this.dtp_datetime.TabIndex = 6;
             // 
-            // frm_Evaluation_From
+            // frm_Evaluation_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -268,8 +268,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "frm_Evaluation_From";
-            this.Text = "Evaluation_From";
+            this.Name = "frm_Evaluation_Form";
+            this.Text = "Evaluation_Form";
             this.Load += new System.EventHandler(this.frm_Evaluation_From_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

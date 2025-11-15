@@ -58,13 +58,13 @@ namespace ioop_GROUP_WORK.UniSupervisor
         public static int GetMonthlyCheckInCount(string studentID, DateTime date)
         {
             int count = 0;
-            using (SqlConnection conn = new SqlConnection(DBConnection.connectionString))
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
             {
-                conn.Open();
+                con.Open();
 
                 string query = @"SELECT COUNT(*) FROM Check_In_Record WHERE studentID = @StudentID AND MONTH(checkInDate) = @Month AND YEAR(checkInDate) = @Year";
                    
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@StudentID", studentID);
                     cmd.Parameters.AddWithValue("@Month", date.Month);
@@ -85,7 +85,9 @@ namespace ioop_GROUP_WORK.UniSupervisor
             }
 
             int actualDays = GetMonthlyCheckInCount(studentID, date);
-            double percentage = ((double)actualDays / requiredDays) * 100;
+            double percentage = ((double)actualDays / requiredDays) * 100.00;
+
+            return Math.Round(percentage,2);
         }
     }
 }
