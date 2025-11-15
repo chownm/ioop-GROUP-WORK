@@ -48,7 +48,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(583, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(406, 38);
+            this.label1.Size = new System.Drawing.Size(393, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "Student Check In Progress";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -59,7 +59,7 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(99, 172);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(252, 38);
+            this.label2.Size = new System.Drawing.Size(241, 37);
             this.label2.TabIndex = 1;
             this.label2.Text = "Student Name ：";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -70,7 +70,7 @@
             this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(99, 107);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(204, 38);
+            this.label3.Size = new System.Drawing.Size(196, 37);
             this.label3.TabIndex = 1;
             this.label3.Text = "Student ID ：";
             this.label3.Click += new System.EventHandler(this.label2_Click);
@@ -79,9 +79,9 @@
             // 
             this.lbl_student_id.AutoSize = true;
             this.lbl_student_id.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_student_id.Location = new System.Drawing.Point(346, 107);
+            this.lbl_student_id.Location = new System.Drawing.Point(361, 107);
             this.lbl_student_id.Name = "lbl_student_id";
-            this.lbl_student_id.Size = new System.Drawing.Size(30, 38);
+            this.lbl_student_id.Size = new System.Drawing.Size(30, 37);
             this.lbl_student_id.TabIndex = 1;
             this.lbl_student_id.Text = "s";
             this.lbl_student_id.Click += new System.EventHandler(this.label2_Click);
@@ -92,7 +92,7 @@
             this.lbl_student_name.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_student_name.Location = new System.Drawing.Point(399, 172);
             this.lbl_student_name.Name = "lbl_student_name";
-            this.lbl_student_name.Size = new System.Drawing.Size(30, 38);
+            this.lbl_student_name.Size = new System.Drawing.Size(30, 37);
             this.lbl_student_name.TabIndex = 1;
             this.lbl_student_name.Text = "s";
             this.lbl_student_name.Click += new System.EventHandler(this.label2_Click);
@@ -103,7 +103,7 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(99, 308);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(371, 38);
+            this.label4.Size = new System.Drawing.Size(357, 37);
             this.label4.TabIndex = 1;
             this.label4.Text = "Check In Record View ：";
             this.label4.Click += new System.EventHandler(this.label2_Click);
@@ -114,7 +114,7 @@
             this.lbl_check_in_percentage.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_check_in_percentage.Location = new System.Drawing.Point(490, 233);
             this.lbl_check_in_percentage.Name = "lbl_check_in_percentage";
-            this.lbl_check_in_percentage.Size = new System.Drawing.Size(36, 38);
+            this.lbl_check_in_percentage.Size = new System.Drawing.Size(35, 37);
             this.lbl_check_in_percentage.TabIndex = 1;
             this.lbl_check_in_percentage.Text = "S";
             this.lbl_check_in_percentage.Click += new System.EventHandler(this.label2_Click);
@@ -147,7 +147,7 @@
             this.label5.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(99, 233);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(346, 38);
+            this.label5.Size = new System.Drawing.Size(334, 37);
             this.label5.TabIndex = 1;
             this.label5.Text = "Check In Percentage ：";
             this.label5.Click += new System.EventHandler(this.label2_Click);
@@ -161,6 +161,7 @@
             this.dgv_record_view.RowTemplate.Height = 24;
             this.dgv_record_view.Size = new System.Drawing.Size(816, 576);
             this.dgv_record_view.TabIndex = 3;
+            this.dgv_record_view.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_record_view_CellContentClick);
             // 
             // frm_Student_Internship_Progress
             // 

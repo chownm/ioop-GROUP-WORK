@@ -16,5 +16,19 @@ namespace ioop_GROUP_WORK.UniSupervisor
         {
             InitializeComponent();
         }
+
+        private void btn_evaluate_form_load_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frm_Evaluation_Form frm = new frm_Evaluation_Form();
+            frm.ShowDialog();
+        }
+
+        private void btn_internship_progress_load_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frm_Student_Internship_Table frm = new frm_Student_Internship_Table();
+            frm.ShowDialog();
+        }
     }
 }

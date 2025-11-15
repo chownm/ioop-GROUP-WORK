@@ -36,9 +36,13 @@ namespace ioop_GROUP_WORK.UniSupervisor
             {
                 MessageBox.Show("Please select a student ID.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
+            
+            Internship_Evaluation selectedStudent = cmb_student_id.SelectedItem as Internship_Evaluation;
 
+            if (selectedStudent != null)
+            {
+                frm_Student_Internship_Progress detailsForm = new frm_Student_Internship_Progress(selectedStudent.Student_id);
+                detailsForm.ShowDialog();
             }
         }
 
@@ -49,7 +53,9 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void button3_Click(object sender, EventArgs e)      // Exit Button
         {
-
+            this.Close();
+            frm_UniSupervisorHome frm = new frm_UniSupervisorHome();
+            frm.ShowDialog();
         }
 
         private void ShowStudentDetails()
