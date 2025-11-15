@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ioop_GROUP_WORK.Login;
+using ioop_GROUP_WORK.Admin;
+using ioop_GROUP_WORK.Student;
+using ioop_GROUP_WORK.UniSupervisor;
+using ioop_GROUP_WORK.HR;
 
 namespace ioop_GROUP_WORK
 {
@@ -35,17 +39,40 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string role ;
-            User obj1 = new User(txtIdentify.Text, txtPassword.Text);
-            role = obj1.login();
-            if (role != null)
+            string stat ;
+            User obj1 = new User(txtUsername.Text, txtPassword.Text);
+            stat = obj1.login(txtUsername.Text, txtPassword.Text);
+            if(stat != null)
             {
-                this.Close();
-                MessageBox.Show(obj1.identify(role));   
+                switch(stat)
+                {
+                    case "admin":
+                        AdminHome adminHome = new AdminHome();
+                        adminHome.Show();
+                        this.Hide();
+                        break;
+                    case "student":
+                        StudentHomeForm studentHome = new StudentHomeForm();
+                        studentHome.Show();
+                        this.Hide();
+                        break;
+                    case "HR":
+                        HRHome companyHome = new HRHome();
+                        companyHome.Show();
+                        this.Hide();
+                        break;
+                    case "supervisor":
+                        frm_UniSupervisorHome uniSupervisorHome = new frm_UniSupervisorHome();
+                        uniSupervisorHome.Show();
+                        this.Hide();
+                        break;
+                    default:
+                        MessageBox.Show("Invalid user role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
-            
-            txtIdentify.Text = String.Empty;
-            txtPassword.Text = String.Empty ;   
+            txtUsername.Text = String.Empty;
+            txtUsername.Text = String.Empty ;   
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

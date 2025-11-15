@@ -132,7 +132,7 @@ namespace ioop_GROUP_WORK.Admin
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
 
             // btnExport
             this.btnExport.BackColor = System.Drawing.Color.ForestGreen;
