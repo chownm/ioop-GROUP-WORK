@@ -49,7 +49,7 @@ namespace ioop_GROUP_WORK.HR
         public CP(string name, string password)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE ContactPerson = @Contactp AND Password = password ", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE ContactPerson = @Contactp AND Password = @password ", con);
             cmd.Parameters.AddWithValue("@Contactp", name);
             cmd.Parameters.AddWithValue("@password", password);
             

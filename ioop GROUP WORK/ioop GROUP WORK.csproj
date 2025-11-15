@@ -115,7 +115,7 @@
       <DependentUpon>HRHome.cs</DependentUpon>
     </Compile>
     <!-- Login -->
-    <Compile Include="Login\User.cs" />
+    <Compile Include="Login\Login.cs" />
     <Compile Include="Login\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
