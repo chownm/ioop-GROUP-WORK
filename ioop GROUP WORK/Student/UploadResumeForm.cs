@@ -8,9 +8,11 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class UploadResumeForm : Form
     {
-        public UploadResumeForm()
+        private string internshipPosition;
+        public UploadResumeForm(string position)
         {
             InitializeComponent();
+            internshipPosition = position;
         }
 
         
@@ -73,15 +75,15 @@ namespace ioop_GROUP_WORK.Student
                 {
                     con.Open();
 
-                    string query = "SELECT Position FROM InternshipOffer WHERE PositionID = @PositionID";
+                    string query = "SELECT Position FROM InternshipOffer WHERE Position = @Position";
 
                     SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@PositionID", 1);  // Example: Replace with actual PositionID from your form or logic
+                    cmd.Parameters.AddWithValue("@Position", internshipPosition); 
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        position = reader["Position"].ToString();  // Store the Position from the table
+                        position = reader["Position"].ToString();
                     }
 
                     reader.Close();

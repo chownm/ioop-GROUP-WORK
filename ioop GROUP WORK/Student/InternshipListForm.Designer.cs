@@ -109,6 +109,7 @@
             this.btnBack.TabIndex = 13;
             this.btnBack.Text = "Cancel";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // InternshipListForm
             // 
