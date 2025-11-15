@@ -21,5 +21,10 @@ namespace ioop_GROUP_WORK.Student
         {
 
         }
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

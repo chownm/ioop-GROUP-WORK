@@ -33,13 +33,15 @@
             this.btnManageOffers = new System.Windows.Forms.Button();
             this.btnCompanyProfile = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnPersonalProfile = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(475, 377);
+            this.label2.Location = new System.Drawing.Point(436, 115);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(663, 73);
@@ -49,10 +51,10 @@
             // btnViewApplications
             // 
             this.btnViewApplications.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewApplications.Location = new System.Drawing.Point(68, 810);
-            this.btnViewApplications.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewApplications.Location = new System.Drawing.Point(510, 247);
+            this.btnViewApplications.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewApplications.Name = "btnViewApplications";
-            this.btnViewApplications.Size = new System.Drawing.Size(346, 61);
+            this.btnViewApplications.Size = new System.Drawing.Size(442, 75);
             this.btnViewApplications.TabIndex = 2;
             this.btnViewApplications.Text = "View Applications";
             this.btnViewApplications.UseVisualStyleBackColor = true;
@@ -61,10 +63,10 @@
             // btnManageOffers
             // 
             this.btnManageOffers.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageOffers.Location = new System.Drawing.Point(547, 810);
-            this.btnManageOffers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageOffers.Location = new System.Drawing.Point(510, 344);
+            this.btnManageOffers.Margin = new System.Windows.Forms.Padding(2);
             this.btnManageOffers.Name = "btnManageOffers";
-            this.btnManageOffers.Size = new System.Drawing.Size(335, 61);
+            this.btnManageOffers.Size = new System.Drawing.Size(442, 79);
             this.btnManageOffers.TabIndex = 3;
             this.btnManageOffers.Text = "Manage Offers";
             this.btnManageOffers.UseVisualStyleBackColor = true;
@@ -73,10 +75,10 @@
             // btnCompanyProfile
             // 
             this.btnCompanyProfile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCompanyProfile.Location = new System.Drawing.Point(1027, 810);
-            this.btnCompanyProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCompanyProfile.Location = new System.Drawing.Point(510, 442);
+            this.btnCompanyProfile.Margin = new System.Windows.Forms.Padding(2);
             this.btnCompanyProfile.Name = "btnCompanyProfile";
-            this.btnCompanyProfile.Size = new System.Drawing.Size(305, 61);
+            this.btnCompanyProfile.Size = new System.Drawing.Size(442, 69);
             this.btnCompanyProfile.TabIndex = 4;
             this.btnCompanyProfile.Text = "Company Profile";
             this.btnCompanyProfile.UseVisualStyleBackColor = true;
@@ -86,7 +88,7 @@
             // 
             this.btnLogout.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Location = new System.Drawing.Point(1465, 810);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(305, 61);
             this.btnLogout.TabIndex = 5;
@@ -94,18 +96,44 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // btnPersonalProfile
+            // 
+            this.btnPersonalProfile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonalProfile.Location = new System.Drawing.Point(510, 539);
+            this.btnPersonalProfile.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPersonalProfile.Name = "btnPersonalProfile";
+            this.btnPersonalProfile.Size = new System.Drawing.Size(442, 75);
+            this.btnPersonalProfile.TabIndex = 6;
+            this.btnPersonalProfile.Text = "Change Personal Profile";
+            this.btnPersonalProfile.UseVisualStyleBackColor = true;
+            this.btnPersonalProfile.Click += new System.EventHandler(this.btnPersonalProfile_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(510, 644);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(442, 72);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Logout";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1443, 857);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPersonalProfile);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnCompanyProfile);
             this.Controls.Add(this.btnManageOffers);
             this.Controls.Add(this.btnViewApplications);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HRHome";
             this.Text = "HRHome";
             this.Load += new System.EventHandler(this.HRHome_Load);
@@ -120,5 +148,7 @@
         private System.Windows.Forms.Button btnManageOffers;
         private System.Windows.Forms.Button btnCompanyProfile;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnPersonalProfile;
+        private System.Windows.Forms.Button button1;
     }
 }

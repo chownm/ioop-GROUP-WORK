@@ -14,6 +14,7 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class CompanyProfile : Form
     {
+        private PersonalProfile PP;
         public CompanyProfile()
         {
             InitializeComponent();
@@ -76,12 +77,15 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string name = PP.getname();
+            string password = PP.getpassword();
+
             byte[] logoBytes = getPhoto();
 
             CP company = new CP(txtCompanyName.Text, txtContactPerson.Text, txtEmail.Text, txtPhone.Text, richTextBox1.Text, rtbDescription.Text, logoBytes);
 
 
-           MessageBox.Show(company.SaveInfo());
+           MessageBox.Show(company.SaveInfo(name, password));
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
@@ -91,7 +95,10 @@ namespace ioop_GROUP_WORK.HR
 
         private void CompanyProfile_Load_1(object sender, EventArgs e)
         {
-            CP company = new CP(1);
+            string name = PP.getname();
+            string password = PP.getpassword();
+
+            CP company = new CP(name,password);
             txtCompanyName.Text = company.Companyname;
             txtContactPerson.Text = company.Contactperson;
             txtEmail.Text = company.Email;
@@ -115,10 +122,17 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {
+            
+
             HRHome back = new HRHome();
             this.Close();
             back.ShowDialog();
             
+        }
+
+        private void lblDescription_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

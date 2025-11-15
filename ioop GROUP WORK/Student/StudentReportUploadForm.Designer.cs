@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.Student
 {
-    partial class ApplyInternshipForm
+    partial class StudentReportUploadForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // ApplyInternshipForm
+            // StudentReportUploadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(24F, 49F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
-            this.Name = "ApplyInternshipForm";
-            this.Text = "ApplyInternshipForm";
+            this.Name = "StudentReportUploadForm";
+            this.Text = "Student Report Upload";
             this.ResumeLayout(false);
 
         }
