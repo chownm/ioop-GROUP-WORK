@@ -18,24 +18,28 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            try
             {
-                con.Open();
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE Students SET email=@em, phoneNumber=@ph, course=@cs WHERE studentID=@id", con);
+                    cmd.Parameters.AddWithValue("@em", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@ph", txtPhone.Text);
+                    cmd.Parameters.AddWithValue("@cs", txtCourse.Text);
+                    cmd.Parameters.AddWithValue("@id", studentID);
 
-                SqlCommand cmd = new SqlCommand(
-                    "UPDATE Students SET email=@em, phoneNumber=@ph, course=@cs WHERE studentID=@id", con);
+                    int rows = cmd.ExecuteNonQuery();
 
-                cmd.Parameters.AddWithValue("@em", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@ph", txtPhone.Text);
-                cmd.Parameters.AddWithValue("@cs", txtCourse.Text);
-                cmd.Parameters.AddWithValue("@id", studentID);
-
-                int rows = cmd.ExecuteNonQuery();
-
-                if (rows > 0)
-                    MessageBox.Show("Profile updated successfully!");
-                else
-                    MessageBox.Show("Update failed! Please try again.");
+                    if (rows > 0)
+                        MessageBox.Show("Profile updated successfully!");
+                    else
+                        MessageBox.Show("Update failed! Please try again.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

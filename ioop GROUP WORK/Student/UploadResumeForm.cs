@@ -26,6 +26,14 @@ namespace ioop_GROUP_WORK.Student
 
             if (opd.ShowDialog() == DialogResult.OK)
             {
+                // Validate file extension
+                string fileExtension = Path.GetExtension(opd.FileName).ToLower();
+                if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png")
+                {
+                    MessageBox.Show("Please upload a valid image file (JPEG, PNG).", "Invalid File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;  // Exit the method if the file type is invalid
+                }
+
                 picPreview.ImageLocation = opd.FileName;
             }
         }
