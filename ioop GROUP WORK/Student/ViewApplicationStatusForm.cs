@@ -12,9 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class ViewApplicationStatusForm : Form
     {
-        public ViewApplicationStatusForm()
+        public ViewApplicationStatusForm(string studentID)
         {
             InitializeComponent();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

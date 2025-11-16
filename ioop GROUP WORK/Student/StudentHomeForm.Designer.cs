@@ -213,6 +213,7 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.Name = "StudentHomeForm";
             this.Text = "Student Home";
+            this.Load += new System.EventHandler(this.StudentHomeForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
