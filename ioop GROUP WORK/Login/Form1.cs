@@ -47,9 +47,6 @@ namespace ioop_GROUP_WORK
             //FOR STUDENT PART (DO NOT DELETE)
             (role, studentName) = obj1.login();
 
-            // Get the role from the login method
-            role = obj1.login();
-
             // If the role is valid, navigate to the appropriate home form
             if (role != null)
             {
