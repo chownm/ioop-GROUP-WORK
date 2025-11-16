@@ -55,6 +55,7 @@
             this.lst_Student_Details.Name = "lst_Student_Details";
             this.lst_Student_Details.Size = new System.Drawing.Size(1088, 438);
             this.lst_Student_Details.TabIndex = 1;
+            this.lst_Student_Details.SelectedIndexChanged += new System.EventHandler(this.lst_Student_Details_SelectedIndexChanged);
             // 
             // label2
             // 
