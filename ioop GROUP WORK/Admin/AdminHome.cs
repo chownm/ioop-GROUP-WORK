@@ -137,26 +137,36 @@ namespace ioop_GROUP_WORK
         private void BtnManageUsers_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Manage Users form will open here.", "Info");
+            ManageUsers manageUsers = new ManageUsers();
+            manageUsers.Show();
         }
 
         private void BtnManageRecruiters_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Manage Recruiters form will open here.", "Info");
+            ManageRecruiters manageRecruiters = new ManageRecruiters();
+            manageRecruiters.Show();
         }
 
         private void BtnAssignSupervisors_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Assign Supervisors form will open here.", "Info");
+            AssignSupervisor assignSupervisor = new AssignSupervisor();
+            assignSupervisor.Show();
         }
 
         private void BtnGenerateReports_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Generate Reports form will open here.", "Info");
+            GenerateReports generateReports = new GenerateReports();
+            generateReports.Show();
         }
 
         private void BtnViewStatistics_Click(object sender, EventArgs e)
         {
             MessageBox.Show("View Statistics form will open here.", "Info");
+            ViewStatistics viewStatistics = new ViewStatistics();
+            viewStatistics.Show();
         }
 
         private void BtnSystemConfig_Click(object sender, EventArgs e)
