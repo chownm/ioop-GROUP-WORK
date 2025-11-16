@@ -9,6 +9,7 @@ namespace ioop_GROUP_WORK.Student
     public partial class UploadResumeForm : Form
     {
         private string internshipPosition;
+        private string companyName;
         public UploadResumeForm(string position)
         {
             InitializeComponent();
@@ -25,6 +26,14 @@ namespace ioop_GROUP_WORK.Student
 
             if (opd.ShowDialog() == DialogResult.OK)
             {
+                // Validate file extension
+                string fileExtension = Path.GetExtension(opd.FileName).ToLower();
+                if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png")
+                {
+                    MessageBox.Show("Please upload a valid image file (JPEG, PNG).", "Invalid File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;  // Exit the method if the file type is invalid
+                }
+
                 picPreview.ImageLocation = opd.FileName;
             }
         }
@@ -52,9 +61,10 @@ namespace ioop_GROUP_WORK.Student
 
                 //Fetch postition from InternshipOffer table
                 string position = GetPositionFromDatabase();
+                companyName = GetCompanyNameFromDatabase();
 
                 //Save application to Database
-                SaveApplicationToDatabase(txtStuID.Text, txtStuName.Text, position, imageBytes);
+                SaveApplicationToDatabase(txtStuID.Text, txtStuName.Text, position, companyName, imageBytes);
 
                 MessageBox.Show("Application submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -63,6 +73,7 @@ namespace ioop_GROUP_WORK.Student
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private string GetPositionFromDatabase()
@@ -100,20 +111,55 @@ namespace ioop_GROUP_WORK.Student
 
 
 
-        private void SaveApplicationToDatabase(string studentID, string studentName, string position, byte[] resumeImage)
+        private string GetCompanyNameFromDatabase()
+        {
+            string companyName = string.Empty;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+
+                    string query = "SELECT CompanyName FROM CompanyProfile WHERE CompanyName IS NOT NULL";
+
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        companyName = reader["CompanyName"].ToString();
+                    }
+
+                    reader.Close();
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching company name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return companyName;
+        }
+
+
+
+        private void SaveApplicationToDatabase(string studentID, string studentName, string position, string companyName, byte[] resumeImage)
         {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
             {
-                string query = "INSERT INTO StudentApplication (StudentID, StudentName, Position, DateApplied, Status, Resume) " +
-                               "VALUES (@StudentID, @StudentName, @Position, @DateApplied, @Status, @Resume)";
+                string query = "INSERT INTO StudentApplication (StudentID, StudentName, Position, CompanyName, DateApplied, Status, Resume) " +
+                               "VALUES (@StudentID, @StudentName, @Position, @CompanyName, @DateApplied, @Status, @Resume)";
 
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@StudentID", studentID);  
-                cmd.Parameters.AddWithValue("@StudentName", studentName); 
-                cmd.Parameters.AddWithValue("@Position", position); 
+                cmd.Parameters.AddWithValue("@StudentID", studentID);
+                cmd.Parameters.AddWithValue("@StudentName", studentName);
+                cmd.Parameters.AddWithValue("@Position", position);
+                cmd.Parameters.AddWithValue("@CompanyName", companyName);  // Insert the Company Name
                 cmd.Parameters.AddWithValue("@DateApplied", DateTime.Now);
-                cmd.Parameters.AddWithValue("@Status", "Pending"); 
-                cmd.Parameters.AddWithValue("@Resume", resumeImage);  
+                cmd.Parameters.AddWithValue("@Status", "Pending");
+                cmd.Parameters.AddWithValue("@Resume", resumeImage);
                 con.Open();
                 cmd.ExecuteNonQuery();  // Execute the insert query
             }

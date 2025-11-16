@@ -12,9 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class ViewProgressForm : Form
     {
-        public ViewProgressForm()
+        public ViewProgressForm(string studentID)
         {
             InitializeComponent();
+        }
+
+        private void ViewProgressForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

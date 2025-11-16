@@ -37,9 +37,10 @@
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "StudentReportUploadForm";
             this.Text = "Student Report Upload";
+            this.Load += new System.EventHandler(this.StudentReportUploadForm_Load);
             this.ResumeLayout(false);
 
         }

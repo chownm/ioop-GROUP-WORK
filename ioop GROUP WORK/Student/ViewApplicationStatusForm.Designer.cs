@@ -34,17 +34,17 @@
             this.dgvApplications = new System.Windows.Forms.DataGridView();
             this.lblStatus = new System.Windows.Forms.Label();
             this.grpOfferDetails = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labell = new System.Windows.Forms.Label();
-            this.labelll = new System.Windows.Forms.Label();
-            this.lblPosition = new System.Windows.Forms.Label();
-            this.lblJobTitle = new System.Windows.Forms.Label();
+            this.lblAllowance = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.lblEndDate = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblAllowance = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.lblJobTitle = new System.Windows.Forms.Label();
+            this.labell = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelll = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplications)).BeginInit();
             this.grpOfferDetails.SuspendLayout();
@@ -61,6 +61,7 @@
             this.btnBack.TabIndex = 17;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // label1
             // 
@@ -96,6 +97,7 @@
             this.dgvApplications.RowTemplate.Height = 28;
             this.dgvApplications.Size = new System.Drawing.Size(704, 600);
             this.dgvApplications.TabIndex = 0;
+            this.dgvApplications.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvApplications_CellContentClick);
             // 
             // lblStatus
             // 
@@ -127,60 +129,27 @@
             this.grpOfferDetails.TabIndex = 16;
             this.grpOfferDetails.TabStop = false;
             // 
-            // label2
+            // lblAllowance
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(273, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 38);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Offer Details";
+            this.lblAllowance.AutoSize = true;
+            this.lblAllowance.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAllowance.ForeColor = System.Drawing.Color.Navy;
+            this.lblAllowance.Location = new System.Drawing.Point(440, 490);
+            this.lblAllowance.Name = "lblAllowance";
+            this.lblAllowance.Size = new System.Drawing.Size(183, 37);
+            this.lblAllowance.TabIndex = 27;
+            this.lblAllowance.Text = "[Allowance]";
             // 
-            // labell
+            // label4
             // 
-            this.labell.AutoSize = true;
-            this.labell.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labell.ForeColor = System.Drawing.Color.Navy;
-            this.labell.Location = new System.Drawing.Point(107, 228);
-            this.labell.Name = "labell";
-            this.labell.Size = new System.Drawing.Size(169, 37);
-            this.labell.TabIndex = 19;
-            this.labell.Text = "Postition : ";
-            // 
-            // labelll
-            // 
-            this.labelll.AutoSize = true;
-            this.labelll.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelll.ForeColor = System.Drawing.Color.Navy;
-            this.labelll.Location = new System.Drawing.Point(108, 138);
-            this.labelll.Name = "labelll";
-            this.labelll.Size = new System.Drawing.Size(168, 37);
-            this.labelll.TabIndex = 18;
-            this.labelll.Text = "Job Title : ";
-            // 
-            // lblPosition
-            // 
-            this.lblPosition.AutoSize = true;
-            this.lblPosition.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.ForeColor = System.Drawing.Color.Navy;
-            this.lblPosition.Location = new System.Drawing.Point(282, 228);
-            this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(153, 37);
-            this.lblPosition.TabIndex = 21;
-            this.lblPosition.Text = "[Position]";
-            // 
-            // lblJobTitle
-            // 
-            this.lblJobTitle.AutoSize = true;
-            this.lblJobTitle.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJobTitle.ForeColor = System.Drawing.Color.Navy;
-            this.lblJobTitle.Location = new System.Drawing.Point(282, 138);
-            this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(163, 37);
-            this.lblJobTitle.TabIndex = 20;
-            this.lblJobTitle.Text = "[Job Title]";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(108, 490);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(339, 37);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Allowance (Monthly) : ";
             // 
             // lblEndDate
             // 
@@ -226,27 +195,60 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Start Date : ";
             // 
-            // lblAllowance
+            // lblPosition
             // 
-            this.lblAllowance.AutoSize = true;
-            this.lblAllowance.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAllowance.ForeColor = System.Drawing.Color.Navy;
-            this.lblAllowance.Location = new System.Drawing.Point(440, 490);
-            this.lblAllowance.Name = "lblAllowance";
-            this.lblAllowance.Size = new System.Drawing.Size(183, 37);
-            this.lblAllowance.TabIndex = 27;
-            this.lblAllowance.Text = "[Allowance]";
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosition.ForeColor = System.Drawing.Color.Navy;
+            this.lblPosition.Location = new System.Drawing.Point(282, 228);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(153, 37);
+            this.lblPosition.TabIndex = 21;
+            this.lblPosition.Text = "[Position]";
             // 
-            // label4
+            // lblJobTitle
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(108, 490);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(339, 37);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "Allowance (Monthly) : ";
+            this.lblJobTitle.AutoSize = true;
+            this.lblJobTitle.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJobTitle.ForeColor = System.Drawing.Color.Navy;
+            this.lblJobTitle.Location = new System.Drawing.Point(282, 138);
+            this.lblJobTitle.Name = "lblJobTitle";
+            this.lblJobTitle.Size = new System.Drawing.Size(163, 37);
+            this.lblJobTitle.TabIndex = 20;
+            this.lblJobTitle.Text = "[Job Title]";
+            // 
+            // labell
+            // 
+            this.labell.AutoSize = true;
+            this.labell.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labell.ForeColor = System.Drawing.Color.Navy;
+            this.labell.Location = new System.Drawing.Point(107, 228);
+            this.labell.Name = "labell";
+            this.labell.Size = new System.Drawing.Size(169, 37);
+            this.labell.TabIndex = 19;
+            this.labell.Text = "Postition : ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label2.Location = new System.Drawing.Point(273, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(202, 38);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Offer Details";
+            // 
+            // labelll
+            // 
+            this.labelll.AutoSize = true;
+            this.labelll.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelll.ForeColor = System.Drawing.Color.Navy;
+            this.labelll.Location = new System.Drawing.Point(108, 138);
+            this.labelll.Name = "labelll";
+            this.labelll.Size = new System.Drawing.Size(168, 37);
+            this.labelll.TabIndex = 18;
+            this.labelll.Text = "Job Title : ";
             // 
             // ViewApplicationStatusForm
             // 
@@ -262,6 +264,7 @@
             this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "ViewApplicationStatusForm";
             this.Text = "ViewApplicationStatusForm";
+            this.Load += new System.EventHandler(this.ViewApplicationStatusForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplications)).EndInit();
