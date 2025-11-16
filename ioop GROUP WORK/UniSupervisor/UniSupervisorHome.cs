@@ -30,5 +30,19 @@ namespace ioop_GROUP_WORK.UniSupervisor
             frm_Student_Internship_Table frm = new frm_Student_Internship_Table();
             frm.ShowDialog();
         }
+
+        private void btn_check_student_profile_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frm_Student_Table frm = new frm_Student_Table();
+            frm.ShowDialog();
+        }
+
+        private void btn_logOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            LoginPage frm = new LoginPage();
+            frm.ShowDialog();
+        }
     }
 }
