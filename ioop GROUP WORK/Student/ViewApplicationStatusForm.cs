@@ -12,6 +12,13 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class ViewApplicationStatusForm : Form
     {
+        // ✅ ADD 1-ARG CONSTRUCTOR
+        public ViewApplicationStatusForm(string studentId)
+        {
+            InitializeComponent();
+            this.Text = $"Application Status - {studentId}";
+        }
+
         public ViewApplicationStatusForm()
         {
             InitializeComponent();

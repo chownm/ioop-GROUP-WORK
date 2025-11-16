@@ -1,14 +1,15 @@
-﻿using System;
+﻿using ioop_GROUP_WORK.Login;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using System.Windows.Forms;
-using System.IO;
-using System.Drawing;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.HR
 {
@@ -24,7 +25,7 @@ namespace ioop_GROUP_WORK.HR
 
 
 
-         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
+        private static readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
         public string Companyname { get => companyname; private set => companyname = value; }
         public string Contactperson { get => contactperson; private set => contactperson = value; }
@@ -32,7 +33,7 @@ namespace ioop_GROUP_WORK.HR
         public string Contactnumber { get => contactnumber; private set => contactnumber = value; }
         public string Address { get => address; private set => address = value; }
         public string Companydescription { get => companydescription; private set => companydescription = value; }
-        public byte[] CompanyLogo { get => companyLogo;private set => companyLogo = value; }
+        public byte[] CompanyLogo { get => companyLogo; private set => companyLogo = value; }
 
         public CP(string companyname, string contactperson, string email, string contactnumber, string address, string companydescription, byte[] companyLogo)
         {
@@ -52,23 +53,23 @@ namespace ioop_GROUP_WORK.HR
             SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE ContactPerson = @Contactp AND Password = @password ", con);
             cmd.Parameters.AddWithValue("@Contactp", name);
             cmd.Parameters.AddWithValue("@password", password);
-            
+
             SqlDataReader reader = cmd.ExecuteReader();
-            
-                if (reader.Read())
-                {
-                    this.Companyname = reader["CompanyName"].ToString();
-                    this.Contactperson = reader["ContactPerson"].ToString();
-                    this.Email = reader["Email"].ToString();
-                    this.Contactnumber = reader["ContactNumber"].ToString();
-                    this.Address = reader["Address"].ToString();
-                    this.Companydescription = reader["CompanyDescription"].ToString();
-                    this.CompanyLogo = reader["CompanyLogo"] as byte[];
-                }
-                reader.Close();
-                con.Close();
+
+            if (reader.Read())
+            {
+                this.Companyname = reader["CompanyName"].ToString();
+                this.Contactperson = reader["ContactPerson"].ToString();
+                this.Email = reader["Email"].ToString();
+                this.Contactnumber = reader["ContactNumber"].ToString();
+                this.Address = reader["Address"].ToString();
+                this.Companydescription = reader["CompanyDescription"].ToString();
+                this.CompanyLogo = reader["CompanyLogo"] as byte[];
+            }
+            reader.Close();
+            con.Close();
         }
-    
+
 
 
         public string SaveInfo(string name, string password)
@@ -77,7 +78,7 @@ namespace ioop_GROUP_WORK.HR
             con.Open();
 
             SqlCommand checkCmd = new SqlCommand(
-            "SELECT COUNT(*) FROM CompanyProfile WHERE ContactPerson = @contactp AND Password = @passw",con);
+            "SELECT COUNT(*) FROM CompanyProfile WHERE ContactPerson = @contactp AND Password = @passw", con);
             checkCmd.Parameters.AddWithValue("@contactp", name);
             checkCmd.Parameters.AddWithValue("@passw", password);
 
@@ -85,7 +86,7 @@ namespace ioop_GROUP_WORK.HR
 
             if (count == 0)
             {
-                
+
                 SqlCommand insertCmd = new SqlCommand(
                 "INSERT INTO CompanyProfile (CompanyName, ContactPerson, Email, Contactn, Address, CompanyDescription, CompanyLogo, Password) " +
                 "VALUES (@companyn, @contactp, @e, @cn, @a, @Companyd, @logo, @passw)", con);
@@ -142,7 +143,72 @@ namespace ioop_GROUP_WORK.HR
             }
         }
 
+        public static void CreateUser(User user)
+        {
+            if (user == null) return;
 
-       
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    conn.Open();
+                    string query = @"INSERT INTO dbo.users (Username, Email, password, role) 
+                                    VALUES (@username, @email, @password, @role)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", user.Username ?? "");
+                        cmd.Parameters.AddWithValue("@email", user.Email ?? "");
+                        cmd.Parameters.AddWithValue("@password", user.Password ?? "");
+                        cmd.Parameters.AddWithValue("@role", user.Role ?? "");
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("User created successfully");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public static User GetUserById(int userId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT id, Username, Email, password, role FROM dbo.users WHERE id=@id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", userId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // ✅ USE 5-ARG CONSTRUCTOR
+                                return new User(
+                                    (int)reader["id"],
+                                    reader["Username"].ToString(),
+                                    reader["Email"].ToString(),
+                                    reader["password"].ToString(),
+                                    reader["role"].ToString()
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return null;
+
+        }
     }
 }

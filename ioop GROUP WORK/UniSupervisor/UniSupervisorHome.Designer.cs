@@ -1,4 +1,8 @@
-﻿namespace ioop_GROUP_WORK.UniSupervisor
+﻿// ============================================================================
+// UniSupervisorHome.Designer.cs - FIX (Move Review Student button ABOVE)
+// ============================================================================
+
+namespace ioop_GROUP_WORK.UniSupervisor
 {
     partial class frm_UniSupervisorHome
     {
@@ -32,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_evaluate_form_load = new System.Windows.Forms.Button();
             this.btn_internship_progress_load = new System.Windows.Forms.Button();
+            this.btn_manage_profile_load = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,16 +70,30 @@
             this.btn_evaluate_form_load.UseVisualStyleBackColor = true;
             this.btn_evaluate_form_load.Click += new System.EventHandler(this.btn_evaluate_form_load_Click);
             // 
+            // btn_manage_profile_load
+            // 
+            // ✅ FIX: MOVE "Review Student" ABOVE "Check Student Internship Progress" (Y=310)
+            this.btn_manage_profile_load.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_manage_profile_load.Location = new System.Drawing.Point(407, 310);
+            this.btn_manage_profile_load.Name = "btn_manage_profile_load";
+            this.btn_manage_profile_load.Size = new System.Drawing.Size(658, 68);
+            this.btn_manage_profile_load.TabIndex = 1;
+            this.btn_manage_profile_load.Text = "Review Student";
+            this.btn_manage_profile_load.UseVisualStyleBackColor = true;
+            this.btn_manage_profile_load.Click += new System.EventHandler(this.btn_manage_profile_load_Click);
+            // 
             // btn_internship_progress_load
             // 
+            // ✅ FIX: KEEP "Check Student Internship Progress" BELOW (Y=400)
             this.btn_internship_progress_load.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_internship_progress_load.Location = new System.Drawing.Point(407, 328);
+            this.btn_internship_progress_load.Location = new System.Drawing.Point(407, 400);
             this.btn_internship_progress_load.Name = "btn_internship_progress_load";
             this.btn_internship_progress_load.Size = new System.Drawing.Size(658, 68);
             this.btn_internship_progress_load.TabIndex = 1;
             this.btn_internship_progress_load.Text = "Check Student Internship Progress";
             this.btn_internship_progress_load.UseVisualStyleBackColor = true;
             this.btn_internship_progress_load.Click += new System.EventHandler(this.btn_internship_progress_load_Click);
+
             // 
             // frm_UniSupervisorHome
             // 
@@ -82,6 +101,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.btn_internship_progress_load);
+            this.Controls.Add(this.btn_manage_profile_load);
             this.Controls.Add(this.btn_evaluate_form_load);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -98,5 +118,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_evaluate_form_load;
         private System.Windows.Forms.Button btn_internship_progress_load;
+        private System.Windows.Forms.Button btn_manage_profile_load;
     }
 }

@@ -41,7 +41,8 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
             if (selectedStudent != null)
             {
-                frm_Student_Internship_Progress detailsForm = new frm_Student_Internship_Progress(selectedStudent.Student_id);
+                // Provide both id and name to match frm_Student_Internship_Progress constructor
+                frm_Student_Internship_Progress detailsForm = new frm_Student_Internship_Progress(selectedStudent.Student_id, selectedStudent.Student_name);
                 detailsForm.ShowDialog();
             }
         }

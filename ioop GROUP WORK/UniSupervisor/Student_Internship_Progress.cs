@@ -21,6 +21,12 @@ namespace ioop_GROUP_WORK.UniSupervisor
             studentName = name;
         }
 
+
+        public frm_Student_Internship_Progress()
+        {
+            InitializeComponent();
+        }
+
         private void frm_Student_Internship_Progress_Load(object sender, EventArgs e)
         {
             LoadStudentInternshipProgress();

@@ -35,7 +35,7 @@ namespace ioop_GROUP_WORK
 
         /// <summary>
         /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// the contents of this method by the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -100,6 +100,7 @@ namespace ioop_GROUP_WORK
             this.txtPassword.Location = new System.Drawing.Point(263, 151);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(180, 37);
             this.txtPassword.TabIndex = 4;
             // 
@@ -174,7 +175,6 @@ namespace ioop_GROUP_WORK
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

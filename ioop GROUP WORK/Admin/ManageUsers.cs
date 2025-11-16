@@ -83,14 +83,11 @@ namespace ioop_GROUP_WORK.Admin
                 if (!ValidateInputs())
                     return;
 
-                User newUser = new User(
+                string result = adminMgr.CreateUser(txtUserId.Text,
                     txtUsername.Text.Trim(),
                     txtEmail.Text.Trim(),
                     txtPassword.Text.Trim(),
-                    cmbRole.SelectedItem.ToString()
-                );
-
-                string result = adminMgr.CreateUser(newUser);
+                    cmbRole.SelectedItem.ToString());
                 MessageBox.Show(result, "Create User", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LoadAllUsers();
@@ -115,8 +112,13 @@ namespace ioop_GROUP_WORK.Admin
                 if (!ValidateInputs())
                     return;
 
-                int userId = int.Parse(lblUserId.Text);
-                User updatedUser = new User(
+                if (!int.TryParse(txtUserId.Text, out int userId))
+                {
+                    MessageBox.Show("Invalid user id.");
+                    return;
+                }
+
+                string result = adminMgr.UpdateUser(
                     userId,
                     txtUsername.Text.Trim(),
                     txtEmail.Text.Trim(),
@@ -124,7 +126,6 @@ namespace ioop_GROUP_WORK.Admin
                     cmbRole.SelectedItem.ToString()
                 );
 
-                string result = adminMgr.UpdateUser(updatedUser);
                 MessageBox.Show(result);
                 LoadAllUsers();
                 ClearFields();
