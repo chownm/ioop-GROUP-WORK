@@ -101,13 +101,14 @@ namespace ioop_GROUP_WORK.HR
         private void CompanyProfile_Load_1(object sender, EventArgs e)
         {
             PersonalProfile PP = new PersonalProfile(Identify, Password);
-            string name = PP.getname();
+            string name = PP.getprofilename();
+            string email = PP.getemail();
             string password = PP.getpassword();
 
             CP company = new CP(name,password);
             txtCompanyName.Text = company.Companyname;
-            txtContactPerson.Text = company.Contactperson;
-            txtEmail.Text = company.Email;
+            txtContactPerson.Text = name;
+            txtEmail.Text = email;
             txtPhone.Text = company.Contactnumber;
             richTextBox1.Text = company.Address;
             rtbDescription.Text = company.Companydescription;
