@@ -14,13 +14,18 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class CompanyProfile : Form
     {
-        public CompanyProfile()
+        private string Identify;
+        private string Password;
+        public CompanyProfile(string identify, string password)
         {
+            Identify = identify;
+            Password = password;
             InitializeComponent();
+            
         }
         private void lblTitle_Click(object sender, EventArgs e)
         {
-            // 如果不需要可留空
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,7 +81,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            PersonalProfile PP = new PersonalProfile();
+            PersonalProfile PP = new PersonalProfile(Identify,Password);
             string name = PP.getname();
             string password = PP.getpassword();
 
@@ -95,7 +100,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void CompanyProfile_Load_1(object sender, EventArgs e)
         {
-            PersonalProfile PP = new PersonalProfile();
+            PersonalProfile PP = new PersonalProfile(Identify, Password);
             string name = PP.getname();
             string password = PP.getpassword();
 

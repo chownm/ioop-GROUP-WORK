@@ -4,22 +4,28 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.HR
 {
+    
     public partial class PersonalProfileForm : Form
     {
-        public PersonalProfileForm()
+        private string Identify;
+        private string Password;
+        public PersonalProfileForm(string identify, string password)
         {
+             Identify = identify;
+             Password = password;
             InitializeComponent();
         }
 
         private void PersonalProfileForm_Load(object sender, EventArgs e)
         {
-            PersonalProfile pp = new PersonalProfile();
+            PersonalProfile pp = new PersonalProfile(Identify, Password);
             txtUsername.Text = pp.getprofilename();
             txtPassword.Text = pp.getpassword();
             txtEmail.Text = pp.getemail();
@@ -39,10 +45,15 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            PersonalProfile pp = new PersonalProfile();
+            PersonalProfile pp = new PersonalProfile(Identify, Password);
+            LoginPage back = new LoginPage();
             MessageBox.Show(pp.UpdatePersonalProfile(txtUsername.Text, txtPassword.Text, txtEmail.Text));
             Clear();
+
             this.Close();
+            back.ShowDialog();
+            MessageBox.Show("Pls Login Again");
+            
             
 
         }

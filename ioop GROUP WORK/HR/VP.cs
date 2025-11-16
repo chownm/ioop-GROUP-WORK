@@ -12,6 +12,7 @@ namespace ioop_GROUP_WORK.HR
 {
     internal class VP
     {
+        
         public string StudentName { get; private set; }
         public string Position { get; private set; }
         public DateTime DateApplied { get; private set; }
@@ -51,12 +52,31 @@ namespace ioop_GROUP_WORK.HR
             return student;
         }
 
-        public static List<string> GetAllStudentNames()
+        public static List<string> GetAllStudentNames(string identify, string _password)
         {
             List<string> names = new List<string>();
+            PersonalProfile pp = new PersonalProfile(identify, _password);
+            string useridentify = pp.getprofilename();
+            string password = pp.getpassword();
+
 
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT StudentName FROM StudentApplication", con);
+            SqlCommand getCompanyCmd = new SqlCommand("SELECT CompanyName FROM CompanyProfile WHERE (Email = @identity OR ContactPerson = @identity) AND Password = @password",con);
+            SqlCommand cmd = new SqlCommand("SELECT StudentName FROM StudentApplication WHERE CompanyName = @companyname", con);
+
+            getCompanyCmd.Parameters.AddWithValue("@identity", useridentify);
+            getCompanyCmd.Parameters.AddWithValue("@password", password);
+
+            object result = getCompanyCmd.ExecuteScalar();
+            string companyName = result.ToString();
+
+            if (companyName == null)
+            {
+                con.Close();
+                return names;
+            }
+
+            cmd.Parameters.AddWithValue("@companyname", companyName);
             SqlDataReader rd = cmd.ExecuteReader();
 
             while (rd.Read())

@@ -47,7 +47,7 @@ namespace ioop_GROUP_WORK.Login
             }
 
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Login Failed, Please Contact The Adminstrator.Thank you");
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,8 +14,12 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class ManageOffer : Form
     {
-        public ManageOffer()
+        private string Identify;
+        private string Password;
+        public ManageOffer(string identify, string password)
         {
+            Identify = identify;
+            Password = password;
             InitializeComponent();
         }
 
@@ -61,7 +66,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSendOffer_Click(object sender, EventArgs e)
         {
-            PersonalProfile PP = new PersonalProfile();
+            PersonalProfile PP = new PersonalProfile(Identify, Password);
             string name = PP.getname();
             string password = PP.getpassword();
 

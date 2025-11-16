@@ -14,10 +14,15 @@ namespace ioop_GROUP_WORK
 {
     public partial class HRHome : Form
     {
-                        
+        private string UserIdentity;
+        private string Password;
+
         public HRHome(string userIdentity, string password)
         {
-            PersonalProfile PP = new PersonalProfile(userIdentity, password);
+             UserIdentity = userIdentity;
+             Password = password;
+
+
             InitializeComponent();
         }
 
@@ -33,7 +38,7 @@ namespace ioop_GROUP_WORK
 
         private void btnViewApplications_Click(object sender, EventArgs e)
         {
-            ViewApplication vp = new ViewApplication();
+            ViewApplication vp = new ViewApplication(UserIdentity, Password);
             this.Close();
             vp.ShowDialog();
                
@@ -41,14 +46,14 @@ namespace ioop_GROUP_WORK
 
         private void btnCompanyProfile_Click(object sender, EventArgs e)
         {
-            CompanyProfile cp = new CompanyProfile();
+            CompanyProfile cp = new CompanyProfile(UserIdentity, Password);
             this.Close();
             cp.ShowDialog();
         }
 
         private void btnManageOffers_Click(object sender, EventArgs e)
         {
-            ManageOffer mo = new ManageOffer();
+            ManageOffer mo = new ManageOffer(UserIdentity, Password);
             this.Close();
             mo.ShowDialog();
         }
@@ -65,7 +70,7 @@ namespace ioop_GROUP_WORK
 
         private void btnPersonalProfile_Click(object sender, EventArgs e)
         {
-            PersonalProfileForm pp = new PersonalProfileForm();
+            PersonalProfileForm pp = new PersonalProfileForm(UserIdentity,Password);
             this.Close();
             pp.ShowDialog();
         }

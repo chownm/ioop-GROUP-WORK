@@ -41,7 +41,7 @@ namespace ioop_GROUP_WORK
         {
             string stat ;
             User obj1 = new User(txtUsername.Text, txtPassword.Text);
-            stat = obj1.login(txtUsername.Text, txtPassword.Text);
+            stat = obj1.login();
             if(stat != null)
             {
                 switch(stat)

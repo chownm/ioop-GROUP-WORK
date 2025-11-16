@@ -24,11 +24,6 @@ namespace ioop_GROUP_WORK.HR
             this.password = Password;
             
         }
-        public PersonalProfile()
-        {
-
-        }
-
 
         public string getname()
         {
@@ -58,7 +53,7 @@ namespace ioop_GROUP_WORK.HR
         public string getprofilename()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
+            SqlCommand cmd = new SqlCommand("SELECT Username FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
 
             cmd.Parameters.AddWithValue("@identity", this.Useridentify);
             cmd.Parameters.AddWithValue("@password", this.password);

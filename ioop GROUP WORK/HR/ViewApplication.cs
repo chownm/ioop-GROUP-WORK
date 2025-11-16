@@ -13,9 +13,14 @@ namespace ioop_GROUP_WORK.HR
 {
     public partial class ViewApplication : Form
     {
-        public ViewApplication()
+        private string Identify;
+        private string Password;
+        public ViewApplication(string identify, string password)
         {
+            Identify = identify;
+            Password = password;
             InitializeComponent();
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,7 +105,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void ViewApplication_Load(object sender, EventArgs e)
         {
-            List<string> studentNames = VP.GetAllStudentNames();
+            List<string> studentNames = VP.GetAllStudentNames(Identify,Password);
             comboBox1.Items.Clear();
 
             foreach (string name in studentNames)
