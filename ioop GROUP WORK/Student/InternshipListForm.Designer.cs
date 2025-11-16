@@ -109,6 +109,7 @@
             this.btnBack.TabIndex = 13;
             this.btnBack.Text = "Cancel";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // InternshipListForm
             // 
@@ -124,6 +125,7 @@
             this.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.Name = "InternshipListForm";
             this.Text = "Internship List";
+            this.Load += new System.EventHandler(this.InternshipListForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIntern)).EndInit();

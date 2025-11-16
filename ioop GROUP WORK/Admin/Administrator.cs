@@ -1,23 +1,31 @@
-﻿using System;
+﻿using ioop_GROUP_WORK.HR;
+using ioop_GROUP_WORK.Login;
+using ioop_GROUP_WORK.Student;
+using ioop_GROUP_WORK.UniSupervisor;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Windows.Forms;
-using System.Runtime.CompilerServices;
-using ioop_GROUP_WORK.HR;
-using ioop_GROUP_WORK.Student;
-using ioop_GROUP_WORK.UniSupervisor;
-using ioop_GROUP_WORK.Login;
 
 namespace ioop_GROUP_WORK.Admin
 {
+    [Table("Administrators")]
     public class Administrator
     {
+        [Key]
+        [Column("AdminId")]
         public int AdminId { get; private set; }
+        [Required]
+        [Column("UserId")]
+        [ForeignKey("User")]
         public int UserId
         {
             get
@@ -29,9 +37,18 @@ namespace ioop_GROUP_WORK.Admin
                 UserId = value;
             }
         }
+        [Required]
+        [StringLength(100)]
+        [Column("FullName")]
         public string FullName { get; private set; }
+        [StringLength(100)]
+        [Column("Department")]
         public string Department { get; private set; }
+        [StringLength(20)]
+        [Column("Phone")]
         public string Phone { get; private set; }
+        [StringLength(20)]
+        [Column("AccessLevel")]
         public string AccessLevel { get; private set; }
 
         // Constructor 1: Default

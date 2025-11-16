@@ -31,10 +31,11 @@
             this.btnProfile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnProgress = new System.Windows.Forms.Button();
             this.btnFeedback = new System.Windows.Forms.Button();
             this.btnApplications = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.btnUploadResume = new System.Windows.Forms.Button();
+            this.btnUploadReport = new System.Windows.Forms.Button();
             this.btnInternship = new System.Windows.Forms.Button();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnChangePass = new System.Windows.Forms.Button();
@@ -49,9 +50,9 @@
             this.btnProfile.ForeColor = System.Drawing.Color.White;
             this.btnProfile.Location = new System.Drawing.Point(138, 98);
             this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Size = new System.Drawing.Size(484, 86);
+            this.btnProfile.Size = new System.Drawing.Size(484, 70);
             this.btnProfile.TabIndex = 12;
-            this.btnProfile.Text = "Profile";
+            this.btnProfile.Text = "View Profile";
             this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
@@ -71,10 +72,11 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Silver;
+            this.groupBox1.Controls.Add(this.btnProgress);
             this.groupBox1.Controls.Add(this.btnFeedback);
             this.groupBox1.Controls.Add(this.btnApplications);
             this.groupBox1.Controls.Add(this.btnLogout);
-            this.groupBox1.Controls.Add(this.btnUploadResume);
+            this.groupBox1.Controls.Add(this.btnUploadReport);
             this.groupBox1.Controls.Add(this.btnInternship);
             this.groupBox1.Controls.Add(this.btnProfile);
             this.groupBox1.Controls.Add(this.lblWelcome);
@@ -86,15 +88,29 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
+            // btnProgress
+            // 
+            this.btnProgress.BackColor = System.Drawing.Color.Navy;
+            this.btnProgress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProgress.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProgress.ForeColor = System.Drawing.Color.White;
+            this.btnProgress.Location = new System.Drawing.Point(138, 557);
+            this.btnProgress.Name = "btnProgress";
+            this.btnProgress.Size = new System.Drawing.Size(484, 70);
+            this.btnProgress.TabIndex = 18;
+            this.btnProgress.Text = "View Progress";
+            this.btnProgress.UseVisualStyleBackColor = false;
+            this.btnProgress.Click += new System.EventHandler(this.btnProgress_Click);
+            // 
             // btnFeedback
             // 
             this.btnFeedback.BackColor = System.Drawing.Color.Navy;
             this.btnFeedback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFeedback.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFeedback.ForeColor = System.Drawing.Color.White;
-            this.btnFeedback.Location = new System.Drawing.Point(138, 427);
+            this.btnFeedback.Location = new System.Drawing.Point(138, 465);
             this.btnFeedback.Name = "btnFeedback";
-            this.btnFeedback.Size = new System.Drawing.Size(484, 86);
+            this.btnFeedback.Size = new System.Drawing.Size(484, 70);
             this.btnFeedback.TabIndex = 17;
             this.btnFeedback.Text = "View Feedback";
             this.btnFeedback.UseVisualStyleBackColor = false;
@@ -106,9 +122,9 @@
             this.btnApplications.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnApplications.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApplications.ForeColor = System.Drawing.Color.White;
-            this.btnApplications.Location = new System.Drawing.Point(138, 319);
+            this.btnApplications.Location = new System.Drawing.Point(138, 282);
             this.btnApplications.Name = "btnApplications";
-            this.btnApplications.Size = new System.Drawing.Size(484, 86);
+            this.btnApplications.Size = new System.Drawing.Size(484, 70);
             this.btnApplications.TabIndex = 16;
             this.btnApplications.Text = "View Application Status";
             this.btnApplications.UseVisualStyleBackColor = false;
@@ -122,25 +138,25 @@
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.Location = new System.Drawing.Point(138, 647);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(484, 86);
+            this.btnLogout.Size = new System.Drawing.Size(484, 70);
             this.btnLogout.TabIndex = 15;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // btnUploadResume
+            // btnUploadReport
             // 
-            this.btnUploadResume.BackColor = System.Drawing.Color.Navy;
-            this.btnUploadResume.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUploadResume.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUploadResume.ForeColor = System.Drawing.Color.White;
-            this.btnUploadResume.Location = new System.Drawing.Point(138, 538);
-            this.btnUploadResume.Name = "btnUploadResume";
-            this.btnUploadResume.Size = new System.Drawing.Size(484, 86);
-            this.btnUploadResume.TabIndex = 14;
-            this.btnUploadResume.Text = " Upload Resume";
-            this.btnUploadResume.UseVisualStyleBackColor = false;
-            this.btnUploadResume.Click += new System.EventHandler(this.btnUploadResume_Click);
+            this.btnUploadReport.BackColor = System.Drawing.Color.Navy;
+            this.btnUploadReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUploadReport.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUploadReport.ForeColor = System.Drawing.Color.White;
+            this.btnUploadReport.Location = new System.Drawing.Point(138, 373);
+            this.btnUploadReport.Name = "btnUploadReport";
+            this.btnUploadReport.Size = new System.Drawing.Size(484, 70);
+            this.btnUploadReport.TabIndex = 14;
+            this.btnUploadReport.Text = " Upload Report";
+            this.btnUploadReport.UseVisualStyleBackColor = false;
+            this.btnUploadReport.Click += new System.EventHandler(this.btnUploadReport_Click);
             // 
             // btnInternship
             // 
@@ -148,9 +164,9 @@
             this.btnInternship.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInternship.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInternship.ForeColor = System.Drawing.Color.White;
-            this.btnInternship.Location = new System.Drawing.Point(138, 210);
+            this.btnInternship.Location = new System.Drawing.Point(138, 190);
             this.btnInternship.Name = "btnInternship";
-            this.btnInternship.Size = new System.Drawing.Size(484, 86);
+            this.btnInternship.Size = new System.Drawing.Size(484, 70);
             this.btnInternship.TabIndex = 13;
             this.btnInternship.Text = "Internship List";
             this.btnInternship.UseVisualStyleBackColor = false;
@@ -176,7 +192,7 @@
             this.btnChangePass.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnChangePass.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangePass.ForeColor = System.Drawing.Color.White;
-            this.btnChangePass.Location = new System.Drawing.Point(751, 906);
+            this.btnChangePass.Location = new System.Drawing.Point(752, 884);
             this.btnChangePass.Name = "btnChangePass";
             this.btnChangePass.Size = new System.Drawing.Size(412, 51);
             this.btnChangePass.TabIndex = 18;
@@ -197,7 +213,6 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.Name = "StudentHomeForm";
             this.Text = "Student Home";
-            this.Load += new System.EventHandler(this.StudentHomeForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -212,10 +227,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Button btnUploadResume;
         private System.Windows.Forms.Button btnInternship;
         private System.Windows.Forms.Button btnFeedback;
         private System.Windows.Forms.Button btnApplications;
         private System.Windows.Forms.Button btnChangePass;
+        private System.Windows.Forms.Button btnUploadReport;
+        private System.Windows.Forms.Button btnProgress;
     }
 }

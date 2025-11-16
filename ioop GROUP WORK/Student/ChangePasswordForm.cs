@@ -65,7 +65,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

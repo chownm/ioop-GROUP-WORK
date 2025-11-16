@@ -83,13 +83,13 @@
   <ItemGroup>
     <!-- Admin -->
     <!-- HR -->
-    <Compile Include="Admin\Administrator.cs" />
     <Compile Include="Admin\AdminHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Admin\AdminHome.Designer.cs">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Administrator.cs" />
     <Compile Include="Admin\AdminManager.cs" />
     <Compile Include="Admin\AssignSupervisor.cs">
       <SubType>Form</SubType>
@@ -99,6 +99,9 @@
     </Compile>
     <Compile Include="Admin\GenerateReports.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\GenerateReports.Designer.cs">
+      <DependentUpon>GenerateReports.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\IAdminManager.cs" />
     <Compile Include="Admin\ManageRecruiters.cs">
@@ -116,9 +119,6 @@
     <Compile Include="Admin\ValidationHelper.cs" />
     <Compile Include="Admin\ViewStatistics.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Admin\GenerateReports.Designer.cs">
-      <DependentUpon>GenerateReports.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\ViewStatistics.Designer.cs">
       <DependentUpon>ViewStatistics.cs</DependentUpon>

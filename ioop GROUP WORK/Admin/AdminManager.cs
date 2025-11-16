@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ioop_GROUP_WORK.Login;
 
 namespace ioop_GROUP_WORK.Admin
@@ -64,7 +65,7 @@ namespace ioop_GROUP_WORK.Admin
             {
                 if (!ValidationHelper.ValidatePassword(user.Password))
                 {
-                    return "Password must be at least 8 characters with uppercase, lowercase, and numbers";
+                    MessageBox.Show("Password must be at least 8 characters with uppercase, lowercase, and numbers");
                 }
                 using (SqlConnection con = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
@@ -72,25 +73,25 @@ namespace ioop_GROUP_WORK.Admin
                     con.Open();
 
                     // Check if username exists
-                    string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @username";
+                    string checkQuery = "SELECT Username FROM users WHERE Username = @Username;";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                     {
-                        checkCmd.Parameters.AddWithValue("@username", user.Username);
+                        checkCmd.Parameters.AddWithValue("@Username", user.Username);
                         if ((int)checkCmd.ExecuteScalar() > 0)
                             return "Username already exists";
                     }
 
                     // Insert user with parameterized query (SQL injection prevention)
                     string insertQuery = @"
-                        INSERT INTO Users (Username, Email, Password, Role, CreatedDate, IsActive)
-                        VALUES (@username, @email, @password, @role, GETDATE(), 1)";
+                        INSERT INTO users (Username, Email, Password, Role)
+                        VALUES (@Username, @Email, @password, @Role);";
 
                     using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@username", user.Username);
-                        cmd.Parameters.AddWithValue("@email", user.Email);
+                        cmd.Parameters.AddWithValue("@Username", user.Username);
+                        cmd.Parameters.AddWithValue("@Email", user.Email);
                         cmd.Parameters.AddWithValue("@password", user.Password);
-                        cmd.Parameters.AddWithValue("@role", user.Role);
+                        cmd.Parameters.AddWithValue("@Role", user.Role);
 
                         int result = cmd.ExecuteNonQuery();
                         return (result > 0) ? "User created successfully" : "Failed to create user";
@@ -123,17 +124,17 @@ namespace ioop_GROUP_WORK.Admin
                     con.Open();
 
                     string updateQuery = @"
-                        UPDATE Users 
-                        SET Username = @username, Email = @email, Password = @password, Role = @role
-                        WHERE UserId = @userId";
+                        UPDATE users 
+                        SET Username = @Username, Email = @Email, Password = @password, Role = @Role
+                        WHERE UserId = @id;";
 
                     using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@username", user.Username);
-                        cmd.Parameters.AddWithValue("@email", user.Email);
+                        cmd.Parameters.AddWithValue("@Username", user.Username);
+                        cmd.Parameters.AddWithValue("@Email", user.Email);
                         cmd.Parameters.AddWithValue("@password", user.Password);
-                        cmd.Parameters.AddWithValue("@role", user.Role);
-                        cmd.Parameters.AddWithValue("@userId", user.UserId);
+                        cmd.Parameters.AddWithValue("@Role", user.Role);
+                        cmd.Parameters.AddWithValue("@id", user.Id);
 
                         int result = cmd.ExecuteNonQuery();
                         return (result > 0) ? "User updated successfully" : "User not found";
@@ -158,13 +159,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-
-                    // Soft delete - set IsActive to 0
-                    string deleteQuery = "UPDATE Users SET IsActive = 0 WHERE UserId = @userId";
+                    
+                    string deleteQuery = "DELETE * FROM users WHERE Username = @Username;";
 
                     using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@id", userId);
                         int result = cmd.ExecuteNonQuery();
                         return (result > 0) ? "User deactivated successfully" : "User not found";
                     }
@@ -189,9 +189,9 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     string query = @"
-                        SELECT UserId, Username, Email, Role, CreatedDate, IsActive
-                        FROM Users
-                        ORDER BY CreatedDate DESC";
+                        SELECT id, Username, Email, Role
+                        FROM users
+                        ORDER BY Username;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -221,8 +221,8 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     string query = @"
-                        SELECT UserId, Username, Email, Role, CreatedDate, IsActive
-                        FROM Users
+                        SELECT id, Username, Email, Role
+                        FROM users
                         WHERE Username LIKE @searchTerm 
                            OR Email LIKE @searchTerm 
                            OR Role LIKE @searchTerm
@@ -267,9 +267,9 @@ namespace ioop_GROUP_WORK.Admin
                     {
                         // Create user account first
                         string userQuery = @"
-                            INSERT INTO Users (Username, Email, Password, Role, CreatedDate, IsActive)
-                            OUTPUT INSERTED.UserId
-                            VALUES (@username, @email, @password, 'Recruiter', GETDATE(), 1)";
+                            INSERT INTO users (Username, Email, Password, Role)
+                            OUTPUT INSERTED.id
+                            VALUES (@username, @email, @password, 'Recruiter')";
 
                         int userId;
                         using (SqlCommand userCmd = new SqlCommand(userQuery, con, transaction))

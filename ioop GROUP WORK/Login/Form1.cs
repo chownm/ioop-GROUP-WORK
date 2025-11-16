@@ -39,12 +39,20 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string stat ;
+            string role;
+            // Create a User object with the username and password entered
             User obj1 = new User(txtUsername.Text, txtPassword.Text);
-            stat = obj1.login();
-            if(stat != null)
+
+            //FOR STUDENT PART (DO NOT DELETE)
+            (role,studentName) = obj1.login();
+
+            // Get the role from the login method
+            role = obj1.login();
+
+            // If the role is valid, navigate to the appropriate home form
+            if (role != null)
             {
-                switch(stat)
+                switch (role)
                 {
                     case "admin":
                         AdminHome adminHome = new AdminHome();
@@ -52,7 +60,7 @@ namespace ioop_GROUP_WORK
                         this.Hide();
                         break;
                     case "student":
-                        StudentHomeForm studentHome = new StudentHomeForm();
+                        StudentHomeForm studentHome = new StudentHomeForm(txtUsername.Text, studentName); 
                         studentHome.Show();
                         this.Hide();
                         break;
@@ -70,6 +78,11 @@ namespace ioop_GROUP_WORK
                         MessageBox.Show("Invalid user role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
+            }
+            else
+            {
+                // If role is null, show login failed message
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             txtUsername.Text = String.Empty;
             txtUsername.Text = String.Empty ;   

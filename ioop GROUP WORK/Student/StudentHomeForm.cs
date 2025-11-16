@@ -1,29 +1,34 @@
 ﻿using System;
 using System.Windows.Forms;
-using ioop_GROUP_WORK;
 
 namespace ioop_GROUP_WORK.Student
 {
     public partial class StudentHomeForm : Form
     {
-        private string username;
+        private string studentID;
+        private string studentName;
         public StudentHomeForm()
         {
             InitializeComponent();
         }
 
-        public StudentHomeForm(string username)
+
+
+        public StudentHomeForm(string id, string name)
         {
             InitializeComponent();
-            this.username = username;
-            // Show username in a label
-            lblWelcome.Text = $"Welcome, {username}";
+            studentID = id;
+            studentName = name;
+
+            // Display Name in a label
+            lblWelcome.Text = $"Welcome, {studentName}";
         }
+
 
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            StudentProfileForm profile = new StudentProfileForm(username);
+            StudentProfileForm profile = new StudentProfileForm(studentID);
             profile.ShowDialog();
         }
 
@@ -36,25 +41,37 @@ namespace ioop_GROUP_WORK.Student
         }
 
 
+
         private void btnApplications_Click(object sender, EventArgs e)
         {
-            ViewApplicationStatusForm application = new ViewApplicationStatusForm();
+            ViewApplicationStatusForm application = new ViewApplicationStatusForm(studentID);
             application.ShowDialog();
         }
 
 
+
+        private void btnUploadReport_Click(object sender, EventArgs e)
+        {
+            StudentReportUploadForm report = new StudentReportUploadForm(studentID);
+            report.ShowDialog();
+        }
+
+
+
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            ViewFeedbackForm feedback = new ViewFeedbackForm();
+            ViewFeedbackForm feedback = new ViewFeedbackForm(studentID);
             feedback.ShowDialog();
         }
 
 
-        private void btnUploadResume_Click(object sender, EventArgs e)
+
+        private void btnProgress_Click(object sender, EventArgs e)
         {
-            UploadResumeForm resume = new UploadResumeForm();
-            resume.ShowDialog();
+            ViewProgressForm progress = new ViewProgressForm(studentID);
+            progress.ShowDialog();
         }
+
 
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -64,18 +81,11 @@ namespace ioop_GROUP_WORK.Student
         }
 
 
+
         private void btnChangePass_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm changepass = new ChangePasswordForm(username);
+            ChangePasswordForm changepass = new ChangePasswordForm(studentID);
             changepass.ShowDialog();
-        }
-
-
-        private void StudentHomeForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
+        }     
     }
 }
