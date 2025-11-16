@@ -12,9 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class StudentReportUploadForm : Form
     {
-        public StudentReportUploadForm()
+        public StudentReportUploadForm(string studentID)
         {
             InitializeComponent();
+        }
+
+        private void StudentReportUploadForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

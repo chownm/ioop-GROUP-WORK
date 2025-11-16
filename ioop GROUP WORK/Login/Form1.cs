@@ -40,14 +40,12 @@ namespace ioop_GROUP_WORK
         private void button1_Click(object sender, EventArgs e)
         {
             string role;
+            string studentName = null;
             // Create a User object with the username and password entered
             User obj1 = new User(txtUsername.Text, txtPassword.Text);
 
             //FOR STUDENT PART (DO NOT DELETE)
-            (role,studentName) = obj1.login();
-
-            // Get the role from the login method
-            role = obj1.login();
+            (role, studentName) = obj1.login();
 
             // If the role is valid, navigate to the appropriate home form
             if (role != null)
@@ -85,7 +83,7 @@ namespace ioop_GROUP_WORK
                 MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             txtUsername.Text = String.Empty;
-            txtUsername.Text = String.Empty ;   
+            txtPassword.Text = String.Empty ;   
         }
 
         private void LoginPage_Load(object sender, EventArgs e)
