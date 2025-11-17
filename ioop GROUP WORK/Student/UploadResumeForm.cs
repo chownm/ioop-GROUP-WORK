@@ -3,6 +3,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Drawing;
 
 namespace ioop_GROUP_WORK.Student
 {
@@ -10,16 +11,29 @@ namespace ioop_GROUP_WORK.Student
     {
         private string internshipPosition;
         private string companyName;
-        public UploadResumeForm(string position)
+        public UploadResumeForm(string position, string companyName)
         {
             InitializeComponent();
             internshipPosition = position;
+            this.companyName = companyName;
+
+            // Set the company name and position fields in the form
+            lblCompanyName.Text = companyName; 
+            lblPosition.Text = position;
+
+            picPreview.Width = 495;
+            picPreview.Height = 700;
+
+            picPreview.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        
+
+
+
 
         private void btnUploadResume_Click(object sender, EventArgs e)
         {
+            // Open file dialog to select the resume image
             OpenFileDialog opd = new OpenFileDialog();
             opd.Filter = "Image Files|*.jpg;*.jpeg;*.png";
             opd.Title = "Select Resume Image";
@@ -34,9 +48,19 @@ namespace ioop_GROUP_WORK.Student
                     return;  // Exit the method if the file type is invalid
                 }
 
+                // Set the PictureBox size to A4 dimensions (portrait size)
+                picPreview.Width = 495;  // Set to A4 width 
+                picPreview.Height = 700; // Set to A4 height
+
+                // Load the image into the PictureBox
                 picPreview.ImageLocation = opd.FileName;
+
+                // Set the PictureBox SizeMode to Zoom to maintain aspect ratio
+                picPreview.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
+
+
 
 
 
@@ -156,7 +180,7 @@ namespace ioop_GROUP_WORK.Student
                 cmd.Parameters.AddWithValue("@StudentID", studentID);
                 cmd.Parameters.AddWithValue("@StudentName", studentName);
                 cmd.Parameters.AddWithValue("@Position", position);
-                cmd.Parameters.AddWithValue("@CompanyName", companyName);  // Insert the Company Name
+                cmd.Parameters.AddWithValue("@CompanyName", companyName);
                 cmd.Parameters.AddWithValue("@DateApplied", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Status", "Pending");
                 cmd.Parameters.AddWithValue("@Resume", resumeImage);
@@ -176,7 +200,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void UploadReportForm_Load(object sender, EventArgs e)
         {
-            
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void label4_Click(object sender, EventArgs e)

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
-using System.Configuration;
 
 namespace ioop_GROUP_WORK.Student
 {
@@ -45,21 +46,31 @@ namespace ioop_GROUP_WORK.Student
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                string query = "SELECT ApplicationID, Position, CompanyName, DateApplied, Status FROM StudentApplication WHERE StudentID = @studentID";
+                string query = "SELECT Position, CompanyName, DateApplied, Status FROM StudentApplication WHERE StudentID = @studentID";
 
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@studentID", studentID); 
+                cmd.Parameters.AddWithValue("@studentID", studentID);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 dgvApplications.DataSource = dt;  // Bind data to the DataGridView
+
             }
+
+            dgvApplications.Font = new Font("Times New Roman", 10);
+            dgvApplications.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvApplications.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgvApplications.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvApplications.ScrollBars = ScrollBars.Both;
         }
+
+
 
         private void ViewApplicationStatusForm_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             LoadApplications();
         }
     }
