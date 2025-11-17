@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace ioop_GROUP_WORK.Admin
 {
     [Table("Administrators")]
-    public class Administrator
+    internal class Administrator
     {
         [Key]
         [Column("AdminId")]

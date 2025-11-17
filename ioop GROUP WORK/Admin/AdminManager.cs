@@ -1,16 +1,19 @@
+﻿using ioop_GROUP_WORK.Admin;
+using ioop_GROUP_WORK.Login;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ioop_GROUP_WORK.Admin;
-using ioop_GROUP_WORK.Login;
+using static System.Net.Mime.MediaTypeNames;
 
+//Sync AdminManager as per my plans for the forms No Alterations
 namespace ioop_GROUP_WORK.Admin
 {
     /// <summary>
@@ -18,13 +21,14 @@ namespace ioop_GROUP_WORK.Admin
     /// Implements Singleton pattern for database operations
     /// Provides centralized management of admin functions with validation
     /// </summary>
-    internal class AdminManager : IAdminManager
+    internal class AdminManager
     {
         //=============================
         // Singleton Instance
         //=============================
         private static AdminManager instance = null;
         private static readonly object lockObject = new object();
+        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
         public static AdminManager Instance
         {
@@ -136,33 +140,48 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Update existing user information
         /// </summary>
-        public string UpdateUser(int userId, string username, string email, string password, string role)
+        public string UpdateUser(int userId, string field, string specificattribute)
         {
             try
             {
-                if (!ValidationHelper.ValidateEmail(email))
+                // ✅ Validate email if updating Email field
+                if (field.ToLower() == "email" && !ValidationHelper.ValidateEmail(specificattribute))
                     return "Invalid email format";
 
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
 
-                    string updateQuery = @"
-                        UPDATE users 
-                        SET Username = @Username, Email = @Email, password = @password, role = @Role
-                        WHERE id = @id;";
+                    // ✅ Build dynamic query based on which field to update
+                    string updateQuery = "";
+
+                    switch (field.ToLower())
+                    {
+                        case "username":
+                            updateQuery = "UPDATE dbo.users SET Username = @specificattribute WHERE id = @id";
+                            break;
+                        case "email":
+                            updateQuery = "UPDATE dbo.users SET Email = @specificattribute WHERE id = @id";
+                            break;
+                        case "password":
+                            updateQuery = "UPDATE dbo.users SET password = @specificattribute WHERE id = @id";
+                            break;
+                        case "role":
+                            updateQuery = "UPDATE dbo.users SET role = @specificattribute WHERE id = @id";
+                            break;
+                        default:
+                            return "Invalid field name";
+                    }
 
                     using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@Username", username);
-                        cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@password", password);
-                        cmd.Parameters.AddWithValue("@Role", role);
+                        cmd.Parameters.AddWithValue("@specificattribute", specificattribute ?? "");
                         cmd.Parameters.AddWithValue("@id", userId);
 
                         int result = cmd.ExecuteNonQuery();
-                        return (result > 0) ? "User updated successfully" : "User not found";
+                        return (result > 0)
+                            ? $"User {field} updated successfully"
+                            : "User not found";
                     }
                 }
             }
@@ -212,7 +231,7 @@ namespace ioop_GROUP_WORK.Admin
                 using (SqlConnection con = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
-                    // select and alias columns to match UI expectations
+                    con.Open();
                     string query = @"
                         SELECT id AS UserId, Username, Email, role AS Role
                         FROM users
@@ -435,7 +454,7 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Get total count of active users
         /// </summary>
-        public int GetTotalUsersCount()
+        public int GetTotalUsersCount() // Make Dynamic for Totals for all Relevant Columns
         {
             try
             {
@@ -461,7 +480,7 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Get count of students
         /// </summary>
-        public int GetTotalStudentsCount()
+        public int GetTotalStudentsCount() // Make Dynamic for Averages of All Relevant columns
         {
             try
             {
@@ -487,7 +506,7 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Get count of companies
         /// </summary>
-        public int GetTotalCompaniesCount()
+        public int GetTotalCompaniesCount() // Make Dynamic for Max Values of Relevant Columns
         {
             try
             {
@@ -513,7 +532,7 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Get count of recruiters
         /// </summary>
-        public int GetTotalRecruitersCount()
+        public int GetTotalRecruitersCount() // Make Dynamic for Min Values of Relevant Columns
         {
             try
             {
@@ -569,39 +588,6 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Generate comprehensive placement statistics
         /// </summary>
-        public DataTable GeneratePlacementStatistics()
-        {
-            try
-            {
-                DataTable dtStats = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-                {
-                    string query = @"
-                        SELECT 
-                            COUNT(*) AS TotalApplications,
-                            SUM(CASE WHEN Status = 'Accepted' THEN 1 ELSE 0 END) AS Accepted,
-                            SUM(CASE WHEN Status = 'Rejected' THEN 1 ELSE 0 END) AS Rejected,
-                            SUM(CASE WHEN Status = 'Pending' THEN 1 ELSE 0 END) AS Pending,
-                            (SELECT COUNT(*) FROM InternshipOffer) AS TotalInternships,
-                            (SELECT COUNT(DISTINCT CompanyName) FROM StudentApplication) AS CompaniesInvolved
-                        FROM StudentApplication;";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dtStats);
-                    }
-                }
-
-                return dtStats;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error: " + ex.Message);
-            }
-        }
 
         /// <summary>
         /// Get pending applications for dashboard
@@ -640,82 +626,375 @@ namespace ioop_GROUP_WORK.Admin
         /// Get activity logs showing recruiter decisions
         /// Maintains audit trail for system transparency
         /// </summary>
-        public DataTable GetActivityLogs()
+        public DataTable GetActivityLogs(string status)
+        {
+            DataTable dtLogs = new DataTable();
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+            {
+                con.Open();
+                string query = @"
+            SELECT StudentID, StudentName, CompanyName, Position, DateApplied, Status
+            FROM StudentApplication
+            WHERE (@status = 'All' OR Status = @status)
+            ORDER BY DateApplied DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@status", status);
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dtLogs);
+                }
+            }
+            return dtLogs;
+        }
+
+
+        /// <summary>
+        /// Export all users to CSV file
+        /// </summary>
+
+        //=============================
+        // NEW: Table Export Functions (Simple SQL Way)
+        //=============================
+
+        /// <summary>
+        /// Get all table names from Database1.mdf
+        /// </summary>
+        public DataTable GetAllTables()
         {
             try
             {
-                DataTable dtLogs = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
-                    string query = @"
-                        SELECT StudentID, StudentName, CompanyName, Position, DateApplied, Status
-                        FROM StudentApplication
-                        WHERE Status <> 'Pending'
-                        ORDER BY DateApplied DESC;";
-
+                    string query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' ORDER BY TABLE_NAME";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dtLogs);
+                        adapter.Fill(dt);
                     }
                 }
-
-                return dtLogs;
+                return dt;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error: " + ex.Message);
+                throw new Exception("Error getting tables: " + ex.Message);
             }
         }
 
         /// <summary>
-        /// Export all users to CSV file at the provided path.
-        /// Returns a status message.
+        /// Get table data (SQL)
         /// </summary>
-        public string ExportUsersToCSV(string filePath)
+        public DataTable GetTableData(string tableName)
         {
             try
             {
-                DataTable dt = GetAllUsers();
-                if (dt == null || dt.Rows.Count == 0)
-                    return "No users to export.";
-
-                using (var sw = new System.IO.StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
-                    // header
-                    var columnNames = dt.Columns.Cast<DataColumn>().Select(c => c.ColumnName);
-                    sw.WriteLine(string.Join(",", columnNames));
-
-                    // rows
-                    foreach (DataRow row in dt.Rows)
+                    string query = $"SELECT * FROM [{tableName}]";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        var fields = dt.Columns.Cast<DataColumn>()
-                            .Select(col => EscapeCsvField(row[col]));
-                        sw.WriteLine(string.Join(",", fields));
+                        cmd.CommandTimeout = 120;
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dt);
                     }
                 }
-
-                return "Export completed: " + filePath;
+                return dt;
             }
             catch (Exception ex)
             {
-                return "Error exporting users: " + ex.Message;
+                throw new Exception("Error getting table data: " + ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Export to CSV excluding IDs and Passwords
+        /// </summary>
+
+        /// <summary>
+        /// Remove sensitive columns like IDs and Passwords for export
+        /// </summary>
+        /// <summary>
+        /// Calculate relevant aggregate statistics for any table
+        /// Based on database schema - extracts meaningful metrics
+        /// Examples: TotalStudents, AverageSalary, TotalPendingApplications
+        /// </summary>
+        /// <summary>
+        /// Calculate relevant aggregate statistics for any table
+        /// Excludes IDs and sensitive columns
+        /// </summary>
+        public DataTable CalculateAggregateStatistics(string tableName)
+        {
+            try
+            {
+                DataTable dt = GetTableData(tableName);
+                if (dt == null || dt.Rows.Count == 0)
+                    return null;
+
+                DataTable stats = new DataTable();
+                stats.Columns.Add("Metric", typeof(string));
+                stats.Columns.Add("Value", typeof(string));
+
+                // Basic Info
+                stats.Rows.Add("Table", tableName);
+                stats.Rows.Add("Total Records", dt.Rows.Count.ToString());
+                stats.Rows.Add("", "");
+
+                // Sensitive patterns to exclude
+                var sensitivePatterns = new[] { "id", "password", "passwordhash", "salt", "token", "secret", "key", "credential" };
+
+                // Relevant aggregates based on table schema
+                switch (tableName.ToLower())
+                {
+                    case "students":
+                        stats.Rows.Add("Total Students", dt.Rows.Count.ToString());
+                        break;
+
+                    case "studentapplication":
+                        int totalApps = dt.Rows.Count;
+                        int accepted = 0, rejected = 0, pending = 0;
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            if (row["Status"] != DBNull.Value)
+                            {
+                                string status = row["Status"].ToString().Trim().ToLower();
+                                if (status == "accepted") accepted++;
+                                else if (status == "rejected") rejected++;
+                                else if (status == "pending") pending++;
+                            }
+                        }
+                        stats.Rows.Add("Total Applications", totalApps.ToString());
+                        stats.Rows.Add("Accepted", accepted.ToString());
+                        stats.Rows.Add("Rejected", rejected.ToString());
+                        stats.Rows.Add("Pending", pending.ToString());
+                        break;
+
+                    case "internshipoffer":
+                        stats.Rows.Add("Total Internship Offers", dt.Rows.Count.ToString());
+                        // Calculate average salary if exists
+                        try
+                        {
+                            if (dt.Columns.Contains("Salary"))
+                            {
+                                decimal totalSalary = 0;
+                                int salaryCount = 0;
+                                foreach (DataRow row in dt.Rows)
+                                {
+                                    if (row["Salary"] != DBNull.Value)
+                                    {
+                                        totalSalary += Convert.ToDecimal(row["Salary"]);
+                                        salaryCount++;
+                                    }
+                                }
+                                if (salaryCount > 0)
+                                    stats.Rows.Add("Average Salary", (totalSalary / salaryCount).ToString("N2"));
+                            }
+                        }
+                        catch { }
+                        break;
+
+                    case "users":
+                        stats.Rows.Add("Total Users", dt.Rows.Count.ToString());
+                        break;
+
+                    case "recruiters":
+                        stats.Rows.Add("Total Recruiters", dt.Rows.Count.ToString());
+                        break;
+
+                    case "supervisors":
+                        stats.Rows.Add("Total Supervisors", dt.Rows.Count.ToString());
+                        break;
+
+                    case "companyprofile":
+                        stats.Rows.Add("Total Companies", dt.Rows.Count.ToString());
+                        break;
+
+                    default:
+                        // Generic numeric column aggregates (excluding IDs and sensitive columns)
+                        foreach (DataColumn col in dt.Columns)
+                        {
+                            // Skip sensitive columns
+                            bool isSensitive = false;
+                            foreach (var pattern in sensitivePatterns)
+                            {
+                                if (col.ColumnName.ToLower().Contains(pattern))
+                                {
+                                    isSensitive = true;
+                                    break;
+                                }
+                            }
+
+                            if (isSensitive)
+                                continue;
+
+                            // Only calculate for numeric columns
+                            if (col.DataType == typeof(int) || col.DataType == typeof(decimal) ||
+                                col.DataType == typeof(double) || col.DataType == typeof(float))
+                            {
+                                try
+                                {
+                                    decimal sum = 0, max = decimal.MinValue, min = decimal.MaxValue;
+                                    int count = 0;
+
+                                    foreach (DataRow row in dt.Rows)
+                                    {
+                                        if (row[col] != DBNull.Value)
+                                        {
+                                            decimal val = Convert.ToDecimal(row[col]);
+                                            sum += val;
+                                            if (val > max) max = val;
+                                            if (val < min) min = val;
+                                            count++;
+                                        }
+                                    }
+
+                                    if (count > 0)
+                                    {
+                                        stats.Rows.Add($"{col.ColumnName} - Total", sum.ToString("N2"));
+                                        stats.Rows.Add($"{col.ColumnName} - Average", (sum / count).ToString("N2"));
+                                        stats.Rows.Add($"{col.ColumnName} - Maximum", max.ToString("N2"));
+                                        stats.Rows.Add($"{col.ColumnName} - Minimum", min.ToString("N2"));
+                                    }
+                                }
+                                catch { }
+                            }
+                        }
+                        break;
+                }
+
+                stats.Rows.Add("", "");
+                stats.Rows.Add("Last Updated", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error calculating statistics: " + ex.Message);
             }
         }
 
         /// <summary>
-        /// Helper to quote/escape CSV fields
+        /// Export to CSV with both data AND statistics (Excludes IDs and Passwords)
         /// </summary>
-        private string EscapeCsvField(object value)
+        /// <summary>
+        /// Export to CSV with both data AND statistics (Excludes IDs and Passwords)
+        /// </summary>
+        public string ExportToCSVExcludingSensitive(string tableName, string filePath)
         {
-            if (value == null) return "";
-            var s = value.ToString();
-            if (s.Contains("\"") ) s = s.Replace("\"", "\"\"");
-            if (s.Contains(",") || s.Contains("\"") || s.Contains("\n") || s.Contains("\r"))
-                return "\"" + s + "\"";
-            return s;
+            try
+            {
+                DataTable dt = GetTableData(tableName);
+                if (dt == null || dt.Rows.Count == 0)
+                    return "No data to export.";
+
+                // Create a copy to preserve original
+                DataTable dtCopy = dt.Copy();
+
+                // Remove sensitive columns
+                RemoveSensitiveColumnsForExport(dtCopy);
+
+                if (dtCopy.Columns.Count == 0)
+                    return "No columns available after removing sensitive data.";
+
+                using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, false, System.Text.Encoding.UTF8))
+                {
+                    // ===== DATA SECTION =====
+                    sw.WriteLine($"TABLE: {tableName}");
+                    sw.WriteLine($"Export Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                    sw.WriteLine($"Total Records: {dtCopy.Rows.Count}");
+                    sw.WriteLine();
+
+                    // Column headers
+                    for (int i = 0; i < dtCopy.Columns.Count; i++)
+                    {
+                        sw.Write(dtCopy.Columns[i].ColumnName);
+                        if (i < dtCopy.Columns.Count - 1) sw.Write(",");
+                    }
+                    sw.WriteLine();
+
+                    // Data rows
+                    for (int i = 0; i < dtCopy.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dtCopy.Columns.Count; j++)
+                        {
+                            object val = dtCopy.Rows[i][j];
+                            string strVal = (val == null || val == DBNull.Value) ? "" : val.ToString();
+
+                            if (strVal.Contains(",") || strVal.Contains("\""))
+                                strVal = "\"" + strVal.Replace("\"", "\"\"") + "\"";
+
+                            sw.Write(strVal);
+                            if (j < dtCopy.Columns.Count - 1) sw.Write(",");
+                        }
+                        sw.WriteLine();
+                    }
+
+                    // ===== AGGREGATE STATISTICS SECTION =====
+                    sw.WriteLine();
+                    sw.WriteLine("═════════════════════════════════════════");
+                    sw.WriteLine("AGGREGATE STATISTICS");
+                    sw.WriteLine("═════════════════════════════════════════");
+                    sw.WriteLine();
+
+                    try
+                    {
+                        DataTable dtStats = CalculateAggregateStatistics(tableName);
+                        if (dtStats != null && dtStats.Rows.Count > 0)
+                        {
+                            foreach (DataRow statRow in dtStats.Rows)
+                            {
+                                string metric = statRow[0].ToString();
+                                string value = statRow[1].ToString();
+                                if (!string.IsNullOrWhiteSpace(metric))
+                                    sw.WriteLine($"{metric},{value}");
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                return "Export OK: " + System.IO.Path.GetFileName(filePath);
+            }
+            catch (System.IO.IOException ioEx)
+            {
+                return "File Error: " + ioEx.Message;
+            }
+            catch (SqlException sqlEx)
+            {
+                return "SQL Error: " + sqlEx.Message;
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Remove sensitive columns like IDs and Passwords for export
+        /// </summary>
+        private void RemoveSensitiveColumnsForExport(DataTable dt)
+        {
+            var sensitivePatterns = new[] { "id", "password", "passwordhash", "salt", "token", "secret", "key", "credential" };
+            var columnsToRemove = new List<string>();
+
+            foreach (DataColumn col in dt.Columns)
+            {
+                foreach (var pattern in sensitivePatterns)
+                {
+                    if (col.ColumnName.ToLower().Contains(pattern))
+                    {
+                        columnsToRemove.Add(col.ColumnName);
+                        break;
+                    }
+                }
+            }
+
+            foreach (var colName in columnsToRemove)
+            {
+                dt.Columns.Remove(colName);
+            }
         }
     }
 }

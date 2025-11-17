@@ -1,13 +1,12 @@
-﻿using System;
+﻿// ============================================================================
+// GenerateReports.Designer.cs - SYNCHRONIZED (Keep as is - already correct)
+// ============================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-// ============================================================================
-// FILE 2: GenerateReports.Designer.cs (ID: 88)
-// Database: dbo.Applications + dbo.Companies
-// ============================================================================
 
 namespace ioop_GROUP_WORK.Admin
 {
@@ -31,12 +30,14 @@ namespace ioop_GROUP_WORK.Admin
             this.lblTotalApps = new System.Windows.Forms.Label();
             this.lblAccepted = new System.Windows.Forms.Label();
             this.lblRejected = new System.Windows.Forms.Label();
+            this.cbActivityStatus = new System.Windows.Forms.ComboBox();
             this.lblPending = new System.Windows.Forms.Label();
             this.lblCompanies = new System.Windows.Forms.Label();
             this.lblPendingHeader = new System.Windows.Forms.Label();
             this.dgvPendingApps = new System.Windows.Forms.DataGridView();
             this.lblActivityHeader = new System.Windows.Forms.Label();
             this.dgvActivityLogs = new System.Windows.Forms.DataGridView();
+            this.btn_Tables_Select = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
@@ -132,6 +133,19 @@ namespace ioop_GROUP_WORK.Admin
             this.dgvPendingApps.Size = new System.Drawing.Size(900, 150);
             this.dgvPendingApps.TabIndex = 3;
 
+            // 
+            // cbActivityStatus
+            // 
+            this.cbActivityStatus = new System.Windows.Forms.ComboBox();
+            this.cbActivityStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActivityStatus.FormattingEnabled = true;
+            this.cbActivityStatus.Items.AddRange(new object[] {"All","Pending","Accepted","Rejected"});
+            this.cbActivityStatus.Location = new System.Drawing.Point(170, 340); // Change X/Y as needed
+            this.cbActivityStatus.Name = "cbActivityStatus";
+            this.cbActivityStatus.Size = new System.Drawing.Size(140, 24);
+            this.cbActivityStatus.TabIndex = 13;
+            this.cbActivityStatus.SelectedIndexChanged += new System.EventHandler(this.CbActivityStatus_SelectedIndexChanged);
+
             // lblActivityHeader
             this.lblActivityHeader.AutoSize = true;
             this.lblActivityHeader.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
@@ -174,6 +188,19 @@ namespace ioop_GROUP_WORK.Admin
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
 
+            // btn_Tables_Select
+            this.btn_Tables_Select.BackColor = System.Drawing.Color.DarkOrange;
+            this.btn_Tables_Select.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Tables_Select.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Tables_Select.ForeColor = System.Drawing.Color.White;
+            this.btn_Tables_Select.Location = new System.Drawing.Point(250, 530);
+            this.btn_Tables_Select.Name = "btn_Tables_Select";
+            this.btn_Tables_Select.Size = new System.Drawing.Size(150, 35);
+            this.btn_Tables_Select.TabIndex = 9;
+            this.btn_Tables_Select.Text = "Choose Table";
+            this.btn_Tables_Select.UseVisualStyleBackColor = false;
+            this.btn_Tables_Select.Click += new System.EventHandler(this.btn_Tables_Select_Click);
+
             // btnBack
             this.btnBack.BackColor = System.Drawing.Color.DimGray;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -197,6 +224,7 @@ namespace ioop_GROUP_WORK.Admin
             this.Controls.Add(this.dgvActivityLogs);
             this.Controls.Add(this.lblActivityHeader);
             this.Controls.Add(this.dgvPendingApps);
+            this.Controls.Add(this.cbActivityStatus);
             this.Controls.Add(this.lblPendingHeader);
             this.Controls.Add(this.pnlStatistics);
             this.Controls.Add(this.lblTitle);
@@ -221,11 +249,14 @@ namespace ioop_GROUP_WORK.Admin
         private System.Windows.Forms.Label lblCompanies;
         private System.Windows.Forms.Label lblPendingHeader;
         private System.Windows.Forms.DataGridView dgvPendingApps;
+        private System.Windows.Forms.ComboBox cbActivityStatus;
         private System.Windows.Forms.Label lblActivityHeader;
         private System.Windows.Forms.DataGridView dgvActivityLogs;
+        private System.Windows.Forms.Button btn_Tables_Select;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnBack;
+        //Sync Everything
     }
 }
 

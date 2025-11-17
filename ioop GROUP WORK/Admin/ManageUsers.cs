@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -98,41 +98,60 @@ namespace ioop_GROUP_WORK.Admin
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
                 if (string.IsNullOrEmpty(txtUserId.Text))
                 {
-                    MessageBox.Show("Please select a user to update.");
+                    MessageBox.Show("Please select a user to update!");
                     return;
                 }
 
-                if (!ValidateInputs())
-                    return;
+                int userId = int.Parse(txtUserId.Text);
 
-                if (!int.TryParse(txtUserId.Text, out int userId))
+                // ✅ KEEP: string field (instead of fieldName)
+                string field = "";
+                // ✅ KEEP: string specificattribute (instead of newValue)
+                string specificattribute = "";
+
+                // Check which field has been modified
+                if (!string.IsNullOrEmpty(txtUsername.Text))
                 {
-                    MessageBox.Show("Invalid user id.");
+                    field = "Username";
+                    specificattribute = txtUsername.Text.Trim();
+                }
+                else if (!string.IsNullOrEmpty(txtEmail.Text))
+                {
+                    field = "Email";
+                    specificattribute = txtEmail.Text.Trim();
+                }
+                else if (!string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    field = "Password";
+                    specificattribute = txtPassword.Text.Trim();
+                }
+                else if (cmbRole.SelectedItem != null)
+                {
+                    field = "Role";
+                    specificattribute = cmbRole.SelectedItem.ToString();
+                }
+
+                if (string.IsNullOrEmpty(field))
+                {
+                    MessageBox.Show("Please modify at least one field!");
                     return;
                 }
 
-                string result = adminMgr.UpdateUser(
-                    userId,
-                    txtUsername.Text.Trim(),
-                    txtEmail.Text.Trim(),
-                    txtPassword.Text.Trim(),
-                    cmbRole.SelectedItem.ToString()
-                );
-
+                // ✅ CALL WITH field AND specificattribute
+                string result = adminMgr.UpdateUser(userId, field, specificattribute);
                 MessageBox.Show(result);
                 LoadAllUsers();
-                ClearFields();
+                btnClear_Click(null, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error updating user: " + ex.Message);
             }
         }
 

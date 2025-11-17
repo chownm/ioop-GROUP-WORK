@@ -7,11 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-// ============================================================================
-// FILE: AdminHome.cs
-// Purpose: Administrator Dashboard
-// ============================================================================
 using ioop_GROUP_WORK.Admin;
 using ioop_GROUP_WORK.Login;
 using ioop_GROUP_WORK.Student;
@@ -30,7 +25,7 @@ namespace ioop_GROUP_WORK
             InitializeComponent();
         }
 
-        public AdminHome(Administrator admin)
+        internal AdminHome(Administrator admin)
         {
             InitializeComponent();
             this.adminUser = admin;
@@ -172,12 +167,18 @@ namespace ioop_GROUP_WORK
         private void BtnSystemConfig_Click(object sender, EventArgs e)
         {
             MessageBox.Show("System Configuration form will open here.", "Info");
+            SystemConfiguration systemConfiguration = new SystemConfiguration();
+            systemConfiguration.Show();
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            // Refresh dashboard statistics
-            AdminHome_Load(this, null);
+            AdminManager adm = AdminManager.Instance;
+            lblTotalUsers.Text = "Total Users: " + adm.GetTotalUsersCount().ToString();
+            lblTotalStudents.Text = "Total Students: " + adm.GetTotalStudentsCount().ToString();
+            lblTotalCompanies.Text = "Total Companies: " + adm.GetTotalCompaniesCount().ToString();
+            lblTotalRecruiters.Text = "Total Recruiters: " + adm.GetTotalRecruitersCount().ToString();
+            lblPendingApplications.Text = "Pending: " + adm.GetPendingApplicationsCount().ToString();
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
