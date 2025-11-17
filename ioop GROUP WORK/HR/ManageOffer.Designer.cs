@@ -49,9 +49,10 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(552, 28);
+            this.lblTitle.Location = new System.Drawing.Point(414, 23);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(865, 90);
+            this.lblTitle.Size = new System.Drawing.Size(688, 73);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Manage Internship Offers";
             this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
@@ -60,9 +61,10 @@
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.Location = new System.Drawing.Point(632, 219);
+            this.lblPosition.Location = new System.Drawing.Point(474, 178);
+            this.lblPosition.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(190, 25);
+            this.lblPosition.Size = new System.Drawing.Size(154, 22);
             this.lblPosition.TabIndex = 11;
             this.lblPosition.Text = "Position Offered :";
             // 
@@ -70,86 +72,90 @@
             // 
             this.lblStartDate.AutoSize = true;
             this.lblStartDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStartDate.Location = new System.Drawing.Point(700, 305);
+            this.lblStartDate.Location = new System.Drawing.Point(525, 248);
+            this.lblStartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(125, 25);
+            this.lblStartDate.Size = new System.Drawing.Size(100, 22);
             this.lblStartDate.TabIndex = 13;
             this.lblStartDate.Text = "Start Date:";
             // 
             // dtpStartDate
             // 
             this.dtpStartDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpStartDate.Location = new System.Drawing.Point(839, 299);
-            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpStartDate.Location = new System.Drawing.Point(629, 243);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(381, 34);
+            this.dtpStartDate.Size = new System.Drawing.Size(287, 29);
             this.dtpStartDate.TabIndex = 14;
             // 
             // lblEndDate
             // 
             this.lblEndDate.AutoSize = true;
             this.lblEndDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEndDate.Location = new System.Drawing.Point(700, 374);
+            this.lblEndDate.Location = new System.Drawing.Point(525, 304);
+            this.lblEndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(121, 25);
+            this.lblEndDate.Size = new System.Drawing.Size(97, 22);
             this.lblEndDate.TabIndex = 15;
             this.lblEndDate.Text = "End Date :";
             // 
             // dtpEndDate
             // 
             this.dtpEndDate.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEndDate.Location = new System.Drawing.Point(839, 374);
-            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpEndDate.Location = new System.Drawing.Point(629, 304);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(381, 34);
+            this.dtpEndDate.Size = new System.Drawing.Size(287, 29);
             this.dtpEndDate.TabIndex = 16;
             // 
             // lblSalary
             // 
             this.lblSalary.AutoSize = true;
             this.lblSalary.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSalary.Location = new System.Drawing.Point(535, 462);
+            this.lblSalary.Location = new System.Drawing.Point(401, 375);
+            this.lblSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalary.Name = "lblSalary";
-            this.lblSalary.Size = new System.Drawing.Size(274, 25);
+            this.lblSalary.Size = new System.Drawing.Size(221, 22);
             this.lblSalary.TabIndex = 17;
             this.lblSalary.Text = "Monthly Allowance (RM):";
             // 
             // txtSalary
             // 
             this.txtSalary.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSalary.Location = new System.Drawing.Point(839, 459);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSalary.Location = new System.Drawing.Point(629, 373);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(271, 34);
+            this.txtSalary.Size = new System.Drawing.Size(204, 29);
             this.txtSalary.TabIndex = 18;
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(632, 537);
+            this.lblDescription.Location = new System.Drawing.Point(474, 436);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(177, 25);
+            this.lblDescription.Size = new System.Drawing.Size(144, 22);
             this.lblDescription.TabIndex = 19;
             this.lblDescription.Text = "Job Description:";
             // 
             // rtbDescription
             // 
             this.rtbDescription.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbDescription.Location = new System.Drawing.Point(839, 537);
-            this.rtbDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rtbDescription.Location = new System.Drawing.Point(629, 436);
+            this.rtbDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtbDescription.Name = "rtbDescription";
-            this.rtbDescription.Size = new System.Drawing.Size(875, 198);
+            this.rtbDescription.Size = new System.Drawing.Size(657, 162);
             this.rtbDescription.TabIndex = 20;
             this.rtbDescription.Text = "";
             // 
             // btnSendOffer
             // 
             this.btnSendOffer.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendOffer.Location = new System.Drawing.Point(579, 783);
-            this.btnSendOffer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSendOffer.Location = new System.Drawing.Point(434, 636);
+            this.btnSendOffer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSendOffer.Name = "btnSendOffer";
-            this.btnSendOffer.Size = new System.Drawing.Size(285, 65);
+            this.btnSendOffer.Size = new System.Drawing.Size(214, 53);
             this.btnSendOffer.TabIndex = 21;
             this.btnSendOffer.Text = "Send Offer";
             this.btnSendOffer.UseVisualStyleBackColor = true;
@@ -158,10 +164,10 @@
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(935, 783);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnBack.Location = new System.Drawing.Point(701, 636);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(285, 65);
+            this.btnBack.Size = new System.Drawing.Size(214, 53);
             this.btnBack.TabIndex = 22;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -171,10 +177,10 @@
             // 
             this.cmbPosition.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPosition.FormattingEnabled = true;
-            this.cmbPosition.Location = new System.Drawing.Point(839, 211);
-            this.cmbPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbPosition.Location = new System.Drawing.Point(629, 171);
+            this.cmbPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbPosition.Name = "cmbPosition";
-            this.cmbPosition.Size = new System.Drawing.Size(256, 33);
+            this.cmbPosition.Size = new System.Drawing.Size(193, 28);
             this.cmbPosition.TabIndex = 23;
             this.cmbPosition.SelectedIndexChanged += new System.EventHandler(this.txtPosition_SelectedIndexChanged);
             // 
@@ -182,9 +188,10 @@
             // 
             this.lblJobTitle.AutoSize = true;
             this.lblJobTitle.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJobTitle.Location = new System.Drawing.Point(714, 144);
+            this.lblJobTitle.Location = new System.Drawing.Point(536, 117);
+            this.lblJobTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(113, 25);
+            this.lblJobTitle.Size = new System.Drawing.Size(93, 22);
             this.lblJobTitle.TabIndex = 24;
             this.lblJobTitle.Text = "Job Title :";
             // 
@@ -200,19 +207,19 @@
             "Sales & Marketing",
             "Production / Operations",
             "Maintenance & Support"});
-            this.cmbJobTitle.Location = new System.Drawing.Point(839, 140);
-            this.cmbJobTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbJobTitle.Location = new System.Drawing.Point(629, 115);
+            this.cmbJobTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbJobTitle.Name = "cmbJobTitle";
-            this.cmbJobTitle.Size = new System.Drawing.Size(256, 33);
+            this.cmbJobTitle.Size = new System.Drawing.Size(193, 28);
             this.cmbJobTitle.TabIndex = 25;
             this.cmbJobTitle.SelectedIndexChanged += new System.EventHandler(this.cbJobTitle_SelectedIndexChanged);
             // 
             // ManageOffer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.ClientSize = new System.Drawing.Size(1443, 857);
             this.Controls.Add(this.cmbJobTitle);
             this.Controls.Add(this.lblJobTitle);
             this.Controls.Add(this.cmbPosition);
@@ -228,7 +235,7 @@
             this.Controls.Add(this.lblStartDate);
             this.Controls.Add(this.lblPosition);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ManageOffer";
             this.Text = "ManageOffer";
             this.Load += new System.EventHandler(this.ManageOffer_Load);
