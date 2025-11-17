@@ -102,7 +102,6 @@
             this.label4.Size = new System.Drawing.Size(99, 37);
             this.label4.TabIndex = 22;
             this.label4.Text = "Name";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -212,7 +211,7 @@
             this.Name = "UploadResumeForm";
             this.Text = "Upload Resume";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.UploadReportForm_Load);
+            this.Load += new System.EventHandler(this.UploadResumeForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();

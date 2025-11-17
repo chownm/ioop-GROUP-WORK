@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.Student
 {
-    partial class InternshipListForm
+    partial class ViewApplicationStatusForm
     {
         /// <summary>
         /// Required designer variable.

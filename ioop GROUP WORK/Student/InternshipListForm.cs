@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace ioop_GROUP_WORK.Student
 {
     public partial class InternshipListForm : Form
     {
-        public InternshipListForm()
+        private string studentID;
+        private InternshipList internshipList; // Business Logic Class
+
+        public InternshipListForm(string studentID)
         {
             InitializeComponent();
+            this.studentID = studentID;
+            this.internshipList = new InternshipList(); // Initialize the business logic class
         }
-
-
 
         private void InternshipListForm_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            LoadIntershipOffers();
+
+            // Load internship offers from the business logic class and display them
+            LoadInternshipOffers();
+
             // Ensure the DataGridView resizes with the form
             dgvIntern.Font = new Font("Times New Roman", 10);
             dgvIntern.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -28,57 +33,23 @@ namespace ioop_GROUP_WORK.Student
             dgvIntern.ScrollBars = ScrollBars.Both;
         }
 
-
-
-        private void LoadIntershipOffers()
+        private void LoadInternshipOffers()
         {
-            // Code to load internship offers from the database and display them in the DataGridView
-            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
+            // Get internship offers from the business logic class
+            DataTable internshipTable = internshipList.LoadInternshipOffers();
+            dgvIntern.DataSource = internshipTable;
 
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                con.Open();
+            // Optionally, customize column headers
+            dgvIntern.Columns["InternshipID"].HeaderText = "Internship ID";
+            dgvIntern.Columns["Position"].HeaderText = "Position";
+            dgvIntern.Columns["JobTitle"].HeaderText = "Job Title";
+            dgvIntern.Columns["StartDate"].HeaderText = "Start Date";
+            dgvIntern.Columns["EndDate"].HeaderText = "End Date";
+            dgvIntern.Columns["Allowance"].HeaderText = "Salary";
+            dgvIntern.Columns["CompanyName"].HeaderText = "Company Name";
 
-                // Define the columns if they are not already defined in the designer
-                dgvIntern.Columns.Add("InternshipID", "Internship ID");
-                dgvIntern.Columns.Add("Position", "Position");
-                dgvIntern.Columns.Add("Company", "Company Name");
-                dgvIntern.Columns.Add("StartDate", "Start Date");
-                dgvIntern.Columns.Add("EndDate", "End Date");
-                dgvIntern.Columns.Add("Allowance", "Salary");
-
-                string query = "SELECT Id, JobTitle, Position, StartDate, EndDate, Salary, CompanyName FROM InternshipOffer";
-                SqlCommand cmd = new SqlCommand(query, con);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                // Clear existing data and display internship in DataGridView
-                dgvIntern.Rows.Clear();
-
-                while (reader.Read())
-                {
-                    int rowIndex = dgvIntern.Rows.Add();
-                    // Map cells to existing columns in the grid (ensure grid has these column names)
-                    dgvIntern.Rows[rowIndex].Cells["InternshipID"].Value = reader["Id"];
-                    dgvIntern.Rows[rowIndex].Cells["Position"].Value = reader["Position"];
-                    dgvIntern.Rows[rowIndex].Cells["Company"].Value = reader["CompanyName"];
-                    dgvIntern.Rows[rowIndex].Cells["StartDate"].Value = reader["StartDate"];
-                    dgvIntern.Rows[rowIndex].Cells["EndDate"].Value = reader["EndDate"];
-                    dgvIntern.Rows[rowIndex].Cells["Allowance"].Value = reader["Salary"];
-                }
-
-                reader.Close();
-                con.Close();
-            }
+            dgvIntern.ReadOnly = true;
         }
-
-
-
-        private void lblStatus_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -91,17 +62,19 @@ namespace ioop_GROUP_WORK.Student
             {
                 int selectedRowIndex = dgvIntern.SelectedRows[0].Index;
 
-                // Get the necessary details
+                // Get the necessary details from the selected row
                 string internshipId = dgvIntern.Rows[selectedRowIndex].Cells["InternshipID"].Value.ToString();
                 string position = dgvIntern.Rows[selectedRowIndex].Cells["Position"].Value.ToString();
-                string companyName = dgvIntern.Rows[selectedRowIndex].Cells["Company"].Value.ToString();
+                string companyName = dgvIntern.Rows[selectedRowIndex].Cells["CompanyName"].Value.ToString();
                 string startDate = dgvIntern.Rows[selectedRowIndex].Cells["StartDate"].Value.ToString();
                 string endDate = dgvIntern.Rows[selectedRowIndex].Cells["EndDate"].Value.ToString();
                 string salary = dgvIntern.Rows[selectedRowIndex].Cells["Allowance"].Value.ToString();
 
-                MessageBox.Show($"You have applied for {position} at {companyName}.\n" +
-                                $"Start Date: {startDate}\nEnd Date: {endDate}\nSalary: {salary}",
-                                "Application Details");
+                // Call the ApplyForInternship method from the business logic class
+                string applicationResult = internshipList.ApplyForInternship(internshipId, position, companyName, startDate, endDate, salary);
+
+                // Display the application result
+                MessageBox.Show(applicationResult, "Application Details");
 
                 // Pass Position and Company Name to UploadResumeForm
                 UploadResumeForm uploadForm = new UploadResumeForm(position, companyName);
@@ -114,7 +87,5 @@ namespace ioop_GROUP_WORK.Student
                 MessageBox.Show("Please select an internship before applying.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }

@@ -18,11 +18,18 @@ namespace ioop_GROUP_WORK.Student
             {
                 con.Open();
 
-                string query = "SELECT Id, JobTitle, Position, StartDate, EndDate, Salary, CompanyName FROM InternshipOffer";
+                string query = @"SELECT io.Id AS InternshipID, 
+                                        io.JobTitle, 
+                                        io.Position, 
+                                        io.StartDate, 
+                                        io.EndDate, 
+                                        io.Salary AS Allowance, 
+                                        io.CompanyName
+                                 FROM InternshipOffer io";
+
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(internshipTable);
-                con.Close();
             }
 
             return internshipTable;

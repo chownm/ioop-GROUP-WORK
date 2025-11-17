@@ -172,6 +172,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Student\InternshipListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\InternshipListForm.Designer.cs">
+      <DependentUpon>InternshipListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StudentReportUpload.cs" />
+    <Compile Include="Student\UploadResume.cs" />
     <Compile Include="Student\ViewApplicationStatus.cs" />
     <Compile Include="Student\ChangePassword.cs" />
     <Compile Include="Student\ChangePasswordForm.cs">
@@ -207,12 +215,6 @@
     </Compile>
     <Compile Include="Student\UploadResumeForm.Designer.cs">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Student\InternshipListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Student\InternshipListForm.Designer.cs">
-      <DependentUpon>InternshipListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\StudentRegisterForm.cs">
       <SubType>Form</SubType>
@@ -331,6 +333,9 @@
     <EmbeddedResource Include="Student\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Student\InternshipListForm.resx">
+      <DependentUpon>InternshipListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student\StudentCheckInForm.resx">
       <DependentUpon>StudentCheckInForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,9 +347,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Student\UploadResumeForm.resx">
       <DependentUpon>UploadResumeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Student\InternshipListForm.resx">
-      <DependentUpon>InternshipListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\StudentRegisterForm.resx">
       <DependentUpon>StudentRegisterForm.cs</DependentUpon>
