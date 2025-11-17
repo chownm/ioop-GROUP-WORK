@@ -86,6 +86,11 @@ namespace ioop_GROUP_WORK.Student
         {
             ChangePasswordForm changepass = new ChangePasswordForm(studentID);
             changepass.ShowDialog();
-        }     
+        }
+
+        private void StudentHomeForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
