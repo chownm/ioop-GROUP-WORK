@@ -19,6 +19,7 @@ namespace ioop_GROUP_WORK
     {
         private string UserIdentity;
         private string Password;
+        
 
         public HRHome(string userIdentity, string password)
         {

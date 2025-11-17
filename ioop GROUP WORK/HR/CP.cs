@@ -23,6 +23,9 @@ namespace ioop_GROUP_WORK.HR
         private string companydescription;
         private byte[] companyLogo;
 
+        
+        
+
 
 
         private static readonly SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
@@ -49,6 +52,7 @@ namespace ioop_GROUP_WORK.HR
 
         public CP(string identify, string password)
         {
+            
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE (ContactPerson = @identify OR Email = @identify) AND Password = @password ", con);
             cmd.Parameters.AddWithValue("@identify", identify);

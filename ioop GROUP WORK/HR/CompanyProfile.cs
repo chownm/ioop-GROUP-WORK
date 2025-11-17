@@ -16,6 +16,8 @@ namespace ioop_GROUP_WORK.HR
     {
         private string Identify;
         private string Password;
+        private byte[] existingLogo;
+        private CP company;
         public CompanyProfile(string identify, string password)
         {
             Identify = identify;
@@ -71,11 +73,15 @@ namespace ioop_GROUP_WORK.HR
         private byte[] getPhoto()
         {
             if (pbLogo.Image == null)
-                return null;
+                return existingLogo; 
 
             using (MemoryStream ms = new MemoryStream())
             {
-                pbLogo.Image.Save(ms, pbLogo.Image.RawFormat);
+                
+                using (Bitmap bmp = new Bitmap(pbLogo.Image))
+                {
+                    bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                }
                 return ms.ToArray();
             }
         }
@@ -109,7 +115,7 @@ namespace ioop_GROUP_WORK.HR
 
 
 
-            CP company = new CP(name,password);
+            company = new CP(name,password);
             txtCompanyName.Text = company.Companyname;
             txtContactPerson.Text = name;
             txtEmail.Text = email;
@@ -117,11 +123,12 @@ namespace ioop_GROUP_WORK.HR
             richTextBox1.Text = company.Address;
             rtbDescription.Text = company.Companydescription;
 
-            if (company.CompanyLogo != null)
+            existingLogo = company.CompanyLogo;
+            if (existingLogo != null && existingLogo.Length > 0)
             {
-                using (MemoryStream ms = new MemoryStream(company.CompanyLogo))
+                using (MemoryStream ms = new MemoryStream(existingLogo))
                 {
-                    pbLogo.Image = Image.FromStream(ms);
+                    pbLogo.Image = new Bitmap(ms); 
                     pbLogo.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
             }
@@ -135,7 +142,7 @@ namespace ioop_GROUP_WORK.HR
         {
             
 
-            HRHome back = new HRHome();
+            HRHome back = new HRHome(Identify,Password);
             this.Close();
             back.ShowDialog();
             
