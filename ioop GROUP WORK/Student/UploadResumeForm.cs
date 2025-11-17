@@ -179,7 +179,7 @@ namespace ioop_GROUP_WORK.Student
                 cmd.Parameters.AddWithValue("@StudentID", studentID);
                 cmd.Parameters.AddWithValue("@StudentName", studentName);
                 cmd.Parameters.AddWithValue("@Position", position);
-                cmd.Parameters.AddWithValue("@CompanyName", companyName);  // Insert the Company Name
+                cmd.Parameters.AddWithValue("@CompanyName", companyName);
                 cmd.Parameters.AddWithValue("@DateApplied", DateTime.Now);
                 cmd.Parameters.AddWithValue("@Status", "Pending");
                 cmd.Parameters.AddWithValue("@Resume", resumeImage);
