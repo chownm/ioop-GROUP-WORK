@@ -97,6 +97,7 @@
             this.dgvApplications.RowTemplate.Height = 28;
             this.dgvApplications.Size = new System.Drawing.Size(704, 600);
             this.dgvApplications.TabIndex = 0;
+            this.dgvApplications.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvApplications_CellContentClick);
             // 
             // lblStatus
             // 
@@ -263,6 +264,7 @@
             this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "ViewApplicationStatusForm";
             this.Text = "ViewApplicationStatusForm";
+            this.Load += new System.EventHandler(this.ViewApplicationStatusForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplications)).EndInit();

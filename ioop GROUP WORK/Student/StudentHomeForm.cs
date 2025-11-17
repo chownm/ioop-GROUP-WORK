@@ -76,8 +76,12 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            this.Close();
-            new LoginPage().Show();
+            var confirmation = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmation == DialogResult.Yes) 
+            {
+                this.Close();
+                new LoginPage().Show();
+            }
         }
 
 

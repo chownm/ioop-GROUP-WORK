@@ -20,6 +20,7 @@ namespace ioop_GROUP_WORK.HR
         {
             Identify = identify;
             Password = password;
+
             InitializeComponent();
         }
 
@@ -55,11 +56,11 @@ namespace ioop_GROUP_WORK.HR
             // Guard against null selection
             if (cmbJobTitle.SelectedItem == null) return;
 
-            cmbJobTitle.Items.Clear();
             string selectedDept = cmbJobTitle.SelectedItem.ToString();
             List<string> positions = MO.AddJobPosition(selectedDept);
+            
 
-            cmbJobTitle.Items.AddRange(positions.ToArray());
+            cmbPosition.Items.AddRange(positions.ToArray());
 
             if (cmbJobTitle.Items.Count > 0)
             {
@@ -69,15 +70,13 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSendOffer_Click(object sender, EventArgs e)
         {
-            PersonalProfile PP = new PersonalProfile(Identify, Password);
-            string name = PP.getname();
-            string password = PP.getpassword();
+            string name = Identify;
+            string password = Password;        
 
             CP company = new CP(name, password);
             string Cname = company.Companyname;
-
-            double salary = 0;
-            double.TryParse(txtSalary.Text, out salary);
+                       
+            double.TryParse(txtSalary.Text, out double salary);
             try
             {
                 if (cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)

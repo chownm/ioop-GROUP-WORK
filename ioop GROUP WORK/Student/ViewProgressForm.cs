@@ -12,17 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class ViewProgressForm : Form
     {
-        // ✅ ADD 1-ARG CONSTRUCTOR
-        public ViewProgressForm(string studentId)
+        public ViewProgressForm(string studentID)
         {
             InitializeComponent();
-            this.Text = $"View Progress - {studentId}";
         }
 
-        public ViewProgressForm()
+        private void ViewProgressForm_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
+
         }
     }
-}    
-
+}

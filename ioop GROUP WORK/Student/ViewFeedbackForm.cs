@@ -12,16 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class ViewFeedbackForm : Form
     {
-        // ✅ ADD 1-ARG CONSTRUCTOR
-        public ViewFeedbackForm(string studentId)
+        public ViewFeedbackForm(string studentID)
         {
             InitializeComponent();
-            this.Text = $"View Feedback - {studentId}";
         }
 
-        public ViewFeedbackForm()
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
+
         }
     }
 }

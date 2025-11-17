@@ -12,16 +12,14 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class StudentReportUploadForm : Form
     {
-        // ✅ ADD 1-ARG CONSTRUCTOR
-        public StudentReportUploadForm(string studentId)
+        public StudentReportUploadForm(string studentID)
         {
             InitializeComponent();
-            this.Text = $"Upload Report - {studentId}";
         }
 
-        public StudentReportUploadForm()
+        private void StudentReportUploadForm_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
+
         }
     }
 }

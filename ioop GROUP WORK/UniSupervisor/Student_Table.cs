@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -28,15 +29,21 @@ namespace ioop_GROUP_WORK.UniSupervisor
         {
             if (lst_Student_Details.SelectedItem == null)
             {
-                MessageBox.Show("No student selected. Please select a student from the list.");
+                MessageBox.Show("Please select a student from the list.");
                 return;
             }
 
-            string selectedText = lst_Student_Details.SelectedItem.ToString();
-            string selectedStudentID = selectedText.Split('-')[0].Trim();
+            View_Student_Profile selectedStudent = lst_Student_Details.SelectedItem as View_Student_Profile;
 
-            frm_Student_Profile_Review profilePage = new frm_Student_Profile_Review(selectedStudentID);
-            profilePage.ShowDialog();
+            frm_Student_Profile_Review frm = new frm_Student_Profile_Review(
+                selectedStudent.Student_id,
+                selectedStudent.Student_name,
+                selectedStudent.Email,
+                selectedStudent.Phone_number,
+                selectedStudent.Course
+            );
+
+            frm.ShowDialog();
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -44,31 +51,26 @@ namespace ioop_GROUP_WORK.UniSupervisor
             Show_Student_Details();
         }
 
-        // 点击 “Exit” 按钮事件
         private void btn_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+            frm_UniSupervisorHome frm = new frm_UniSupervisorHome();
+            frm.ShowDialog();
         }
 
-        // 显示学生资料列表
         private void Show_Student_Details()
         {
-            lst_Student_Details.Items.Clear();
+            lst_Student_Details.DataSource = null;
+            var students = View_Student_Profile.GetStudentIDAndName();
 
-            // 调用数据库读取方法
-            List<View_Student_Profile> students = View_Student_Profile.GetAllStudents();
+            lst_Student_Details.DataSource = students;
+            lst_Student_Details.DisplayMember = "DisplayStudentInfo";  
+            lst_Student_Details.ValueMember = "Student_id";            
+        }
 
-            if (students.Count == 0)
-            {
-                lst_Student_Details.Items.Add("No student records found.");
-                return;
-            }
-
-            // 添加到 ListBox，每项显示 "ID - Name - Course"
-            foreach (var s in students)
-            {
-                lst_Student_Details.Items.Add($"{s.StudentID} - {s.StudentName} ({s.CourseName})");
-            }
+        private void lst_Student_Details_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

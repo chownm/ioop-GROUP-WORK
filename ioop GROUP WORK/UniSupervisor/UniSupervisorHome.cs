@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ioop_GROUP_WORK.UniSupervisor;
-using ioop_GROUP_WORK.Login;
 
 namespace ioop_GROUP_WORK.UniSupervisor
 {
@@ -32,14 +30,15 @@ namespace ioop_GROUP_WORK.UniSupervisor
             frm_Student_Internship_Table frm = new frm_Student_Internship_Table();
             frm.ShowDialog();
         }
-        private void btn_manage_profile_load_Click(object sender, EventArgs e)
+
+        private void btn_check_student_profile_Click(object sender, EventArgs e)
         {
             this.Close();
-            frm_Student_Profile_Review frm = new frm_Student_Profile_Review();
+            frm_Student_Table frm = new frm_Student_Table();
             frm.ShowDialog();
         }
 
-        private void btn_logout_Click(object sender, EventArgs e)
+        private void btn_logOut_Click(object sender, EventArgs e)
         {
             this.Close();
             LoginPage frm = new LoginPage();

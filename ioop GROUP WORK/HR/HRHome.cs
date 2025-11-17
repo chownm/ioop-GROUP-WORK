@@ -75,7 +75,7 @@ namespace ioop_GROUP_WORK
         }
         private void HRHome_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnViewApplications_Click(object sender, EventArgs e)
@@ -107,7 +107,9 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            LoginPage loginPage = new LoginPage();
+            this.Close();
+            loginPage.ShowDialog();
         }
 
         private void btnPersonalProfile_Click(object sender, EventArgs e)

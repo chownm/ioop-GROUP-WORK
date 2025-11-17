@@ -39,70 +39,51 @@ namespace ioop_GROUP_WORK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            string role;
+            string studentName = null;
+            // Create a User object with the username and password entered
+            User obj1 = new User(txtUsername.Text, txtPassword.Text);
+
+            //FOR STUDENT PART (DO NOT DELETE)
+            (role, studentName) = obj1.login();
+
+            // If the role is valid, navigate to the appropriate home form
+            if (role != null)
             {
-                string username = txtUsername?.Text?.Trim() ?? "";
-                string password = txtPassword?.Text?.Trim() ?? "";
-
-                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                switch (role)
                 {
-                    MessageBox.Show("Please enter username and password.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    case "admin":
+                        AdminHome adminHome = new AdminHome();
+                        adminHome.Show();
+                        this.Hide();
+                        break;
+                    case "student":
+                        StudentHomeForm studentHome = new StudentHomeForm(txtUsername.Text, studentName); 
+                        studentHome.Show();
+                        this.Hide();
+                        break;
+                    case "HR":
+                        HRHome companyHome = new HRHome(txtUsername.Text,txtPassword.Text);
+                        companyHome.Show();
+                        this.Hide();
+                        break;
+                    case "supervisor":
+                        frm_UniSupervisorHome uniSupervisorHome = new frm_UniSupervisorHome();
+                        uniSupervisorHome.Show();
+                        this.Hide();
+                        break;
+                    default:
+                        MessageBox.Show("Invalid user role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                 }
-
-                string role = null;
-                string studentName = null;
-
-                // Create a User object with the username and password entered
-                User obj1 = new User(username, password);
-
-                // Get the role and student name from the login method
-                (role, studentName) = obj1.login();
-
-                // If the role is valid, navigate to the appropriate home form
-                if (!string.IsNullOrEmpty(role))
-                {
-                    switch (role.ToLower())
-                    {
-                        case "admin":
-                            AdminHome adminHome = new AdminHome();
-                            adminHome.Show();
-                            this.Hide();
-                            break;
-                        case "student":
-                            StudentHomeForm studentHome = new StudentHomeForm(username, studentName ?? "");
-                            studentHome.Show();
-                            this.Hide();
-                            break;
-                        case "hr":
-                            HRHome companyHome = new HRHome(username, password);
-                            companyHome.Show();
-                            this.Hide();
-                            break;
-                        case "supervisor":
-                            frm_UniSupervisorHome uniSupervisorHome = new frm_UniSupervisorHome();
-                            uniSupervisorHome.Show();
-                            this.Hide();
-                            break;
-                        default:
-                            MessageBox.Show("Invalid user role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
-                }
-                else
-                {
-                    // If role is null or empty, show login failed message
-                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                // Clear text fields
-                if (txtUsername != null) txtUsername.Text = String.Empty;
-                if (txtPassword != null) txtPassword.Text = String.Empty;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Login error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // If role is null, show login failed message
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            txtUsername.Text = String.Empty;
+            txtPassword.Text = String.Empty ;   
         }
 
         private void LoginPage_Load(object sender, EventArgs e)
