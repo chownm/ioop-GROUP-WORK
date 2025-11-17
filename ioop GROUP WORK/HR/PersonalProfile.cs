@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Configuration;
 using System.Windows.Forms;
 
@@ -20,130 +19,155 @@ namespace ioop_GROUP_WORK.HR
 
         public PersonalProfile(string userIdentity, string Password) 
         { 
-            this.Useridentify = userIdentity;
-            this.password = Password;
-            
+            this.Useridentify = userIdentity ?? "";
+            this.password = Password ?? "";
         }
 
         public string getname()
         {
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("SELECT ContactPerson FROM CompanyProfile WHERE (Email = @identity OR ContactPerson = @identity) AND Password = @password", con);
-
-            cmd.Parameters.AddWithValue("@identity", this.Useridentify);
-            cmd.Parameters.AddWithValue("@password", this.password);
-
-            object value = cmd.ExecuteScalar();
-            con.Close();
-
-            if (value != null)
+            try
             {
-                string result = value.ToString();
+                con.Open();
 
-                return result;
+                SqlCommand cmd = new SqlCommand("SELECT ContactPerson FROM CompanyProfile WHERE (Email = @identity OR ContactPerson = @identity)", con);
+                cmd.Parameters.AddWithValue("@identity", Useridentify ?? "");
+
+                object value = cmd.ExecuteScalar();
+
+                if (value != null && value != DBNull.Value)
+                {
+                    return value.ToString();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                MessageBox.Show("Error retrieving company name: " + ex.Message);
             }
-            
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+
+            return null;
         }
 
         public string getprofilename()
         {
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT Username FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
-
-            cmd.Parameters.AddWithValue("@identity", this.Useridentify);
-            cmd.Parameters.AddWithValue("@password", this.password);
-
-            object value = cmd.ExecuteScalar();
-            con.Close();
-
-            if (value != null)
+            try
             {
-                string result = value.ToString();
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Username FROM users WHERE (Email = @identity OR Username = @identity) AND password = @password", con);
 
-                return result;
+                cmd.Parameters.AddWithValue("@identity", Useridentify ?? "");
+                cmd.Parameters.AddWithValue("@password", password ?? "");
+
+                object value = cmd.ExecuteScalar();
+
+                if (value != null && value != DBNull.Value)
+                {
+                    return value.ToString();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                MessageBox.Show("Error retrieving profile name: " + ex.Message);
             }
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+
+            return null;
         }
 
         public string getemail()
         {
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM users WHERE (Email = @identity OR Username = @identity) AND Password = @password", con);
-
-            cmd.Parameters.AddWithValue("@identity", this.Useridentify);
-            cmd.Parameters.AddWithValue("@password", this.password);
-
-            object value = cmd.ExecuteScalar();
-            con.Close();
-
-            if (value != null)
+            try
             {
-                string result = value.ToString();
+                con.Open();
 
-                return result;
+                SqlCommand cmd = new SqlCommand("SELECT Email FROM users WHERE (Email = @identity OR Username = @identity) AND password = @password", con);
+
+                cmd.Parameters.AddWithValue("@identity", Useridentify ?? "");
+                cmd.Parameters.AddWithValue("@password", password ?? "");
+
+                object value = cmd.ExecuteScalar();
+
+                if (value != null && value != DBNull.Value)
+                {
+                    return value.ToString();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                MessageBox.Show("Error retrieving email: " + ex.Message);
             }
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+
+            return null;
         }
         
         public string getpassword()
         {
-            return this.password; 
+            return password ?? "";
         }
 
         public string UpdatePersonalProfile(string newusername, string newpassword, string newemail)
         {
             string message = "";
-            con.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE users SET Username = @newusername, Password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND Password = @oldpassword ", con);
 
-            SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Password = @newpassword, Email = @newemail WHERE (ContactPerson = @oldusername OR Email = @oldemail) AND Password = @oldpassword ", con);
-
-            cmd.Parameters.AddWithValue("@newusername", newusername);
-            cmd.Parameters.AddWithValue("@password", newpassword);
-            cmd.Parameters.AddWithValue("@newemail", newemail);
-            cmd.Parameters.AddWithValue("@oldusername", this.Useridentify);
-            cmd.Parameters.AddWithValue("@oldemail", this.Useridentify);
-            cmd.Parameters.AddWithValue("@oldpassword", this.password);
-
-            cmd1.Parameters.AddWithValue("@newusername", newusername);
-            cmd1.Parameters.AddWithValue("@password", newpassword);
-            cmd1.Parameters.AddWithValue("@newemail", newemail);
-            cmd1.Parameters.AddWithValue("@oldusername", this.Useridentify);
-            cmd1.Parameters.AddWithValue("@oldemail", this.Useridentify);
-            cmd1.Parameters.AddWithValue("@oldpassword", this.password);
-
-            int rows = cmd.ExecuteNonQuery();
-            int rows1 = cmd.ExecuteNonQuery();
-
-            if (rows > 0)
+            try
             {
-                this.Useridentify = newusername;
-                this.password = newpassword;
-                this.Email = newemail;
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE users SET Username = @newusername, password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND password = @oldpassword ", con);
 
-                message = "Profile updated successfully!";
+                SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Email = @newemail WHERE (ContactPerson = @oldusername OR Email = @oldemail)", con);
+
+                cmd.Parameters.AddWithValue("@newusername", newusername ?? "");
+                cmd.Parameters.AddWithValue("@newpassword", newpassword ?? "");
+                cmd.Parameters.AddWithValue("@newemail", newemail ?? "");
+                cmd.Parameters.AddWithValue("@oldusername", Useridentify ?? "");
+                cmd.Parameters.AddWithValue("@oldemail", Useridentify ?? "");
+                cmd.Parameters.AddWithValue("@oldpassword", password ?? "");
+
+                cmd1.Parameters.AddWithValue("@newusername", newusername ?? "");
+                cmd1.Parameters.AddWithValue("@newemail", newemail ?? "");
+                cmd1.Parameters.AddWithValue("@oldusername", Useridentify ?? "");
+                cmd1.Parameters.AddWithValue("@oldemail", Useridentify ?? "");
+
+                int rows = cmd.ExecuteNonQuery();
+                int rows1 = cmd1.ExecuteNonQuery();
+
+                if (rows > 0 || rows1 > 0)
+                {
+                    this.Useridentify = newusername ?? "";
+                    this.password = newpassword ?? "";
+                    this.Email = newemail ?? "";
+
+                    message = "Profile updated successfully!";
+                }
+                else
+                {
+                    message = "Update failed: username/password incorrect or no records updated.";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                message = "Update failed: username/password incorrect.";
+                message = "Error updating profile: " + ex.Message;
+            }
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
             }
 
-            con.Close();
             return message;
         }
     }
-
-            
 }

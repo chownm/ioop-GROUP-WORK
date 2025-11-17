@@ -78,7 +78,8 @@ namespace ioop_GROUP_WORK.Admin
                     return;
                 }
 
-                int studentId = int.Parse(dgvStudents.SelectedRows[0].Cells["StudentId"].Value.ToString());
+                // studentID is varchar in DB, use string
+                string studentId = dgvStudents.SelectedRows[0].Cells["StudentId"].Value.ToString();
                 int supervisorId = int.Parse(cmbSupervisor.SelectedValue.ToString());
 
                 string result = adminMgr.AssignSupervisor(studentId, supervisorId);

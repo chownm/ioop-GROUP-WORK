@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ioop_GROUP_WORK.Admin;
 using ioop_GROUP_WORK.Login;
 
 namespace ioop_GROUP_WORK.Admin
@@ -27,7 +28,6 @@ namespace ioop_GROUP_WORK.Admin
 
         public static AdminManager Instance
         {
-
             get
             {
                 if (instance == null)
@@ -59,39 +59,64 @@ namespace ioop_GROUP_WORK.Admin
         /// Create new user with validation
         /// Ensures data integrity through parameterized queries
         /// </summary>
-        public string CreateUser(User user)
+        public string CreateUser(string id, string username, string email, string password, string role)
         {
             try
             {
-                if (!ValidationHelper.ValidatePassword(user.Password))
+                if (!ValidationHelper.ValidatePassword(password))
                 {
-                    MessageBox.Show("Password must be at least 8 characters with uppercase, lowercase, and numbers");
+                    return "Password must be at least 8 characters with uppercase, lowercase, and numbers!";
                 }
+
                 using (SqlConnection con = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
 
-                    // Check if username exists
-                    string checkQuery = "SELECT Username FROM users WHERE Username = @Username;";
-                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
+                    // Check if email exists
+                    if (!string.IsNullOrEmpty(email))
                     {
-                        checkCmd.Parameters.AddWithValue("@Username", user.Username);
-                        if ((int)checkCmd.ExecuteScalar() > 0)
-                            return "Username already exists";
+                        if (!ValidationHelper.ValidateEmail(email))
+                            return "Invalid email format";
+
+                        string checkEmailQuery = "SELECT COUNT(*) FROM users WHERE Email = @Email;";
+                        using (SqlCommand checkCmd = new SqlCommand(checkEmailQuery, con))
+                        {
+                            checkCmd.Parameters.AddWithValue("@Email", email);
+                            int emailExists = (int)checkCmd.ExecuteScalar();
+                            if (emailExists > 0)
+                                return "Email already exists";
+                        }
+                    }
+
+                    // Check if username exists
+                    if (!string.IsNullOrEmpty(username))
+                    {
+                        if (!ValidationHelper.ValidateUsername(username))
+                            return "Invalid username format";
+
+                        string checkUsernameQuery = "SELECT COUNT(*) FROM users WHERE Username = @Username;";
+                        using (SqlCommand checkCmd = new SqlCommand(checkUsernameQuery, con))
+                        {
+                            checkCmd.Parameters.AddWithValue("@Username", username);
+                            int usernameExists = (int)checkCmd.ExecuteScalar();
+                            if (usernameExists > 0)
+                                return "Username already exists";
+                        }
                     }
 
                     // Insert user with parameterized query (SQL injection prevention)
+                    // Database users table columns: Username, password, Email, role
                     string insertQuery = @"
-                        INSERT INTO users (Username, Email, Password, Role)
-                        VALUES (@Username, @Email, @password, @Role);";
+                        INSERT INTO users (Username, password, Email, role)
+                        VALUES (@Username, @password, @Email, @Role);";
 
                     using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@Username", user.Username);
-                        cmd.Parameters.AddWithValue("@Email", user.Email);
-                        cmd.Parameters.AddWithValue("@password", user.Password);
-                        cmd.Parameters.AddWithValue("@Role", user.Role);
+                        cmd.Parameters.AddWithValue("@Username", username ?? "");
+                        cmd.Parameters.AddWithValue("@Email", email ?? "");
+                        cmd.Parameters.AddWithValue("@password", password ?? "");
+                        cmd.Parameters.AddWithValue("@Role", role ?? "");
 
                         int result = cmd.ExecuteNonQuery();
                         return (result > 0) ? "User created successfully" : "Failed to create user";
@@ -111,11 +136,11 @@ namespace ioop_GROUP_WORK.Admin
         /// <summary>
         /// Update existing user information
         /// </summary>
-        public string UpdateUser(User user)
+        public string UpdateUser(int userId, string username, string email, string password, string role)
         {
             try
             {
-                if (!ValidationHelper.ValidateEmail(user.Email))
+                if (!ValidationHelper.ValidateEmail(email))
                     return "Invalid email format";
 
                 using (SqlConnection con = new SqlConnection(
@@ -125,16 +150,16 @@ namespace ioop_GROUP_WORK.Admin
 
                     string updateQuery = @"
                         UPDATE users 
-                        SET Username = @Username, Email = @Email, Password = @password, Role = @Role
-                        WHERE UserId = @id;";
+                        SET Username = @Username, Email = @Email, password = @password, role = @Role
+                        WHERE id = @id;";
 
                     using (SqlCommand cmd = new SqlCommand(updateQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@Username", user.Username);
-                        cmd.Parameters.AddWithValue("@Email", user.Email);
-                        cmd.Parameters.AddWithValue("@password", user.Password);
-                        cmd.Parameters.AddWithValue("@Role", user.Role);
-                        cmd.Parameters.AddWithValue("@id", user.Id);
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@password", password);
+                        cmd.Parameters.AddWithValue("@Role", role);
+                        cmd.Parameters.AddWithValue("@id", userId);
 
                         int result = cmd.ExecuteNonQuery();
                         return (result > 0) ? "User updated successfully" : "User not found";
@@ -149,7 +174,6 @@ namespace ioop_GROUP_WORK.Admin
 
         /// <summary>
         /// Delete/deactivate user account
-        /// Soft delete maintains audit trail
         /// </summary>
         public string DeleteUser(int userId)
         {
@@ -159,14 +183,14 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    
-                    string deleteQuery = "DELETE * FROM users WHERE Username = @Username;";
+
+                    string deleteQuery = "DELETE FROM users WHERE id = @id;";
 
                     using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
                     {
                         cmd.Parameters.AddWithValue("@id", userId);
                         int result = cmd.ExecuteNonQuery();
-                        return (result > 0) ? "User deactivated successfully" : "User not found";
+                        return (result > 0) ? "User deleted successfully" : "User not found";
                     }
                 }
             }
@@ -188,8 +212,9 @@ namespace ioop_GROUP_WORK.Admin
                 using (SqlConnection con = new SqlConnection(
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
+                    // select and alias columns to match UI expectations
                     string query = @"
-                        SELECT id, Username, Email, Role
+                        SELECT id AS UserId, Username, Email, role AS Role
                         FROM users
                         ORDER BY Username;";
 
@@ -221,12 +246,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     string query = @"
-                        SELECT id, Username, Email, Role
+                        SELECT id AS UserId, Username, Email, role AS Role
                         FROM users
                         WHERE Username LIKE @searchTerm 
                            OR Email LIKE @searchTerm 
-                           OR Role LIKE @searchTerm
-                        ORDER BY Username";
+                           OR role LIKE @searchTerm
+                        ORDER BY Username;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -252,7 +277,7 @@ namespace ioop_GROUP_WORK.Admin
         /// Create recruiter account with transaction support
         /// Ensures atomic operation for user and recruiter creation
         /// </summary>
-        public string CreateRecruiter(string username, string email, string password, 
+        public string CreateRecruiter(string username, string email, string password,
             int companyId, string fullName, string position, string phone)
         {
             try
@@ -267,9 +292,9 @@ namespace ioop_GROUP_WORK.Admin
                     {
                         // Create user account first
                         string userQuery = @"
-                            INSERT INTO users (Username, Email, Password, Role)
+                            INSERT INTO users (Username, Email, password, role)
                             OUTPUT INSERTED.id
-                            VALUES (@username, @email, @password, 'Recruiter')";
+                            VALUES (@username, @email, @password, 'Recruiter');";
 
                         int userId;
                         using (SqlCommand userCmd = new SqlCommand(userQuery, con, transaction))
@@ -284,7 +309,7 @@ namespace ioop_GROUP_WORK.Admin
                         // Create recruiter record
                         string recruiterQuery = @"
                             INSERT INTO Recruiters (UserId, CompanyId, FullName, Position, Phone, Email)
-                            VALUES (@userId, @companyId, @fullName, @position, @phone, @email)";
+                            VALUES (@userId, @companyId, @fullName, @position, @phone, @email);";
 
                         using (SqlCommand recruiterCmd = new SqlCommand(recruiterQuery, con, transaction))
                         {
@@ -333,12 +358,12 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     string query = @"
                         SELECT r.RecruiterId, r.FullName, r.Position, r.Phone, r.Email, 
-                               u.Username, u.IsActive, c.CompanyName
+                               u.Username, c.CompanyName
                         FROM Recruiters r
-                        JOIN Users u ON r.UserId = u.UserId
-                        JOIN Companies c ON r.CompanyId = c.CompanyId
+                        JOIN users u ON r.UserId = u.id
+                        JOIN CompanyProfile c ON r.CompanyId = c.Id
                         WHERE r.CompanyId = @companyId
-                        ORDER BY r.FullName";
+                        ORDER BY r.FullName;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -364,7 +389,7 @@ namespace ioop_GROUP_WORK.Admin
         /// Assign supervisor to student
         /// Creates many-to-one relationship for student monitoring
         /// </summary>
-        public string AssignSupervisor(int studentId, int supervisorId)
+        public string AssignSupervisor(string studentId, int supervisorId)
         {
             try
             {
@@ -373,18 +398,27 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     con.Open();
 
+                    // Attempt to update Students table if it has SupervisorId column
                     string query = @"
                         UPDATE Students 
                         SET SupervisorId = @supervisorId
-                        WHERE StudentId = @studentId";
+                        WHERE studentID = @studentId;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@supervisorId", supervisorId);
                         cmd.Parameters.AddWithValue("@studentId", studentId);
 
-                        int result = cmd.ExecuteNonQuery();
-                        return (result > 0) ? "Supervisor assigned successfully" : "Failed to assign";
+                        try
+                        {
+                            int result = cmd.ExecuteNonQuery();
+                            return (result > 0) ? "Supervisor assigned successfully" : "Failed to assign (no matching student)";
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            // Likely the Students table doesn't have SupervisorId column in the schema
+                            return "Cannot assign supervisor: database schema does not contain a SupervisorId column on Students. " + sqlEx.Message;
+                        }
                     }
                 }
             }
@@ -409,12 +443,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Users WHERE IsActive = 1";
+                    string query = "SELECT COUNT(*) FROM users;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         object result = cmd.ExecuteScalar();
-                        return result != null ? (int)result : 0;
+                        return result != null ? Convert.ToInt32(result) : 0;
                     }
                 }
             }
@@ -435,12 +469,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Students";
+                    string query = "SELECT COUNT(*) FROM Students;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         object result = cmd.ExecuteScalar();
-                        return result != null ? (int)result : 0;
+                        return result != null ? Convert.ToInt32(result) : 0;
                     }
                 }
             }
@@ -461,12 +495,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Companies";
+                    string query = "SELECT COUNT(*) FROM CompanyProfile;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         object result = cmd.ExecuteScalar();
-                        return result != null ? (int)result : 0;
+                        return result != null ? Convert.ToInt32(result) : 0;
                     }
                 }
             }
@@ -487,12 +521,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Recruiters";
+                    string query = "SELECT COUNT(*) FROM Recruiters;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         object result = cmd.ExecuteScalar();
-                        return result != null ? (int)result : 0;
+                        return result != null ? Convert.ToInt32(result) : 0;
                     }
                 }
             }
@@ -513,12 +547,12 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Applications WHERE Status = 'Pending'";
+                    string query = "SELECT COUNT(*) FROM StudentApplication WHERE Status = 'Pending';";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         object result = cmd.ExecuteScalar();
-                        return result != null ? (int)result : 0;
+                        return result != null ? Convert.ToInt32(result) : 0;
                     }
                 }
             }
@@ -546,15 +580,13 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     string query = @"
                         SELECT 
-                            COUNT(DISTINCT a.StudentId) AS TotalApplications,
-                            COUNT(DISTINCT CASE WHEN a.Status = 'Accepted' THEN a.StudentId END) AS Accepted,
-                            COUNT(DISTINCT CASE WHEN a.Status = 'Rejected' THEN a.StudentId END) AS Rejected,
-                            COUNT(DISTINCT CASE WHEN a.Status = 'Pending' THEN a.StudentId END) AS Pending,
-                            COUNT(DISTINCT i.InternshipId) AS TotalInternships,
-                            COUNT(DISTINCT c.CompanyId) AS CompaniesInvolved
-                        FROM Applications a
-                        FULL OUTER JOIN Internships i ON a.InternshipId = i.InternshipId
-                        FULL OUTER JOIN Companies c ON i.CompanyId = c.CompanyId";
+                            COUNT(*) AS TotalApplications,
+                            SUM(CASE WHEN Status = 'Accepted' THEN 1 ELSE 0 END) AS Accepted,
+                            SUM(CASE WHEN Status = 'Rejected' THEN 1 ELSE 0 END) AS Rejected,
+                            SUM(CASE WHEN Status = 'Pending' THEN 1 ELSE 0 END) AS Pending,
+                            (SELECT COUNT(*) FROM InternshipOffer) AS TotalInternships,
+                            (SELECT COUNT(DISTINCT CompanyName) FROM StudentApplication) AS CompaniesInvolved
+                        FROM StudentApplication;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -584,14 +616,10 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     string query = @"
-                        SELECT a.ApplicationId, s.StudentId, s.FullName AS StudentName, 
-                               i.Title AS InternshipTitle, c.CompanyName, a.ApplicationDate
-                        FROM Applications a
-                        JOIN Students s ON a.StudentId = s.StudentId
-                        JOIN Internships i ON a.InternshipId = i.InternshipId
-                        JOIN Companies c ON i.CompanyId = c.CompanyId
-                        WHERE a.Status = 'Pending'
-                        ORDER BY a.ApplicationDate DESC";
+                        SELECT StudentID, StudentName, Position, CompanyName, DateApplied, Status
+                        FROM StudentApplication
+                        WHERE Status = 'Pending'
+                        ORDER BY DateApplied DESC;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -622,15 +650,10 @@ namespace ioop_GROUP_WORK.Admin
                     ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     string query = @"
-                        SELECT a.ApplicationId, a.EvaluationDate, r.FullName AS RecruiterName, 
-                               s.FullName AS StudentName, i.Title, a.Status, a.PerformanceScore,
-                               a.PunctualityScore, a.CommunicationScore
-                        FROM Applications a
-                        LEFT JOIN Recruiters r ON a.RecruiterId = r.RecruiterId
-                        JOIN Students s ON a.StudentId = s.StudentId
-                        JOIN Internships i ON a.InternshipId = i.InternshipId
-                        WHERE a.RecruiterId IS NOT NULL
-                        ORDER BY a.EvaluationDate DESC";
+                        SELECT StudentID, StudentName, CompanyName, Position, DateApplied, Status
+                        FROM StudentApplication
+                        WHERE Status <> 'Pending'
+                        ORDER BY DateApplied DESC;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
@@ -682,12 +705,14 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        // small helper to quote/escape CSV fields
+        /// <summary>
+        /// Helper to quote/escape CSV fields
+        /// </summary>
         private string EscapeCsvField(object value)
         {
             if (value == null) return "";
             var s = value.ToString();
-            if (s.Contains("\"")) s = s.Replace("\"", "\"\"");
+            if (s.Contains("\"") ) s = s.Replace("\"", "\"\"");
             if (s.Contains(",") || s.Contains("\"") || s.Contains("\n") || s.Contains("\r"))
                 return "\"" + s + "\"";
             return s;
