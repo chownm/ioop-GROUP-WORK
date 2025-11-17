@@ -10,16 +10,29 @@ namespace ioop_GROUP_WORK.Student
     {
         private string internshipPosition;
         private string companyName;
-        public UploadResumeForm(string position)
+        public UploadResumeForm(string position, string companyName)
         {
             InitializeComponent();
             internshipPosition = position;
+            this.companyName = companyName;
+
+            // Set the company name and position fields in the form
+            lblCompanyName.Text = companyName; 
+            lblPosition.Text = position;
+
+            picPreview.Width = 495;
+            picPreview.Height = 700;
+
+            picPreview.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        
+
+
+
 
         private void btnUploadResume_Click(object sender, EventArgs e)
         {
+            // Open file dialog to select the resume image
             OpenFileDialog opd = new OpenFileDialog();
             opd.Filter = "Image Files|*.jpg;*.jpeg;*.png";
             opd.Title = "Select Resume Image";
@@ -34,9 +47,19 @@ namespace ioop_GROUP_WORK.Student
                     return;  // Exit the method if the file type is invalid
                 }
 
+                // Set the PictureBox size to A4 dimensions (portrait size)
+                picPreview.Width = 495;  // Set to A4 width (portrait)
+                picPreview.Height = 700; // Set to A4 height (portrait)
+
+                // Load the image into the PictureBox
                 picPreview.ImageLocation = opd.FileName;
+
+                // Set the PictureBox SizeMode to Zoom to maintain aspect ratio
+                picPreview.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
+
+
 
 
 

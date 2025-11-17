@@ -30,18 +30,18 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtStuID = new System.Windows.Forms.TextBox();
+            this.txtStuName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.picPreview = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnUploadResume = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblPosition = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.picPreview = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtStuName = new System.Windows.Forms.TextBox();
-            this.txtStuID = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(671, 111);
+            this.label1.Location = new System.Drawing.Point(670, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(576, 90);
             this.label1.TabIndex = 12;
@@ -72,18 +72,74 @@
             this.groupBox1.Controls.Add(this.lblPosition);
             this.groupBox1.Controls.Add(this.lblCompanyName);
             this.groupBox1.Controls.Add(this.btnSubmit);
-            this.groupBox1.Location = new System.Drawing.Point(459, 204);
+            this.groupBox1.Location = new System.Drawing.Point(459, 160);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(999, 702);
+            this.groupBox1.Size = new System.Drawing.Size(999, 753);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
+            // 
+            // txtStuID
+            // 
+            this.txtStuID.Location = new System.Drawing.Point(29, 356);
+            this.txtStuID.Name = "txtStuID";
+            this.txtStuID.Size = new System.Drawing.Size(437, 53);
+            this.txtStuID.TabIndex = 24;
+            // 
+            // txtStuName
+            // 
+            this.txtStuName.Location = new System.Drawing.Point(29, 229);
+            this.txtStuName.Name = "txtStuName";
+            this.txtStuName.Size = new System.Drawing.Size(437, 53);
+            this.txtStuName.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(22, 189);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 37);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Name";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(22, 316);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(171, 37);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Student ID";
+            // 
+            // picPreview
+            // 
+            this.picPreview.Location = new System.Drawing.Point(498, 37);
+            this.picPreview.Name = "picPreview";
+            this.picPreview.Size = new System.Drawing.Size(495, 700);
+            this.picPreview.TabIndex = 20;
+            this.picPreview.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Navy;
+            this.label2.Location = new System.Drawing.Point(24, 522);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(436, 25);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "*Please upload an image file (JPEG, PNG)";
             // 
             // btnUploadResume
             // 
             this.btnUploadResume.BackColor = System.Drawing.Color.Navy;
             this.btnUploadResume.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUploadResume.ForeColor = System.Drawing.Color.White;
-            this.btnUploadResume.Location = new System.Drawing.Point(30, 371);
+            this.btnUploadResume.Location = new System.Drawing.Point(29, 438);
             this.btnUploadResume.Name = "btnUploadResume";
             this.btnUploadResume.Size = new System.Drawing.Size(431, 73);
             this.btnUploadResume.TabIndex = 18;
@@ -96,7 +152,7 @@
             this.btnBack.BackColor = System.Drawing.Color.Navy;
             this.btnBack.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(30, 589);
+            this.btnBack.Location = new System.Drawing.Point(29, 656);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(431, 81);
             this.btnBack.TabIndex = 17;
@@ -131,7 +187,7 @@
             this.btnSubmit.BackColor = System.Drawing.Color.Navy;
             this.btnSubmit.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(30, 502);
+            this.btnSubmit.Location = new System.Drawing.Point(29, 569);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(431, 81);
             this.btnSubmit.TabIndex = 12;
@@ -142,62 +198,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(25, 455);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(436, 25);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "*Please upload an image file (JPEG, PNG)";
-            // 
-            // picPreview
-            // 
-            this.picPreview.Location = new System.Drawing.Point(512, 61);
-            this.picPreview.Name = "picPreview";
-            this.picPreview.Size = new System.Drawing.Size(469, 609);
-            this.picPreview.TabIndex = 20;
-            this.picPreview.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(23, 265);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(171, 37);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Student ID";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(23, 169);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 37);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Name";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // txtStuName
-            // 
-            this.txtStuName.Location = new System.Drawing.Point(30, 209);
-            this.txtStuName.Name = "txtStuName";
-            this.txtStuName.Size = new System.Drawing.Size(437, 53);
-            this.txtStuName.TabIndex = 23;
-            // 
-            // txtStuID
-            // 
-            this.txtStuID.Location = new System.Drawing.Point(30, 305);
-            this.txtStuID.Name = "txtStuID";
-            this.txtStuID.Size = new System.Drawing.Size(437, 53);
-            this.txtStuID.TabIndex = 24;
             // 
             // UploadResumeForm
             // 
