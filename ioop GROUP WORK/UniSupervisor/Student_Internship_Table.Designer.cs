@@ -43,9 +43,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(751, 40);
+            this.label1.Location = new System.Drawing.Point(396, 33);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(472, 45);
+            this.label1.Size = new System.Drawing.Size(381, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "Student Internship Review";
             // 
@@ -53,18 +54,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(570, 108);
+            this.label2.Location = new System.Drawing.Point(252, 84);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(767, 37);
+            this.label2.Size = new System.Drawing.Size(656, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Choose a student to show his / her internship report record";
             // 
             // btn_select
             // 
             this.btn_select.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_select.Location = new System.Drawing.Point(516, 357);
+            this.btn_select.Location = new System.Drawing.Point(211, 286);
+            this.btn_select.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_select.Name = "btn_select";
-            this.btn_select.Size = new System.Drawing.Size(199, 51);
+            this.btn_select.Size = new System.Drawing.Size(149, 41);
             this.btn_select.TabIndex = 3;
             this.btn_select.Text = "Select";
             this.btn_select.UseVisualStyleBackColor = true;
@@ -73,9 +76,10 @@
             // btn_Refresh
             // 
             this.btn_Refresh.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Refresh.Location = new System.Drawing.Point(892, 357);
+            this.btn_Refresh.Location = new System.Drawing.Point(493, 286);
+            this.btn_Refresh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(199, 51);
+            this.btn_Refresh.Size = new System.Drawing.Size(149, 41);
             this.btn_Refresh.TabIndex = 3;
             this.btn_Refresh.Text = "Refresh";
             this.btn_Refresh.UseVisualStyleBackColor = true;
@@ -84,9 +88,10 @@
             // btn_Exit
             // 
             this.btn_Exit.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Exit.Location = new System.Drawing.Point(1233, 357);
+            this.btn_Exit.Location = new System.Drawing.Point(749, 286);
+            this.btn_Exit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_Exit.Name = "btn_Exit";
-            this.btn_Exit.Size = new System.Drawing.Size(199, 51);
+            this.btn_Exit.Size = new System.Drawing.Size(149, 41);
             this.btn_Exit.TabIndex = 3;
             this.btn_Exit.Text = "Exit";
             this.btn_Exit.UseVisualStyleBackColor = true;
@@ -96,9 +101,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(613, 165);
+            this.label3.Location = new System.Drawing.Point(284, 130);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 37);
+            this.label3.Size = new System.Drawing.Size(146, 31);
             this.label3.TabIndex = 1;
             this.label3.Text = "Student ID :";
             // 
@@ -106,9 +112,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(570, 237);
+            this.label4.Location = new System.Drawing.Point(252, 189);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(219, 37);
+            this.label4.Size = new System.Drawing.Size(182, 31);
             this.label4.TabIndex = 1;
             this.label4.Text = "Student Name :";
             // 
@@ -116,9 +123,10 @@
             // 
             this.cmb_student_id.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_student_id.FormattingEnabled = true;
-            this.cmb_student_id.Location = new System.Drawing.Point(812, 161);
+            this.cmb_student_id.Location = new System.Drawing.Point(433, 127);
+            this.cmb_student_id.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmb_student_id.Name = "cmb_student_id";
-            this.cmb_student_id.Size = new System.Drawing.Size(411, 45);
+            this.cmb_student_id.Size = new System.Drawing.Size(309, 38);
             this.cmb_student_id.TabIndex = 4;
             this.cmb_student_id.SelectedIndexChanged += new System.EventHandler(this.cmb_student_id_SelectedIndexChanged);
             // 
@@ -126,16 +134,17 @@
             // 
             this.lbl_student_name.AutoSize = true;
             this.lbl_student_name.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_student_name.Location = new System.Drawing.Point(805, 237);
+            this.lbl_student_name.Location = new System.Drawing.Point(428, 189);
+            this.lbl_student_name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_student_name.Name = "lbl_student_name";
-            this.lbl_student_name.Size = new System.Drawing.Size(0, 37);
+            this.lbl_student_name.Size = new System.Drawing.Size(0, 31);
             this.lbl_student_name.TabIndex = 1;
             // 
             // frm_Student_Internship_Table
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.ClientSize = new System.Drawing.Size(1155, 687);
             this.Controls.Add(this.cmb_student_id);
             this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.btn_Refresh);
@@ -145,6 +154,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_Student_Internship_Table";
             this.Text = "Student_Internship_Review";
             this.Load += new System.EventHandler(this.frm_Student_Internship_Table_Load);
