@@ -10,7 +10,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ioop_GROUP_WORK.Login
 {
@@ -99,9 +98,9 @@ namespace ioop_GROUP_WORK.Login
         }
 
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
-        
-        //Methods
-        //FOR STUDENT PART (DO NOT DELETE)
+
+        // Methods
+        // FOR STUDENT PART (DO NOT DELETE)
         public (string role, string studentName) login()
         {
             string identifyrole = "";
@@ -110,6 +109,8 @@ namespace ioop_GROUP_WORK.Login
             try
             {
                 con.Open();
+
+                // Check the user's role based on either username or email and password
                 SqlCommand cmd = new SqlCommand("SELECT Role FROM Users WHERE (Username=@u OR Email = @e) AND Password=@p", con);
                 cmd.Parameters.AddWithValue("@u", UserIdentify ?? "");
                 cmd.Parameters.AddWithValue("@e", UserIdentify ?? "");
@@ -123,24 +124,25 @@ namespace ioop_GROUP_WORK.Login
                 }
                 rd.Close();
 
-                //FOR STUDENT PART (DO NOT DELETE)
-                //Fetch student name if the role is student
+                // If the role is student, fetch the student name using the Username (which is actually StudentID)
                 if (!string.IsNullOrEmpty(identifyrole) && identifyrole.ToLower() == "student")
                 {
-                    StudentV2 student = new StudentV2();
-                    if (!string.IsNullOrEmpty(student.StudentID))
-                    {
-                        SqlCommand studentCmd = new SqlCommand("SELECT StudentName FROM Students WHERE StudentID=@studentID", con);
-                        studentCmd.Parameters.AddWithValue("@studentID", student.StudentID ?? "");
+                    // The Username is actually the StudentID for students
+                    string studentID = UserIdentify;  // Use UserIdentify (which is the StudentID) directly
 
-                        SqlDataReader studentReader = studentCmd.ExecuteReader();
-                        if (studentReader.Read())
-                        {
-                            if (studentReader["studentName"] != DBNull.Value)
-                                studentName = studentReader["studentName"].ToString();
-                        }
-                        studentReader.Close();
+                    // Fetch student name from Students table using StudentID (which is stored in Username)
+                    SqlCommand studentCmd = new SqlCommand(
+                        "SELECT StudentName FROM Students WHERE StudentID=@studentID OR Email=@email", con);
+                    studentCmd.Parameters.AddWithValue("@studentID", studentID);
+                    studentCmd.Parameters.AddWithValue("@email", UserIdentify);  // Include Email to check in Students table
+
+                    SqlDataReader studentReader = studentCmd.ExecuteReader();
+                    if (studentReader.Read())
+                    {
+                        if (studentReader["StudentName"] != DBNull.Value)
+                            studentName = studentReader["StudentName"].ToString();
                     }
+                    studentReader.Close();
                 }
 
             }
@@ -154,8 +156,12 @@ namespace ioop_GROUP_WORK.Login
                     con.Close();
             }
 
-            return (identifyrole, studentName);
+            studentName = studentName ?? "Unknown Student";  // If studentName is null, use "Unknown Student"
+
+            return (identifyrole, studentName);  // Return role and studentName
         }
+
+
 
         public string identify(string role, string studentName)
         {
