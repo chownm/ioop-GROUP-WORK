@@ -23,6 +23,7 @@ namespace ioop_GROUP_WORK.HR
             InitializeComponent();
             
         }
+        
         private void lblTitle_Click(object sender, EventArgs e)
         {
             
@@ -81,16 +82,17 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            PersonalProfile PP = new PersonalProfile(Identify,Password);
-            string name = PP.getname();
-            string password = PP.getpassword();
+            string name = Identify;
+            string password = Password;
 
             byte[] logoBytes = getPhoto();
 
             CP company = new CP(txtCompanyName.Text, txtContactPerson.Text, txtEmail.Text, txtPhone.Text, richTextBox1.Text, rtbDescription.Text, logoBytes);
 
 
-           MessageBox.Show(company.SaveInfo(name, password));
+            string result = company.SaveInfo(name, password);
+            MessageBox.Show(result);
+
         }
 
         private void txtEmail_TextChanged(object sender, EventArgs e)
@@ -104,6 +106,8 @@ namespace ioop_GROUP_WORK.HR
             string name = PP.getprofilename();
             string email = PP.getemail();
             string password = PP.getpassword();
+
+
 
             CP company = new CP(name,password);
             txtCompanyName.Text = company.Companyname;

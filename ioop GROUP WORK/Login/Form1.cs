@@ -63,7 +63,7 @@ namespace ioop_GROUP_WORK
                         this.Hide();
                         break;
                     case "HR":
-                        HRHome companyHome = new HRHome();
+                        HRHome companyHome = new HRHome(txtUsername.Text,txtPassword.Text);
                         companyHome.Show();
                         this.Hide();
                         break;

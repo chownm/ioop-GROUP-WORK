@@ -48,30 +48,21 @@ namespace ioop_GROUP_WORK.HR
             try
             {
                 con.Open();
-
-                // Compute next StudentID because InternshipOffer.StudentID is NOT NULL and not identity in schema
-                int nextId = 1;
-                using (SqlCommand idCmd = new SqlCommand("SELECT ISNULL(MAX(StudentID), 0) + 1 FROM InternshipOffer", con))
-                {
-                    object idObj = idCmd.ExecuteScalar();
-                    if (idObj != null && int.TryParse(idObj.ToString(), out int parsed))
-                        nextId = parsed;
-                }
-                               
+                           
+                              
                 SqlCommand cmd = new SqlCommand(
                     "INSERT INTO InternshipOffer " +
-                    "(StudentID, StudentName, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
-                    "VALUES (@studentId, @studentName, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
-
-                // Use jobTitle as StudentName field to preserve existing logic (UI supplies jobTitle)
-                cmd.Parameters.AddWithValue("@studentId", nextId);
-                cmd.Parameters.AddWithValue("@studentName", jobTitle ?? "");
+                    "(JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered, CompanyName) " +
+                    "VALUES (@jobtitle, @position, @startDate, @endDate, @salary, @description, @dateO, @companyname)", con);
+                                
+                cmd.Parameters.AddWithValue("@jobtitle", JobTitle ?? "");
                 cmd.Parameters.AddWithValue("@position", Position ?? "");
                 cmd.Parameters.AddWithValue("@startDate", Start);
                 cmd.Parameters.AddWithValue("@endDate", End);
                 cmd.Parameters.AddWithValue("@salary", Salary);
                 cmd.Parameters.AddWithValue("@description", JobDescription ?? "");
                 cmd.Parameters.AddWithValue("@dateO", timenow);
+                cmd.Parameters.AddWithValue("@companyname", companyname);
 
                 int result = cmd.ExecuteNonQuery();
 

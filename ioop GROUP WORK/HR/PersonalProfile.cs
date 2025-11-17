@@ -127,7 +127,7 @@ namespace ioop_GROUP_WORK.HR
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE users SET Username = @newusername, password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND password = @oldpassword ", con);
 
-                SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Email = @newemail WHERE (ContactPerson = @oldusername OR Email = @oldemail)", con);
+                SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Email = @newemail, password = @newpassword WHERE (ContactPerson = @oldusername OR Email = @oldemail) AND password = @oldpassword", con);
 
                 cmd.Parameters.AddWithValue("@newusername", newusername ?? "");
                 cmd.Parameters.AddWithValue("@newpassword", newpassword ?? "");
@@ -137,14 +137,16 @@ namespace ioop_GROUP_WORK.HR
                 cmd.Parameters.AddWithValue("@oldpassword", password ?? "");
 
                 cmd1.Parameters.AddWithValue("@newusername", newusername ?? "");
+                cmd1.Parameters.AddWithValue("@newpassword", newpassword ?? "");
                 cmd1.Parameters.AddWithValue("@newemail", newemail ?? "");
                 cmd1.Parameters.AddWithValue("@oldusername", Useridentify ?? "");
                 cmd1.Parameters.AddWithValue("@oldemail", Useridentify ?? "");
+                cmd1.Parameters.AddWithValue("@oldpassword", password ?? "");
 
                 int rows = cmd.ExecuteNonQuery();
                 int rows1 = cmd1.ExecuteNonQuery();
 
-                if (rows > 0 || rows1 > 0)
+                if (rows > 0 )
                 {
                     this.Useridentify = newusername ?? "";
                     this.password = newpassword ?? "";
@@ -169,5 +171,7 @@ namespace ioop_GROUP_WORK.HR
 
             return message;
         }
+
+
     }
 }

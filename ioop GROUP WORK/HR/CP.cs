@@ -47,11 +47,11 @@ namespace ioop_GROUP_WORK.HR
 
         }
 
-        public CP(string name, string password)
+        public CP(string identify, string password)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE ContactPerson = @Contactp AND Password = @password ", con);
-            cmd.Parameters.AddWithValue("@Contactp", name);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyProfile WHERE (ContactPerson = @identify OR Email = @identify) AND Password = @password ", con);
+            cmd.Parameters.AddWithValue("@identify", identify);
             cmd.Parameters.AddWithValue("@password", password);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -88,7 +88,7 @@ namespace ioop_GROUP_WORK.HR
             {
 
                 SqlCommand insertCmd = new SqlCommand(
-                "INSERT INTO CompanyProfile (CompanyName, ContactPerson, Email, Contactn, Address, CompanyDescription, CompanyLogo, Password) " +
+                "INSERT INTO CompanyProfile (CompanyName, ContactPerson, Email, ContactNumber, Address, CompanyDescription, CompanyLogo, Password) " +
                 "VALUES (@companyn, @contactp, @e, @cn, @a, @Companyd, @logo, @passw)", con);
 
                 insertCmd.Parameters.AddWithValue("@companyn", this.Companyname);
@@ -115,7 +115,7 @@ namespace ioop_GROUP_WORK.HR
             {
 
                 SqlCommand cmd = new SqlCommand(
-            "UPDATE CompanyProfile SET CompanyName = @companyn, ContactPerson = @contactp, Email = @e, Contactn = @cn, Address = @a, CompanyDescription = @Companyd, CompanyLogo = @logo WHERE ContactPerson = @checkperson AND Password = @passw ", con);
+            "UPDATE CompanyProfile SET CompanyName = @companyn, ContactPerson = @contactp, Email = @e, ContactNumber = @cn, Address = @a, CompanyDescription = @Companyd, CompanyLogo = @logo WHERE ContactPerson = @checkperson AND Password = @passw ", con);
 
                 cmd.Parameters.AddWithValue("@companyn", this.Companyname);
                 cmd.Parameters.AddWithValue("@contactp", this.contactperson);
