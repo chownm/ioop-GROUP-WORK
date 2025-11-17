@@ -52,6 +52,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void StudentProfileForm_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
             {
                 try

@@ -94,7 +94,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void StudentHomeForm_Load(object sender, EventArgs e)
         {
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

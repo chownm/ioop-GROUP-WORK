@@ -3,6 +3,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Drawing;
 
 namespace ioop_GROUP_WORK.Student
 {
@@ -48,8 +49,8 @@ namespace ioop_GROUP_WORK.Student
                 }
 
                 // Set the PictureBox size to A4 dimensions (portrait size)
-                picPreview.Width = 495;  // Set to A4 width (portrait)
-                picPreview.Height = 700; // Set to A4 height (portrait)
+                picPreview.Width = 495;  // Set to A4 width 
+                picPreview.Height = 700; // Set to A4 height
 
                 // Load the image into the PictureBox
                 picPreview.ImageLocation = opd.FileName;
@@ -199,7 +200,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void UploadReportForm_Load(object sender, EventArgs e)
         {
-            
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void label4_Click(object sender, EventArgs e)

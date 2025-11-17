@@ -109,6 +109,7 @@
             this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "ViewFeedbackForm";
             this.Text = "ViewFeedbackForm";
+            this.Load += new System.EventHandler(this.ViewFeedbackForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeedback)).EndInit();

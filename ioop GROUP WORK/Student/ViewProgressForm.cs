@@ -19,7 +19,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void ViewProgressForm_Load(object sender, EventArgs e)
         {
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

@@ -19,7 +19,12 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        private void ViewFeedbackForm_Load(object sender, EventArgs e)
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

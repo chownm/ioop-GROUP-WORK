@@ -60,6 +60,7 @@ namespace ioop_GROUP_WORK.Student
 
         private void ViewApplicationStatusForm_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             LoadApplications();
         }
     }
