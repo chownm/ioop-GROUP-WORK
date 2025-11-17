@@ -1,6 +1,6 @@
 ﻿namespace ioop_GROUP_WORK.Student
 {
-    partial class ViewApplicationStatusForm
+    partial class InternshipListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
-            this.lblJobTitle = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             this.labell = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelll = new System.Windows.Forms.Label();
@@ -119,7 +119,7 @@
             this.grpOfferDetails.Controls.Add(this.label5);
             this.grpOfferDetails.Controls.Add(this.label6);
             this.grpOfferDetails.Controls.Add(this.lblPosition);
-            this.grpOfferDetails.Controls.Add(this.lblJobTitle);
+            this.grpOfferDetails.Controls.Add(this.lblCompanyName);
             this.grpOfferDetails.Controls.Add(this.labell);
             this.grpOfferDetails.Controls.Add(this.label2);
             this.grpOfferDetails.Controls.Add(this.labelll);
@@ -206,16 +206,16 @@
             this.lblPosition.TabIndex = 21;
             this.lblPosition.Text = "[Position]";
             // 
-            // lblJobTitle
+            // lblCompanyName
             // 
-            this.lblJobTitle.AutoSize = true;
-            this.lblJobTitle.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJobTitle.ForeColor = System.Drawing.Color.Navy;
-            this.lblJobTitle.Location = new System.Drawing.Point(282, 138);
-            this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(163, 37);
-            this.lblJobTitle.TabIndex = 20;
-            this.lblJobTitle.Text = "[Job Title]";
+            this.lblCompanyName.AutoSize = true;
+            this.lblCompanyName.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompanyName.ForeColor = System.Drawing.Color.Navy;
+            this.lblCompanyName.Location = new System.Drawing.Point(107, 147);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(257, 37);
+            this.lblCompanyName.TabIndex = 20;
+            this.lblCompanyName.Text = "[CompanyName]";
             // 
             // labell
             // 
@@ -244,11 +244,11 @@
             this.labelll.AutoSize = true;
             this.labelll.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelll.ForeColor = System.Drawing.Color.Navy;
-            this.labelll.Location = new System.Drawing.Point(108, 138);
+            this.labelll.Location = new System.Drawing.Point(107, 81);
             this.labelll.Name = "labelll";
-            this.labelll.Size = new System.Drawing.Size(168, 37);
+            this.labelll.Size = new System.Drawing.Size(270, 37);
             this.labelll.TabIndex = 18;
-            this.labelll.Text = "Job Title : ";
+            this.labelll.Text = "Company Name : ";
             // 
             // ViewApplicationStatusForm
             // 
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblPosition;
-        private System.Windows.Forms.Label lblJobTitle;
+        private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.Label labell;
         private System.Windows.Forms.Label labelll;
     }

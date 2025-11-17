@@ -106,6 +106,7 @@ namespace ioop_GROUP_WORK.Student
                 // Pass Position and Company Name to UploadResumeForm
                 UploadResumeForm uploadForm = new UploadResumeForm(position, companyName);
                 uploadForm.ShowDialog();
+                this.Close();
             }
             else
             {

@@ -172,25 +172,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Student\ViewApplicationStatus.cs" />
+    <Compile Include="Student\ChangePassword.cs" />
     <Compile Include="Student\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Student\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Student.cs" />
+    <Compile Include="Student\InternshipList.cs" />
     <Compile Include="Student\StudentCheckInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Student\StudentCheckInForm.Designer.cs">
       <DependentUpon>StudentCheckInForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentHome.cs" />
+    <Compile Include="Student\StudentProfile.cs" />
     <Compile Include="Student\StudentProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Student\StudentProfileForm.Designer.cs">
       <DependentUpon>StudentProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentRegister.cs" />
     <Compile Include="Student\StudentReportUploadForm.cs">
       <SubType>Form</SubType>
     </Compile>

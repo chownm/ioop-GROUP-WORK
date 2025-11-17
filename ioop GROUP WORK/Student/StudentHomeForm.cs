@@ -5,106 +5,80 @@ namespace ioop_GROUP_WORK.Student
 {
     public partial class StudentHomeForm : Form
     {
-        private string studentID;
-        private string studentName;
+        // Attributes
+        private StudentHome studentHome;
+
+        // Constructor
         public StudentHomeForm()
         {
             InitializeComponent();
         }
 
-
-
         public StudentHomeForm(string id, string name)
         {
             InitializeComponent();
-            studentID = id;
-            studentName = name;
+            // Initialize the StudentHome object with student data
+            studentHome = new StudentHome(id, name);
 
-            // Display Name in a label
-            lblWelcome.Text = $"Welcome, {studentName}";
+            // Display the welcome message on the label
+            lblWelcome.Text = studentHome.GetWelcomeMessage();
         }
 
-
+        // Button click handlers that delegate logic to StudentHome
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            StudentProfileForm profile = new StudentProfileForm(studentID);
-            profile.ShowDialog();
+            studentHome.OpenProfileForm();
         }
-
-
 
         private void btnInternship_Click(object sender, EventArgs e)
         {
-            InternshipListForm internship = new InternshipListForm();
-            internship.ShowDialog();
+            studentHome.OpenInternshipForm();
         }
-
-
 
         private void btnApplications_Click(object sender, EventArgs e)
         {
-            ViewApplicationStatusForm application = new ViewApplicationStatusForm(studentID);
-            application.ShowDialog();
+            studentHome.OpenApplicationsForm();
         }
-
-
 
         private void btnUploadReport_Click(object sender, EventArgs e)
         {
-            StudentReportUploadForm report = new StudentReportUploadForm(studentID);
-            report.ShowDialog();
+            studentHome.OpenReportUploadForm();
         }
-
-
 
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            ViewFeedbackForm feedback = new ViewFeedbackForm(studentID);
-            feedback.ShowDialog();
+            studentHome.OpenFeedbackForm();
         }
-
-
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            StudentCheckInForm checkin = new StudentCheckInForm(studentID, studentName);
-            checkin.ShowDialog();
+            studentHome.OpenCheckInForm();
         }
-
-
 
         private void btnProgress_Click(object sender, EventArgs e)
         {
-            ViewCheckInRecordForm progress = new ViewCheckInRecordForm(studentID);
-            progress.ShowDialog();
+            studentHome.OpenProgressForm();
         }
-
-
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             var confirmation = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirmation == DialogResult.Yes) 
+            if (confirmation == DialogResult.Yes)
             {
                 this.Close();
                 new LoginPage().Show();
             }
         }
 
-
-
         private void btnChangePass_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm changepass = new ChangePasswordForm(studentID);
-            changepass.ShowDialog();
+            studentHome.OpenChangePasswordForm();
         }
 
         private void StudentHomeForm_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
         }
-
-        
     }
 }

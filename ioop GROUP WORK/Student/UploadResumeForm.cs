@@ -91,6 +91,8 @@ namespace ioop_GROUP_WORK.Student
                 SaveApplicationToDatabase(txtStuID.Text, txtStuName.Text, position, companyName, imageBytes);
 
                 MessageBox.Show("Application submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
             catch(Exception ex) 
             {
