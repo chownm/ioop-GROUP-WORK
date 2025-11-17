@@ -55,11 +55,11 @@ namespace ioop_GROUP_WORK.HR
             // Guard against null selection
             if (cmbJobTitle.SelectedItem == null) return;
 
-            cmbJobTitle.Items.Clear();
             string selectedDept = cmbJobTitle.SelectedItem.ToString();
             List<string> positions = MO.AddJobPosition(selectedDept);
+            
 
-            cmbJobTitle.Items.AddRange(positions.ToArray());
+            cmbPosition.Items.AddRange(positions.ToArray());
 
             if (cmbJobTitle.Items.Count > 0)
             {

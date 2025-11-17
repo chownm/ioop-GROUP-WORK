@@ -141,5 +141,10 @@ namespace ioop_GROUP_WORK.HR
         {
 
         }
+
+        private void pbLogo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -149,6 +149,7 @@
             this.pbLogo.Size = new System.Drawing.Size(356, 268);
             this.pbLogo.TabIndex = 8;
             this.pbLogo.TabStop = false;
+            this.pbLogo.Click += new System.EventHandler(this.pbLogo_Click);
             // 
             // rtbDescription
             // 
@@ -264,7 +265,7 @@
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.lblTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CompanyProfile";
             this.Text = "CompanyProfile";
             this.Load += new System.EventHandler(this.CompanyProfile_Load_1);
