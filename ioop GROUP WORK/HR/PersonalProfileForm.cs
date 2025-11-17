@@ -38,7 +38,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            HRHome back = new HRHome();
+            HRHome back = new HRHome(Identify,Password);
             this.Close();
             back.ShowDialog();
         }
