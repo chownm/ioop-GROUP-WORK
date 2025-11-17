@@ -46,9 +46,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(583, 32);
+            this.label1.Location = new System.Drawing.Point(437, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(393, 37);
+            this.label1.Size = new System.Drawing.Size(326, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "Student Check In Progress";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -57,9 +58,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(99, 172);
+            this.label2.Location = new System.Drawing.Point(74, 140);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 37);
+            this.label2.Size = new System.Drawing.Size(201, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Student Name ：";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -68,9 +70,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(99, 107);
+            this.label3.Location = new System.Drawing.Point(74, 87);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(196, 37);
+            this.label3.Size = new System.Drawing.Size(163, 31);
             this.label3.TabIndex = 1;
             this.label3.Text = "Student ID ：";
             this.label3.Click += new System.EventHandler(this.label2_Click);
@@ -79,9 +82,10 @@
             // 
             this.lbl_student_id.AutoSize = true;
             this.lbl_student_id.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_student_id.Location = new System.Drawing.Point(361, 107);
+            this.lbl_student_id.Location = new System.Drawing.Point(271, 87);
+            this.lbl_student_id.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_student_id.Name = "lbl_student_id";
-            this.lbl_student_id.Size = new System.Drawing.Size(30, 37);
+            this.lbl_student_id.Size = new System.Drawing.Size(25, 31);
             this.lbl_student_id.TabIndex = 1;
             this.lbl_student_id.Text = "s";
             this.lbl_student_id.Click += new System.EventHandler(this.label2_Click);
@@ -90,9 +94,10 @@
             // 
             this.lbl_student_name.AutoSize = true;
             this.lbl_student_name.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_student_name.Location = new System.Drawing.Point(399, 172);
+            this.lbl_student_name.Location = new System.Drawing.Point(299, 140);
+            this.lbl_student_name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_student_name.Name = "lbl_student_name";
-            this.lbl_student_name.Size = new System.Drawing.Size(30, 37);
+            this.lbl_student_name.Size = new System.Drawing.Size(25, 31);
             this.lbl_student_name.TabIndex = 1;
             this.lbl_student_name.Text = "s";
             this.lbl_student_name.Click += new System.EventHandler(this.label2_Click);
@@ -101,9 +106,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(99, 308);
+            this.label4.Location = new System.Drawing.Point(74, 250);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(357, 37);
+            this.label4.Size = new System.Drawing.Size(298, 31);
             this.label4.TabIndex = 1;
             this.label4.Text = "Check In Record View ：";
             this.label4.Click += new System.EventHandler(this.label2_Click);
@@ -112,9 +118,10 @@
             // 
             this.lbl_check_in_percentage.AutoSize = true;
             this.lbl_check_in_percentage.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_check_in_percentage.Location = new System.Drawing.Point(490, 233);
+            this.lbl_check_in_percentage.Location = new System.Drawing.Point(368, 189);
+            this.lbl_check_in_percentage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_check_in_percentage.Name = "lbl_check_in_percentage";
-            this.lbl_check_in_percentage.Size = new System.Drawing.Size(35, 37);
+            this.lbl_check_in_percentage.Size = new System.Drawing.Size(29, 31);
             this.lbl_check_in_percentage.TabIndex = 1;
             this.lbl_check_in_percentage.Text = "S";
             this.lbl_check_in_percentage.Click += new System.EventHandler(this.label2_Click);
@@ -122,9 +129,10 @@
             // btn_refresh
             // 
             this.btn_refresh.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_refresh.Location = new System.Drawing.Point(215, 944);
+            this.btn_refresh.Location = new System.Drawing.Point(149, 610);
+            this.btn_refresh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(260, 61);
+            this.btn_refresh.Size = new System.Drawing.Size(195, 50);
             this.btn_refresh.TabIndex = 2;
             this.btn_refresh.Text = "Refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
@@ -133,9 +141,10 @@
             // btn_exit
             // 
             this.btn_exit.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_exit.Location = new System.Drawing.Point(1070, 944);
+            this.btn_exit.Location = new System.Drawing.Point(790, 610);
+            this.btn_exit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(260, 61);
+            this.btn_exit.Size = new System.Drawing.Size(195, 50);
             this.btn_exit.TabIndex = 2;
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = true;
@@ -145,9 +154,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(99, 233);
+            this.label5.Location = new System.Drawing.Point(74, 189);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(334, 37);
+            this.label5.Size = new System.Drawing.Size(277, 31);
             this.label5.TabIndex = 1;
             this.label5.Text = "Check In Percentage ：";
             this.label5.Click += new System.EventHandler(this.label2_Click);
@@ -155,19 +165,20 @@
             // dgv_record_view
             // 
             this.dgv_record_view.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_record_view.Location = new System.Drawing.Point(497, 317);
+            this.dgv_record_view.Location = new System.Drawing.Point(373, 258);
+            this.dgv_record_view.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgv_record_view.Name = "dgv_record_view";
             this.dgv_record_view.RowHeadersWidth = 51;
             this.dgv_record_view.RowTemplate.Height = 24;
-            this.dgv_record_view.Size = new System.Drawing.Size(816, 576);
+            this.dgv_record_view.Size = new System.Drawing.Size(612, 293);
             this.dgv_record_view.TabIndex = 3;
             this.dgv_record_view.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_record_view_CellContentClick);
             // 
             // frm_Student_Internship_Progress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.ClientSize = new System.Drawing.Size(1169, 667);
             this.Controls.Add(this.dgv_record_view);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_refresh);
@@ -179,6 +190,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_Student_Internship_Progress";
             this.Text = "Student_Internship_Progress";
             this.Load += new System.EventHandler(this.frm_Student_Internship_Progress_Load);

@@ -90,5 +90,10 @@ namespace ioop_GROUP_WORK
         {
 
         }
+
+        private void LoginPage_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

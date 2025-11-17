@@ -54,24 +54,36 @@ namespace ioop_GROUP_WORK.Student
         {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
             {
-                con.Open();
-
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT studentName, email, phoneNumber, course FROM Students WHERE studentID=@id", con);
-                cmd.Parameters.AddWithValue("@id", studentID);
-
-                SqlDataReader rd = cmd.ExecuteReader();
-                if (rd.Read())
+                try
                 {
-                    lblStudentID.Text = studentID;
-                    lblName.Text = rd["studentName"].ToString();
-                    txtEmail.Text = rd["email"].ToString();
-                    txtPhone.Text = rd["phoneNumber"].ToString();
-                    txtCourse.Text = rd["course"].ToString();
+                    con.Open();
+
+                    // Correct SQL query to retrieve student info using studentID (which is stored in Username)
+                    SqlCommand cmd = new SqlCommand(
+                        "SELECT studentName, email, phoneNumber, course FROM Students WHERE StudentID=@id OR Email=@id", con);
+                    cmd.Parameters.AddWithValue("@id", studentID);  // Use studentID (which is the Username)
+
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    if (rd.Read())
+                    {
+                        // Display student data in the relevant fields
+                        lblStudentID.Text = studentID;
+                        lblName.Text = rd["studentName"].ToString();
+                        txtEmail.Text = rd["email"].ToString();
+                        txtPhone.Text = rd["phoneNumber"].ToString();
+                        txtCourse.Text = rd["course"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Student data not found.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading student data: " + ex.Message);
                 }
             }
         }
 
-        
     }
 }

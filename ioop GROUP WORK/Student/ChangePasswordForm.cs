@@ -43,7 +43,7 @@ namespace ioop_GROUP_WORK.Student
                     SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM Users WHERE username=@user AND password=@old AND role='student'", con);
                     checkCmd.Parameters.AddWithValue("@user", studentID ?? "");
                     checkCmd.Parameters.AddWithValue("@old", oldPass ?? "");
-                    
+
                     object countObj = checkCmd.ExecuteScalar();
                     int exists = (countObj != null && int.TryParse(countObj.ToString(), out int count)) ? count : 0;
 
@@ -70,9 +70,15 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ChangePasswordForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
