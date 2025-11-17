@@ -88,12 +88,7 @@ namespace ioop_GROUP_WORK
 
         private void LoginPage_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void LoginPage_Load_1(object sender, EventArgs e)
-        {
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }
