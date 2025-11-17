@@ -66,9 +66,17 @@ namespace ioop_GROUP_WORK.Student
 
 
 
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            StudentCheckInForm checkin = new StudentCheckInForm(studentID, studentName);
+            checkin.ShowDialog();
+        }
+
+
+
         private void btnProgress_Click(object sender, EventArgs e)
         {
-            ViewProgressForm progress = new ViewProgressForm(studentID);
+            ViewCheckInRecordForm progress = new ViewCheckInRecordForm(studentID);
             progress.ShowDialog();
         }
 
@@ -96,5 +104,7 @@ namespace ioop_GROUP_WORK.Student
         {
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+        
     }
 }
