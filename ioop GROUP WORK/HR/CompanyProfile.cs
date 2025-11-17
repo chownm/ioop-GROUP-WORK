@@ -17,7 +17,7 @@ namespace ioop_GROUP_WORK.HR
         private string Identify;
         private string Password;
         private byte[] existingLogo;
-        private CP company;
+        
         public CompanyProfile(string identify, string password)
         {
             Identify = identify;
@@ -115,7 +115,7 @@ namespace ioop_GROUP_WORK.HR
 
 
 
-            company = new CP(name,password);
+            CP company = new CP(name,password);
             txtCompanyName.Text = company.Companyname;
             txtContactPerson.Text = name;
             txtEmail.Text = email;
