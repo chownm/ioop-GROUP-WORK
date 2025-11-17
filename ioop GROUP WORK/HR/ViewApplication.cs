@@ -75,6 +75,9 @@ namespace ioop_GROUP_WORK.HR
                 lstApplicationDetails.Items.Add("Position: " + student.Position);
                 lstApplicationDetails.Items.Add("Date Applied: " + student.DateApplied);
                 lstApplicationDetails.Items.Add("Status: " + student.Status);
+
+                pictureBox1.Image = student.ResumeImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             else
             {

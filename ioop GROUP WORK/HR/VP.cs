@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Windows.Forms;
 
 
@@ -14,6 +16,7 @@ namespace ioop_GROUP_WORK.HR
     {
         
         public string StudentName { get; private set; }
+        public Image ResumeImage { get; private set; }
         public string Position { get; private set; }
         public DateTime DateApplied { get; private set; }
         public string Status { get; private set; }
@@ -43,8 +46,21 @@ namespace ioop_GROUP_WORK.HR
                     DateApplied = Convert.ToDateTime(rd["DateApplied"]),
                     Status = rd["Status"].ToString()
                 };
-                
+
+
+                byte[] imgBytes = rd["Resume"] as byte[];
+                if (imgBytes != null && imgBytes.Length > 0)
+                {
+                    MemoryStream ms = new MemoryStream(imgBytes);
+                    student.ResumeImage = Image.FromStream(ms);
+                    ms.Close();
+                }
+                else
+                {
+                    student.ResumeImage = null;
+                }
             }
+        
            
             rd.Close();
             con.Close();
