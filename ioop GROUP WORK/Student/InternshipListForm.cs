@@ -31,7 +31,8 @@ namespace ioop_GROUP_WORK.Student
             {
                 con.Open();
 
-                string query = "SELECT InternshipID, Position, Company, StartDate, EndDate, Allowance FROM InternshipOffer";
+                // Use columns that exist in your schema: StudentID, StudentName, Position, StartDate, EndDate, Salary
+                string query = "SELECT StudentID, StudentName, Position, StartDate, EndDate, Salary FROM InternshipOffer";
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -41,12 +42,13 @@ namespace ioop_GROUP_WORK.Student
                 while (reader.Read())
                 {
                     int rowIndex = dgvIntern.Rows.Add();
-                    dgvIntern.Rows[rowIndex].Cells["InternshipID"].Value = reader["InternshipID"];
+                    // Map cells to existing columns in the grid (ensure grid has these column names)
+                    dgvIntern.Rows[rowIndex].Cells["InternshipID"].Value = reader["StudentID"];
                     dgvIntern.Rows[rowIndex].Cells["Position"].Value = reader["Position"];
-                    dgvIntern.Rows[rowIndex].Cells["Company"].Value = reader["Company"];
+                    dgvIntern.Rows[rowIndex].Cells["Company"].Value = reader["StudentName"];
                     dgvIntern.Rows[rowIndex].Cells["StartDate"].Value = reader["StartDate"];
                     dgvIntern.Rows[rowIndex].Cells["EndDate"].Value = reader["EndDate"];
-                    dgvIntern.Rows[rowIndex].Cells["Allowance"].Value = reader["Allowance"];
+                    dgvIntern.Rows[rowIndex].Cells["Allowance"].Value = reader["Salary"];
                 }
 
                 reader.Close();

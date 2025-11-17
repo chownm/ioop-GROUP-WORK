@@ -25,7 +25,7 @@ namespace ioop_GROUP_WORK.Admin
         public int AdminId { get; private set; }
         [Required]
         [Column("UserId")]
-        [ForeignKey("User")]
+        [ForeignKey("id")]
         public int UserId
         {
             get
@@ -52,24 +52,13 @@ namespace ioop_GROUP_WORK.Admin
         public string AccessLevel { get; private set; }
 
         // Constructor 1: Default
-        public Administrator() : base()
+        public Administrator()
         {
-            AdminId = 0;
-            UserId = 0;
-            FullName = string.Empty;
-            Department = string.Empty;
-            Phone = string.Empty;
-            AccessLevel = "Standard";
         }
 
         // Constructor 2
         public Administrator(int UserId)
         {
-            AdminId = 0;
-            FullName = string.Empty;
-            Department = string.Empty;
-            Phone = string.Empty;
-            AccessLevel = "Standard";
         }
 
         // Constructor 3: Full initialization
@@ -94,7 +83,7 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand(
-                        "SELECT AdminId, FullName, Department, Phone, AccessLevel FROM dbo.Administrators WHERE UserId = @userId",
+                        "SELECT AdminId, FullName, Department, Phone, AccessLevel FROM dbo.Administrators WHERE UserId = @UserId;",
                         con);
                     cmd.Parameters.AddWithValue("@userId", UserId);
 
@@ -127,14 +116,14 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand(
-                        "UPDATE dbo.Administrators SET FullName = @fullName, Department = @dept, Phone = @phone " +
-                        "WHERE UserId = @userId",
+                        "UPDATE dbo.Administrators SET FullName = @FullName, Department = @Department, Phone = @Phone" +
+                        "WHERE UserId = @UserId;",
                         con);
 
-                    cmd.Parameters.AddWithValue("@fullName", fullName);
-                    cmd.Parameters.AddWithValue("@dept", department);
-                    cmd.Parameters.AddWithValue("@phone", phone);
-                    cmd.Parameters.AddWithValue("@userId", UserId);
+                    cmd.Parameters.AddWithValue("@FullName", fullName);
+                    cmd.Parameters.AddWithValue("@Dept", department);
+                    cmd.Parameters.AddWithValue("@Phone", phone);
+                    cmd.Parameters.AddWithValue("@UserId", UserId);
 
                     int result = cmd.ExecuteNonQuery();
                     return result > 0 ? "Profile Updated Successfully" : "Update Failed";
@@ -157,12 +146,11 @@ namespace ioop_GROUP_WORK.Admin
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand(
-                        "SELECT COUNT(*) AS TotalUsers, " +
+                        "(SELECT COUNT(*) FROM dbo.users) AS TotalUsers, " +
                         "(SELECT COUNT(*) FROM dbo.Students) AS TotalStudents, " +
-                        "(SELECT COUNT(*) FROM dbo.Companies) AS TotalCompanies, " +
+                        "(SELECT COUNT(*) FROM dbo.CompanyProfile) AS TotalCompanies, " +
                         "(SELECT COUNT(*) FROM dbo.Recruiters) AS TotalRecruiters, " +
-                        "(SELECT COUNT(*) FROM dbo.Applications WHERE Status = 'Pending') AS PendingApplications " +
-                        "FROM dbo.Users",
+                        "(SELECT COUNT(*) FROM dbo.StudentApplication WHERE Status = 'Pending') AS PendingApplications;",
                         con);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);

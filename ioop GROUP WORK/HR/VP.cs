@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 
 
@@ -16,7 +14,6 @@ namespace ioop_GROUP_WORK.HR
     {
         
         public string StudentName { get; private set; }
-        public Image ResumeImage { get; private set; }
         public string Position { get; private set; }
         public DateTime DateApplied { get; private set; }
         public string Status { get; private set; }
@@ -25,45 +22,41 @@ namespace ioop_GROUP_WORK.HR
 
         public VP(string student)
         {
-            StudentName= student;
+            StudentName = student ?? "";
         }
 
         public VP ViewProfile()
         {
             VP student = null;
 
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM StudentApplication WHERE StudentName = @name", con);
-            cmd.Parameters.AddWithValue("@name", StudentName);
-
-            SqlDataReader rd = cmd. ExecuteReader();
-
-            if (rd.Read())
+            try
             {
-                student = new VP(rd["StudentName"].ToString())
-                {  
-                    Position = rd["Position"].ToString(),
-                    DateApplied = Convert.ToDateTime(rd["DateApplied"]),
-                    Status = rd["Status"].ToString()
-                };
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM StudentApplication WHERE StudentName = @name", con);
+                cmd.Parameters.AddWithValue("@name", StudentName ?? "");
 
+                SqlDataReader rd = cmd.ExecuteReader();
 
-                byte[] imgBytes = rd["Resume"] as byte[];
-                if (imgBytes != null && imgBytes.Length > 0)
+                if (rd.Read())
                 {
-                    MemoryStream ms = new MemoryStream(imgBytes);
-                    student.ResumeImage = Image.FromStream(ms);
-                    ms.Close();
+                    string positionVal = rd["Position"] != DBNull.Value ? rd["Position"].ToString() : "";
+                    DateTime dateVal = rd["DateApplied"] != DBNull.Value ? Convert.ToDateTime(rd["DateApplied"]) : DateTime.MinValue;
+                    string statusVal = rd["Status"] != DBNull.Value ? rd["Status"].ToString() : "";
+
+                    student = new VP(rd["StudentName"].ToString())
+                    {  
+                        Position = positionVal,
+                        DateApplied = dateVal,
+                        Status = statusVal
+                    };
                 }
-                else
-                {
-                    student.ResumeImage = null;
-                }
+                
+                rd.Close();
             }
-        
-           
-            rd.Close();
-            con.Close();
+            finally
+            {
+                con.Close();
+            }
 
             return student;
         }
@@ -71,103 +64,128 @@ namespace ioop_GROUP_WORK.HR
         public static List<string> GetAllStudentNames(string identify, string _password)
         {
             List<string> names = new List<string>();
-            PersonalProfile pp = new PersonalProfile(identify, _password);
-            string useridentify = pp.getprofilename();
-            string password = pp.getpassword();
-
-
-            con.Open();
-            SqlCommand getCompanyCmd = new SqlCommand("SELECT CompanyName FROM CompanyProfile WHERE (Email = @identity OR ContactPerson = @identity) AND Password = @password",con);
-            SqlCommand cmd = new SqlCommand("SELECT StudentName FROM StudentApplication WHERE CompanyName = @companyname", con);
-
-            getCompanyCmd.Parameters.AddWithValue("@identity", useridentify);
-            getCompanyCmd.Parameters.AddWithValue("@password", password);
-
-            object result = getCompanyCmd.ExecuteScalar();
-            string companyName = result.ToString();
-
-            if (companyName == null)
+            
+            try
             {
-                con.Close();
-                return names;
+                PersonalProfile pp = new PersonalProfile(identify ?? "", _password ?? "");
+                string useridentify = pp.getprofilename();
+                string password = pp.getpassword();
+
+                if (string.IsNullOrEmpty(useridentify))
+                    return names;
+
+                con.Open();
+                SqlCommand getCompanyCmd = new SqlCommand("SELECT CompanyName FROM CompanyProfile WHERE (Email = @identity OR ContactPerson = @identity)", con);
+                SqlCommand cmd = new SqlCommand("SELECT StudentName FROM StudentApplication WHERE CompanyName = @companyname", con);
+
+                getCompanyCmd.Parameters.AddWithValue("@identity", useridentify ?? "");
+
+                object result = getCompanyCmd.ExecuteScalar();
+
+                if (result == null || result == DBNull.Value)
+                {
+                    return names;
+                }
+
+                string companyName = result.ToString();
+
+                cmd.Parameters.AddWithValue("@companyname", companyName ?? "");
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read())
+                {
+                    string name = rd["StudentName"] != DBNull.Value ? rd["StudentName"].ToString() : "";
+                    if (!string.IsNullOrEmpty(name))
+                        names.Add(name);
+                }
+
+                rd.Close();
             }
-
-            cmd.Parameters.AddWithValue("@companyname", companyName);
-            SqlDataReader rd = cmd.ExecuteReader();
-
-            while (rd.Read())
+            catch (Exception ex)
             {
-                names.Add(rd["StudentName"].ToString());
+                MessageBox.Show("Error retrieving student names: " + ex.Message);
             }
-
-            rd.Close();
-            con.Close();
+            finally
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
 
             return names;
-
         }
 
         public string Accept()
         {
             string newstatus = "Accepted";
-            string message;
+            string message = "";
 
-            con.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
-
-            cmd.Parameters.AddWithValue("@status", newstatus);
-            cmd.Parameters.AddWithValue("@SName", this.StudentName);
-
-            int i = cmd.ExecuteNonQuery();
-
-            if (i > 0)
+            try
             {
-                message = ($"{this.StudentName} Student:Application accepted successfully.");
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
 
+                cmd.Parameters.AddWithValue("@status", newstatus);
+                cmd.Parameters.AddWithValue("@SName", StudentName ?? "");
+
+                int i = cmd.ExecuteNonQuery();
+
+                if (i > 0)
+                {
+                    message = $"{StudentName} Student: Application accepted successfully.";
+                }
+                else
+                {
+                    message = $"{StudentName} Student: Already accepted or not found.";
+                }
             }
-            else if (i == 0)
+            catch (Exception ex)
             {
-                message = $"{this.StudentName}Student:already accepted."; 
+                message = "Error: " + ex.Message;
             }
-            else
+            finally
             {
-                message = ("No record found to update");
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
             }
 
-            con.Close();
             return message;
         }
 
         public string Reject()
         {
             string newstatus = "Rejected";
-            string message;
+            string message = "";
 
-            con.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
-
-            cmd.Parameters.AddWithValue("@status", newstatus);
-            cmd.Parameters.AddWithValue("@SName", this.StudentName);
-
-            int i = cmd.ExecuteNonQuery();
-
-            if (i > 0)
+            try
             {
-                message = $"{this.StudentName} Student:Application Rejected Successful.";
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE StudentApplication SET Status = @status WHERE StudentName = @SName", con);
+
+                cmd.Parameters.AddWithValue("@status", newstatus);
+                cmd.Parameters.AddWithValue("@SName", StudentName ?? "");
+
+                int i = cmd.ExecuteNonQuery();
+
+                if (i > 0)
+                {
+                    message = $"{StudentName} Student: Application rejected successfully.";
+                }
+                else
+                {
+                    message = $"{StudentName} Student: Already rejected or not found.";
+                }
             }
-            else if (i == 0)
+            catch (Exception ex)
             {
-                message = $"{this.StudentName} Student:already rejected.";
+                message = "Error: " + ex.Message;
             }
-            else
+            finally
             {
-                message = "No record found to update";
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
             }
-            con.Close();
+
             return message;
         }
-
-        
-        
     }
 }

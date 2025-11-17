@@ -21,8 +21,6 @@ namespace ioop_GROUP_WORK.HR
         private string jobDescription;
         
 
-        
-
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString);
 
         public string JobTitle { get => jobTitle; private set => jobTitle = value; }
@@ -40,8 +38,6 @@ namespace ioop_GROUP_WORK.HR
             End = end;
             Salary = salary;
             JobDescription = jobDescription;
-            
-  
         }
 
         public string SendApplication(string companyname)
@@ -52,28 +48,37 @@ namespace ioop_GROUP_WORK.HR
             try
             {
                 con.Open();
+
+                // Compute next StudentID because InternshipOffer.StudentID is NOT NULL and not identity in schema
+                int nextId = 1;
+                using (SqlCommand idCmd = new SqlCommand("SELECT ISNULL(MAX(StudentID), 0) + 1 FROM InternshipOffer", con))
+                {
+                    object idObj = idCmd.ExecuteScalar();
+                    if (idObj != null && int.TryParse(idObj.ToString(), out int parsed))
+                        nextId = parsed;
+                }
                                
-                    SqlCommand cmd = new SqlCommand(
-                        "INSERT INTO InternshipOffer " +
-                        "(JobTitle, Position, StartDate, EndDate, Salary, Description, DateOffered, Company) " +
-                        "VALUES (@title, @position, @startDate, @endDate, @salary, @description, @dateO, @companyname)", con);
-                                        
-                    cmd.Parameters.AddWithValue("@title", jobTitle);
-                    cmd.Parameters.AddWithValue("@position", Position);
-                    cmd.Parameters.AddWithValue("@startDate", Start);
-                    cmd.Parameters.AddWithValue("@endDate", End);
-                    cmd.Parameters.AddWithValue("@salary", Salary);
-                    cmd.Parameters.AddWithValue("@description", JobDescription);
-                    cmd.Parameters.AddWithValue("@dateO", timenow);
-                    cmd.Parameters.AddWithValue("@companyname", companyname);
+                SqlCommand cmd = new SqlCommand(
+                    "INSERT INTO InternshipOffer " +
+                    "(StudentID, StudentName, Position, StartDate, EndDate, Salary, Description, DateOffered) " +
+                    "VALUES (@studentId, @studentName, @position, @startDate, @endDate, @salary, @description, @dateO)", con);
 
-                    int result = cmd.ExecuteNonQuery();
+                // Use jobTitle as StudentName field to preserve existing logic (UI supplies jobTitle)
+                cmd.Parameters.AddWithValue("@studentId", nextId);
+                cmd.Parameters.AddWithValue("@studentName", jobTitle ?? "");
+                cmd.Parameters.AddWithValue("@position", Position ?? "");
+                cmd.Parameters.AddWithValue("@startDate", Start);
+                cmd.Parameters.AddWithValue("@endDate", End);
+                cmd.Parameters.AddWithValue("@salary", Salary);
+                cmd.Parameters.AddWithValue("@description", JobDescription ?? "");
+                cmd.Parameters.AddWithValue("@dateO", timenow);
 
-                    if (result > 0)
-                        message = "Application sent successfully!";
-                    else
-                        message = "Failed to send application.";
-                
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
+                    message = "Application sent successfully!";
+                else
+                    message = "Failed to send application.";
             }
             catch (Exception ex)
             {

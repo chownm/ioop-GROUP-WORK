@@ -52,6 +52,9 @@ namespace ioop_GROUP_WORK.HR
 
         private void cbJobTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Guard against null selection
+            if (cmbJobTitle.SelectedItem == null) return;
+
             cmbJobTitle.Items.Clear();
             string selectedDept = cmbJobTitle.SelectedItem.ToString();
             List<string> positions = MO.AddJobPosition(selectedDept);
@@ -73,7 +76,8 @@ namespace ioop_GROUP_WORK.HR
             CP company = new CP(name, password);
             string Cname = company.Companyname;
 
-            double salary = double.Parse(txtSalary.Text);
+            double salary = 0;
+            double.TryParse(txtSalary.Text, out salary);
             try
             {
                 if (cmbJobTitle.SelectedItem == null || cmbPosition.SelectedItem == null)
@@ -114,7 +118,7 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {
-            HRHome back = new HRHome();
+            HRHome back = new HRHome(Identify, Password);
             this.Close();
             back.ShowDialog();
         }

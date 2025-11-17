@@ -60,8 +60,9 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void Show_Student_Details()
         {
-            lst_Student_Details.Items.Clear();
+            lst_Student_Details.DataSource = null;
             var students = View_Student_Profile.GetStudentIDAndName();
+
             lst_Student_Details.DataSource = students;
             lst_Student_Details.DisplayMember = "DisplayStudentInfo";  
             lst_Student_Details.ValueMember = "Student_id";            
