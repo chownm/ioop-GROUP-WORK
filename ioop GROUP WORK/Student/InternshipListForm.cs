@@ -18,9 +18,9 @@ namespace ioop_GROUP_WORK.Student
 
         private void InternshipListForm_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             LoadIntershipOffers();
             // Ensure the DataGridView resizes with the form
-            this.StartPosition = FormStartPosition.CenterScreen;
             dgvIntern.Font = new Font("Times New Roman", 10);
             dgvIntern.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvIntern.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
