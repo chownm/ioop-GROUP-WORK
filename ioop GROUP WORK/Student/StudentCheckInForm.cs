@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace ioop_GROUP_WORK.Student
@@ -9,12 +7,14 @@ namespace ioop_GROUP_WORK.Student
     {
         private string studentID;
         private string studentName;
+        private StudentCheckIn checkInLogic;
 
         public StudentCheckInForm(string studentID, string studentName)
         {
             InitializeComponent();
             this.studentID = studentID;
             this.studentName = studentName;
+            checkInLogic = new StudentCheckIn();
         }
 
 
@@ -30,44 +30,18 @@ namespace ioop_GROUP_WORK.Student
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
+            string resultMessage = checkInLogic.CheckIn(studentID, studentName);
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            MessageBox.Show(resultMessage, "Check-in Status", MessageBoxButtons.OK, resultMessage.Contains("successful") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+
+            if (resultMessage.Contains("successful"))
             {
-                try
-                {
-                    con.Open();
+                btnCheckIn.Enabled = false;
 
-                    string query = @"INSERT INTO Check_In_Record (studentID, studentName, checkInDate)
-                                     VALUES (@studentID, @studentName, @checkInDate)";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@studentID", studentID);
-                    cmd.Parameters.AddWithValue("@studentName", studentName);
+                ViewCheckInRecordForm viewCheckIn = new ViewCheckInRecordForm(studentID);
+                viewCheckIn.ShowDialog();
 
-                    cmd.Parameters.AddWithValue("@checkInDate", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
-                    int result = cmd.ExecuteNonQuery();
-
-                    if (result > 0)
-                    {
-                        MessageBox.Show("✅ Check-in successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        btnCheckIn.Enabled = false;
-
-                        ViewCheckInRecordForm viewCheckIn = new ViewCheckInRecordForm(studentID);
-                        viewCheckIn.ShowDialog();
-
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("❌ Check-in failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"❗ Error during check-in: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                this.Close();
             }
         }
 

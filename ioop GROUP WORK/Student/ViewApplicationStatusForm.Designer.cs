@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvApplications = new System.Windows.Forms.DataGridView();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.lbllll = new System.Windows.Forms.Label();
             this.grpOfferDetails = new System.Windows.Forms.GroupBox();
             this.lblAllowance = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,6 +45,8 @@
             this.labell = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelll = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplications)).BeginInit();
             this.grpOfferDetails.SuspendLayout();
@@ -79,7 +81,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvApplications);
-            this.groupBox1.Controls.Add(this.lblStatus);
+            this.groupBox1.Controls.Add(this.lbllll);
             this.groupBox1.Location = new System.Drawing.Point(200, 229);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(741, 657);
@@ -99,19 +101,21 @@
             this.dgvApplications.TabIndex = 0;
             this.dgvApplications.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvApplications_CellContentClick);
             // 
-            // lblStatus
+            // lbllll
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblStatus.Location = new System.Drawing.Point(234, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(247, 38);
-            this.lblStatus.TabIndex = 10;
-            this.lblStatus.Text = "All Applications";
+            this.lbllll.AutoSize = true;
+            this.lbllll.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbllll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbllll.Location = new System.Drawing.Point(234, 0);
+            this.lbllll.Name = "lbllll";
+            this.lbllll.Size = new System.Drawing.Size(247, 38);
+            this.lbllll.TabIndex = 10;
+            this.lbllll.Text = "All Applications";
             // 
             // grpOfferDetails
             // 
+            this.grpOfferDetails.Controls.Add(this.lblStatus);
+            this.grpOfferDetails.Controls.Add(this.label3);
             this.grpOfferDetails.Controls.Add(this.lblAllowance);
             this.grpOfferDetails.Controls.Add(this.label4);
             this.grpOfferDetails.Controls.Add(this.lblEndDate);
@@ -209,11 +213,11 @@
             // lblCompanyName
             // 
             this.lblCompanyName.AutoSize = true;
-            this.lblCompanyName.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompanyName.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompanyName.ForeColor = System.Drawing.Color.Navy;
-            this.lblCompanyName.Location = new System.Drawing.Point(107, 147);
+            this.lblCompanyName.Location = new System.Drawing.Point(106, 140);
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(257, 37);
+            this.lblCompanyName.Size = new System.Drawing.Size(311, 45);
             this.lblCompanyName.TabIndex = 20;
             this.lblCompanyName.Text = "[CompanyName]";
             // 
@@ -250,6 +254,28 @@
             this.labelll.TabIndex = 18;
             this.labelll.Text = "Company Name : ";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(170, 580);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(175, 51);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Status : ";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.Color.Navy;
+            this.lblStatus.Location = new System.Drawing.Point(339, 580);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(168, 51);
+            this.lblStatus.TabIndex = 29;
+            this.lblStatus.Text = "[Status]";
+            // 
             // ViewApplicationStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(24F, 49F);
@@ -281,7 +307,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvApplications;
-        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lbllll;
         private System.Windows.Forms.GroupBox grpOfferDetails;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblAllowance;
@@ -294,5 +320,7 @@
         private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.Label labell;
         private System.Windows.Forms.Label labelll;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label label3;
     }
 }

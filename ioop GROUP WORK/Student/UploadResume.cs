@@ -5,11 +5,12 @@ using System.Configuration;
 
 namespace ioop_GROUP_WORK.Student
 {
+
     public class UploadResume
     {
+        
         private string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
-        // Method to fetch the position from the database
         public string GetPositionFromDatabase(string internshipPosition)
         {
             string position = string.Empty;
@@ -43,40 +44,8 @@ namespace ioop_GROUP_WORK.Student
             return position;
         }
 
-        // Method to fetch the company name from the database
-        public string GetCompanyNameFromDatabase()
-        {
-            string companyName = string.Empty;
 
-            try
-            {
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    con.Open();
 
-                    string query = "SELECT CompanyName FROM CompanyProfile WHERE CompanyName IS NOT NULL";
-
-                    SqlCommand cmd = new SqlCommand(query, con);
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        companyName = reader["CompanyName"].ToString();
-                    }
-
-                    reader.Close();
-                    con.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error fetching company name: {ex.Message}");
-            }
-
-            return companyName;
-        }
-
-        // Method to save the application to the database
         public string SaveApplicationToDatabase(string studentID, string studentName, string position, string companyName, byte[] resumeImage)
         {
             try

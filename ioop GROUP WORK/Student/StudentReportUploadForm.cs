@@ -17,10 +17,14 @@ namespace ioop_GROUP_WORK.Student
             this.reportUploadLogic = new StudentReportUpload();
         }
 
+
+
         private void StudentReportUploadForm_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
@@ -36,6 +40,8 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
+
+
         private void btnUpload_Click(object sender, EventArgs e)
         {
             string uploadResult = reportUploadLogic.UploadReport(studentID, filePath);
@@ -46,6 +52,8 @@ namespace ioop_GROUP_WORK.Student
                 this.Close();
             }
         }
+
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {

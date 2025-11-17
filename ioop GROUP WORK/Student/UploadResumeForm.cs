@@ -19,7 +19,6 @@ namespace ioop_GROUP_WORK.Student
             this.companyName = companyName;
             uploadResumeLogic = new UploadResume();
 
-            // Set the company name and position fields in the form
             lblCompanyName.Text = companyName;
             lblPosition.Text = position;
 
@@ -27,6 +26,8 @@ namespace ioop_GROUP_WORK.Student
             picPreview.Height = 700;
             picPreview.SizeMode = PictureBoxSizeMode.Zoom;
         }
+
+
 
         private void btnUploadResume_Click(object sender, EventArgs e)
         {
@@ -42,21 +43,21 @@ namespace ioop_GROUP_WORK.Student
                 if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png")
                 {
                     MessageBox.Show("Please upload a valid image file (JPEG, PNG).", "Invalid File", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;  // Exit the method if the file type is invalid
+                    return; 
                 }
 
                 // Set the PictureBox size to A4 dimensions (portrait size)
                 picPreview.Width = 495;  // Set to A4 width
                 picPreview.Height = 700; // Set to A4 height
 
-                // Load the image into the PictureBox
                 picPreview.ImageLocation = opd.FileName;
                 filePath = opd.FileName;
 
-                // Set the PictureBox SizeMode to Zoom to maintain aspect ratio
                 picPreview.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
+
+
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -79,7 +80,6 @@ namespace ioop_GROUP_WORK.Student
 
                 // Fetch position from InternshipOffer table
                 string position = uploadResumeLogic.GetPositionFromDatabase(internshipPosition);
-                companyName = uploadResumeLogic.GetCompanyNameFromDatabase();
 
                 // Save application to Database
                 string result = uploadResumeLogic.SaveApplicationToDatabase(txtStuID.Text, txtStuName.Text, position, companyName, imageBytes);
@@ -97,10 +97,14 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
+
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
 
         private void UploadResumeForm_Load(object sender, EventArgs e)
         {

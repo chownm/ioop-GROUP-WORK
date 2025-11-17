@@ -14,7 +14,6 @@ namespace ioop_GROUP_WORK.Student
             studentID = id ?? "";
             lblDisUsername.Text = studentID;
 
-            // Initialize the ChangePassword logic class
             changePasswordLogic = new ChangePassword(studentID);
         }
 

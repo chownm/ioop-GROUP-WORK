@@ -178,6 +178,7 @@
     <Compile Include="Student\InternshipListForm.Designer.cs">
       <DependentUpon>InternshipListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentCheckIn.cs" />
     <Compile Include="Student\StudentReportUpload.cs" />
     <Compile Include="Student\UploadResume.cs" />
     <Compile Include="Student\ViewApplicationStatus.cs" />
@@ -235,6 +236,8 @@
     <Compile Include="Student\ViewApplicationStatusForm.Designer.cs">
       <DependentUpon>ViewApplicationStatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Student\ViewCheckInRecord.cs" />
+    <Compile Include="Student\ViewFeedback.cs" />
     <Compile Include="Student\ViewFeedbackForm.cs">
       <SubType>Form</SubType>
     </Compile>

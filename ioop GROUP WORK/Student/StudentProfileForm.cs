@@ -15,6 +15,8 @@ namespace ioop_GROUP_WORK.Student
             studentProfileLogic = new StudentProfile(studentID);
         }
 
+
+
         private void StudentProfileForm_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -34,6 +36,8 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
+
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text.Trim();
@@ -49,6 +53,7 @@ namespace ioop_GROUP_WORK.Student
                 this.Close();
             }
         }
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {

@@ -13,7 +13,8 @@ namespace ioop_GROUP_WORK.Student
             studentID = id ?? "";
         }
 
-        // Method to get the student profile data from the database
+
+
         public (string studentName, string email, string phoneNumber, string course, string errorMessage) GetStudentProfile()
         {
             try
@@ -22,14 +23,13 @@ namespace ioop_GROUP_WORK.Student
                 {
                     con.Open();
 
-                    // Query to get student details
+                    // Get student details
                     SqlCommand cmd = new SqlCommand("SELECT studentName, email, phoneNumber, course FROM Students WHERE StudentID=@id OR Email=@id", con);
                     cmd.Parameters.AddWithValue("@id", studentID);
 
                     SqlDataReader rd = cmd.ExecuteReader();
                     if (rd.Read())
                     {
-                        // Return student data
                         return (rd["studentName"].ToString(), rd["email"].ToString(), rd["phoneNumber"].ToString(), rd["course"].ToString(), null);
                     }
                     else
@@ -44,7 +44,8 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
-        // Method to update student profile data in the database
+
+
         public string UpdateStudentProfile(string email, string phone, string course)
         {
             try
@@ -56,7 +57,7 @@ namespace ioop_GROUP_WORK.Student
 
                     try
                     {
-                        // Update the Students table
+                        // Update Students table
                         SqlCommand cmdStudent = new SqlCommand("UPDATE Students SET email=@em, phoneNumber=@ph, course=@cs WHERE studentID=@id", con, transaction);
                         cmdStudent.Parameters.AddWithValue("@em", email);
                         cmdStudent.Parameters.AddWithValue("@ph", phone);
@@ -65,7 +66,7 @@ namespace ioop_GROUP_WORK.Student
 
                         int rowsStudent = cmdStudent.ExecuteNonQuery();
 
-                        // Update the Users table
+                        // Update Users table
                         SqlCommand cmdUser = new SqlCommand("UPDATE Users SET Email=@em WHERE Username=@id", con, transaction);
                         cmdUser.Parameters.AddWithValue("@em", email);
                         cmdUser.Parameters.AddWithValue("@id", studentID);

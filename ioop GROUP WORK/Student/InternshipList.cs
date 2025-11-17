@@ -9,7 +9,6 @@ namespace ioop_GROUP_WORK.Student
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
-        // Method to load internship offers from the database
         public DataTable LoadInternshipOffers()
         {
             DataTable internshipTable = new DataTable();
@@ -35,7 +34,8 @@ namespace ioop_GROUP_WORK.Student
             return internshipTable;
         }
 
-        // Method to apply for an internship
+
+
         public string ApplyForInternship(string internshipId, string position, string companyName, string startDate, string endDate, string salary)
         {
             try

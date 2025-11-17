@@ -13,6 +13,8 @@ namespace ioop_GROUP_WORK.Student
             studentRegisterLogic = new StudentRegister();
         }
 
+
+
         private void btnRegister_Click(object sender, EventArgs e)
         {
             string name = txtStuName?.Text?.Trim() ?? "";
@@ -29,7 +31,6 @@ namespace ioop_GROUP_WORK.Student
                 return;
             }
 
-            // Check if student ID already exists
             if (studentRegisterLogic.DoesStudentIDExist(id))
             {
                 MessageBox.Show("Student ID already exists!");
@@ -47,10 +48,14 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
+
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
 
         private void StudentRegisterForm_Load(object sender, EventArgs e)
         {

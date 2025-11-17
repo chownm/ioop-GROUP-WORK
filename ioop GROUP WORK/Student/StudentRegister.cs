@@ -8,7 +8,6 @@ namespace ioop_GROUP_WORK.Student
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
-        // Method to check if the student ID already exists
         public bool DoesStudentIDExist(string studentID)
         {
             try
@@ -23,7 +22,7 @@ namespace ioop_GROUP_WORK.Student
                     object countObj = checkCmd.ExecuteScalar();
                     int exists = (countObj != null && int.TryParse(countObj.ToString(), out int count)) ? count : 0;
 
-                    return exists > 0; // returns true if student ID exists
+                    return exists > 0;
                 }
             }
             catch (Exception ex)
@@ -32,7 +31,8 @@ namespace ioop_GROUP_WORK.Student
             }
         }
 
-        // Method to register a new student
+
+
         public string RegisterStudent(string studentID, string studentName, string email, string phone, string course, string password)
         {
             try

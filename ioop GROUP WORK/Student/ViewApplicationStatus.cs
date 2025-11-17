@@ -9,7 +9,6 @@ namespace ioop_GROUP_WORK.Student
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
-        // Method to get the student's application status from the database
         public DataTable GetApplicationStatus(string studentID)
         {
             DataTable applicationTable = new DataTable();
@@ -18,7 +17,7 @@ namespace ioop_GROUP_WORK.Student
             {
                 con.Open();
 
-                string query = @"SELECT sa.Position, io.JobTitle, io.StartDate, io.EndDate, io.Salary AS Allowance, sa.CompanyName
+                string query = @"SELECT sa.Position, io.JobTitle, io.StartDate, io.EndDate, io.Salary AS Allowance, sa.CompanyName, sa.Status
                                  FROM StudentApplication sa
                                  INNER JOIN InternshipOffer io ON sa.Position = io.Position
                                  WHERE sa.StudentID = @studentID";

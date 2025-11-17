@@ -9,7 +9,6 @@ namespace ioop_GROUP_WORK.Student
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
 
-        // Method to upload the report to the database
         public string UploadReport(string studentID, string filePath)
         {
             if (string.IsNullOrEmpty(filePath))

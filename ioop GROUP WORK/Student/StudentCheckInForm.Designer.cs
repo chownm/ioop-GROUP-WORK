@@ -30,14 +30,14 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDateTime = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblStudentName = new System.Windows.Forms.Label();
             this.lblStudentID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCheckIn = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblDateTime = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +70,28 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
+            // lblDateTime
+            // 
+            this.lblDateTime.AutoSize = true;
+            this.lblDateTime.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateTime.ForeColor = System.Drawing.Color.Navy;
+            this.lblDateTime.Location = new System.Drawing.Point(278, 322);
+            this.lblDateTime.Name = "lblDateTime";
+            this.lblDateTime.Size = new System.Drawing.Size(417, 53);
+            this.lblDateTime.TabIndex = 19;
+            this.lblDateTime.Text = "[CurrentDateTime]";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Navy;
+            this.label7.Location = new System.Drawing.Point(307, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(360, 49);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Current Datetime ";
+            // 
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.Navy;
@@ -90,7 +112,7 @@
             this.lblStudentName.ForeColor = System.Drawing.Color.Navy;
             this.lblStudentName.Location = new System.Drawing.Point(307, 53);
             this.lblStudentName.Name = "lblStudentName";
-            this.lblStudentName.Size = new System.Drawing.Size(306, 51);
+            this.lblStudentName.Size = new System.Drawing.Size(301, 49);
             this.lblStudentName.TabIndex = 16;
             this.lblStudentName.Text = "[StudentName]";
             // 
@@ -101,7 +123,7 @@
             this.lblStudentID.ForeColor = System.Drawing.Color.Navy;
             this.lblStudentID.Location = new System.Drawing.Point(307, 142);
             this.lblStudentID.Name = "lblStudentID";
-            this.lblStudentID.Size = new System.Drawing.Size(245, 51);
+            this.lblStudentID.Size = new System.Drawing.Size(241, 49);
             this.lblStudentID.TabIndex = 15;
             this.lblStudentID.Text = "[StudentID]";
             // 
@@ -112,7 +134,7 @@
             this.label3.ForeColor = System.Drawing.Color.Navy;
             this.label3.Location = new System.Drawing.Point(33, 53);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(268, 51);
+            this.label3.Size = new System.Drawing.Size(265, 49);
             this.label3.TabIndex = 14;
             this.label3.Text = "Name          : ";
             // 
@@ -123,7 +145,7 @@
             this.label2.ForeColor = System.Drawing.Color.Navy;
             this.label2.Location = new System.Drawing.Point(33, 142);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(263, 51);
+            this.label2.Size = new System.Drawing.Size(260, 49);
             this.label2.TabIndex = 13;
             this.label2.Text = "Student ID : ";
             // 
@@ -140,28 +162,6 @@
             this.btnCheckIn.UseVisualStyleBackColor = false;
             this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Navy;
-            this.label7.Location = new System.Drawing.Point(33, 226);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(394, 51);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Current Datetime : ";
-            // 
-            // lblDateTime
-            // 
-            this.lblDateTime.AutoSize = true;
-            this.lblDateTime.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateTime.ForeColor = System.Drawing.Color.Navy;
-            this.lblDateTime.Location = new System.Drawing.Point(33, 318);
-            this.lblDateTime.Name = "lblDateTime";
-            this.lblDateTime.Size = new System.Drawing.Size(417, 53);
-            this.lblDateTime.TabIndex = 19;
-            this.lblDateTime.Text = "[CurrentDateTime]";
-            // 
             // StudentCheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(24F, 49F);
@@ -171,7 +171,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "StudentCheckInForm";
             this.Text = "Student Check-in";
             this.Load += new System.EventHandler(this.StudentCheckInForm_Load);

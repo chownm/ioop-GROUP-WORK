@@ -14,17 +14,18 @@ namespace ioop_GROUP_WORK.Student
             InitializeComponent();
         }
 
+
+
         public StudentHomeForm(string id, string name)
         {
             InitializeComponent();
-            // Initialize the StudentHome object with student data
             studentHome = new StudentHome(id, name);
 
-            // Display the welcome message on the label
+            // Display welcome message 
             lblWelcome.Text = studentHome.GetWelcomeMessage();
         }
 
-        // Button click handlers that delegate logic to StudentHome
+
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
