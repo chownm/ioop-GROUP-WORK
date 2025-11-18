@@ -4,12 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// ============================================================================
-// FILE 1: ManageUsers.Designer.cs (ID: 96)
-// Database: dbo.Users
-// ============================================================================
-
-namespace ioop_GROUP_WORK.Admin
+namespace ioopGROUPWORK.Admin
 {
     partial class ManageUsers
     {
@@ -40,6 +35,10 @@ namespace ioop_GROUP_WORK.Admin
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.lblDepartment = new System.Windows.Forms.Label();
+            this.txtDepartment = new System.Windows.Forms.TextBox();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
             this.lblRole = new System.Windows.Forms.Label();
             this.cmbRole = new System.Windows.Forms.ComboBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
@@ -117,58 +116,86 @@ namespace ioop_GROUP_WORK.Admin
             this.txtUserId.Location = new System.Drawing.Point(100, 9);
             this.txtUserId.Name = "txtUserId";
             this.txtUserId.ReadOnly = true;
-            this.txtUserId.Size = new System.Drawing.Size(150, 20);
+            this.txtUserId.Size = new System.Drawing.Size(100, 20);
             this.txtUserId.TabIndex = 1;
 
             // lblUsername
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(10, 40);
+            this.lblUsername.Location = new System.Drawing.Point(210, 12);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(66, 14);
             this.lblUsername.TabIndex = 2;
-            this.lblUsername.Text = "Username:";
+            this.lblUsername.Text = "Name/User:";
 
             // txtUsername
-            this.txtUsername.Location = new System.Drawing.Point(100, 37);
+            this.txtUsername.Location = new System.Drawing.Point(280, 9);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(200, 20);
+            this.txtUsername.Size = new System.Drawing.Size(150, 20);
             this.txtUsername.TabIndex = 3;
 
             // lblEmail
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(310, 40);
+            this.lblEmail.Location = new System.Drawing.Point(440, 12);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(38, 14);
             this.lblEmail.TabIndex = 4;
             this.lblEmail.Text = "Email:";
 
             // txtEmail
-            this.txtEmail.Location = new System.Drawing.Point(400, 37);
+            this.txtEmail.Location = new System.Drawing.Point(480, 9);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(200, 20);
+            this.txtEmail.Size = new System.Drawing.Size(150, 20);
             this.txtEmail.TabIndex = 5;
 
             // lblPassword
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(610, 40);
+            this.lblPassword.Location = new System.Drawing.Point(640, 12);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(61, 14);
             this.lblPassword.TabIndex = 6;
             this.lblPassword.Text = "Password:";
 
             // txtPassword
-            this.txtPassword.Location = new System.Drawing.Point(700, 37);
+            this.txtPassword.Location = new System.Drawing.Point(700, 9);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(150, 20);
+            this.txtPassword.Size = new System.Drawing.Size(100, 20);
             this.txtPassword.TabIndex = 7;
+
+            // lblDepartment
+            this.lblDepartment.AutoSize = true;
+            this.lblDepartment.Location = new System.Drawing.Point(810, 12);
+            this.lblDepartment.Name = "lblDepartment";
+            this.lblDepartment.Size = new System.Drawing.Size(72, 14);
+            this.lblDepartment.TabIndex = 8;
+            this.lblDepartment.Text = "Department:";
+
+            // txtDepartment
+            this.txtDepartment.Location = new System.Drawing.Point(880, 9);
+            this.txtDepartment.Name = "txtDepartment";
+            this.txtDepartment.Size = new System.Drawing.Size(80, 20);
+            this.txtDepartment.TabIndex = 9;
+
+            // lblPhone
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Location = new System.Drawing.Point(10, 40);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(45, 14);
+            this.lblPhone.TabIndex = 10;
+            this.lblPhone.Text = "Phone:";
+
+            // txtPhone
+            this.txtPhone.Location = new System.Drawing.Point(100, 37);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtPhone.TabIndex = 11;
 
             // lblRole
             this.lblRole.AutoSize = true;
-            this.lblRole.Location = new System.Drawing.Point(10, 68);
+            this.lblRole.Location = new System.Drawing.Point(210, 40);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(35, 14);
-            this.lblRole.TabIndex = 8;
+            this.lblRole.TabIndex = 12;
             this.lblRole.Text = "Role:";
 
             // cmbRole
@@ -180,17 +207,17 @@ namespace ioop_GROUP_WORK.Admin
                 "Supervisor",
                 "Administrator"
             });
-            this.cmbRole.Location = new System.Drawing.Point(100, 65);
+            this.cmbRole.Location = new System.Drawing.Point(280, 37);
             this.cmbRole.Name = "cmbRole";
-            this.cmbRole.Size = new System.Drawing.Size(200, 21);
-            this.cmbRole.TabIndex = 9;
+            this.cmbRole.Size = new System.Drawing.Size(150, 21);
+            this.cmbRole.TabIndex = 13;
 
             // chkActive
             this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(310, 70);
+            this.chkActive.Location = new System.Drawing.Point(440, 40);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(50, 17);
-            this.chkActive.TabIndex = 10;
+            this.chkActive.TabIndex = 14;
             this.chkActive.Text = "Active";
             this.chkActive.UseVisualStyleBackColor = true;
             this.chkActive.Checked = true;
@@ -203,6 +230,10 @@ namespace ioop_GROUP_WORK.Admin
             this.pnlForm.Controls.Add(this.txtEmail);
             this.pnlForm.Controls.Add(this.lblPassword);
             this.pnlForm.Controls.Add(this.txtPassword);
+            this.pnlForm.Controls.Add(this.lblDepartment);
+            this.pnlForm.Controls.Add(this.txtDepartment);
+            this.pnlForm.Controls.Add(this.lblPhone);
+            this.pnlForm.Controls.Add(this.txtPhone);
             this.pnlForm.Controls.Add(this.lblRole);
             this.pnlForm.Controls.Add(this.cmbRole);
             this.pnlForm.Controls.Add(this.chkActive);
@@ -307,6 +338,10 @@ namespace ioop_GROUP_WORK.Admin
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label lblDepartment;
+        private System.Windows.Forms.TextBox txtDepartment;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.ComboBox cmbRole;
         private System.Windows.Forms.CheckBox chkActive;
@@ -317,4 +352,5 @@ namespace ioop_GROUP_WORK.Admin
         private System.Windows.Forms.Button btnBack;
     }
 }
+
 

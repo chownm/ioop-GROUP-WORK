@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ioop_GROUP_WORK.Admin;
+using ioop_GROUP_WORK.UniSupervisor;
 
 namespace ioop_GROUP_WORK.Admin
 {
@@ -30,7 +31,7 @@ namespace ioop_GROUP_WORK.Admin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error loading form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -38,13 +39,20 @@ namespace ioop_GROUP_WORK.Admin
         {
             try
             {
-                DataTable dtStudents = new DataTable();
+                DataTable dtStudents = adminMgr.GetAllStudents();
                 dgvStudents.DataSource = dtStudents;
                 dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                // ✅ Adjust column widths
+                if (dgvStudents.Columns.Count > 0)
+                {
+                    dgvStudents.Columns[0].Width = 80;
+                    dgvStudents.Columns[1].Width = 120;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading students: " + ex.Message);
+                MessageBox.Show("Error loading students: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -52,13 +60,26 @@ namespace ioop_GROUP_WORK.Admin
         {
             try
             {
-                DataTable dtSupervisors = new DataTable();
-                dgvSupervisors.DataSource = dtSupervisors;
-                dgvSupervisors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                // ✅ Clear and populate dropdown from database
+                cmbSupervisor.Items.Clear();
+                cmbSupervisor.DisplayMember = "FullName";
+                cmbSupervisor.ValueMember = "SupervisorId";
+
+                DataTable dtSupervisors = adminMgr.GetAllSupervisors();
+
+                if (dtSupervisors.Rows.Count > 0)
+                {
+                    cmbSupervisor.DataSource = dtSupervisors;
+                    cmbSupervisor.SelectedIndex = -1; // ✅ No default selection
+                }
+                else
+                {
+                    MessageBox.Show("No supervisors found in database.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading supervisors: " + ex.Message);
+                MessageBox.Show("Error loading supervisors: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -66,29 +87,35 @@ namespace ioop_GROUP_WORK.Admin
         {
             try
             {
+                // ✅ Validate student selection
                 if (dgvStudents.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Please select a student.");
+                    MessageBox.Show("Please select a student from the list.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (cmbSupervisor.SelectedIndex < 0)
+                // ✅ Validate supervisor selection
+                if (cmbSupervisor.SelectedIndex < 0 || cmbSupervisor.SelectedValue == null)
                 {
-                    MessageBox.Show("Please select a supervisor.");
+                    MessageBox.Show("Please select a supervisor from the dropdown.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // studentID is varchar in DB, use string
-                string studentId = dgvStudents.SelectedRows[0].Cells["StudentId"].Value.ToString();
-                int supervisorId = int.Parse(cmbSupervisor.SelectedValue.ToString());
+                // ✅ Get values from UI
+                string studentId = dgvStudents.SelectedRows[0].Cells["studentID"].Value.ToString();
+                int supervisorId = (int)cmbSupervisor.SelectedValue;
 
+                // ✅ Call AdminManager to assign
                 string result = adminMgr.AssignSupervisor(studentId, supervisorId);
-                MessageBox.Show(result);
+                MessageBox.Show(result, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // ✅ Refresh list
                 LoadStudents();
+                cmbSupervisor.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error assigning supervisor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

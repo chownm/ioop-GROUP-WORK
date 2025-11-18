@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ioop_GROUP_WORK.Admin
 {
@@ -51,82 +52,49 @@ namespace ioop_GROUP_WORK.Admin
         [Column("AccessLevel")]
         public string AccessLevel { get; private set; }
 
+
         // Constructor 1: Default
-        public Administrator()
-        {
-        }
-
-        // Constructor 2
-        public Administrator(int UserId)
-        {
-        }
-
-        // Constructor 3: Full initialization
-        public Administrator(int userId, int adminId, string fullName,
-            string department, string phone, string accessLevel)
+        public Administrator() { }
+        public Administrator(int userId, string fullName, string department, string phone, string accessLevel)
         {
             UserId = userId;
-            AdminId = adminId;
             FullName = fullName;
             Department = department;
             Phone = phone;
             AccessLevel = accessLevel;
         }
 
-        // Load admin profile from database
-        public bool LoadProfile()
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand(
-                        "SELECT AdminId, FullName, Department, Phone, AccessLevel FROM dbo.Administrators WHERE UserId = @UserId;",
-                        con);
-                    cmd.Parameters.AddWithValue("@userId", UserId);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        AdminId = Convert.ToInt32(reader["AdminId"]);
-                        FullName = reader["FullName"].ToString();
-                        Department = reader["Department"].ToString();
-                        Phone = reader["Phone"].ToString();
-                        AccessLevel = reader["AccessLevel"].ToString();
-                        return true;
-                    }
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+        public Administrator(int adminId, int userId, string fullName, string department, string phone, string accessLevel)
+        {
+            AdminId = adminId;
+            UserId = userId;
+            FullName = fullName;
+            Department = department;
+            Phone = phone;
+            AccessLevel = accessLevel;
         }
 
-        // Update admin profile
-        public string UpdateProfile(string fullName, string department, string phone)
+        // ✅ CREATE - Add new administrator
+        public static string Create(int adminId, int userId, string fullName, string department, string phone, string accessLevel)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand(
-                        "UPDATE dbo.Administrators SET FullName = @FullName, Department = @Department, Phone = @Phone" +
-                        "WHERE UserId = @UserId;",
-                        con);
-
-                    cmd.Parameters.AddWithValue("@FullName", fullName);
-                    cmd.Parameters.AddWithValue("@Dept", department);
-                    cmd.Parameters.AddWithValue("@Phone", phone);
-                    cmd.Parameters.AddWithValue("@UserId", UserId);
-
-                    int result = cmd.ExecuteNonQuery();
-                    return result > 0 ? "Profile Updated Successfully" : "Update Failed";
+                    string query = @"INSERT INTO Administrators (UserId, FullName, Department, Phone, AccessLevel, CreatedDate) 
+                                   VALUES (@userId, @fullName, @department, @phone, @accessLevel, GETDATE())";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@fullName", fullName ?? "");
+                        cmd.Parameters.AddWithValue("@department", department ?? "");
+                        cmd.Parameters.AddWithValue("@phone", phone ?? "");
+                        cmd.Parameters.AddWithValue("@accessLevel", accessLevel ?? "Full");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Administrator created successfully." : "Failed to create administrator.";
+                    }
                 }
             }
             catch (Exception ex)
@@ -135,33 +103,238 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        // Get admin statistics
-        public DataTable GetStatistics()
+        // ✅ READ - Get all administrators
+        public static DataTable GetAll()
         {
-            DataTable dt = new DataTable();
             try
             {
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                DataTable dtAdmins = new DataTable();
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand(
-                        "(SELECT COUNT(*) FROM dbo.users) AS TotalUsers, " +
-                        "(SELECT COUNT(*) FROM dbo.Students) AS TotalStudents, " +
-                        "(SELECT COUNT(*) FROM dbo.CompanyProfile) AS TotalCompanies, " +
-                        "(SELECT COUNT(*) FROM dbo.Recruiters) AS TotalRecruiters, " +
-                        "(SELECT COUNT(*) FROM dbo.StudentApplication WHERE Status = 'Pending') AS PendingApplications;",
-                        con);
+                    string query = @"SELECT a.AdminId, a.UserId, a.FullName, a.Department, a.Phone,  
+                                   a.AccessLevel, a.IsActive, u.Username, a.CreatedDate
+                                   FROM Administrators a 
+                                   JOIN users u ON a.UserId = u.id 
+                                   ORDER BY a.FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtAdmins);
+                    }
+                }
+                return dtAdmins;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving administrators: " + ex.Message);
+            }
+        }
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
+        // ✅ READ - Get single administrator by ID
+        public static Administrator GetById(int adminId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = "SELECT * FROM Administrators WHERE AdminId = @adminId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@adminId", adminId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new Administrator(
+                                    (int)reader["AdminId"],
+                                    (int)reader["UserId"],
+                                    reader["FullName"].ToString(),
+                                    reader["Department"].ToString(),
+                                    reader["Phone"].ToString(),
+                                    reader["AccessLevel"].ToString()
+                                );
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving administrator: " + ex.Message);
+            }
+        }
+
+        // ✅ UPDATE - Update administrator field
+        public static string Update(int adminId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE Administrators SET {field} = @value WHERE AdminId = @adminId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@adminId", adminId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? $"Administrator {field} updated successfully." : "Administrator not found.";
+                    }
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Error fetching statistics: " + ex.Message);
+                return "Error: " + ex.Message;
             }
-            return dt;
+        }
+
+        // ✅ UPDATE - Update multiple fields
+        public static string UpdateMultiple(int adminId, string fullName, string department, string phone, string email, string accessLevel)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = @"UPDATE Administrators 
+                                   SET FullName = @fullName, 
+                                       Department = @department, 
+                                       Phone = @phone, 
+                                       Email = @email, 
+                                       AccessLevel = @accessLevel 
+                                   WHERE AdminId = @adminId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@adminId", adminId);
+                        cmd.Parameters.AddWithValue("@fullName", fullName ?? "");
+                        cmd.Parameters.AddWithValue("@department", department ?? "");
+                        cmd.Parameters.AddWithValue("@phone", phone ?? "");
+                        cmd.Parameters.AddWithValue("@email", email ?? "");
+                        cmd.Parameters.AddWithValue("@accessLevel", accessLevel ?? "Full");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Administrator updated successfully." : "Administrator not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ✅ DELETE - Delete administrator
+        public static string Delete(int adminId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Administrators WHERE AdminId = @adminId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@adminId", adminId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Administrator deleted successfully." : "Administrator not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ✅ SEARCH - Search administrators by name, email, or department
+        public static DataTable Search(string searchTerm)
+        {
+            try
+            {
+                DataTable dtSearch = new DataTable();
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT a.AdminId, a.UserId, a.FullName, a.Department, a.Phone, a.Email, 
+                                   a.AccessLevel, a.IsActive, u.Username
+                                   FROM Administrators a 
+                                   JOIN users u ON a.UserId = u.id 
+                                   WHERE a.FullName LIKE @searchTerm 
+                                      OR a.Email LIKE @searchTerm 
+                                      OR a.Department LIKE @searchTerm 
+                                   ORDER BY a.FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtSearch);
+                    }
+                }
+                return dtSearch;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error searching administrators: " + ex.Message);
+            }
+        }
+
+        // ✅ COUNT - Get total administrators
+        public static int Count()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = "SELECT COUNT(*) FROM Administrators WHERE IsActive = 1";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        return (int)cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error counting administrators: " + ex.Message);
+            }
+        }
+
+        // ✅ GET BY USER ID - Get administrator by User ID
+        public static Administrator GetByUserId(int userId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                {
+                    con.Open();
+                    string query = "SELECT * FROM Administrators WHERE UserId = @userId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new Administrator(
+                                    (int)reader["AdminId"],
+                                    (int)reader["UserId"],
+                                    reader["FullName"].ToString(),
+                                    reader["Department"].ToString(),
+                                    reader["Phone"].ToString(),
+                                    reader["AccessLevel"].ToString()
+                                );
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving administrator by user ID: " + ex.Message);
+            }
         }
     }
 }

@@ -23,12 +23,11 @@ namespace ioop_GROUP_WORK.Admin
     /// </summary>
     internal class AdminManager
     {
-        //=============================
-        // Singleton Instance
-        //=============================
         private static AdminManager instance = null;
         private static readonly object lockObject = new object();
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString;
+
+        private AdminManager() { }
 
         public static AdminManager Instance
         {
@@ -48,202 +47,74 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        //=============================
-        // Private Constructor (Singleton)
-        //=============================
-        private AdminManager()
+        // ============================================
+        // ADMINISTRATOR TABLE - CRUD (Delegated to Administrator class)
+        // ============================================
+
+        public DataTable GetAllAdministrators()
         {
+            return Administrator.GetAll();
         }
 
-        //=============================
-        // User Management Functions
-        //=============================
-
-        /// <summary>
-        /// Create new user with validation
-        /// Ensures data integrity through parameterized queries
-        /// </summary>
-        public string CreateUser(string id, string username, string email, string password, string role)
+        public Administrator GetAdministratorById(int adminId)
         {
-            try
-            {
-                if (!ValidationHelper.ValidatePassword(password))
-                {
-                    return "Password must be at least 8 characters with uppercase, lowercase, and numbers!";
-                }
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-                {
-                    con.Open();
-
-                    // Check if email exists
-                    if (!string.IsNullOrEmpty(email))
-                    {
-                        if (!ValidationHelper.ValidateEmail(email))
-                            return "Invalid email format";
-
-                        string checkEmailQuery = "SELECT COUNT(*) FROM users WHERE Email = @Email;";
-                        using (SqlCommand checkCmd = new SqlCommand(checkEmailQuery, con))
-                        {
-                            checkCmd.Parameters.AddWithValue("@Email", email);
-                            int emailExists = (int)checkCmd.ExecuteScalar();
-                            if (emailExists > 0)
-                                return "Email already exists";
-                        }
-                    }
-
-                    // Check if username exists
-                    if (!string.IsNullOrEmpty(username))
-                    {
-                        if (!ValidationHelper.ValidateUsername(username))
-                            return "Invalid username format";
-
-                        string checkUsernameQuery = "SELECT COUNT(*) FROM users WHERE Username = @Username;";
-                        using (SqlCommand checkCmd = new SqlCommand(checkUsernameQuery, con))
-                        {
-                            checkCmd.Parameters.AddWithValue("@Username", username);
-                            int usernameExists = (int)checkCmd.ExecuteScalar();
-                            if (usernameExists > 0)
-                                return "Username already exists";
-                        }
-                    }
-
-                    // Insert user with parameterized query (SQL injection prevention)
-                    // Database users table columns: Username, password, Email, role
-                    string insertQuery = @"
-                        INSERT INTO users (Username, password, Email, role)
-                        VALUES (@Username, @password, @Email, @Role);";
-
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Username", username ?? "");
-                        cmd.Parameters.AddWithValue("@Email", email ?? "");
-                        cmd.Parameters.AddWithValue("@password", password ?? "");
-                        cmd.Parameters.AddWithValue("@Role", role ?? "");
-
-                        int result = cmd.ExecuteNonQuery();
-                        return (result > 0) ? "User created successfully" : "Failed to create user";
-                    }
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                return "Database Error: " + sqlEx.Message;
-            }
-            catch (Exception ex)
-            {
-                return "Error: " + ex.Message;
-            }
+            return Administrator.GetById(adminId);
         }
 
-        /// <summary>
-        /// Update existing user information
-        /// </summary>
-        public string UpdateUser(int userId, string field, string specificattribute)
+        public Administrator GetAdministratorByUserId(int userId)
         {
-            try
-            {
-                // ✅ Validate email if updating Email field
-                if (field.ToLower() == "email" && !ValidationHelper.ValidateEmail(specificattribute))
-                    return "Invalid email format";
-
-                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-                {
-                    con.Open();
-
-                    // ✅ Build dynamic query based on which field to update
-                    string updateQuery = "";
-
-                    switch (field.ToLower())
-                    {
-                        case "username":
-                            updateQuery = "UPDATE dbo.users SET Username = @specificattribute WHERE id = @id";
-                            break;
-                        case "email":
-                            updateQuery = "UPDATE dbo.users SET Email = @specificattribute WHERE id = @id";
-                            break;
-                        case "password":
-                            updateQuery = "UPDATE dbo.users SET password = @specificattribute WHERE id = @id";
-                            break;
-                        case "role":
-                            updateQuery = "UPDATE dbo.users SET role = @specificattribute WHERE id = @id";
-                            break;
-                        default:
-                            return "Invalid field name";
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand(updateQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@specificattribute", specificattribute ?? "");
-                        cmd.Parameters.AddWithValue("@id", userId);
-
-                        int result = cmd.ExecuteNonQuery();
-                        return (result > 0)
-                            ? $"User {field} updated successfully"
-                            : "User not found";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return "Error: " + ex.Message;
-            }
+            return Administrator.GetByUserId(userId);
         }
 
-        /// <summary>
-        /// Delete/deactivate user account
-        /// </summary>
-        public string DeleteUser(int userId)
+        public string CreateAdministrator(int userId, string fullName, string department, string phone, string accessLevel)
         {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-                {
-                    con.Open();
-
-                    string deleteQuery = "DELETE FROM users WHERE id = @id;";
-
-                    using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@id", userId);
-                        int result = cmd.ExecuteNonQuery();
-                        return (result > 0) ? "User deleted successfully" : "User not found";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return "Error: " + ex.Message;
-            }
+            return Administrator.Create(0, userId, fullName, department, phone, accessLevel);
         }
 
-        /// <summary>
-        /// Get all users as DataTable
-        /// </summary>
+        public string UpdateAdministrator(int adminId, string field, string newValue)
+        {
+            return Administrator.Update(adminId, field, newValue);
+        }
+
+        public string UpdateAdministratorMultiple(int adminId, string fullName, string department, string phone, string accessLevel)
+        {
+            return Administrator.UpdateMultiple(adminId, fullName, department, phone, "", accessLevel);
+        }
+
+        public string DeleteAdministrator(int adminId)
+        {
+            return Administrator.Delete(adminId);
+        }
+
+        public DataTable SearchAdministrators(string searchTerm)
+        {
+            return Administrator.Search(searchTerm);
+        }
+
+        public int GetAdministratorCount()
+        {
+            return Administrator.Count();
+        }
+
+        // ============================================
+        // USERS TABLE - CRUD OPERATIONS
+        // ============================================
+
         public DataTable GetAllUsers()
         {
             try
             {
                 DataTable dtUsers = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
-                    string query = @"
-                        SELECT id AS UserId, Username, Email, role AS Role
-                        FROM users
-                        ORDER BY Username;";
-
+                    string query = "SELECT id, Username, Email, role FROM users ORDER BY Username";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(dtUsers);
                     }
                 }
-
                 return dtUsers;
             }
             catch (Exception ex)
@@ -252,26 +123,85 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        /// <summary>
-        /// Search users with filtering
-        /// </summary>
+        public string CreateUser(string userId, string username, string email, string password, string role)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "INSERT INTO users (Username, Email, password, role) VALUES (@username, @email, @password, @role)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username ?? "");
+                        cmd.Parameters.AddWithValue("@email", email ?? "");
+                        cmd.Parameters.AddWithValue("@password", password ?? "");
+                        cmd.Parameters.AddWithValue("@role", role ?? "Student");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "User created successfully." : "Failed to create user.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateUser(int userId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE users SET {field} = @value WHERE id = @userId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "User updated successfully." : "User not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteUser(int userId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM users WHERE id = @userId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "User deleted successfully." : "User not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
         public DataTable SearchUsers(string searchTerm)
         {
             try
             {
                 DataTable dtSearch = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    string query = @"
-                        SELECT id AS UserId, Username, Email, role AS Role
-                        FROM users
-                        WHERE Username LIKE @searchTerm 
-                           OR Email LIKE @searchTerm 
-                           OR role LIKE @searchTerm
-                        ORDER BY Username;";
-
+                    con.Open();
+                    string query = "SELECT id, Username, Email, role FROM users WHERE Username LIKE @searchTerm OR Email LIKE @searchTerm ORDER BY Username";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
@@ -279,76 +209,313 @@ namespace ioop_GROUP_WORK.Admin
                         adapter.Fill(dtSearch);
                     }
                 }
-
                 return dtSearch;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error searching: " + ex.Message);
+                throw new Exception("Error searching users: " + ex.Message);
             }
         }
 
-        //=============================
-        // Recruiter Management
-        //=============================
+        // ============================================
+        // STUDENTS TABLE - CRUD OPERATIONS
+        // ============================================
 
-        /// <summary>
-        /// Create recruiter account with transaction support
-        /// Ensures atomic operation for user and recruiter creation
-        /// </summary>
-        public string CreateRecruiter(string username, string email, string password,
-            int companyId, string fullName, string position, string phone)
+        public DataTable GetAllStudents()
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                DataTable dtStudents = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "SELECT studentID, studentName, email, phoneNumber, course FROM Students ORDER BY studentName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtStudents);
+                    }
+                }
+                return dtStudents;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving students: " + ex.Message);
+            }
+        }
+
+        public string CreateStudent(string studentID, string studentName, string email, string phoneNumber, string course)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "INSERT INTO Students (studentID, studentName, email, phoneNumber, course) VALUES (@studentID, @studentName, @email, @phoneNumber, @course)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@studentID", studentID ?? "");
+                        cmd.Parameters.AddWithValue("@studentName", studentName ?? "");
+                        cmd.Parameters.AddWithValue("@email", email ?? "");
+                        cmd.Parameters.AddWithValue("@phoneNumber", phoneNumber ?? "");
+                        cmd.Parameters.AddWithValue("@course", course ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Student created successfully." : "Failed to create student.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateStudent(string studentID, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE Students SET {field} = @value WHERE studentID = @studentID";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@studentID", studentID);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Student updated successfully." : "Student not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteStudent(string studentID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Students WHERE studentID = @studentID";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@studentID", studentID);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Student deleted successfully." : "Student not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // SUPERVISORS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllSupervisors()
+        {
+            try
+            {
+                DataTable dtSupervisors = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT s.SupervisorId, s.FullName, s.Department, s.Phone, s.Email, 
+                                   u.Username, s.IsActive, s.CreatedDate 
+                                   FROM Supervisors s 
+                                   JOIN users u ON s.UserId = u.id 
+                                   ORDER BY s.FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtSupervisors);
+                    }
+                }
+                return dtSupervisors;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving supervisors: " + ex.Message);
+            }
+        }
+
+        public string CreateSupervisor(int userId, string fullName, string department, string phone, string email)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO Supervisors (UserId, FullName, Department, Phone, Email, IsActive) 
+                                   VALUES (@userId, @fullName, @department, @phone, @email, 1)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@fullName", fullName ?? "");
+                        cmd.Parameters.AddWithValue("@department", department ?? "");
+                        cmd.Parameters.AddWithValue("@phone", phone ?? "");
+                        cmd.Parameters.AddWithValue("@email", email ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Supervisor created successfully." : "Failed to create supervisor.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateSupervisor(int supervisorId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE Supervisors SET {field} = @value WHERE SupervisorId = @supervisorId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@supervisorId", supervisorId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Supervisor updated successfully." : "Supervisor not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteSupervisor(int supervisorId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Supervisors WHERE SupervisorId = @supervisorId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@supervisorId", supervisorId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Supervisor deleted successfully." : "Supervisor not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // RECRUITERS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllRecruiters()
+        {
+            try
+            {
+                DataTable dtRecruiters = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT r.RecruiterId, r.FullName, r.Position, r.Phone, r.Email, 
+                                   u.Username, c.CompanyName, r.IsActive, r.CreatedDate 
+                                   FROM Recruiters r 
+                                   JOIN users u ON r.UserId = u.id 
+                                   JOIN CompanyProfile c ON r.CompanyId = c.Id 
+                                   ORDER BY r.FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtRecruiters);
+                    }
+                }
+                return dtRecruiters;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving recruiters: " + ex.Message);
+            }
+        }
+
+        public DataTable GetRecruitersByCompany(int companyId)
+        {
+            try
+            {
+                DataTable dtRecruiters = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT r.RecruiterId, r.FullName, r.Position, r.Phone, r.Email, 
+                                   u.Username, c.CompanyName 
+                                   FROM Recruiters r 
+                                   JOIN users u ON r.UserId = u.id 
+                                   JOIN CompanyProfile c ON r.CompanyId = c.Id 
+                                   WHERE r.CompanyId = @companyId 
+                                   ORDER BY r.FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@companyId", companyId);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtRecruiters);
+                    }
+                }
+                return dtRecruiters;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving recruiters: " + ex.Message);
+            }
+        }
+
+        public string CreateRecruiter(string username, string email, string password, int companyId, string fullName, string position, string phone)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
                     SqlTransaction transaction = con.BeginTransaction();
-
                     try
                     {
-                        // Create user account first
-                        string userQuery = @"
-                            INSERT INTO users (Username, Email, password, role)
-                            OUTPUT INSERTED.id
-                            VALUES (@username, @email, @password, 'Recruiter');";
-
+                        string userQuery = @"INSERT INTO users (Username, Email, password, role) OUTPUT INSERTED.id 
+                                           VALUES (@username, @email, @password, 'Recruiter')";
                         int userId;
                         using (SqlCommand userCmd = new SqlCommand(userQuery, con, transaction))
                         {
                             userCmd.Parameters.AddWithValue("@username", username);
                             userCmd.Parameters.AddWithValue("@email", email);
                             userCmd.Parameters.AddWithValue("@password", password);
-
                             userId = (int)userCmd.ExecuteScalar();
                         }
 
-                        // Create recruiter record
-                        string recruiterQuery = @"
-                            INSERT INTO Recruiters (UserId, CompanyId, FullName, Position, Phone, Email)
-                            VALUES (@userId, @companyId, @fullName, @position, @phone, @email);";
-
+                        string recruiterQuery = @"INSERT INTO Recruiters (UserId, CompanyId, FullName, Position, Phone, Email, IsActive) 
+                                                VALUES (@userId, @companyId, @fullName, @position, @phone, @email, 1)";
                         using (SqlCommand recruiterCmd = new SqlCommand(recruiterQuery, con, transaction))
                         {
                             recruiterCmd.Parameters.AddWithValue("@userId", userId);
                             recruiterCmd.Parameters.AddWithValue("@companyId", companyId);
-                            recruiterCmd.Parameters.AddWithValue("@fullName", fullName);
-                            recruiterCmd.Parameters.AddWithValue("@position", position);
-                            recruiterCmd.Parameters.AddWithValue("@phone", phone);
-                            recruiterCmd.Parameters.AddWithValue("@email", email);
-
-                            int result = recruiterCmd.ExecuteNonQuery();
-                            if (result > 0)
-                            {
-                                transaction.Commit();
-                                return "Recruiter created successfully";
-                            }
+                            recruiterCmd.Parameters.AddWithValue("@fullName", fullName ?? "");
+                            recruiterCmd.Parameters.AddWithValue("@position", position ?? "");
+                            recruiterCmd.Parameters.AddWithValue("@phone", phone ?? "");
+                            recruiterCmd.Parameters.AddWithValue("@email", email ?? "");
+                            recruiterCmd.ExecuteNonQuery();
                         }
 
-                        transaction.Rollback();
-                        return "Failed to create recruiter";
+                        transaction.Commit();
+                        return "Recruiter created successfully.";
                     }
                     catch (Exception)
                     {
@@ -363,40 +530,770 @@ namespace ioop_GROUP_WORK.Admin
             }
         }
 
-        /// <summary>
-        /// Get all recruiters by company
-        /// </summary>
-        public DataTable GetRecruitersByCompany(int companyId)
+        public string UpdateRecruiter(int recruiterId, string field, string newValue)
         {
             try
             {
-                DataTable dtRecruiters = new DataTable();
-
-                using (SqlConnection con = new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    string query = @"
-                        SELECT r.RecruiterId, r.FullName, r.Position, r.Phone, r.Email, 
-                               u.Username, c.CompanyName
-                        FROM Recruiters r
-                        JOIN users u ON r.UserId = u.id
-                        JOIN CompanyProfile c ON r.CompanyId = c.Id
-                        WHERE r.CompanyId = @companyId
-                        ORDER BY r.FullName;";
-
+                    con.Open();
+                    string query = $"UPDATE Recruiters SET {field} = @value WHERE RecruiterId = @recruiterId";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@companyId", companyId);
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dtRecruiters);
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@recruiterId", recruiterId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Recruiter updated successfully." : "Recruiter not found.";
                     }
                 }
-
-                return dtRecruiters;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error retrieving recruiters: " + ex.Message);
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteRecruiter(int recruiterId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Recruiters WHERE RecruiterId = @recruiterId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@recruiterId", recruiterId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Recruiter deleted successfully." : "Recruiter not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // COMPANIES TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllCompanies()
+        {
+            try
+            {
+                DataTable dtCompanies = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT Id, CompanyName, ContactPerson, Email, ContactNumber, Address, CompanyDescription 
+                                   FROM CompanyProfile ORDER BY CompanyName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtCompanies);
+                    }
+                }
+                return dtCompanies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving companies: " + ex.Message);
+            }
+        }
+
+        public string CreateCompany(string companyName, string contactPerson, string email, string contactNumber, string address, string description)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO CompanyProfile (CompanyName, ContactPerson, Email, ContactNumber, Address, CompanyDescription) 
+                                   VALUES (@companyName, @contactPerson, @email, @contactNumber, @address, @description)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@companyName", companyName ?? "");
+                        cmd.Parameters.AddWithValue("@contactPerson", contactPerson ?? "");
+                        cmd.Parameters.AddWithValue("@email", email ?? "");
+                        cmd.Parameters.AddWithValue("@contactNumber", contactNumber ?? "");
+                        cmd.Parameters.AddWithValue("@address", address ?? "");
+                        cmd.Parameters.AddWithValue("@description", description ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Company created successfully." : "Failed to create company.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateCompany(int companyId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE CompanyProfile SET {field} = @value WHERE Id = @companyId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@companyId", companyId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Company updated successfully." : "Company not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteCompany(int companyId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM CompanyProfile WHERE Id = @companyId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@companyId", companyId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Company deleted successfully." : "Company not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // APPLICATIONS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllApplications()
+        {
+            try
+            {
+                DataTable dtApplications = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT StudentID, StudentName, Position, CompanyName, DateApplied, Status 
+                                   FROM StudentApplication ORDER BY DateApplied DESC";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtApplications);
+                    }
+                }
+                return dtApplications;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving applications: " + ex.Message);
+            }
+        }
+
+        public DataTable GetApplicationsByStatus(string status)
+        {
+            try
+            {
+                DataTable dtApplications = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT StudentID, StudentName, CompanyName, Position, DateApplied, Status 
+                                   FROM StudentApplication 
+                                   WHERE (@status = 'All' OR Status = @status) 
+                                   ORDER BY DateApplied DESC";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@status", status);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtApplications);
+                    }
+                }
+                return dtApplications;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving applications: " + ex.Message);
+            }
+        }
+
+        public string UpdateApplicationStatus(string studentID, string newStatus)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "UPDATE StudentApplication SET Status = @status WHERE StudentID = @studentID";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@status", newStatus);
+                        cmd.Parameters.AddWithValue("@studentID", studentID);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Application status updated successfully." : "Application not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // INTERNSHIP OFFERS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllInternshipOffers()
+        {
+            try
+            {
+                DataTable dtOffers = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT Id, JobTitle, Position, StartDate, EndDate, Salary, CompanyName, DateOffered 
+                                   FROM InternshipOffer ORDER BY DateOffered DESC";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtOffers);
+                    }
+                }
+                return dtOffers;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving internship offers: " + ex.Message);
+            }
+        }
+
+        public string CreateInternshipOffer(string jobTitle, string position, DateTime startDate, DateTime endDate, decimal salary, string description, string companyName)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO InternshipOffer (JobTitle, Position, StartDate, EndDate, Salary, Description, CompanyName, DateOffered) 
+                                   VALUES (@jobTitle, @position, @startDate, @endDate, @salary, @description, @companyName, GETDATE())";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@jobTitle", jobTitle ?? "");
+                        cmd.Parameters.AddWithValue("@position", position ?? "");
+                        cmd.Parameters.AddWithValue("@startDate", startDate);
+                        cmd.Parameters.AddWithValue("@endDate", endDate);
+                        cmd.Parameters.AddWithValue("@salary", salary);
+                        cmd.Parameters.AddWithValue("@description", description ?? "");
+                        cmd.Parameters.AddWithValue("@companyName", companyName ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Internship offer created successfully." : "Failed to create offer.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteInternshipOffer(int offerId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM InternshipOffer WHERE Id = @offerId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@offerId", offerId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Internship offer deleted successfully." : "Offer not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // COURSES TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllCourses()
+        {
+            try
+            {
+                DataTable dtCourses = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "SELECT CourseId, SubjectName FROM Courses ORDER BY SubjectName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtCourses);
+                    }
+                }
+                return dtCourses;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving courses: " + ex.Message);
+            }
+        }
+
+        public string CreateCourse(string subjectName)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "INSERT INTO Courses (SubjectName) VALUES (@subjectName)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@subjectName", subjectName ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Course created successfully." : "Failed to create course.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateCourse(int courseId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE Courses SET {field} = @value WHERE CourseId = @courseId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@courseId", courseId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Course updated successfully." : "Course not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteCourse(int courseId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Courses WHERE CourseId = @courseId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@courseId", courseId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Course deleted successfully." : "Course not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // CHAPTERS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllChapters()
+        {
+            try
+            {
+                DataTable dtChapters = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT c.ChapterId, c.ChapterName, c.ChapterOrder, c.Description, co.SubjectName 
+                                   FROM Chapters c 
+                                   JOIN Courses co ON c.CourseId = co.CourseId 
+                                   ORDER BY c.ChapterOrder";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtChapters);
+                    }
+                }
+                return dtChapters;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving chapters: " + ex.Message);
+            }
+        }
+
+        public string CreateChapter(int courseId, string chapterName, int chapterOrder, string description)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO Chapters (CourseId, ChapterName, ChapterOrder, Description) 
+                                   VALUES (@courseId, @chapterName, @chapterOrder, @description)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@courseId", courseId);
+                        cmd.Parameters.AddWithValue("@chapterName", chapterName ?? "");
+                        cmd.Parameters.AddWithValue("@chapterOrder", chapterOrder);
+                        cmd.Parameters.AddWithValue("@description", description ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Chapter created successfully." : "Failed to create chapter.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string UpdateChapter(int chapterId, string field, string newValue)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = $"UPDATE Chapters SET {field} = @value WHERE ChapterId = @chapterId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@value", newValue ?? "");
+                        cmd.Parameters.AddWithValue("@chapterId", chapterId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Chapter updated successfully." : "Chapter not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteChapter(int chapterId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM Chapters WHERE ChapterId = @chapterId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@chapterId", chapterId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Chapter deleted successfully." : "Chapter not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // CHECK-IN RECORDS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllCheckInRecords()
+        {
+            try
+            {
+                DataTable dtCheckIn = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT CheckInID, studentID, studentName, checkInDate 
+                                   FROM CheckInRecord 
+                                   ORDER BY checkInDate DESC";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtCheckIn);
+                    }
+                }
+                return dtCheckIn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving check-in records: " + ex.Message);
+            }
+        }
+
+        public string CreateCheckInRecord(string studentId, string studentName, DateTime checkInDate)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO CheckInRecord (studentID, studentName, checkInDate) 
+                                   VALUES (@studentId, @studentName, @checkInDate)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@studentId", studentId ?? "");
+                        cmd.Parameters.AddWithValue("@studentName", studentName ?? "");
+                        cmd.Parameters.AddWithValue("@checkInDate", checkInDate);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Check-in record created successfully." : "Failed to create check-in record.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteCheckInRecord(int checkInId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM CheckInRecord WHERE CheckInID = @checkInId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@checkInId", checkInId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Check-in record deleted successfully." : "Record not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // STUDENT PROGRESS TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllStudentProgress()
+        {
+            try
+            {
+                DataTable dtProgress = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT sp.SubjectId, sp.ChapterId, sp.ProgressPercentage, sp.studentID, 
+                                   s.studentName, c.SubjectName 
+                                   FROM StudentProgress sp 
+                                   JOIN Students s ON sp.studentID = s.studentID 
+                                   JOIN Courses c ON sp.SubjectId = c.CourseId 
+                                   ORDER BY sp.studentID";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtProgress);
+                    }
+                }
+                return dtProgress;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving student progress: " + ex.Message);
+            }
+        }
+
+        public string UpdateStudentProgress(string studentId, int subjectId, int chapterId, decimal progressPercentage)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"UPDATE StudentProgress 
+                                   SET ProgressPercentage = @progress 
+                                   WHERE studentID = @studentId AND SubjectId = @subjectId AND ChapterId = @chapterId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@progress", progressPercentage);
+                        cmd.Parameters.AddWithValue("@studentId", studentId);
+                        cmd.Parameters.AddWithValue("@subjectId", subjectId);
+                        cmd.Parameters.AddWithValue("@chapterId", chapterId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Student progress updated successfully." : "Progress record not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // STUDENT EVALUATION REPORT TABLE - CRUD OPERATIONS
+        // ============================================
+
+        public DataTable GetAllEvaluationReports()
+        {
+            try
+            {
+                DataTable dtReports = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"SELECT ReportID, studentID, studentName, Position, EvaluationDate, 
+                                   Performance, CommunicationSkills, Punctuality 
+                                   FROM StudentEvaluationReport 
+                                   ORDER BY EvaluationDate DESC";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dtReports);
+                    }
+                }
+                return dtReports;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving evaluation reports: " + ex.Message);
+            }
+        }
+
+        public string CreateEvaluationReport(string studentId, string studentName, string position,
+            DateTime evaluationDate, float performance, float communicationSkills, float punctuality, string description)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"INSERT INTO StudentEvaluationReport 
+                                   (studentID, studentName, Position, EvaluationDate, Performance, CommunicationSkills, Punctuality, Description) 
+                                   VALUES (@studentId, @studentName, @position, @evaluationDate, @performance, @communication, @punctuality, @description)";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@studentId", studentId ?? "");
+                        cmd.Parameters.AddWithValue("@studentName", studentName ?? "");
+                        cmd.Parameters.AddWithValue("@position", position ?? "");
+                        cmd.Parameters.AddWithValue("@evaluationDate", evaluationDate);
+                        cmd.Parameters.AddWithValue("@performance", performance);
+                        cmd.Parameters.AddWithValue("@communication", communicationSkills);
+                        cmd.Parameters.AddWithValue("@punctuality", punctuality);
+                        cmd.Parameters.AddWithValue("@description", description ?? "");
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Evaluation report created successfully." : "Failed to create report.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        public string DeleteEvaluationReport(int reportId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = "DELETE FROM StudentEvaluationReport WHERE ReportID = @reportId";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@reportId", reportId);
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0 ? "Evaluation report deleted successfully." : "Report not found.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        // ============================================
+        // UTILITY METHODS
+        // ============================================
+
+        public DataTable GetAllTables()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = @"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES 
+                                   WHERE TABLE_TYPE = 'BASE TABLE' ORDER BY TABLE_NAME";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting tables: " + ex.Message);
+            }
+        }
+
+        public DataTable GetTableData(string tableName)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = $"SELECT * FROM {tableName}";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.CommandTimeout = 120;
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting table data: " + ex.Message);
             }
         }
 
@@ -408,7 +1305,7 @@ namespace ioop_GROUP_WORK.Admin
         /// Assign supervisor to student
         /// Creates many-to-one relationship for student monitoring
         /// </summary>
-        public string AssignSupervisor(string studentId, int supervisorId)
+        public string AssignSupervisor(string studentId, int supervisorId) // Supervisor Assign to Student Implement in AssignSupervisor Form
         {
             try
             {
@@ -653,60 +1550,9 @@ namespace ioop_GROUP_WORK.Admin
         /// Export all users to CSV file
         /// </summary>
 
-        //=============================
-        // NEW: Table Export Functions (Simple SQL Way)
-        //=============================
-
-        /// <summary>
-        /// Get all table names from Database1.mdf
-        /// </summary>
-        public DataTable GetAllTables()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection con = new SqlConnection(_connectionString))
-                {
-                    string query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' ORDER BY TABLE_NAME";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
-                }
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error getting tables: " + ex.Message);
-            }
-        }
-
         /// <summary>
         /// Get table data (SQL)
         /// </summary>
-        public DataTable GetTableData(string tableName)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection con = new SqlConnection(_connectionString))
-                {
-                    string query = $"SELECT * FROM [{tableName}]";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.CommandTimeout = 120;
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
-                }
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error getting table data: " + ex.Message);
-            }
-        }
 
 
         /// <summary>
@@ -725,6 +1571,7 @@ namespace ioop_GROUP_WORK.Admin
         /// Calculate relevant aggregate statistics for any table
         /// Excludes IDs and sensitive columns
         /// </summary>
+                
         public DataTable CalculateAggregateStatistics(string tableName)
         {
             try

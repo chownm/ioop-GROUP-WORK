@@ -116,6 +116,12 @@
     <Compile Include="Admin\ManageUsers.Designer.cs">
       <DependentUpon>ManageUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\SystemConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\SystemConfiguration.Designer.cs">
+      <DependentUpon>SystemConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ValidationHelper.cs" />
     <Compile Include="Admin\ViewStatistics.cs">
       <SubType>Form</SubType>
@@ -308,6 +314,9 @@
     <EmbeddedResource Include="Admin\ManageUsers.resx">
       <DependentUpon>ManageUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin\SystemConfiguration.resx">
+      <DependentUpon>SystemConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin\ViewStatistics.resx">
       <DependentUpon>ViewStatistics.cs</DependentUpon>
     </EmbeddedResource>
@@ -388,6 +397,7 @@
   <!-- Others -->
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\ioop GROUP WORK.exe.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +413,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\ioop GROUP WORK.exe" />
+    <Content Include="bin\Debug\ioop GROUP WORK.pdb" />
     <Content Include="Database1.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -410,6 +422,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
