@@ -118,8 +118,8 @@ namespace ioop_GROUP_WORK.HR
         {
             try
             {
-                HRHome back = new HRHome(Identify, Password);
-                back.ShowDialog();
+               this.Close(); 
+                
             }
             catch (Exception ex)
             {

@@ -33,12 +33,27 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void btn_check_student_profile_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btn_logOut_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void frm_UniSupervisorHome_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_student_profile_Click(object sender, EventArgs e)
+        {
             this.Close();
             frm_Student_Table frm = new frm_Student_Table();
             frm.ShowDialog();
         }
 
-        private void btn_logOut_Click(object sender, EventArgs e)
+        private void btn_LogOut_Click_1(object sender, EventArgs e)
         {
             this.Close();
             LoginPage frm = new LoginPage();

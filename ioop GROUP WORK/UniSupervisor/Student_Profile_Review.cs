@@ -34,7 +34,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void frm_Student_Profile_Review_Load(object sender, EventArgs e)
         {
-
+            LoadStudentProfileDetails();
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)
@@ -51,11 +51,13 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void LoadStudentProfileDetails()
         {
+            
+
             lbl_student_id.Text = studentID;
             lbl_name.Text = studentName;
-            lbl_email.Text = email;
-            lbl_phoneNumber.Text = phone_number;
-            lbl_course.Text = course;
+            lbl_email.Text = this.email;
+            lbl_phoneNumber.Text = this.phone_number;
+            lbl_course.Text = this.course;
         }
     }
 }

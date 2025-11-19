@@ -140,11 +140,9 @@ namespace ioop_GROUP_WORK.HR
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {
-            
 
-            HRHome back = new HRHome(Identify,Password);
             this.Close();
-            back.ShowDialog();
+            
             
         }
 
