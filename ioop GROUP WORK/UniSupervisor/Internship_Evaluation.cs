@@ -61,13 +61,13 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query_cmd = @"SELECT studentID, studentName FROM InternshipOffer";
+                    string query_cmd = @"SELECT StudentID, StudentName FROM StudentApplication";
                     SqlCommand cmd = new SqlCommand(query_cmd, con);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        string id = reader["studentID"] != System.DBNull.Value ? reader["studentID"].ToString() : "";
-                        string name = reader["studentName"] != System.DBNull.Value ? reader["studentName"].ToString() : "";
+                        string id = reader["StudentID"] != System.DBNull.Value ? reader["StudentID"].ToString() : "";
+                        string name = reader["StudentName"] != System.DBNull.Value ? reader["StudentName"].ToString() : "";
                         
                         students.Add(new Internship_Evaluation(
                             student_id: id,

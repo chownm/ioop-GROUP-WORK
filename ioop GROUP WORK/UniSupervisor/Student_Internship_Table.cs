@@ -60,8 +60,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         private void ShowStudentDetails()
         {
-            List<Internship_Evaluation> students = Internship_Evaluation.GetStudentName();
-            cmb_student_id.Items.Clear();
+            List<Internship_Evaluation> students = Internship_Evaluation.GetStudentName();           
             lbl_student_name.Text = "";
             cmb_student_id.DataSource = null;
             cmb_student_id.DataSource = students;

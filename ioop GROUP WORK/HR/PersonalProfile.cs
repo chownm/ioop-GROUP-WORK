@@ -127,7 +127,7 @@ namespace ioop_GROUP_WORK.HR
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE users SET Username = @newusername, password = @newpassword, Email = @newemail WHERE (Username = @oldusername OR Email = @oldemail) AND password = @oldpassword ", con);
 
-                SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Email = @newemail, password = @newpassword WHERE (ContactPerson = @oldusername OR Email = @oldemail) AND password = @oldpassword", con);
+                SqlCommand cmd1 = new SqlCommand("UPDATE CompanyProfile SET ContactPerson = @newusername, Email = @newemail, Password = @newpassword WHERE (ContactPerson = @oldusername OR Email = @oldemail) AND Password = @oldpassword", con);
 
                 cmd.Parameters.AddWithValue("@newusername", newusername ?? "");
                 cmd.Parameters.AddWithValue("@newpassword", newpassword ?? "");

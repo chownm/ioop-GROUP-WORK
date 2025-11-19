@@ -44,7 +44,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
             );
 
             frm.ShowDialog();
-        }
+        }   
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
@@ -61,7 +61,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
         private void Show_Student_Details()
         {
             lst_Student_Details.DataSource = null;
-            var students = View_Student_Profile.GetStudentIDAndName();
+            var students = View_Student_Profile.GetAllStudent();
 
             lst_Student_Details.DataSource = students;
             lst_Student_Details.DisplayMember = "DisplayStudentInfo";  
