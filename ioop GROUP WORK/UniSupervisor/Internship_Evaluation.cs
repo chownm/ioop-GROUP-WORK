@@ -100,7 +100,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
                                             (studentID, studentName, Position, EvaluationDate, Performance, CommunicationSkills, Punctuality, Description)
                                          VALUES
                                            (@id, @name, @position, @date, @performance, @communication, @punctuality, @description)";   // Key in the sql command to insert evaluation record
-                            
+
                     using (SqlCommand cmd = new SqlCommand(query_cmd, con))
                     {
                         cmd.Parameters.AddWithValue("@id", student_id ?? "");
@@ -121,5 +121,8 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 MessageBox.Show("Error inserting evaluation record: " + ex.Message);
             }
         }
+
+        public string Display_Student_Name() => $"{student_name} | ({student_id})";
+
     }
 }

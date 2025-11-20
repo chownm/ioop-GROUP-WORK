@@ -26,9 +26,6 @@ namespace ioop_GROUP_WORK.UniSupervisor
         private void frm_Evaluation_From_Load(object sender, EventArgs e)
         {
             ShowStudentDetails();
-            cmb_studentName_studentID.SelectedIndex = -1;
-            cmb_position.SelectedIndex = -1;
-
         }
 
         private void btn_Submit_Click(object sender, EventArgs e)
@@ -38,12 +35,12 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
                 if (cmb_studentName_studentID.SelectedItem == null)
                 {
-                    ClearForm();
                     MessageBox.Show("Please select a student.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 Internship_Evaluation selectedStudent = cmb_studentName_studentID.SelectedItem as Internship_Evaluation;
+
                 string studentID = selectedStudent.Student_id;
                 string studentName = selectedStudent.Student_name;
                 string position = cmb_position.Text;
@@ -56,40 +53,36 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 // Validate position
                 if (cmb_position.Text == null)
                 {
-                    ClearForm();
                     MessageBox.Show("Please select a position.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 // Validate performance mark
                 if (!double.TryParse(txt_performance_mark.Text, out performance) || performance > 100.00 || performance < 0.00)
                 {
-                    ClearForm();
                     MessageBox.Show("Invalid performance mark.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 // Validate communication mark
                 if (!double.TryParse(txt_communication_mark.Text, out communication) || communication > 100.00 || communication < 0.00)
                 {
-                    ClearForm();
                     MessageBox.Show("Invalid communication mark.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 // Validate punctuality mark
                 if (!double.TryParse(txt_punctuality_mark.Text, out punctuality) || punctuality > 100.00 || punctuality < 0.00)
                 {
-                    ClearForm();
                     MessageBox.Show("Invalid punctuality mark.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 // Validate evaluation date
                 if (dtp_datetime.Value == null)
                 {
-                    ClearForm();
                     MessageBox.Show("Please select a valid evaluation date.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Continue with submission if all validations pass
+
                 Internship_Evaluation eval = new Internship_Evaluation(
                         student_name: studentName,
                         student_id: studentID,
@@ -123,28 +116,15 @@ namespace ioop_GROUP_WORK.UniSupervisor
         }
 
         private void ShowStudentDetails()
-        { 
+        {
             List<Internship_Evaluation> students = Internship_Evaluation.GetStudentName();
-            cmb_studentName_studentID.DataSource = null;
             cmb_studentName_studentID.DataSource = students;
             cmb_studentName_studentID.DisplayMember = "Display_Student_Name";
-            cmb_studentName_studentID.ValueMember = "student_id";
-            cmb_position.Text = "";
-
-        }
-
-        private void ClearForm()
-        {
+            cmb_studentName_studentID.ValueMember = "Student_id";
             cmb_studentName_studentID.SelectedIndex = -1;
             cmb_position.SelectedIndex = -1;
-
-            txt_performance_mark.Clear();
-            txt_punctuality_mark.Clear();
-            txt_communication_mark.Clear();
-            rtxt_descriptions.Clear();
-
-            dtp_datetime.Value = DateTime.Now;
         }
+
 
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
