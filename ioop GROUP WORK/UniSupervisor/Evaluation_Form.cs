@@ -28,6 +28,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
             ShowStudentDetails();
             cmb_studentName_studentID.SelectedIndex = -1;
             cmb_position.SelectedIndex = -1;
+
         }
 
         private void btn_Submit_Click(object sender, EventArgs e)
@@ -45,15 +46,15 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 Internship_Evaluation selectedStudent = cmb_studentName_studentID.SelectedItem as Internship_Evaluation;
                 string studentID = selectedStudent.Student_id;
                 string studentName = selectedStudent.Student_name;
-                string position = cmb_position.SelectedItem.ToString();
+                string position = cmb_position.Text;
                 DateTime evaldate = dtp_datetime.Value;
-                double performance = double.Parse(txt_performance_mark.Text);
+                double performance = double.Parse(txt_performance_mark.Text); 
                 double communication = double.Parse(txt_communication_mark.Text);
                 double punctuality = double.Parse(txt_punctuality_mark.Text);
                 string description = rtxt_descriptions.Text;
 
                 // Validate position
-                if (cmb_position.SelectedItem == null)
+                if (cmb_position.Text == null)
                 {
                     ClearForm();
                     MessageBox.Show("Please select a position.", "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -128,18 +129,38 @@ namespace ioop_GROUP_WORK.UniSupervisor
             cmb_studentName_studentID.DataSource = students;
             cmb_studentName_studentID.DisplayMember = "Display_Student_Name";
             cmb_studentName_studentID.ValueMember = "student_id";
+            cmb_position.Text = "";
 
         }
 
         private void ClearForm()
         {
-            cmb_studentName_studentID.SelectedItem = null;
-            cmb_position.SelectedItem = null;
-            dtp_datetime.Value = DateTime.Now;
-            rtxt_descriptions.Clear();
-            txt_communication_mark.Clear();
-            txt_punctuality_mark.Clear();
+            cmb_studentName_studentID.SelectedIndex = -1;
+            cmb_position.SelectedIndex = -1;
+
             txt_performance_mark.Clear();
+            txt_punctuality_mark.Clear();
+            txt_communication_mark.Clear();
+            rtxt_descriptions.Clear();
+
+            dtp_datetime.Value = DateTime.Now;
+        }
+
+        private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_studentName_studentID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_studentName_studentID.SelectedItem is Internship_Evaluation selectedStudent)
+            {
+                cmb_position.Text = selectedStudent.Position;
+            }
+            else
+            {
+                cmb_position.Text = "";
+            }
         }
     }   
 }

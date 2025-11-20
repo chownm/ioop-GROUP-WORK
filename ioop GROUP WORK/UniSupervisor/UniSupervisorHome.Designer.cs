@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_evaluate_form_load = new System.Windows.Forms.Button();
             this.btn_internship_progress_load = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_student_profile = new System.Windows.Forms.Button();
             this.btn_LogOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -72,7 +71,7 @@
             // btn_internship_progress_load
             // 
             this.btn_internship_progress_load.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_internship_progress_load.Location = new System.Drawing.Point(85, 297);
+            this.btn_internship_progress_load.Location = new System.Drawing.Point(76, 305);
             this.btn_internship_progress_load.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_internship_progress_load.Name = "btn_internship_progress_load";
             this.btn_internship_progress_load.Size = new System.Drawing.Size(659, 68);
@@ -81,33 +80,23 @@
             this.btn_internship_progress_load.UseVisualStyleBackColor = true;
             this.btn_internship_progress_load.Click += new System.EventHandler(this.btn_internship_progress_load_Click);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(85, 397);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(472, 68);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Check Student Profile";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btn_internship_progress_load_Click);
-            // 
             // btn_student_profile
             // 
-            this.btn_student_profile.Location = new System.Drawing.Point(363, 648);
+            this.btn_student_profile.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_student_profile.Location = new System.Drawing.Point(76, 404);
             this.btn_student_profile.Name = "btn_student_profile";
-            this.btn_student_profile.Size = new System.Drawing.Size(75, 23);
+            this.btn_student_profile.Size = new System.Drawing.Size(435, 61);
             this.btn_student_profile.TabIndex = 2;
-            this.btn_student_profile.Text = "btn_student_profile";
+            this.btn_student_profile.Text = "Check Student Profile";
             this.btn_student_profile.UseVisualStyleBackColor = true;
             this.btn_student_profile.Click += new System.EventHandler(this.btn_student_profile_Click);
             // 
             // btn_LogOut
             // 
-            this.btn_LogOut.Location = new System.Drawing.Point(131, 521);
+            this.btn_LogOut.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_LogOut.Location = new System.Drawing.Point(76, 496);
             this.btn_LogOut.Name = "btn_LogOut";
-            this.btn_LogOut.Size = new System.Drawing.Size(75, 23);
+            this.btn_LogOut.Size = new System.Drawing.Size(355, 61);
             this.btn_LogOut.TabIndex = 3;
             this.btn_LogOut.Text = "Log Out";
             this.btn_LogOut.UseVisualStyleBackColor = true;
@@ -120,7 +109,6 @@
             this.ClientSize = new System.Drawing.Size(1901, 1033);
             this.Controls.Add(this.btn_LogOut);
             this.Controls.Add(this.btn_student_profile);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_internship_progress_load);
             this.Controls.Add(this.btn_evaluate_form_load);
             this.Controls.Add(this.label2);
@@ -140,7 +128,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_evaluate_form_load;
         private System.Windows.Forms.Button btn_internship_progress_load;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_student_profile;
         private System.Windows.Forms.Button btn_LogOut;
     }

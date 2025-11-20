@@ -35,10 +35,11 @@ namespace ioop_GROUP_WORK.UniSupervisor
             this.description = description ?? "";
         }
 
-        public Internship_Evaluation(string student_name, string student_id)            // This constructor is used for GetStudentName()
+        public Internship_Evaluation(string student_name, string student_id, string position)            // This constructor is used for GetStudentName()
         {
             this.student_name = student_name ?? "";
             this.student_id = student_id ?? "";
+            this.position = position ?? "";
         }
 
 
@@ -61,17 +62,19 @@ namespace ioop_GROUP_WORK.UniSupervisor
                 using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
                 {
                     con.Open();
-                    string query_cmd = @"SELECT StudentID, StudentName FROM StudentApplication";
+                    string query_cmd = @"SELECT StudentID, StudentName, Position FROM StudentApplication";
                     SqlCommand cmd = new SqlCommand(query_cmd, con);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         string id = reader["StudentID"] != System.DBNull.Value ? reader["StudentID"].ToString() : "";
                         string name = reader["StudentName"] != System.DBNull.Value ? reader["StudentName"].ToString() : "";
-                        
+                        string position = reader["Position"] != System.DBNull.Value ? reader["Position"].ToString() : "";
+
                         students.Add(new Internship_Evaluation(
                             student_id: id,
-                            student_name: name
+                            student_name: name,
+                            position: position
                         ));
                     }
                     reader.Close();
@@ -85,15 +88,6 @@ namespace ioop_GROUP_WORK.UniSupervisor
             return students;
         }
 
-        public string Display_Student_Name()
-        {
-            return $"{student_id} | {student_name}";
-        }
-
-        public string ShowStudentName()
-        {
-            return student_name ?? "";
-        }
 
         public void InsertEvaluationsRecord()
         {
@@ -112,7 +106,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
                         cmd.Parameters.AddWithValue("@id", student_id ?? "");
                         cmd.Parameters.AddWithValue("@name", student_name ?? "");
                         cmd.Parameters.AddWithValue("@position", position ?? "");
-                        cmd.Parameters.AddWithValue("@date", evaluation_date == default(DateTime) ? DateTime.Now : evaluation_date);
+                        cmd.Parameters.AddWithValue("@date", evaluation_date);
                         cmd.Parameters.AddWithValue("@performance", performance_rating);
                         cmd.Parameters.AddWithValue("@communication", communication_skills_rating);
                         cmd.Parameters.AddWithValue("@punctuality", punctuality_rating);
