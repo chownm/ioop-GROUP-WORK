@@ -93,9 +93,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
             return student_info;
         }
 
-        public string DisplayStudentInfo()      // used for displaying student ID and name in list box
-        {
-            return $"Student ID: {student_id} | Student Name: {student_name}";
-        }
+        public string DisplayStudentInfo() => $"Student ID: {student_id} | Student Name: {student_name}";     // used for displaying student ID and name in list box
+        
     }
 }
