@@ -33,11 +33,7 @@ namespace ioop_GROUP_WORK.UniSupervisor
 
         }
 
-        public View_Student_Profile(string student_id, string student_name)      // This constructor is used for GetStudentIDAndName()
-        {
-            this.student_id = student_id;
-            this.student_name = student_name;
-        }
+        
 
         public string Student_id { get => student_id; set => student_id = value; }
         public string Student_name { get => student_name; set => student_name = value; }
@@ -73,25 +69,6 @@ namespace ioop_GROUP_WORK.UniSupervisor
             return students;
         }
 
-        public static List<View_Student_Profile> GetStudentIDAndName()      // used for choosing the student from list box
-        { 
-            List<View_Student_Profile> student_info = new List<View_Student_Profile>();
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseInfo"].ConnectionString))
-            {
-                con.Open();
-                string query_cmd = "SELECT studentID, studentName FROM Students";
-                SqlCommand cmd = new SqlCommand(query_cmd, con);
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    string student_id = reader["studentID"].ToString();
-                    string student_name = reader["studentName"].ToString();
-                    View_Student_Profile student = new View_Student_Profile(student_id, student_name);
-                    student_info.Add(student);
-                }
-            }
-            return student_info;
-        }
 
         public string DisplayStudentInfo() => $"Student ID: {student_id} | Student Name: {student_name}";     // used for displaying student ID and name in list box
         

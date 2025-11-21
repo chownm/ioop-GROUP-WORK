@@ -257,7 +257,6 @@
       <DependentUpon>ViewCheckInRecordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UniSupervisor\Check_Internship_Progress.cs" />
-    <Compile Include="UniSupervisor\Display_UniSupervisor_Profile.cs" />
     <Compile Include="UniSupervisor\Evaluation_Form.cs">
       <SubType>Form</SubType>
     </Compile>
